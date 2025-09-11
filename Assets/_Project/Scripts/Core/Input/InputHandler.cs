@@ -4,7 +4,7 @@ using Zenject;
 
 namespace _Project.Scripts.Core.InputSystem
 {
-    public class InputHandler : MonoBehaviour, IInitializable
+    internal class InputHandler : MonoBehaviour, IInitializable, IInputHandler
     {
         private const string VERTICAL = "Vertical";
         private const string HORIZONTAL = "Horizontal";
@@ -33,5 +33,10 @@ namespace _Project.Scripts.Core.InputSystem
         
         public void Disable() =>
             _isActive = false;
+    }
+
+    internal interface IInputHandler
+    {
+        ReactiveProperty<Vector2> MoveAxis { get; }
     }
 }
