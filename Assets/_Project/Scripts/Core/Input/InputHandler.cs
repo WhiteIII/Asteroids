@@ -4,7 +4,7 @@ using Zenject;
 
 namespace _Project.Scripts.Core.InputSystem
 {
-    internal class InputHandler : MonoBehaviour, IInitializable, IInputHandler
+    public class InputHandler : MonoBehaviour, IInitializable, IInputHandler
     {
         private const string VERTICAL = "Vertical";
         private const string HORIZONTAL = "Horizontal";

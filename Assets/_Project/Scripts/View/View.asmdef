@@ -1,10 +1,8 @@
 {
-    "name": "Bootstrap",
+    "name": "View",
     "rootNamespace": "",
     "references": [
-        "GUID:1f5d16a32731ef34ea74d4339fba7df9",
-        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
-        "GUID:1cf2236b85e9fdc40ba80d06d0f884f3"
+        "Zenject"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
