@@ -73,7 +73,8 @@ namespace Zenject
             return creator.GetInstance(context, EmptyArgList);
         }
 
-        public static object GetInstance(
+        public static object 
+            GetInstance(
             this IProvider creator, InjectContext context, List<TypeValuePair> args)
         {
             var allInstances = ZenPools.SpawnList<object>();

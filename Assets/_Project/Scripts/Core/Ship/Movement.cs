@@ -1,28 +1,36 @@
 using _Project.Scripts.Core.InputSystem;
+using _Project.Scripts.Core.Services.GameCycle;
 using R3;
 using UnityEngine;
 using Zenject;
 
 namespace _Project.Scripts.Core.Ship
 {
-    [RequireComponent(typeof(Rigidbody))]
-    internal class Movement : MonoBehaviour
+    public class Movement : IUpdatable, IInitializable
     {
-        [SerializeField] private Rigidbody _rigidbody;
-        [SerializeField] private float _speed;
-        
-        private IInputHandler _inputHandler;
-        
+        private readonly Rigidbody2D _rigidbody;
+        private readonly Transform _shipTransform;
+        private readonly IInputHandler _inputHandler;
+        private readonly float _speed;
+
         public ReactiveProperty<Vector3> Position { get; private set; }
         
-        [Inject]
-        private void Construct(IInputHandler inputHandler) =>
+        public Movement(
+            Rigidbody2D rigidbody,
+            Transform shipTransform,
+            IInputHandler inputHandler,
+            float speed)
+        {
+            _rigidbody = rigidbody;
+            _shipTransform = shipTransform;
             _inputHandler = inputHandler;
+            _speed = speed;
+        }
         
         public void Initialize() => 
-            Position.Value = transform.position;
-
-        private void FixedUpdate() => 
-            _rigidbody.AddForce(_inputHandler.MoveAxis.Value * _speed, ForceMode.Acceleration);
+            Position.Value = _shipTransform.position;
+        
+        public void Update() => 
+            _rigidbody.AddForce(_inputHandler.MoveAxis.Value * _speed, ForceMode2D.Force);
     }
 }
