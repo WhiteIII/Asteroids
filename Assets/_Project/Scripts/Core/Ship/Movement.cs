@@ -1,5 +1,6 @@
 using _Project.Scripts.Core.InputSystem;
 using _Project.Scripts.Core.Services.GameCycle;
+using _Project.Scripts.Core.Stats;
 using R3;
 using UnityEngine;
 using Zenject;
@@ -11,26 +12,32 @@ namespace _Project.Scripts.Core.Ship
         private readonly Rigidbody2D _rigidbody;
         private readonly Transform _shipTransform;
         private readonly IInputHandler _inputHandler;
-        private readonly float _speed;
+        private readonly IMovementSpeedStats _speedStats;
 
-        public ReactiveProperty<Vector3> Position { get; private set; }
+        public ReactiveProperty<Vector3> Position { get; } = new();
         
         public Movement(
             Rigidbody2D rigidbody,
             Transform shipTransform,
             IInputHandler inputHandler,
-            float speed)
+            IMovementSpeedStats speedStats)
         {
             _rigidbody = rigidbody;
             _shipTransform = shipTransform;
             _inputHandler = inputHandler;
-            _speed = speed;
+            _speedStats = speedStats;
         }
         
         public void Initialize() => 
             Position.Value = _shipTransform.position;
         
-        public void Update() => 
-            _rigidbody.AddForce(_inputHandler.MoveAxis.Value * _speed, ForceMode2D.Force);
+        public void SetPosition(Vector3 position) => 
+            _rigidbody.MovePosition(position);
+        
+        public void Update()
+        {
+            _rigidbody.AddForce(_inputHandler.MoveAxis.Value * _speedStats.MovementSpeed, ForceMode2D.Force);
+            Position.Value = _shipTransform.position;
+        }
     }
 }

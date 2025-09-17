@@ -5,7 +5,7 @@ using static UnityEngine.Time;
 
 namespace _Project.Scripts.Core.Ship
 {
-    public class Ship
+    public class Ship : IInitializable
     {
         private readonly Movement _movement;
         
@@ -15,5 +15,13 @@ namespace _Project.Scripts.Core.Ship
         {
             _movement = movement;
         }
+
+        public void Initialize()
+        {
+            _movement.Initialize();
+        }
+        
+        public void SetTransformPosition(Vector3 position) =>
+            _movement.SetPosition(position);
     }
 }

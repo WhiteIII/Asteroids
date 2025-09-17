@@ -419,6 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shipPrefab: {fileID: 2909583028504663578, guid: 3dc495f68c4cea0448441be3226fbb5f, type: 3}
+  _shipDefaultStats: {fileID: 11400000, guid: fb822d011cf428445a3bfc70de4472a7, type: 2}
 --- !u!1 &1070301525
 GameObject:
   m_ObjectHideFlags: 0

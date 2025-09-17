@@ -7,7 +7,7 @@ using Zenject;
 
 namespace _Project.Scripts.Core.Services
 {
-    internal class ShipFactory : IFactory<Ship.Ship>
+    public class ShipFactory : PlaceholderFactory<Ship.Ship>
     {
         private readonly IInstantiator _instantiator;
         private readonly IGameCycleRegisterController _gameCycleRegisterController;
@@ -18,9 +18,9 @@ namespace _Project.Scripts.Core.Services
         public ShipFactory(
             IInstantiator instantiator,
             IGameCycleRegisterController gameCycleRegisterController,
-            GameObject shipPrefab,
             IInputHandler inputHandler,
-            IShipStats shipStats)
+            IShipStats shipStats,
+            GameObject shipPrefab)
         {
             _instantiator = instantiator;
             _gameCycleRegisterController = gameCycleRegisterController;
@@ -29,7 +29,7 @@ namespace _Project.Scripts.Core.Services
             _shipStats = shipStats;
         }
 
-        public Ship.Ship Create()
+        public override Ship.Ship Create()
         {
             GameObject shipGameObject = _instantiator.InstantiatePrefab(_shipPrefab);
             Object.DontDestroyOnLoad(shipGameObject);
@@ -39,7 +39,7 @@ namespace _Project.Scripts.Core.Services
                     shipGameObject.GetComponent<Rigidbody2D>(),
                     shipGameObject.transform,
                     _inputHandler,
-                    _shipStats.MovementSpeed)),
+                    _shipStats)),
             });;
         }
     }
