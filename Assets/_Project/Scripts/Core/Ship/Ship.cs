@@ -7,26 +7,26 @@ namespace _Project.Scripts.Core.Ship
 {
     public class Ship : IInitializable
     {
-        private readonly Movement _movement;
+        private readonly ShipMovement _shipMovement;
         private readonly RotationController _rotationController;
         private readonly GameObject _shipGameObject;
         
-        public Vector3 Position => _movement.Position.Value;
+        public Vector3 Position => _shipMovement.Position.Value;
         public Quaternion Rotation => _rotationController.ShipRotation.Value;
 
         public Ship(
-            Movement movement,
+            ShipMovement shipMovement,
             RotationController rotationController, 
             GameObject shipGameObject)
         {
-            _movement = movement;
+            _shipMovement = shipMovement;
             _rotationController = rotationController;
             _shipGameObject = shipGameObject;
         }
 
         public void Initialize()
         {
-            _movement.Initialize();
+            _shipMovement.Initialize();
         }
         
         public void Enable() =>
@@ -36,7 +36,7 @@ namespace _Project.Scripts.Core.Ship
             _shipGameObject.SetActive(false);
         
         public void SetTransformPosition(Vector3 position) =>
-            _movement.SetPosition(position);
+            _shipMovement.SetPosition(position);
         
         public void SetTransformRotation(Quaternion rotation) =>
             _rotationController.SetRotation(rotation);

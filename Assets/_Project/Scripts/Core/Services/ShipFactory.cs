@@ -34,7 +34,7 @@ namespace _Project.Scripts.Core.Services
             GameObject shipGameObject = _instantiator.InstantiatePrefab(_shipPrefab);
             return _instantiator.Instantiate<Ship.Ship>(new object[]
             {
-                _gameCycleRegisterController.Register(new Movement(
+                _gameCycleRegisterController.Register(new ShipMovement(
                     shipGameObject.GetComponent<Rigidbody2D>(),
                     shipGameObject.transform,
                     _inputHandler,
@@ -43,6 +43,7 @@ namespace _Project.Scripts.Core.Services
                     _inputHandler,
                     shipGameObject.transform,
                     _shipStats)),
+                shipGameObject
             });;
         }
     }

@@ -4,9 +4,4 @@ namespace _Project.Scripts.Core.Stats
     {
         float MovementSpeed { get; }
     }
-
-    public interface IRotationSpeedStats
-    {
-        float RotationSpeed { get; }
-    }
 }

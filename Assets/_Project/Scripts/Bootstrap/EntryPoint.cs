@@ -42,6 +42,7 @@ namespace _Project.Scripts.Bootstrap
         {
             _shipStats.SetMovementSpeed(_shipDefaultStats.MovementSpeed);
             _shipStats.SetRotationSpeed(_shipDefaultStats.RotationSpeed);
+            _shipStats.SetBulletSpeed(_shipDefaultStats.BulletSpeed);
         }
     }
 }

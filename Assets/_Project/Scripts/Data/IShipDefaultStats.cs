@@ -4,5 +4,6 @@ namespace _Project.Scripts.Data
     {
         float MovementSpeed { get; }
         float RotationSpeed { get; }
+        float BulletSpeed { get; }
     }
 }

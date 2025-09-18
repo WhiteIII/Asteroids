@@ -9,7 +9,7 @@ using static UnityEngine.Time;
 
 namespace _Project.Scripts.Core.Ship
 {
-    public class Movement : IUpdatable, IInitializable
+    public class ShipMovement : IUpdatable, IInitializable
     {
         private readonly Rigidbody2D _rigidbody;
         private readonly Transform _shipTransform;
@@ -18,7 +18,7 @@ namespace _Project.Scripts.Core.Ship
 
         public ReactiveProperty<Vector3> Position { get; } = new();
         
-        public Movement(
+        public ShipMovement(
             Rigidbody2D rigidbody,
             Transform shipTransform,
             IInputHandler inputHandler,

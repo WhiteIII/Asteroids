@@ -7,5 +7,6 @@ namespace _Project.Scripts.Data
     {
         [field: SerializeField] public float MovementSpeed { get; private set; }
         [field: SerializeField] public float RotationSpeed { get; private set; }
+        [field: SerializeField] public float BulletSpeed { get; private set; }
     }
 }
