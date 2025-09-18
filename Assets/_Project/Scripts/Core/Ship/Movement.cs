@@ -4,6 +4,8 @@ using _Project.Scripts.Core.Stats;
 using R3;
 using UnityEngine;
 using Zenject;
+using static UnityEngine.Mathf;
+using static UnityEngine.Time;
 
 namespace _Project.Scripts.Core.Ship
 {
@@ -36,7 +38,12 @@ namespace _Project.Scripts.Core.Ship
         
         public void Update()
         {
-            _rigidbody.AddForce(_inputHandler.MoveAxis.Value * _speedStats.MovementSpeed, ForceMode2D.Force);
+            _rigidbody.AddForce(
+                _shipTransform.rotation * 
+                Vector2.up *
+                Max(_inputHandler.MoveAxis.Value.y, 0f) * 
+                _speedStats.MovementSpeed * 
+                deltaTime, ForceMode2D.Force);
             Position.Value = _shipTransform.position;
         }
     }

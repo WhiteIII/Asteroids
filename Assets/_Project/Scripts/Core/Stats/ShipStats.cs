@@ -3,12 +3,16 @@ namespace _Project.Scripts.Core.Stats
     public class ShipStats : IShipStats
     {
         public float MovementSpeed { get; private set; }
+        public float RotationSpeed { get; private set; }
         
-        public float SetMovementSpeed(float movementSpeed) => 
+        public void SetMovementSpeed(float movementSpeed) => 
             MovementSpeed = movementSpeed;
+        
+        public void SetRotationSpeed(float rotationSpeed) => 
+            RotationSpeed = rotationSpeed;
     }
 
-    public interface IShipStats : IMovementSpeedStats
+    public interface IShipStats : IMovementSpeedStats, IRotationSpeedStats
     {
         
     }

@@ -32,13 +32,16 @@ namespace _Project.Scripts.Core.Services
         public override Ship.Ship Create()
         {
             GameObject shipGameObject = _instantiator.InstantiatePrefab(_shipPrefab);
-            Object.DontDestroyOnLoad(shipGameObject);
             return _instantiator.Instantiate<Ship.Ship>(new object[]
             {
                 _gameCycleRegisterController.Register(new Movement(
                     shipGameObject.GetComponent<Rigidbody2D>(),
                     shipGameObject.transform,
                     _inputHandler,
+                    _shipStats)),
+                _gameCycleRegisterController.Register(new RotationController(
+                    _inputHandler,
+                    shipGameObject.transform,
                     _shipStats)),
             });;
         }

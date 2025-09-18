@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dfd6e66558b85e4c9cf173dae878e9e, type: 3}
   m_Name: ShipDefaultStats
   m_EditorClassIdentifier: 
-  <MovementSpeed>k__BackingField: 10
+  <MovementSpeed>k__BackingField: 80
+  <RotationSpeed>k__BackingField: 150
