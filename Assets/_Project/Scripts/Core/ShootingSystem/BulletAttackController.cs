@@ -5,11 +5,11 @@ using Zenject;
 
 namespace _Project.Scripts.Core.ShootingSystem
 {
-    internal class BulletAttackController : IInitializable, IDisposable
+    public class BulletAttackController : IInitializable, IDisposable
     {
         private readonly CollisionHandler _collisionHandler;
         private readonly CompositeDisposable _disposable = new();
-
+        
         public readonly Subject<Unit> OnHit = new();
         
         private Type _targetType;

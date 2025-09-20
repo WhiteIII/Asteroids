@@ -1,10 +1,10 @@
 namespace _Project.Scripts.Core.Services.Targets
 {
-    internal interface ITarget
+    public interface ITarget
     {
     }
 
-    internal interface IKillableTarget : ITarget
+    public interface IKillableTarget : ITarget
     {
         public void Kill();
     }

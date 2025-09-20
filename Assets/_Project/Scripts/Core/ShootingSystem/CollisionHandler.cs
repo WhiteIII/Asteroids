@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Core.ShootingSystem
 {
-    internal class CollisionHandler : MonoBehaviour
+    public class CollisionHandler : MonoBehaviour
     {
         public readonly Subject<ITarget> OnTouchTarget = new();
         
