@@ -55,6 +55,9 @@ namespace _Project.Scripts.Core.ShootingSystem
         public void Disable() =>
             _bulletGameObject.SetActive(false);
 
+        public void SetPosition(Vector3 position) =>
+            _bulletGameObject.transform.position = position;
+        
         public void SendBulletInTheDirectionWithSpeed(Vector2 direction, float speed)
         {
             _bulletMovement.SetDirection(direction);

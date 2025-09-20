@@ -1,5 +1,6 @@
 using _Project.Scripts.Core.Services.GameCycle;
 using UnityEngine;
+using static UnityEngine.Time;
 
 namespace _Project.Scripts.Core.ShootingSystem
 {
@@ -24,7 +25,7 @@ namespace _Project.Scripts.Core.ShootingSystem
                 _bulletTransform.position + 
                 _direction * 
                 _speed *
-                Time.deltaTime);
+                deltaTime);
 
         public void SetDirection(Vector2 direction) =>
             _direction = direction;

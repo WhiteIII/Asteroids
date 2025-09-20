@@ -12,10 +12,19 @@ namespace _Project.Scripts.Core.Services
     {
         private readonly IFactory<string, Transform, Bullet> _factory;
         private readonly Transform _bulletsParent;
+        
         private readonly Dictionary<string, Bullet> _enableBulletsDictionary = new();
         private readonly Dictionary<string, Bullet> _disableBulletsDictionary = new();
         private readonly CompositeDisposable _disposable = new();
-        
+
+        public BulletPool(
+            IFactory<string, Transform, Bullet> factory,
+            Transform bulletsParent)
+        {
+            _factory = factory;
+            _bulletsParent = bulletsParent;
+        }
+
         public void Dispose()
         {
             foreach (Bullet bullet in _enableBulletsDictionary.Values)
@@ -41,19 +50,26 @@ namespace _Project.Scripts.Core.Services
             KeyValuePair<string, Bullet> dictionaryItem = _disableBulletsDictionary.First();
             _disableBulletsDictionary.Remove(dictionaryItem.Key);
             _enableBulletsDictionary.Add(dictionaryItem.Key, dictionaryItem.Value);
+            dictionaryItem.Value.Enable();
             
             return dictionaryItem.Value;
         }
 
         private void Release(string id)
         {
-            
+            if (_enableBulletsDictionary.ContainsKey(id))
+            {
+                _enableBulletsDictionary[id].Disable();
+                _disableBulletsDictionary.Add(id, _enableBulletsDictionary[id]);
+                _enableBulletsDictionary.Remove(id);
+            }   
         }
 
         private Bullet CreateAndAddInEnableBulletsDictionary()
         {
             string id = Guid.NewGuid().ToString();
             Bullet bullet = _factory.Create(id, _bulletsParent);
+            bullet.Initialize();
             _enableBulletsDictionary.Add(id, bullet);
             return bullet;
         } 
