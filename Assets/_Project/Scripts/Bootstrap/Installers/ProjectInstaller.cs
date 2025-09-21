@@ -5,7 +5,6 @@ using _Project.Scripts.Core.Ship;
 using _Project.Scripts.Core.ShootingSystem;
 using _Project.Scripts.Core.Stats;
 using _Project.Scripts.Data;
-using _Project.Scripts.SceneController;
 using UnityEngine;
 using Zenject;
 
@@ -26,7 +25,6 @@ namespace _Project.Scripts.Bootstrap.Installers
             Container.BindInterfacesTo<InputHandler>().AsSingle();
             Container.BindInterfacesTo<GameCycleRepository>().AsSingle();
             Container.BindInterfacesTo<GameCycleRegisterController>().AsSingle();
-            Container.BindInterfacesTo<ScenesController>().AsSingle();
             Container
                 .BindFactoryCustomInterface<Ship, ShipFactory, IFactory<Ship>>()
                 .WithFactoryArguments(_shipPrefab);
