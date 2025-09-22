@@ -1,6 +1,6 @@
 namespace _Project.Scripts.Core.Services.Targets
 {
-    internal interface ITarget 
+    public interface ITarget 
     {
         
     }

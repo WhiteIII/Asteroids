@@ -1,5 +1,4 @@
 using System;
-using _Project.Scripts.Core.InputSystem;
 using _Project.Scripts.Core.Services.Targets;
 using _Project.Scripts.Core.ShootingSystem;
 using R3;
@@ -8,24 +7,23 @@ using Zenject;
 
 namespace _Project.Scripts.Core.Ship
 {
-    internal class AttackController : IInitializable, IDisposable
+    public class AttackController
     {
-        private readonly IInputHandler _inputHandler;
         private readonly Transform _shipTransform;
         private readonly BulletPool _bulletPool;
         private readonly float _bulletFlyingSpeed;
-        private readonly CompositeDisposable _disposables = new();
-        
-        public void Initialize() =>
-            _inputHandler
-                .OnBackspacePressed
-                .Subscribe(_ => Shoot())
-                .AddTo(_disposables);
 
-        public void Dispose() => 
-            _disposables.Dispose();
+        public AttackController(
+            Transform shipTransform, 
+            BulletPool bulletPool,
+            float bulletFlyingSpeed)
+        {
+            _shipTransform = shipTransform;
+            _bulletPool = bulletPool;
+            _bulletFlyingSpeed = bulletFlyingSpeed;
+        }
 
-        private void Shoot()
+        public void Shoot()
         {
             Bullet bullet = _bulletPool.Get();
             bullet.SetDirection(_shipTransform.rotation * Vector2.up);

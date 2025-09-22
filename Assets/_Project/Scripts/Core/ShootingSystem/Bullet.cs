@@ -7,7 +7,7 @@ namespace _Project.Scripts.Core.ShootingSystem
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(CollisionHandler))]
-    internal class Bullet : MonoBehaviour
+    public class Bullet : MonoBehaviour
     {
         public readonly Subject<string> OnHit = new();
 
@@ -15,14 +15,14 @@ namespace _Project.Scripts.Core.ShootingSystem
         
         private BulletMovement _bulletMovement;
         private CollisionHandler _collisionHandler;
-        private string _id;
         private Type _ignoreTargetType;
+        private string _id;
 
-        internal void Initialize(string id, BulletMovement bulletMovement)
-        {
-            _id = id;
+        internal void Initialize(BulletMovement bulletMovement) =>
             _bulletMovement = bulletMovement;
-        }
+        
+        internal void SetID(string id) => 
+            _id = id;
 
         private void Start()
         {
@@ -51,11 +51,20 @@ namespace _Project.Scripts.Core.ShootingSystem
 
         public void SetFlySpeed(float speed) =>
             _bulletMovement.SetMovementSpeed(speed);
-
+        
+        public void SetPosition(Vector2 position) => 
+            _bulletMovement.SetPosition(position);
+        
         public void SetIgnoreTarget<T>()
             where T : ITarget
         {
             _ignoreTargetType = typeof(T);
         }
+        
+        public void Enable() => 
+            gameObject.SetActive(true);
+        
+        public void Disable() =>
+            gameObject.SetActive(false);
     }
 }
