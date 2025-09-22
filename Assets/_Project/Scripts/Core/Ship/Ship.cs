@@ -41,12 +41,6 @@ namespace _Project.Scripts.Core.Ship
         public void SetRotation(Quaternion rotation) =>
             _rotationController.SetRotation(rotation);
         
-        public void Enable() => 
-            gameObject.SetActive(true);
-        
-        public void Disable() =>
-            gameObject.SetActive(false);
-
         private void Shoot() => 
             _attackController.Shoot();
     }

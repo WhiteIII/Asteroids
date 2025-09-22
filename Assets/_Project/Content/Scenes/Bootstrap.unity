@@ -401,9 +401,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7132af884e57d747814ec536c47119f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shipStats: {fileID: 0}
-  _shipPrefab: {fileID: 0}
-  _bulletPrefab: {fileID: 0}
+  _shipStats: {fileID: 11400000, guid: a176893ffadba274f96e2924dc871547, type: 2}
+  _shipPrefab: {fileID: 6278801559816506689, guid: 8413d23ec6b5fd742a22c638656ad203, type: 3}
+  _bulletPrefab: {fileID: 7723277109537424967, guid: a8db8eca41e7e074da1cc1ca970b031f, type: 3}
 --- !u!114 &1616966649
 MonoBehaviour:
   m_ObjectHideFlags: 0
