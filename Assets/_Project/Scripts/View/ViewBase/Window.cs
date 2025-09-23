@@ -1,7 +1,6 @@
 using System;
 using _Project.Scripts.ViewModel;
 using Cysharp.Threading.Tasks;
-using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using Zenject;
 
@@ -22,12 +21,16 @@ namespace _Project.Scripts.View
             
             if (TryGetComponent(out _animation) == false)
                 gameObject.AddComponent<RegularAnimation>();
-        }
 
+            OnSetup();
+        }
+        
         private void OnDestroy()
         {
             if (ViewModel is IDisposable disposable)
                 disposable.Dispose();
+            
+            OnDestroyMethod();
         }
 
         public async UniTask Open()
@@ -42,9 +45,9 @@ namespace _Project.Scripts.View
             Disable();
         }
 
+        protected virtual void OnSetup() { }
+        protected virtual void OnDestroyMethod() { }
         protected abstract void Enable();
         protected abstract void Disable();
     }
-    
-    //public class MenuWindow : Window<>
 }
