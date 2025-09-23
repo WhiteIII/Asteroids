@@ -9,7 +9,7 @@ namespace _Project.Scripts.ViewModel.Implementation
         public MenuViewModel(ISceneController sceneController) => 
             _sceneController = sceneController;
 
-        public void GoToMenu() => 
-            _sceneController.GoToMenu();
+        public void GoToGameplay() => 
+            _sceneController.GoToGameplay();
     }
 }

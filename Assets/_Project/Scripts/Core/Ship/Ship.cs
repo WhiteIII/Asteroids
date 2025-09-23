@@ -15,6 +15,8 @@ namespace _Project.Scripts.Core.Ship
         private AttackController _attackController;
         private RotationController _rotationController;
         
+        [field: SerializeField] public Transform BulletSpawnPoint { get; private set; }
+        
         public Vector2 Position => transform.position;
 
         public void Initialize(

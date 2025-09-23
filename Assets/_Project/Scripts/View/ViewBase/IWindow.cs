@@ -4,11 +4,16 @@ using Cysharp.Threading.Tasks;
 
 namespace _Project.Scripts.View
 {
-    public interface IWindow<in T>
+    public interface IWindow<in T> : IWindow
         where T : IViewModel
     {
         void Setup(T viewModel);
         UniTask Open();
         UniTask Close();
+    }
+
+    public interface IWindow
+    {
+        
     }
 }

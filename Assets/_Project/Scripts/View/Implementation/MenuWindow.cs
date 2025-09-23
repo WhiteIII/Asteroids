@@ -9,10 +9,10 @@ namespace _Project.Scripts.View.Implementation
         [SerializeField] private Button _playButton;
 
         protected override void OnSetup() => 
-            _playButton.onClick.AddListener(ViewModel.GoToMenu);
+            _playButton.onClick.AddListener(ViewModel.GoToGameplay);
 
         protected override void OnDestroyMethod() => 
-            _playButton.onClick.RemoveListener(ViewModel.GoToMenu);
+            _playButton.onClick.RemoveListener(ViewModel.GoToGameplay);
 
         protected override void Enable() => 
             _playButton.enabled = true;

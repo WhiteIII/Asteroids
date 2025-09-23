@@ -46,7 +46,8 @@ namespace _Project.Scripts.Core.Services.Factories
                 new AttackController(
                     ship.transform,
                     _bulletPool,
-                    _shipStats.BulletFlyingSpeed),
+                    _shipStats.BulletFlyingSpeed,
+                    ship.BulletSpawnPoint),
                 _inputHandler,
                 _gameLoopRegisterController.Register(
                     new RotationController(
