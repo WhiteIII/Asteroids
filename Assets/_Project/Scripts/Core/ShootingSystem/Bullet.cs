@@ -26,11 +26,11 @@ namespace _Project.Scripts.Core.ShootingSystem
 
         private void Start()
         {
+            _collisionHandler = GetComponent<CollisionHandler>();
             _collisionHandler
                 .OnTouchTarget
                 .Subscribe(x => Hit(x))
                 .AddTo(_disposables);
-            _collisionHandler = GetComponent<CollisionHandler>();
         }
 
         private void OnDestroy() => 
@@ -54,6 +54,9 @@ namespace _Project.Scripts.Core.ShootingSystem
         
         public void SetPosition(Vector2 position) => 
             _bulletMovement.SetPosition(position);
+        
+        public void SetRotation(Quaternion rotation) =>
+            _bulletMovement.SetRotation(rotation);
         
         public void SetIgnoreTarget<T>()
             where T : ITarget

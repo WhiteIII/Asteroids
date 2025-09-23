@@ -29,10 +29,11 @@ namespace _Project.Scripts.Core.Ship
         public void Shoot()
         {
             Bullet bullet = _bulletPool.Get();
+            bullet.SetPosition(_spawnPoint.position);
+            bullet.SetRotation(_spawnPoint.rotation);
             bullet.SetDirection(_shipTransform.rotation * Vector2.up);
             bullet.SetFlySpeed(_bulletFlyingSpeed);
             bullet.SetIgnoreTarget<ShipTarget>();
-            bullet.SetPosition(_spawnPoint.position);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace _Project.Scripts.Core.Ship
             _attackController = attackController;
             _rotationController = rotationController;
             inputHandler
-                .OnBackspacePressed
+                .OnSpacePressed
                 .Subscribe(_ => Shoot())
                 .AddTo(_disposables);
         }

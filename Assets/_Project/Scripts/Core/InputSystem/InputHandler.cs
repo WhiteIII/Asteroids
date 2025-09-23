@@ -11,15 +11,15 @@ namespace _Project.Scripts.Core.InputSystem
         
         public ReactiveProperty<float> Vertical { get; } = new();
         public ReactiveProperty<float> Horizontal { get; } = new();
-        public Subject<Unit> OnBackspacePressed { get; } = new();
+        public Subject<Unit> OnSpacePressed { get; } = new();
         
         public void Tick()
         {
             Vertical.Value = Input.GetAxis(VERTICAL);
             Horizontal.Value = Input.GetAxis(HORIZONTAL);
             
-            if (Input.GetKey(KeyCode.Backspace))
-                OnBackspacePressed.OnNext(Unit.Default);
+            if (Input.GetKeyDown(KeyCode.Space))
+                OnSpacePressed.OnNext(Unit.Default);
         }
     }
 
@@ -27,6 +27,6 @@ namespace _Project.Scripts.Core.InputSystem
     {
         ReactiveProperty<float> Vertical { get; }
         ReactiveProperty<float> Horizontal { get; }
-        Subject<Unit> OnBackspacePressed { get; } 
+        Subject<Unit> OnSpacePressed { get; } 
     }
 }

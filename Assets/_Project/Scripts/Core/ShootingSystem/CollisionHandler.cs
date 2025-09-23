@@ -8,9 +8,9 @@ namespace _Project.Scripts.Core.ShootingSystem
     {
         public Subject<ITarget> OnTouchTarget { get; } = new();
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.gameObject.TryGetComponent(out ITarget target))
+            if (other.TryGetComponent(out ITarget target))
                 OnTouchTarget.OnNext(target);
         }
     }

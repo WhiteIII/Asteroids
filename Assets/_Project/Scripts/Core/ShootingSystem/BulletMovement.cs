@@ -25,5 +25,8 @@ namespace _Project.Scripts.Core.ShootingSystem
         
         public void SetPosition(Vector2 position) =>
             _rigidbody.position = position;
+        
+        public void SetRotation(Quaternion rotation) =>
+            _rigidbody.transform.rotation = rotation;
     }
 }
