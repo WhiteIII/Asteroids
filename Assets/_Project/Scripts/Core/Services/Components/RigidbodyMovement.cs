@@ -2,16 +2,16 @@ using _Project.Scripts.Core.GameLoopSystem;
 using UnityEngine;
 using static UnityEngine.Time;
 
-namespace _Project.Scripts.Core.ShootingSystem
+namespace _Project.Scripts.Core.Services.Components
 {
-    internal class BulletMovement : IUpdatable
+    public class RigidbodyMovement : IUpdatable
     {
         private readonly Rigidbody2D _rigidbody;
         
         private Vector2 _direction;
         private float _speed;
 
-        public BulletMovement(Rigidbody2D rigidbody) =>
+        public RigidbodyMovement(Rigidbody2D rigidbody) =>
             _rigidbody = rigidbody;
 
         public void Update() => 

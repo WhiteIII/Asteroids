@@ -1,4 +1,5 @@
 using System;
+using _Project.Scripts.Core.Services.Components;
 using _Project.Scripts.Core.Services.Targets;
 using R3;
 using UnityEngine;
@@ -13,12 +14,12 @@ namespace _Project.Scripts.Core.ShootingSystem
 
         private readonly CompositeDisposable _disposables = new();
         
-        private BulletMovement _bulletMovement;
+        private RigidbodyMovement _bulletMovement;
         private CollisionHandler _collisionHandler;
         private Type _ignoreTargetType;
         private string _id;
 
-        internal void Initialize(BulletMovement bulletMovement) =>
+        internal void Initialize(RigidbodyMovement bulletMovement) =>
             _bulletMovement = bulletMovement;
         
         internal void SetID(string id) => 

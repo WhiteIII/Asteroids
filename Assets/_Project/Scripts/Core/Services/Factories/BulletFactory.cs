@@ -1,4 +1,5 @@
 using _Project.Scripts.Core.GameLoopSystem;
+using _Project.Scripts.Core.Services.Components;
 using _Project.Scripts.Core.ShootingSystem;
 using UnityEngine;
 using Zenject;
@@ -28,7 +29,7 @@ namespace _Project.Scripts.Core.Services.Factories
                 .GetComponent<Bullet>();
             bullet.Initialize(
                 _gameLoopRegisterController.Register(
-                    new BulletMovement(bullet.gameObject.GetComponent<Rigidbody2D>())));
+                    new RigidbodyMovement(bullet.gameObject.GetComponent<Rigidbody2D>())));
             return bullet;
         }
     }
