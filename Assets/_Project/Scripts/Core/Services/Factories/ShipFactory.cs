@@ -1,5 +1,6 @@
 using _Project.Scripts.Core.GameLoopSystem;
 using _Project.Scripts.Core.InputSystem;
+using _Project.Scripts.Core.Services.ObjectPools;
 using _Project.Scripts.Core.Ship;
 using _Project.Scripts.Data;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace _Project.Scripts.Core.Services.Factories
         private readonly IInstantiator _instantiator;
         private readonly IGameLoopRegisterController _gameLoopRegisterController;
         private readonly IInputHandler _inputHandler;
-        private readonly BulletPool _bulletPool;
+        private readonly BulletsPool _bulletsPool;
         private readonly ShipStats _shipStats;
 
         public ShipFactory(
@@ -21,14 +22,14 @@ namespace _Project.Scripts.Core.Services.Factories
             IInstantiator instantiator,
             IGameLoopRegisterController gameLoopRegisterController,
             IInputHandler inputHandler,
-            BulletPool bulletPool,
+            BulletsPool bulletsPool,
             ShipStats shipStats)
         {
             _shipPrefab = shipPrefab;
             _instantiator = instantiator;
             _gameLoopRegisterController = gameLoopRegisterController;
             _inputHandler = inputHandler;
-            _bulletPool = bulletPool;
+            _bulletsPool = bulletsPool;
             _shipStats = shipStats;
         }
 
@@ -45,7 +46,7 @@ namespace _Project.Scripts.Core.Services.Factories
                         _inputHandler)),
                 new AttackController(
                     ship.transform,
-                    _bulletPool,
+                    _bulletsPool,
                     _shipStats.BulletFlyingSpeed,
                     ship.BulletSpawnPoint),
                 _inputHandler,

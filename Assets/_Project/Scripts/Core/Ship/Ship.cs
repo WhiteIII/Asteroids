@@ -33,9 +33,12 @@ namespace _Project.Scripts.Core.Ship
                 .Subscribe(_ => Shoot())
                 .AddTo(_disposables);
         }
-        
-        private void OnDestroy() => 
+
+        private void OnDestroy()
+        {
             _disposables.Dispose();
+            _attackController.Dispose();
+        } 
         
         public void SetPosition(Vector2 position) => 
             _shipMovement.SetPosition(position);

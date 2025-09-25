@@ -1,28 +1,30 @@
 using System;
 using _Project.Scripts.Core.Services.Components;
+using _Project.Scripts.Core.Services.ObjectPools.Base;
 using _Project.Scripts.Core.Services.Targets;
 using R3;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Core.ShootingSystem
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(CollisionHandler))]
-    public class Bullet : MonoBehaviour
+    public class Bullet : MonoBehaviour, IEnableAndDisableItem, IItemWithId<string>
     {
-        public readonly Subject<string> OnHit = new();
-
         private readonly CompositeDisposable _disposables = new();
         
         private RigidbodyMovement _bulletMovement;
         private CollisionHandler _collisionHandler;
         private Type _ignoreTargetType;
         private string _id;
+     
+        public Subject<string> Release { get; } = new();
 
         internal void Initialize(RigidbodyMovement bulletMovement) =>
             _bulletMovement = bulletMovement;
         
-        internal void SetID(string id) => 
+        public void SetID(string id) => 
             _id = id;
 
         private void Start()
@@ -44,7 +46,7 @@ namespace _Project.Scripts.Core.ShootingSystem
                 if (killableTarget.GetType() != _ignoreTargetType)
                     killableTarget.Kill();
             }
-            OnHit.OnNext(_id);
+            Release.OnNext(_id);
         }
         
         public void SetDirection(Vector2 diraction) =>

@@ -1,4 +1,5 @@
 using System;
+using _Project.Scripts.Core.Services.ObjectPools;
 using _Project.Scripts.Core.Services.Targets;
 using _Project.Scripts.Core.ShootingSystem;
 using R3;
@@ -7,28 +8,31 @@ using Zenject;
 
 namespace _Project.Scripts.Core.Ship
 {
-    public class AttackController
+    public class AttackController : IDisposable
     {
         private readonly Transform _shipTransform;
         private readonly Transform _spawnPoint;
-        private readonly BulletPool _bulletPool;
+        private readonly BulletsPool _bulletsPool;
         private readonly float _bulletFlyingSpeed;
 
         public AttackController(
             Transform shipTransform, 
-            BulletPool bulletPool,
+            BulletsPool bulletsPool,
             float bulletFlyingSpeed, 
             Transform spawnPoint)
         {
             _shipTransform = shipTransform;
-            _bulletPool = bulletPool;
+            _bulletsPool = bulletsPool;
             _bulletFlyingSpeed = bulletFlyingSpeed;
             _spawnPoint = spawnPoint;
         }
+        
+        public void Dispose() => 
+            _bulletsPool.Dispose();
 
         public void Shoot()
         {
-            Bullet bullet = _bulletPool.Get();
+            Bullet bullet = _bulletsPool.Get();
             bullet.SetPosition(_spawnPoint.position);
             bullet.SetRotation(_spawnPoint.rotation);
             bullet.SetDirection(_shipTransform.rotation * Vector2.up);

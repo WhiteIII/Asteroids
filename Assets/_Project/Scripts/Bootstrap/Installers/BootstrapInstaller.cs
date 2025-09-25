@@ -1,6 +1,7 @@
 using _Project.Scripts.Core.GameLoopSystem;
 using _Project.Scripts.Core.InputSystem;
 using _Project.Scripts.Core.Services.Factories;
+using _Project.Scripts.Core.Services.ObjectPools;
 using _Project.Scripts.Core.Services.Repositories;
 using _Project.Scripts.Core.Ship;
 using _Project.Scripts.Core.ShootingSystem;
@@ -37,7 +38,7 @@ namespace _Project.Scripts.Bootstrap.Installers
                 .BindFactoryCustomInterface<Bullet, BulletFactory, IFactory<Bullet>>()
                 .WithFactoryArguments(_bulletPrefab)
                 .MoveIntoAllSubContainers();
-            Container.BindInterfacesAndSelfTo<BulletPool>().AsSingle().MoveIntoAllSubContainers();
+            Container.BindInterfacesAndSelfTo<BulletsPool>().AsSingle().MoveIntoAllSubContainers();
             Container
                 .BindFactoryCustomInterface<Ship, ShipFactory, IFactory<Ship>>()
                 .WithFactoryArguments(_shipPrefab, _shipStats)

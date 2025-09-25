@@ -1,5 +1,5 @@
-using System;
 using _Project.Scripts.Core.Services.Components;
+using _Project.Scripts.Core.Services.ObjectPools.Base;
 using _Project.Scripts.Core.Services.Targets;
 using _Project.Scripts.Core.ShootingSystem;
 using R3;
@@ -7,24 +7,24 @@ using UnityEngine;
 
 namespace _Project.Scripts.Core.Enemies.Asteroids
 {
-    public class Asteroid : MonoBehaviour
+    public class Asteroid : MonoBehaviour, IEnableAndDisableItem, IItemWithId<string>
     {
-        public readonly Subject<string> OnTouchBarrier = new();
-        
+        public Subject<string> Release { get; } = new();
+
         private readonly CompositeDisposable _disposable = new();
         
-        private RigidbodyMovement _bulletMovement;
+        private RigidbodyMovement _movement;
         private CollisionHandler _collisionHandler;
         private string _id;
-
+        
+        public Vector2 Position => _movement.Position;
+        
         internal void Initialize(
             RigidbodyMovement bulletMovement,
-            CollisionHandler collisionHandler,
-            string id)
+            CollisionHandler collisionHandler)
         {
-            _bulletMovement  = bulletMovement;
+            _movement  = bulletMovement;
             _collisionHandler = collisionHandler;
-            _id = id;
 
             _collisionHandler
                 .OnTouchTarget
@@ -32,17 +32,20 @@ namespace _Project.Scripts.Core.Enemies.Asteroids
                 .AddTo(_disposable);
         }
         
+        public void SetID(string id) => 
+            _id = id;
+        
         private void OnDestroy() => 
             _disposable.Dispose();
         
-        public void SendBulletOnDirection(Vector2 direction, float speed)
+        public void SendAsteroidOnDirection(Vector2 direction, float speed)
         {
-            _bulletMovement.SetDirection(direction);
-            _bulletMovement.SetMovementSpeed(speed);
+            _movement.SetDirection(direction);
+            _movement.SetMovementSpeed(speed);
         }
 
         public void SetPosition(Vector2 position) => 
-            _bulletMovement.SetPosition(position);
+            _movement.SetPosition(position);
 
         public void Enable() => 
             gameObject.SetActive(true);
@@ -55,7 +58,7 @@ namespace _Project.Scripts.Core.Enemies.Asteroids
             if (target is ShipTarget shipTarget)
                 shipTarget.Kill();
             else if (target is Barrier _)
-                OnTouchBarrier.OnNext(_id);
+                Release.OnNext(_id);
         }
     }
 }

@@ -11,6 +11,8 @@ namespace _Project.Scripts.Core.Services.Components
         private Vector2 _direction;
         private float _speed;
 
+        public Vector2 Position => _rigidbody.position;
+        
         public RigidbodyMovement(Rigidbody2D rigidbody) =>
             _rigidbody = rigidbody;
 
