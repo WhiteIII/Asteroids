@@ -8,12 +8,32 @@ namespace _Project.Scripts.Core.Services.Spawners
     public class AsteroidsSpawner
     {
         private readonly AsteroidsPool _asteroidsPool;
+        private readonly AsteroidsPool _smallAsteroidsPool;
         private readonly SpawnPositionHelper _positionHelper;
         private readonly AsteroidsData _asteroidsData;
-        
+
+        public AsteroidsSpawner(
+            AsteroidsPool asteroidsPool,
+            SpawnPositionHelper positionHelper,
+            AsteroidsData asteroidsData,
+            AsteroidsPool smallAsteroidsPool)
+        {
+            _asteroidsPool = asteroidsPool;
+            _positionHelper = positionHelper;
+            _asteroidsData = asteroidsData;
+            _smallAsteroidsPool = smallAsteroidsPool;
+        }
+
         public void Spawn()
         {
-            Asteroid asteroid = _asteroidsPool.Get();
+            int poolNumber = Random.Range(0, 2);
+            Asteroid asteroid = poolNumber switch
+            {
+                0 => _asteroidsPool.Get(),
+                1 => _smallAsteroidsPool.Get(),
+                _ => _asteroidsPool.Get()
+            };
+                
             Vector2 spawnPosition = _positionHelper.GetSpawnPosition();
             asteroid.SetPosition(spawnPosition);
             asteroid.SendAsteroidOnDirection(

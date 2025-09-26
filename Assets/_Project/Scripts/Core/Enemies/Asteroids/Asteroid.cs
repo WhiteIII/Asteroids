@@ -7,6 +7,8 @@ using UnityEngine;
 
 namespace _Project.Scripts.Core.Enemies.Asteroids
 {
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(CollisionHandler))]
     public class Asteroid : MonoBehaviour, IEnableAndDisableItem, IItemWithId<string>
     {
         public Subject<string> Release { get; } = new();
