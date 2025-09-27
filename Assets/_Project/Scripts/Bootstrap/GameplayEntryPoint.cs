@@ -1,3 +1,4 @@
+using System;
 using _Project.Scripts.Core.Services.Repositories;
 using _Project.Scripts.Core.Ship;
 using UnityEngine;
@@ -5,7 +6,7 @@ using Zenject;
 
 namespace _Project.Scripts.Bootstrap
 {
-    public class GameplayEntryPoint : IInitializable
+    public class GameplayEntryPoint : IInitializable, IDisposable
     {
         private readonly IFactory<Ship> _shipFactory;
         private readonly CharactersRepository _charactersRepository;
@@ -22,6 +23,11 @@ namespace _Project.Scripts.Bootstrap
         {
             _charactersRepository.RegisterShip(_shipFactory.Create());
             SetShip();
+        }
+        
+        public void Dispose()
+        {
+            _charactersRepository.Clear();
         }
 
         private void SetShip()

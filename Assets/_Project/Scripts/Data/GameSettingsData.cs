@@ -6,5 +6,6 @@ namespace _Project.Scripts.Data
     public class GameSettingsData : ScriptableObject
     {
         [field: SerializeField] public float SpawnOffsetOutSideCameraVision { get; private set; }
+        [field: SerializeField] public float AsteroidsSpawnCoolDown { get; private set; }
     }
 }

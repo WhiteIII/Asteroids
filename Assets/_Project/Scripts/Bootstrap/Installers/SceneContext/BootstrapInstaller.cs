@@ -53,11 +53,12 @@ namespace _Project.Scripts.Bootstrap.Installers
                 .WithFactoryArguments(_smallAsteroidPrefab);
             Container.BindInterfacesAndSelfTo<CharactersRepository>().AsSingle().MoveIntoAllSubContainers();
             Container
-                .Bind<SpawnPositionHelper>()
+                .BindInterfacesTo<SpawnPositionHelper>()
                 .AsSingle()
                 .WithArguments(_camera, _gameSettingsData.SpawnOffsetOutSideCameraVision);
-            Container.Bind<AsteroidsPool>().WithId("AsteroidsPool").AsSingle();
-            //Container.BindInterfacesTo<AsteroidsSpawner>().AsSingle();
+            Container.Bind<AsteroidsPool>().AsSingle();
+            Container.Bind<SmallAsteroidsPool>().AsSingle();
+            Container.Bind<AsteroidsSpawner>().AsSingle().WithArguments(_asteroidsData).MoveIntoAllSubContainers();
             
             Container.BindInterfacesTo<BootstrapEntryPoint>().AsSingle();
         }
