@@ -26,7 +26,7 @@ namespace _Project.Scripts.Core.Services.Components
             _direction = diraction;
         
         public void SetPosition(Vector2 position) =>
-            _rigidbody.position = position;
+            _rigidbody.transform.position = position;
         
         public void SetRotation(Quaternion rotation) =>
             _rigidbody.transform.rotation = rotation;

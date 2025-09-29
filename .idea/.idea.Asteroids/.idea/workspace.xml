@@ -5,20 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b03fc07a-0e6a-443e-9c95-d8f0976e3a70" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/ObjectPools/Implementation/SmallAsteroidsPool.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/ObjectPools/Implementation/SmallAsteroidsPool.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/Spawners/SpawnersController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/Spawners/SpawnersController.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/ObjectPools/Base/BasePoolWithId.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/ObjectPools/Base/BasePoolWithId.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/ObjectPools/Base/ItemsWithIdAndParameterPool.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/ObjectPools/Base/ItemsWithIdAndParameterPool.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/Targets/AsteroidTarget.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/Targets/AsteroidTarget.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Asteroids/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Asteroids/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Content/Data/AsteroidsData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Content/Data/AsteroidsData.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Content/Data/GameSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Content/Data/GameSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Content/Scenes/Gameplay.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Content/Scenes/Gameplay.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/GameplayEntryPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/GameplayEntryPoint.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/BootstrapInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/BootstrapInstaller.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/GameplayInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/GameplayInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Enemies/Asteroids/Asteroid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Enemies/Asteroids/Asteroid.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/Components/RigidbodyMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/Components/RigidbodyMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/Factories/AsteroidsFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/Factories/AsteroidsFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/ObjectPools/Base/ItemsWithIdPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/ObjectPools/Base/ItemsWithIdPool.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/ObjectPools/Implementation/AsteroidsPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/ObjectPools/Implementation/AsteroidsPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/Repositories/CharactersRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/Repositories/CharactersRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/ObjectPools/Implementation/BulletsPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/ObjectPools/Implementation/BulletsPool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/ObjectPools/Implementation/SmallAsteroidsPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/ObjectPools/Implementation/SmallAsteroidsPool.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/Spawners/AsteroidsSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/Spawners/AsteroidsSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Data/GameSettingsData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Data/GameSettingsData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/Spawners/SpawnPositionHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/Spawners/SpawnPositionHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/Targets/ShipTarget.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Core/Services/Targets/ShipTarget.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,6 +182,8 @@
       <workItem from="1758883075286" duration="1623000" />
       <workItem from="1758909710812" duration="4163000" />
       <workItem from="1758965626279" duration="2088000" />
+      <workItem from="1759172209318" duration="939000" />
+      <workItem from="1759175654939" duration="6531000" />
     </task>
     <servers />
   </component>

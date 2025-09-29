@@ -18,7 +18,6 @@ namespace _Project.Scripts.Bootstrap.Installers
         [Header("Data")]
         [SerializeField] private GameSettingsData _gameSettingsData;
         [SerializeField] private ShipStats _shipStats;
-        [SerializeField] private AsteroidsData _asteroidsData;
         
         [Header("CorePrefabs")]
         [SerializeField] private GameObject _shipPrefab;
@@ -46,19 +45,19 @@ namespace _Project.Scripts.Bootstrap.Installers
             Container
                 .BindFactoryCustomInterface<Asteroid, AsteroidsFactory, IFactory<Asteroid>>()
                 .WithId("AsteroidsFactory")
-                .WithFactoryArguments(_asteroidPrefab);
+                .WithFactoryArguments(_asteroidPrefab)
+                .MoveIntoAllSubContainers();
             Container
                 .BindFactoryCustomInterface<Asteroid, AsteroidsFactory, IFactory<Asteroid>>()
                 .WithId("SmallAsteroidsFactory")
-                .WithFactoryArguments(_smallAsteroidPrefab);
+                .WithFactoryArguments(_smallAsteroidPrefab)
+                .MoveIntoAllSubContainers();
             Container.BindInterfacesAndSelfTo<CharactersRepository>().AsSingle().MoveIntoAllSubContainers();
             Container
                 .BindInterfacesTo<SpawnPositionHelper>()
                 .AsSingle()
-                .WithArguments(_camera, _gameSettingsData.SpawnOffsetOutSideCameraVision);
-            Container.Bind<AsteroidsPool>().AsSingle();
-            Container.Bind<SmallAsteroidsPool>().AsSingle();
-            Container.Bind<AsteroidsSpawner>().AsSingle().WithArguments(_asteroidsData).MoveIntoAllSubContainers();
+                .WithArguments(_camera, _gameSettingsData.SpawnOffsetOutSideCameraVision)
+                .MoveIntoAllSubContainers();
             
             Container.BindInterfacesTo<BootstrapEntryPoint>().AsSingle();
         }

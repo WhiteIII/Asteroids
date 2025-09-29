@@ -9,6 +9,7 @@ namespace _Project.Scripts.Core.Enemies.Asteroids
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(CollisionHandler))]
+    [RequireComponent(typeof(AsteroidTarget))]
     public class Asteroid : MonoBehaviour, IEnableAndDisableItem, IItemWithId<string>
     {
         public Subject<string> Release { get; } = new();
@@ -17,28 +18,39 @@ namespace _Project.Scripts.Core.Enemies.Asteroids
         
         private RigidbodyMovement _movement;
         private CollisionHandler _collisionHandler;
+        private AsteroidTarget _asteroidTarget;
         private string _id;
         
         public Vector2 Position => _movement.Position;
         
-        internal void Initialize(
+        internal void Construct(
             RigidbodyMovement bulletMovement,
             CollisionHandler collisionHandler)
         {
             _movement  = bulletMovement;
             _collisionHandler = collisionHandler;
-
+            
             _collisionHandler
                 .OnTouchTarget
-                .Subscribe(x => OnTargetTouch(x))
+                .Subscribe(OnTargetTouch)
+                .AddTo(_disposable);
+            _asteroidTarget
+                .OnKill
+                .Subscribe(Release.OnNext)
                 .AddTo(_disposable);
         }
-        
-        public void SetID(string id) => 
+
+        public void SetID(string id)
+        {
             _id = id;
+            _asteroidTarget.SetId(_id);
+        }
         
         private void OnDestroy() => 
             _disposable.Dispose();
+        
+        private void Awake() => 
+            _asteroidTarget = gameObject.GetComponent<AsteroidTarget>();
         
         public void SendAsteroidOnDirection(Vector2 direction, float speed)
         {

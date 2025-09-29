@@ -33,10 +33,10 @@ namespace _Project.Scripts.Core.Services.Spawners
                     -(halfCameraVisionHeight + _offsetOnCameraBoard)),
                 2 => new Vector2(
                     halfCameraVisionLenght + _offsetOnCameraBoard, 
-                    Random.Range(topLeft.y, topRight.y)),
+                    Random.Range(bottomLeft.y, topRight.y)),
                 3 => new Vector2(
                     -(halfCameraVisionLenght + _offsetOnCameraBoard), 
-                    Random.Range(topLeft.y, topRight.y)),
+                    Random.Range(bottomLeft.y, topRight.y)),
                 _ => Vector2.zero
             };
         }

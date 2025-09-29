@@ -5,7 +5,7 @@ namespace _Project.Scripts.Core.Services.Targets
 {
     internal class ShipTarget : MonoBehaviour, IKillableTarget
     {
-        public Subject<Unit> OnKill = new();
+        public readonly Subject<Unit> OnKill = new();
         
         public void Kill() => 
             OnKill.OnNext(Unit.Default);

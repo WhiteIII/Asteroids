@@ -714,6 +714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameSettingsData: {fileID: 11400000, guid: 491cd263c424c8845bf5f0a60770fc0e, type: 2}
+  _asteroidsData: {fileID: 11400000, guid: 51b6422c647b1314f96a95220ede2833, type: 2}
 --- !u!1 &1535276691
 GameObject:
   m_ObjectHideFlags: 0

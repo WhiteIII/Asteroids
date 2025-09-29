@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15297bd4a7a4a67a457db1f56a907b9, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  <SpawnOffsetOutSideCameraVision>k__BackingField: 4
+  <SpawnOffsetOutSideCameraVision>k__BackingField: 5
   <AsteroidsSpawnCoolDown>k__BackingField: 3
