@@ -13,14 +13,20 @@ namespace _Project.Scripts.Bootstrap.Installers
         
         [Header("Prefabs")] 
         [SerializeField] private GameObject _menuWindowPrefab;
+        [SerializeField] private GameObject _gameOverWindowPrefab;
 
         public override void InstallBindings()
         {
             Container.Bind<WindowsRepository>().AsSingle().MoveIntoAllSubContainers();
             Container.Bind<MenuViewModel>().AsSingle().MoveIntoAllSubContainers();
+            Container.Bind<GameOverWindowViewModel>().AsSingle().MoveIntoAllSubContainers();
             Container
                 .BindFactoryCustomInterface<MenuWindow, MenuWindowFactory, IFactory<MenuWindow>>()
                 .WithFactoryArguments(_menuWindowPrefab, _uiRoot)
+                .MoveIntoAllSubContainers();
+            Container
+                .BindFactoryCustomInterface<GameOverWindow, GameOverWindowFactory, IFactory<GameOverWindow>>()
+                .WithFactoryArguments(_gameOverWindowPrefab, _uiRoot)
                 .MoveIntoAllSubContainers();
         }
     }

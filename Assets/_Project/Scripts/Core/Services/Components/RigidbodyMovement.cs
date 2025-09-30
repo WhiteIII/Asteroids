@@ -4,19 +4,18 @@ using static UnityEngine.Time;
 
 namespace _Project.Scripts.Core.Services.Components
 {
-    public class RigidbodyMovement : IUpdatable
+    public class RigidbodyMovement : MonoBehaviour, IUpdatable
     {
-        private readonly Rigidbody2D _rigidbody;
-        
+        private Rigidbody2D _rigidbody;
         private Vector2 _direction;
         private float _speed;
 
         public Vector2 Position => _rigidbody.position;
-        
-        public RigidbodyMovement(Rigidbody2D rigidbody) =>
-            _rigidbody = rigidbody;
 
-        public void Update() => 
+        private void Awake() => 
+            _rigidbody = GetComponent<Rigidbody2D>();
+        
+        public void GameLoopUpdate() => 
             _rigidbody.MovePosition(_rigidbody.position + _direction * _speed * deltaTime);
 
         public void SetMovementSpeed(float speed) => 

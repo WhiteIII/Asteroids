@@ -5,23 +5,24 @@ using static UnityEngine.Time;
 
 namespace _Project.Scripts.Core.Ship
 {
-    public class ShipMovement : IUpdatable
+    public class ShipMovement : MonoBehaviour, IUpdatable
     {
-        private readonly Rigidbody2D _rigidbody;
-        private readonly IInputHandler _inputHandler;
-        private readonly float _speed;
+        private Rigidbody2D _rigidbody;
+        private IInputHandler _inputHandler;
+        private float _speed;
 
-        public ShipMovement(
-            Rigidbody2D rigidbody,
+        public void Initialize(
             float speed, 
             IInputHandler inputHandler)
         {
-            _rigidbody = rigidbody;
             _speed = speed;
             _inputHandler = inputHandler;
         }
 
-        public void Update() =>
+        private void Awake() => 
+            _rigidbody = GetComponent<Rigidbody2D>();
+        
+        public void GameLoopUpdate() =>
             Move();
 
         public void SetPosition(Vector2 position) => 

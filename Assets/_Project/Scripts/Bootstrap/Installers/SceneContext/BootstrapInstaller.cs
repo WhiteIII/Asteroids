@@ -37,7 +37,6 @@ namespace _Project.Scripts.Bootstrap.Installers
                 .BindFactoryCustomInterface<Bullet, BulletFactory, IFactory<Bullet>>()
                 .WithFactoryArguments(_bulletPrefab)
                 .MoveIntoAllSubContainers();
-            Container.BindInterfacesAndSelfTo<BulletsPool>().AsSingle().MoveIntoAllSubContainers();
             Container
                 .BindFactoryCustomInterface<Ship, ShipFactory, IFactory<Ship>>()
                 .WithFactoryArguments(_shipPrefab, _shipStats)

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <DirectionDeviationFrom>k__BackingField: -5
   <DirectionDeviationTo>k__BackingField: 5
-  <RandomSpeedFrom>k__BackingField: 10
-  <RandomSpeedTo>k__BackingField: 20
+  <RandomSpeedFrom>k__BackingField: 5
+  <RandomSpeedTo>k__BackingField: 10

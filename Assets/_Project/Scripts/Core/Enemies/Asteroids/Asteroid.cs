@@ -1,3 +1,4 @@
+using _Project.Scripts.Core.GameLoopSystem;
 using _Project.Scripts.Core.Services.Components;
 using _Project.Scripts.Core.Services.ObjectPools.Base;
 using _Project.Scripts.Core.Services.Targets;
@@ -10,7 +11,12 @@ namespace _Project.Scripts.Core.Enemies.Asteroids
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(CollisionHandler))]
     [RequireComponent(typeof(AsteroidTarget))]
-    public class Asteroid : MonoBehaviour, IEnableAndDisableItem, IItemWithId<string>
+    [RequireComponent(typeof(RigidbodyMovement))]
+    public class Asteroid : 
+        MonoBehaviour,
+        IEnableAndDisableItem,
+        IItemWithId<string>,
+        IInitializableUpdatableObject
     {
         public Subject<string> Release { get; } = new();
 
@@ -22,14 +28,13 @@ namespace _Project.Scripts.Core.Enemies.Asteroids
         private string _id;
         
         public Vector2 Position => _movement.Position;
-        
-        internal void Construct(
-            RigidbodyMovement bulletMovement,
-            CollisionHandler collisionHandler)
+
+        private void Awake()
         {
-            _movement  = bulletMovement;
-            _collisionHandler = collisionHandler;
-            
+            _movement = GetComponent<RigidbodyMovement>();
+            _asteroidTarget = gameObject.GetComponent<AsteroidTarget>();
+            _collisionHandler = GetComponent<CollisionHandler>();
+
             _collisionHandler
                 .OnTouchTarget
                 .Subscribe(OnTargetTouch)
@@ -38,7 +43,10 @@ namespace _Project.Scripts.Core.Enemies.Asteroids
                 .OnKill
                 .Subscribe(Release.OnNext)
                 .AddTo(_disposable);
-        }
+        } 
+        
+        public IUpdatable[] GetAllUpdatableObjects() => 
+            new IUpdatable[] { _movement };
 
         public void SetID(string id)
         {
@@ -48,9 +56,6 @@ namespace _Project.Scripts.Core.Enemies.Asteroids
         
         private void OnDestroy() => 
             _disposable.Dispose();
-        
-        private void Awake() => 
-            _asteroidTarget = gameObject.GetComponent<AsteroidTarget>();
         
         public void SendAsteroidOnDirection(Vector2 direction, float speed)
         {

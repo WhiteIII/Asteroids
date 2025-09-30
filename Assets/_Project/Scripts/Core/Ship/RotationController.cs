@@ -5,31 +5,28 @@ using static UnityEngine.Time;
 
 namespace _Project.Scripts.Core.Ship
 {
-    public class RotationController : IUpdatable
+    public class RotationController : MonoBehaviour, IUpdatable
     {
-        private readonly Transform _shipTransform;
-        private readonly IInputHandler _inputHandler;
-        private readonly float _rotationSpeed;
+        private IInputHandler _inputHandler;
+        private float _rotationSpeed;
 
-        public RotationController(
-            Transform shipTransform,
+        public void Initialize(
             IInputHandler inputHandler, 
             float rotationSpeed)
         {
-            _shipTransform = shipTransform;
             _inputHandler = inputHandler;
             _rotationSpeed = rotationSpeed;
         }
 
-        public void Update()
+        public void GameLoopUpdate()
         {
-            _shipTransform.Rotate(
+            transform.Rotate(
                 0f,
                 0f,
                 -_inputHandler.Horizontal.Value * _rotationSpeed * deltaTime);
         } 
         
         public void SetRotation(Quaternion rotation) => 
-            _shipTransform.rotation = rotation; 
+            transform.rotation = rotation; 
     }
 }

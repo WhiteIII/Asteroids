@@ -8,34 +8,29 @@ using Zenject;
 
 namespace _Project.Scripts.Core.Ship
 {
-    public class AttackController : IDisposable
+    public class AttackController : MonoBehaviour
     {
-        private readonly Transform _shipTransform;
-        private readonly Transform _spawnPoint;
-        private readonly BulletsPool _bulletsPool;
-        private readonly float _bulletFlyingSpeed;
+        [SerializeField] private Transform _spawnPoint;
+        
+        private BulletsPool _bulletsPool;
+        private float _bulletFlyingSpeed;
 
-        public AttackController(
-            Transform shipTransform, 
+        public void Initialize(
             BulletsPool bulletsPool,
-            float bulletFlyingSpeed, 
-            Transform spawnPoint)
+            float bulletFlyingSpeed)
         {
-            _shipTransform = shipTransform;
             _bulletsPool = bulletsPool;
             _bulletFlyingSpeed = bulletFlyingSpeed;
-            _spawnPoint = spawnPoint;
         }
         
-        public void Dispose() => 
+        public void OnDestroy() => 
             _bulletsPool.Dispose();
 
         public void Shoot()
         {
-            Bullet bullet = _bulletsPool.Get();
-            bullet.SetPosition(_spawnPoint.position);
+            Bullet bullet = _bulletsPool.Get(_spawnPoint.position);
             bullet.SetRotation(_spawnPoint.rotation);
-            bullet.SetDirection(_shipTransform.rotation * Vector2.up);
+            bullet.SetDirection(transform.rotation * Vector2.up);
             bullet.SetFlySpeed(_bulletFlyingSpeed);
             bullet.SetIgnoreTarget<ShipTarget>();
         }

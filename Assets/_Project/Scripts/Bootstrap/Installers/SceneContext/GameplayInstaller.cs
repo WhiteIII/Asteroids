@@ -15,6 +15,7 @@ namespace _Project.Scripts.Bootstrap.Installers
         {
             Container.Bind<AsteroidsPool>().AsSingle();
             Container.Bind<SmallAsteroidsPool>().AsSingle();
+            Container.Bind<BulletsPool>().AsSingle();
             Container.Bind<AsteroidsSpawner>().AsSingle().WithArguments(_asteroidsData);
             Container
                 .BindInterfacesAndSelfTo<SpawnersController>()

@@ -7,8 +7,10 @@ namespace _Project.Scripts.Core.Services.ObjectPools
     public abstract class ItemsWithIdPool<TItem, TId> : BasePoolWithId<TItem, TId>
         where TItem : IEnableAndDisableItem, IItemWithId<TId>
     {
-        protected ItemsWithIdPool(IFactory<TItem> factory, Func<TId> idGenerator, bool disableItemOnCreate = false) : 
-            base(factory, idGenerator, disableItemOnCreate)
+        protected ItemsWithIdPool(
+            IFactory<TItem> factory,
+            Func<TId> idGenerator, 
+            bool disableItemOnCreate = false) : base(factory, idGenerator, disableItemOnCreate)
         {
         }
 

@@ -15,7 +15,7 @@ namespace _Project.Scripts.Core.GameLoopSystem
                 return;
             
             foreach (IUpdatable updatable in _updateables)
-                updatable.Update();       
+                updatable.GameLoopUpdate();       
         }
         
         public void Add(IUpdatable updatable) =>

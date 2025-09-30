@@ -5,12 +5,12 @@ using Zenject;
 
 namespace _Project.Scripts.View.Services
 {
-    public class MenuWindowFactory : BaseWindowFactory<MenuWindow, MenuViewModel>
+    public class GameOverWindowFactory : BaseWindowFactory<GameOverWindow, GameOverWindowViewModel>
     {
-        public MenuWindowFactory(
-            MenuViewModel viewModel, 
+        public GameOverWindowFactory(
+            GameOverWindowViewModel viewModel,
             GameObject prefab,
-            Transform parent, 
+            Transform parent,
             IInstantiator instantiator) : base(viewModel, prefab, parent, instantiator)
         {
         }

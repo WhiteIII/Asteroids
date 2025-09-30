@@ -1,4 +1,5 @@
 using System;
+using _Project.Scripts.Core.GameLoopSystem;
 using _Project.Scripts.Core.Services.Components;
 using _Project.Scripts.Core.Services.ObjectPools.Base;
 using _Project.Scripts.Core.Services.Targets;
@@ -10,7 +11,12 @@ namespace _Project.Scripts.Core.ShootingSystem
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(CollisionHandler))]
-    public class Bullet : MonoBehaviour, IEnableAndDisableItem, IItemWithId<string>
+    [RequireComponent(typeof(RigidbodyMovement))]
+    public class Bullet :
+        MonoBehaviour,
+        IEnableAndDisableItem, 
+        IItemWithId<string>,
+        IInitializableUpdatableObject
     {
         private readonly CompositeDisposable _disposables = new();
         
@@ -21,15 +27,13 @@ namespace _Project.Scripts.Core.ShootingSystem
      
         public Subject<string> Release { get; } = new();
 
-        internal void Initialize(RigidbodyMovement bulletMovement) =>
-            _bulletMovement = bulletMovement;
-        
         public void SetID(string id) => 
             _id = id;
 
-        private void Start()
+        private void Awake()
         {
             _collisionHandler = GetComponent<CollisionHandler>();
+            _bulletMovement = GetComponent<RigidbodyMovement>();
             _collisionHandler
                 .OnTouchTarget
                 .Subscribe(x => Hit(x))
@@ -38,6 +42,9 @@ namespace _Project.Scripts.Core.ShootingSystem
 
         private void OnDestroy() => 
             _disposables.Dispose();
+        
+        public IUpdatable[] GetAllUpdatableObjects() => 
+            new IUpdatable[] { _bulletMovement };
 
         private void Hit(ITarget target)
         {

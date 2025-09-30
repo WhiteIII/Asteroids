@@ -22,15 +22,9 @@ namespace _Project.Scripts.Core.Services.Factories
             _instantiator = instantiator;
         }
 
-        public override Bullet Create()
-        {
-            Bullet bullet = _instantiator
+        public override Bullet Create() =>
+            _gameLoopRegisterController.RegisterInitializableObject(_instantiator
                 .InstantiatePrefab(_bulletPrefab)
-                .GetComponent<Bullet>();
-            bullet.Initialize(
-                _gameLoopRegisterController.Register(
-                    new RigidbodyMovement(bullet.gameObject.GetComponent<Rigidbody2D>())));
-            return bullet;
-        }
+                .GetComponent<Bullet>());
     }
 }
