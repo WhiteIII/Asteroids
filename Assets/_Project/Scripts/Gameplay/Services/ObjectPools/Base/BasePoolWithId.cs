@@ -12,16 +12,25 @@ namespace _Project.Scripts.Core.Services.ObjectPools
     {
         private readonly IFactory<TItem> _factory;
         private readonly Func<TId> _idGenerator;
+        private readonly Action<TItem> _onGet;
+        private readonly Action<TItem> _onRelease;
         private readonly bool _disableItemOnCreate;
         private readonly Dictionary<TId, TItem> _enabledItemsDictionary = new();   
         private readonly Dictionary<TId, TItem> _disabledItemsDictionary = new();
         private readonly CompositeDisposable  _disposables = new();
 
-        protected BasePoolWithId(IFactory<TItem> factory, Func<TId> idGenerator,  bool disableItemOnCreate = false)
+        protected BasePoolWithId(
+            IFactory<TItem> factory, 
+            Func<TId> idGenerator,  
+            bool disableItemOnCreate = false,
+            Action<TItem> onGet = null,
+            Action<TItem> onRelease = null)
         {
             _factory = factory;
             _idGenerator = idGenerator;
             _disableItemOnCreate = disableItemOnCreate;
+            _onGet = onGet;
+            _onRelease = onRelease;
         }
 
         public void Dispose() => 
@@ -32,6 +41,7 @@ namespace _Project.Scripts.Core.Services.ObjectPools
             if (_disabledItemsDictionary.Count == 0)
             {
                 TItem item = CreateItemAndAddInEnabledItemsDictionary();
+                _onGet?.Invoke(item);
                 item
                     .Release
                     .Subscribe(Release)
@@ -42,6 +52,7 @@ namespace _Project.Scripts.Core.Services.ObjectPools
             KeyValuePair<TId, TItem> itemAndId = _disabledItemsDictionary.First();
             _disabledItemsDictionary.Remove(itemAndId.Key);
             _enabledItemsDictionary.Add(itemAndId.Key, itemAndId.Value);
+            _onGet?.Invoke(itemAndId.Value);
             return itemAndId.Value;
         }
         
@@ -59,6 +70,7 @@ namespace _Project.Scripts.Core.Services.ObjectPools
         private void Release(TId id)
         {
             _disabledItemsDictionary.Add(id, _enabledItemsDictionary[id]);
+            _onRelease?.Invoke(_enabledItemsDictionary[id]);
             _enabledItemsDictionary.Remove(id);
             _disabledItemsDictionary[id].Disable();
         }

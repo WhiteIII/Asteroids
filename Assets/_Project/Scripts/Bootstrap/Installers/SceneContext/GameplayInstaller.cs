@@ -42,8 +42,8 @@ namespace _Project.Scripts.Bootstrap.Installers
                 .BindFactoryCustomInterface<Asteroid, CharacterFactory<Asteroid>, IFactory<Asteroid>>()
                 .WithId("SmallAsteroidsFactory")
                 .WithFactoryArguments(_smallAsteroidPrefab);
-            Container.Bind<AsteroidsPool>().AsSingle();
             Container.Bind<SmallAsteroidsPool>().AsSingle();
+            Container.Bind<AsteroidsPool>().AsSingle().WithArguments(_asteroidsData);
             Container.Bind<BulletsPool>().AsSingle();
             Container.Bind<AsteroidsSpawner>().AsSingle().WithArguments(_asteroidsData);
             Container

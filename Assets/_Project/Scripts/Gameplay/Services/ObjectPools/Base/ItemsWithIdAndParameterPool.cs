@@ -7,21 +7,23 @@ namespace _Project.Scripts.Core.Services.ObjectPools
     public abstract class ItemsWithIdAndParameterPool<TItem, TId, TParameter> : BasePoolWithId<TItem, TId>
         where TItem : IEnableAndDisableItem, IItemWithId<TId>
     {
-        private readonly Action<TItem, TParameter> _actionOnGet;
+        private readonly Action<TItem, TParameter> _actionOnGetWithParameter;
         
         protected ItemsWithIdAndParameterPool(
             IFactory<TItem> factory, 
             Func<TId> idGenerator, 
-            Action<TItem, TParameter> actionOnGet,
-            bool disableItemOnCreate = false) : base(factory, idGenerator, disableItemOnCreate)
+            Action<TItem, TParameter> actionOnGetWithParameter,
+            bool disableItemOnCreate = false,
+            Action<TItem> onRelease = null) : 
+            base(factory, idGenerator, disableItemOnCreate, null, onRelease)
         {
-            _actionOnGet = actionOnGet;
+            _actionOnGetWithParameter = actionOnGetWithParameter;
         }
 
         public TItem Get(TParameter parameter)
         {
             TItem item = GetFromPool();
-            _actionOnGet.Invoke(item, parameter);
+            _actionOnGetWithParameter.Invoke(item, parameter);
             item.Enable();
             return item;
         }

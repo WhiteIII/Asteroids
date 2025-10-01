@@ -9,5 +9,7 @@ namespace _Project.Scripts.Data
         [field: SerializeField] public float DirectionDeviationTo { get; private set; }
         [field: SerializeField] public float RandomSpeedFrom { get; private set; }
         [field: SerializeField] public float RandomSpeedTo { get; private set; }
+        [field: SerializeField] public int SpawnedSmallAsteroidsOnDeadCountForm { get; private set; } = 1;
+        [field: SerializeField] public int SpawnedSmallAsteroidsOnDeadCountTo { get; private set; } = 3;
     }
 }

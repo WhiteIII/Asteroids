@@ -29,6 +29,7 @@ namespace _Project.Scripts.Core.Enemies
         private string _id;
         
         public Vector2 Position => _movement.Position;
+        public Vector2 Direction => _movement.Direction;
 
         private void Awake()
         {
