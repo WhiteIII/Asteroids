@@ -1,6 +1,9 @@
 using System;
+using _Project.Scripts.View;
 using _Project.Scripts.View.Implementation;
 using _Project.Scripts.View.Services;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 namespace _Project.Scripts.Bootstrap
@@ -21,14 +24,12 @@ namespace _Project.Scripts.Bootstrap
         public async void Initialize()
         {
             MenuWindow menuWindow = _menuWindowFactory.Create();
-            _windowsRepository.Register(menuWindow);
             await menuWindow.Open();
         }
 
         public async void Dispose()
         {
-             await _windowsRepository.Get<MenuWindow>().Close();       
-            _windowsRepository.Destroy<MenuWindow>();
+            await _windowsRepository.TryCloseAndDestroyWindow<MenuWindow>();
         }
     }
 }

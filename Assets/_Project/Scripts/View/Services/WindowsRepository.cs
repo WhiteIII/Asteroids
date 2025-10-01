@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using _Project.Scripts.View.Implementation;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace _Project.Scripts.View.Services
@@ -26,13 +28,23 @@ namespace _Project.Scripts.View.Services
         {
             foreach (IWindow window in _windows)
             {
-                if (window is T monobehaviorWindow)
+                if (window is T behaviorWindow)
                 {
                     _windows.Remove(window);
-                    Object.Destroy(monobehaviorWindow.gameObject);
+                    Object.Destroy(behaviorWindow.gameObject);
                     return;
                 }
             }
+        }
+        
+        public async UniTask TryCloseAndDestroyWindow<T>()
+            where T : MonoBehaviour, IWindow
+        {
+            T window = Get<T>();
+            if (!window)
+                return;
+            await window.Close();
+            Destroy<MenuWindow>();
         }
     }
 }

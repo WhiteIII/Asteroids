@@ -4,7 +4,7 @@ using Zenject;
 
 namespace _Project.Scripts.View.Services
 {
-    public abstract class BaseWindowFactory<TWindow, TViewModel> : PlaceholderFactory<TWindow>
+    public class BaseWindowFactory<TWindow, TViewModel> : PlaceholderFactory<TWindow>
         where TViewModel : IViewModel
         where TWindow :  Window<TViewModel>
     {
@@ -12,17 +12,20 @@ namespace _Project.Scripts.View.Services
         private readonly GameObject _prefab;
         private readonly Transform _parent;
         private readonly IInstantiator _instantiator;
+        private readonly WindowsRepository _windowsRepository;
 
         protected BaseWindowFactory(
             TViewModel viewModel,
             GameObject prefab,
             Transform parent,
-            IInstantiator instantiator)
+            IInstantiator instantiator,
+            WindowsRepository windowsRepository)
         {
             _viewModel = viewModel;
             _prefab = prefab;
             _parent = parent;
             _instantiator = instantiator;
+            _windowsRepository = windowsRepository;
         }
 
         public override TWindow Create()
@@ -30,6 +33,7 @@ namespace _Project.Scripts.View.Services
             TWindow window = _instantiator
                 .InstantiatePrefab(_prefab, _parent)
                 .GetComponent<TWindow>();
+            _windowsRepository.Register(window);
             window.Setup(_viewModel);
             return window;
         }

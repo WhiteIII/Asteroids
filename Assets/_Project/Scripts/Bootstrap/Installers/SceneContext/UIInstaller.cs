@@ -21,11 +21,17 @@ namespace _Project.Scripts.Bootstrap.Installers
             Container.Bind<MenuViewModel>().AsSingle().MoveIntoAllSubContainers();
             Container.Bind<GameOverWindowViewModel>().AsSingle().MoveIntoAllSubContainers();
             Container
-                .BindFactoryCustomInterface<MenuWindow, MenuWindowFactory, IFactory<MenuWindow>>()
+                .BindFactoryCustomInterface<
+                    MenuWindow, 
+                    BaseWindowFactory<MenuWindow, MenuViewModel>, 
+                    IFactory<MenuWindow>>()
                 .WithFactoryArguments(_menuWindowPrefab, _uiRoot)
                 .MoveIntoAllSubContainers();
             Container
-                .BindFactoryCustomInterface<GameOverWindow, GameOverWindowFactory, IFactory<GameOverWindow>>()
+                .BindFactoryCustomInterface<
+                    GameOverWindow, 
+                    BaseWindowFactory<GameOverWindow, GameOverWindowViewModel>, 
+                    IFactory<GameOverWindow>>()
                 .WithFactoryArguments(_gameOverWindowPrefab, _uiRoot)
                 .MoveIntoAllSubContainers();
         }

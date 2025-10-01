@@ -7,7 +7,7 @@ using Zenject;
 
 namespace _Project.Scripts.Bootstrap
 {
-    public class GameplayEntryPoint : IInitializable
+    public class GameplayEntryPoint : IInitializable,  IDisposable
     {
         private readonly IFactory<Ship> _shipFactory;
         private readonly CharactersRepository _charactersRepository;
@@ -25,19 +25,22 @@ namespace _Project.Scripts.Bootstrap
 
         public void Initialize()
         {
-            _charactersRepository.RegisterShip(_shipFactory.Create());
-            SetShip();
+            _shipFactory.Create();
+            SetupShip();
         }
         
-        private void SetShip()
+        public void Dispose()
+        {
+            _charactersRepository.ClearAllCharactersList();
+            _charactersRepository.UnregisterShip();
+        }
+        
+        private void SetupShip()
         {
             _charactersRepository.Ship.SetPosition(Vector2.zero);
             _charactersRepository.Ship.SetRotation(Quaternion.identity);
-            _charactersRepository.Ship.SetOnDeadEvent(() =>
-            {
-                _charactersRepository.Clear();
-                _sceneController.GoToMenu();
-            });
+            _charactersRepository.Ship.SetOnDeadEvent(_sceneController.GoToMenu);
         }
+
     }
 }

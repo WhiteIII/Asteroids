@@ -245,9 +245,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ecbdb8f86743e40a3c431305d222ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shipMovement: {fileID: 3304847025165725731}
-  _attackController: {fileID: 4508245367479432009}
-  _rotationController: {fileID: 3212061413088211684}
 --- !u!114 &4508245367479432009
 MonoBehaviour:
   m_ObjectHideFlags: 0
