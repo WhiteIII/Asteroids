@@ -1,10 +1,10 @@
 using System;
-using _Project.Scripts.Core.Enemies;
-using _Project.Scripts.Core.Services.Repositories;
+using _Project.Scripts.Gameplay.Enemies;
+using _Project.Scripts.Gameplay.Services.Repositories;
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.Core.Services.ObjectPools
+namespace _Project.Scripts.Gameplay.Services.ObjectPools
 {
     public class BulletsPool : ItemsWithIdAndParameterPool<Bullet, string, Vector2>
     {

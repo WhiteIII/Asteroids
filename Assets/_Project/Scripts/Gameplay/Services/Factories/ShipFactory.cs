@@ -1,10 +1,10 @@
-using _Project.Scripts.Core.GameLoopSystem;
-using _Project.Scripts.Core.Services.Repositories;
 using _Project.Scripts.Data;
+using _Project.Scripts.Gameplay.GameLoopSystem;
+using _Project.Scripts.Gameplay.Services.Repositories;
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.Core.Services.Factories
+namespace _Project.Scripts.Gameplay.Services.Factories
 {
     public class ShipFactory : PlaceholderFactory<Ship.Ship>
     {

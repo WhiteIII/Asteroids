@@ -1,6 +1,6 @@
 using System;
-using _Project.Scripts.Core.Services.Repositories;
-using _Project.Scripts.Core.Ship;
+using _Project.Scripts.Gameplay.Services.Repositories;
+using _Project.Scripts.Gameplay.Ship;
 using _Project.Scripts.SceneSwitcher;
 using UnityEngine;
 using Zenject;

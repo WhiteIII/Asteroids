@@ -1,6 +1,6 @@
 using R3;
 
-namespace _Project.Scripts.Core.Services.ObjectPools.Base
+namespace _Project.Scripts.Gameplay.Services.ObjectPools.Base
 {
     public interface IItemWithId<T>
     {

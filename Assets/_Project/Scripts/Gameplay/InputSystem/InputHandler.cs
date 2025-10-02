@@ -2,7 +2,7 @@ using R3;
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.Core.InputSystem
+namespace _Project.Scripts.Gameplay.InputSystem
 {
     public class InputHandler : IInputHandler, ITickable
     {

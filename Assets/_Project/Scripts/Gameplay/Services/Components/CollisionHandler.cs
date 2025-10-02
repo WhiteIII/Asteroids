@@ -1,8 +1,9 @@
-using _Project.Scripts.Core.Services.Targets;
+using _Project.Scripts.Gameplay.Services.Targets;
+using _Project.Scripts.Gameplay.Services.Targets.Base;
 using R3;
 using UnityEngine;
 
-namespace _Project.Scripts.Core.Services.Components
+namespace _Project.Scripts.Gameplay.Services.Components
 {
     internal class CollisionHandler : MonoBehaviour
     {

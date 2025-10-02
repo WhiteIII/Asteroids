@@ -1,8 +1,8 @@
-using _Project.Scripts.Core.GameLoopSystem;
+using _Project.Scripts.Gameplay.GameLoopSystem;
 using UnityEngine;
 using static UnityEngine.Time;
 
-namespace _Project.Scripts.Core.Services.Components
+namespace _Project.Scripts.Gameplay.Services.Components
 {
     public class RigidbodyMovement : MonoBehaviour, IUpdatable
     {
@@ -28,6 +28,6 @@ namespace _Project.Scripts.Core.Services.Components
             transform.position = position;
         
         public void SetRotation(Quaternion rotation) =>
-            _rigidbody.transform.rotation = rotation;
+            transform.rotation = rotation;
     }
 }

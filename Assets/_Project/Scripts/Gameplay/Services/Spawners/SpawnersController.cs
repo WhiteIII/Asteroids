@@ -3,7 +3,7 @@ using Zenject;
 using static UnityEngine.Mathf;
 using static UnityEngine.Time;
 
-namespace _Project.Scripts.Core.Services.Spawners
+namespace _Project.Scripts.Gameplay.Services.Spawners
 {
     public class SpawnersController : ITickable
     {

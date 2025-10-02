@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.Core.GameLoopSystem
+namespace _Project.Scripts.Gameplay.GameLoopSystem
 {
     public class GameLoopCreator : IGameLoopCreator
     {

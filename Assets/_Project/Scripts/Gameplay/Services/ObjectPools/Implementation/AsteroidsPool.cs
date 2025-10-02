@@ -1,13 +1,13 @@
 using System;
-using _Project.Scripts.Core.Enemies;
-using _Project.Scripts.Core.Services.Repositories;
 using _Project.Scripts.Data;
+using _Project.Scripts.Gameplay.Enemies;
+using _Project.Scripts.Gameplay.Services.Repositories;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
 
 
-namespace _Project.Scripts.Core.Services.ObjectPools
+namespace _Project.Scripts.Gameplay.Services.ObjectPools
 {
     public class AsteroidsPool : ItemsWithIdAndParameterPool<Asteroid, string, Vector2>
     {

@@ -1,9 +1,9 @@
-using _Project.Scripts.Core.Enemies;
-using _Project.Scripts.Core.Services.ObjectPools;
 using _Project.Scripts.Data;
+using _Project.Scripts.Gameplay.Enemies;
+using _Project.Scripts.Gameplay.Services.ObjectPools;
 using UnityEngine;
 
-namespace _Project.Scripts.Core.Services.Spawners
+namespace _Project.Scripts.Gameplay.Services.Spawners
 {
     public class AsteroidsSpawner
     {

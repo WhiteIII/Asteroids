@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Zenject;
 
-namespace _Project.Scripts.Core.GameLoopSystem
+namespace _Project.Scripts.Gameplay.GameLoopSystem
 {
     public class GameLoop : IGameLoop, ITickable
     {

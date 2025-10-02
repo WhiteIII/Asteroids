@@ -1,4 +1,4 @@
-using _Project.Scripts.Core.GameLoopSystem;
+using _Project.Scripts.Gameplay.GameLoopSystem;
 
 namespace _Project.Scripts.Gameplay.Ai.Base
 {

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
-using _Project.Scripts.Core.Enemies.Base;
+using _Project.Scripts.Gameplay.Enemies.Base;
 
-namespace _Project.Scripts.Core.Services.Repositories
+namespace _Project.Scripts.Gameplay.Services.Repositories
 {
     public class CharactersRepository : ICharacterRepository
     {

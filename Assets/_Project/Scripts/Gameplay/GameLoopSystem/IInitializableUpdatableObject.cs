@@ -1,4 +1,4 @@
-namespace _Project.Scripts.Core.GameLoopSystem
+namespace _Project.Scripts.Gameplay.GameLoopSystem
 {
     public interface IInitializableUpdatableObject : IGameLoopObject
     {

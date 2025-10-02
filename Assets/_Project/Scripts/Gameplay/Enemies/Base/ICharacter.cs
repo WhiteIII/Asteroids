@@ -1,4 +1,4 @@
-namespace _Project.Scripts.Core.Enemies.Base
+namespace _Project.Scripts.Gameplay.Enemies.Base
 {
     public interface ICharacter
     {

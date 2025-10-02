@@ -1,10 +1,10 @@
-using _Project.Scripts.Core.GameLoopSystem;
-using _Project.Scripts.Core.InputSystem;
+using _Project.Scripts.Gameplay.GameLoopSystem;
+using _Project.Scripts.Gameplay.InputSystem;
 using UnityEngine;
 using Zenject;
 using static UnityEngine.Time;
 
-namespace _Project.Scripts.Core.Ship
+namespace _Project.Scripts.Gameplay.Ship
 {
     public class RotationController : MonoBehaviour, IUpdatable
     {

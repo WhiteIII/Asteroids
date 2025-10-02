@@ -1,19 +1,20 @@
 using System;
-using _Project.Scripts.Core.GameLoopSystem;
-using _Project.Scripts.Core.InputSystem;
-using _Project.Scripts.Core.Services.Targets;
+using _Project.Scripts.Gameplay.Enemies.Base;
+using _Project.Scripts.Gameplay.GameLoopSystem;
+using _Project.Scripts.Gameplay.InputSystem;
+using _Project.Scripts.Gameplay.Services.Targets.Implementation;
 using R3;
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.Core.Ship
+namespace _Project.Scripts.Gameplay.Ship
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(ShipTarget))]
     [RequireComponent(typeof(AttackController))]
     [RequireComponent(typeof(ShipMovement))]
     [RequireComponent(typeof(RotationController))]
-    public class Ship : MonoBehaviour, IInitializableUpdatableObject
+    public class Ship : Character, IInitializableUpdatableObject
     {
         private readonly CompositeDisposable _disposables = new();
         
@@ -22,8 +23,6 @@ namespace _Project.Scripts.Core.Ship
         private RotationController _rotationController;
         private IInputHandler _inputHandler;
         
-        public Vector2 Position => transform.position;
-
         [Inject] private void Construct(IInputHandler inputHandler) =>
             _inputHandler = inputHandler;
         
@@ -67,6 +66,6 @@ namespace _Project.Scripts.Core.Ship
                 .AddTo(_disposables);
         
         private void Shoot() => 
-            _attackController.Shoot();
+            _attackController.Shoot<ShipTarget>(transform.rotation * Vector2.up);
     }
 }

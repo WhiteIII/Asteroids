@@ -1,10 +1,10 @@
-using _Project.Scripts.Core.Enemies.Base;
-using _Project.Scripts.Core.GameLoopSystem;
-using _Project.Scripts.Core.Services.Repositories;
+using _Project.Scripts.Gameplay.Enemies.Base;
+using _Project.Scripts.Gameplay.GameLoopSystem;
+using _Project.Scripts.Gameplay.Services.Repositories;
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.Core.Services.Factories
+namespace _Project.Scripts.Gameplay.Services.Factories
 {
     public class CharacterFactory<T> : PlaceholderFactory<T>
         where T : MonoBehaviour, ICharacter, IGameLoopObject

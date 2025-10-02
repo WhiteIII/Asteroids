@@ -1,10 +1,10 @@
-using _Project.Scripts.Core.GameLoopSystem;
-using _Project.Scripts.Core.InputSystem;
-using _Project.Scripts.Core.Services.Factories;
-using _Project.Scripts.Core.Services.ObjectPools;
-using _Project.Scripts.Core.Services.Repositories;
-using _Project.Scripts.Core.Services.Spawners;
-using _Project.Scripts.Core.Ship;
+using _Project.Scripts.Gameplay.GameLoopSystem;
+using _Project.Scripts.Gameplay.InputSystem;
+using _Project.Scripts.Gameplay.Services.Factories;
+using _Project.Scripts.Gameplay.Services.ObjectPools;
+using _Project.Scripts.Gameplay.Services.Repositories;
+using _Project.Scripts.Gameplay.Services.Spawners;
+using _Project.Scripts.Gameplay.Ship;
 using _Project.Scripts.Data;
 using UnityEngine;
 using Zenject;

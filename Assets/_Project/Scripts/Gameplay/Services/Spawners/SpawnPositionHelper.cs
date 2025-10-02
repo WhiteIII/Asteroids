@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Project.Scripts.Core.Services.Spawners
+namespace _Project.Scripts.Gameplay.Services.Spawners
 {
     public class SpawnPositionHelper : ISpawnPositionHelper
     {
