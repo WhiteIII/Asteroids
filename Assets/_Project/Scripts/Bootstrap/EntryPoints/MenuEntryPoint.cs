@@ -1,12 +1,9 @@
 using System;
-using _Project.Scripts.View;
 using _Project.Scripts.View.Implementation;
 using _Project.Scripts.View.Services;
-using Cysharp.Threading.Tasks;
-using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.Bootstrap
+namespace _Project.Scripts.Bootstrap.EntryPoints
 {
     internal class MenuEntryPoint : IInitializable, IDisposable
     {

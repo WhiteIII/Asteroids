@@ -10,7 +10,6 @@ namespace _Project.Scripts.Gameplay.Services.Components
         private float _speed;
 
         public Vector2 Direction { get; private set; }
-        public Vector2 Position => transform.position;
 
         private void Awake() => 
             _rigidbody = GetComponent<Rigidbody2D>();

@@ -1,3 +1,4 @@
+using _Project.Scripts.Bootstrap.EntryPoints;
 using _Project.Scripts.Gameplay.Enemies;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.Services.Factories;
@@ -15,7 +16,7 @@ namespace _Project.Scripts.Bootstrap.Installers
         [Header("Data")]
         [SerializeField] private GameSettingsData _gameSettingsData;
         [SerializeField] private AsteroidsData _asteroidsData;
-        [SerializeField] private ShipStats _shipStats;
+        [SerializeField] private ShipStatsData _shipStats;
         
         [Header("Prefabs")]
         [SerializeField] private GameObject _asteroidPrefab;
@@ -28,6 +29,7 @@ namespace _Project.Scripts.Bootstrap.Installers
             Container.BindInterfacesTo<GameLoop>().AsSingle();
             Container.BindInterfacesTo<GameLoopRegisterController>().AsSingle();
             Container.BindInterfacesTo<GameLoopCreator>().AsSingle();
+            //Container.BindFactoryCustomInterface<IRule[], AiActor, AiActorFactory, IFactory<IRule[], AiActor>>();
             Container
                 .BindFactoryCustomInterface<Bullet, CharacterFactory<Bullet>, IFactory<Bullet>>()
                 .WithFactoryArguments(_bulletPrefab);
@@ -42,9 +44,9 @@ namespace _Project.Scripts.Bootstrap.Installers
                 .BindFactoryCustomInterface<Asteroid, CharacterFactory<Asteroid>, IFactory<Asteroid>>()
                 .WithId("SmallAsteroidsFactory")
                 .WithFactoryArguments(_smallAsteroidPrefab);
-            Container.Bind<SmallAsteroidsPool>().AsSingle();
-            Container.Bind<AsteroidsPool>().AsSingle().WithArguments(_asteroidsData);
-            Container.Bind<BulletsPool>().AsSingle();
+            Container.BindInterfacesAndSelfTo<SmallAsteroidsPool>().AsSingle();
+            Container.BindInterfacesAndSelfTo<AsteroidsPool>().AsSingle().WithArguments(_asteroidsData);
+            Container.BindInterfacesAndSelfTo<BulletsPool>().AsSingle();
             Container.Bind<AsteroidsSpawner>().AsSingle().WithArguments(_asteroidsData);
             Container
                 .BindInterfacesAndSelfTo<SpawnersController>()

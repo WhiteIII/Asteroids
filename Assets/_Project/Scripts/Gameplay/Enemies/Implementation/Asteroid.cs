@@ -1,7 +1,6 @@
 using _Project.Scripts.Gameplay.Enemies.Base;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.Services.Components;
-using _Project.Scripts.Gameplay.Services.Targets;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
 using _Project.Scripts.Gameplay.Services.Targets.Implementation;
 using UnityEngine;

@@ -5,7 +5,7 @@ using _Project.Scripts.SceneSwitcher;
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.Bootstrap
+namespace _Project.Scripts.Bootstrap.EntryPoints
 {
     public class GameplayEntryPoint : IInitializable,  IDisposable
     {

@@ -16,22 +16,32 @@ namespace _Project.Scripts.Gameplay.GameLoopSystem
             _instantiator = instantiator;
         }
 
-        public T Create<T>(GameObject prefab) 
+        public T CreateMonoBehaviourObject<T>(GameObject prefab) 
             where T : MonoBehaviour, IGameLoopObject
         {
-            T updatableComponent = _instantiator.InstantiatePrefab(prefab).GetComponent<T>();
+            return RegisterObject(_instantiator.InstantiatePrefab(prefab).GetComponent<T>());
+        }
 
-            if (updatableComponent is IUpdatable updatable)
+        public T Create<T>(params object[] parameters)
+            where T : IGameLoopObject
+        {
+            return RegisterObject(_instantiator.Instantiate<T>(parameters));
+        }
+
+        private T RegisterObject<T>(T gameLoopObject)
+            where T : IGameLoopObject
+        {
+            if (gameLoopObject is IUpdatable updatable)
                 _gameLoopRegisterController.Register(updatable);
-            else if (updatableComponent is IInitializableUpdatableObject updatableObject)
-                _gameLoopRegisterController.RegisterInitializableObject(updatableObject);
-
-            return updatableComponent;
+            else if (gameLoopObject is IInitializableUpdatableObject initializableUpdatableObject)
+                _gameLoopRegisterController.RegisterInitializableObject(initializableUpdatableObject);
+            return gameLoopObject;
         }
     }
 
     public interface IGameLoopCreator
     {
-        T Create<T>(GameObject prefab) where T : MonoBehaviour, IGameLoopObject;
+        T CreateMonoBehaviourObject<T>(GameObject prefab) where T : MonoBehaviour, IGameLoopObject;
+        T Create<T>(params object[] parameters) where T : IGameLoopObject;
     }
 }

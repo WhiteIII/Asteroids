@@ -1,10 +1,7 @@
-using _Project.Scripts.Gameplay.GameLoopSystem;
+using _Project.Scripts.Bootstrap.EntryPoints;
 using _Project.Scripts.Gameplay.InputSystem;
-using _Project.Scripts.Gameplay.Services.Factories;
-using _Project.Scripts.Gameplay.Services.ObjectPools;
 using _Project.Scripts.Gameplay.Services.Repositories;
 using _Project.Scripts.Gameplay.Services.Spawners;
-using _Project.Scripts.Gameplay.Ship;
 using _Project.Scripts.Data;
 using UnityEngine;
 using Zenject;
@@ -15,7 +12,6 @@ namespace _Project.Scripts.Bootstrap.Installers
     {
         [Header("Data")]
         [SerializeField] private GameSettingsData _gameSettingsData;
-        [SerializeField] private ShipStats _shipStats;
         
         [Header("CorePrefabs")]
         [SerializeField] private GameObject _shipPrefab;

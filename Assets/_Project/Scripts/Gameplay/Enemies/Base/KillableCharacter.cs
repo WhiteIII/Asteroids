@@ -18,8 +18,5 @@ namespace _Project.Scripts.Gameplay.Enemies.Base
                 .Subscribe(_ => ReleaseCharacter())
                 .AddTo(Disposable);
         }
-        
-        protected void KillCharacter() =>
-            _target.Kill();
     }
 }

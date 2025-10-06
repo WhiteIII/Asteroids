@@ -1,7 +1,7 @@
 using _Project.Scripts.SceneSwitcher;
 using Zenject;
 
-namespace _Project.Scripts.Bootstrap
+namespace _Project.Scripts.Bootstrap.EntryPoints
 {
     public class BootstrapEntryPoint : IInitializable
     {

@@ -6,7 +6,7 @@ namespace _Project.Scripts.Gameplay.Ai.Base
     {
         private readonly IRule[] _rules;
 
-        public AiActor(IRule[] rules) => 
+        public AiActor(params IRule[] rules) => 
             _rules = rules;
 
         public void GameLoopUpdate()

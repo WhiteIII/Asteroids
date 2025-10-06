@@ -1,3 +1,4 @@
+using _Project.Scripts.Bootstrap.EntryPoints;
 using Zenject;
 
 namespace _Project.Scripts.Bootstrap.Installers

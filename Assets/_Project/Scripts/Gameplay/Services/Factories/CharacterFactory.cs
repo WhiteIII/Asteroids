@@ -24,6 +24,6 @@ namespace _Project.Scripts.Gameplay.Services.Factories
         }
 
         public override T Create() =>
-            _repository.Register(_creator.Create<T>(_prefab));
+            _repository.Register(_creator.CreateMonoBehaviourObject<T>(_prefab));
     }
 }

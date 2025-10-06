@@ -10,29 +10,29 @@ namespace _Project.Scripts.Gameplay.Services.Factories
     {
         private readonly GameObject _shipPrefab;
         private readonly IGameLoopCreator _creator;
-        private readonly ShipStats _shipStats;
+        private readonly ShipStatsData _shipStatsData;
         private readonly CharactersRepository _repository;
 
         public ShipFactory(
             GameObject shipPrefab,
             IGameLoopCreator creator,
-            ShipStats shipStats,
+            ShipStatsData shipStatsData,
             CharactersRepository repository)
         {
             _shipPrefab = shipPrefab;
             _creator = creator;
-            _shipStats = shipStats;
+            _shipStatsData = shipStatsData;
             _repository = repository;
         }
 
         public override Ship.Ship Create()
         {
             Ship.Ship ship = _repository.RegisterShip(_creator
-                .Create<Ship.Ship>(_shipPrefab));
+                .CreateMonoBehaviourObject<Ship.Ship>(_shipPrefab));
             ship.Initialize(
-                _shipStats.MovementSpeed,
-                _shipStats.BulletFlyingSpeed, 
-                _shipStats.RotationSpeed);
+                _shipStatsData.MovementSpeed,
+                _shipStatsData.BulletFlyingSpeed, 
+                _shipStatsData.RotationSpeed);
             
             return ship;
         }
