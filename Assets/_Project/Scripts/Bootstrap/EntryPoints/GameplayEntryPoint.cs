@@ -12,15 +12,18 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly IFactory<Ship> _shipFactory;
         private readonly CharactersRepository _charactersRepository;
         private readonly ISceneController _sceneController;
+        private readonly AiActorsRepository _aiActorsRepository;
 
         public GameplayEntryPoint(
             IFactory<Ship> shipFactory,
             CharactersRepository charactersRepository, 
-            ISceneController sceneController)
+            ISceneController sceneController,
+            AiActorsRepository aiActorsRepository)
         {
             _shipFactory = shipFactory;
             _charactersRepository = charactersRepository;
             _sceneController = sceneController;
+            _aiActorsRepository = aiActorsRepository;
         }
 
         public void Initialize()
@@ -31,6 +34,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         
         public void Dispose()
         {
+            _aiActorsRepository.Clear();
             _charactersRepository.ClearAllCharactersList();
             _charactersRepository.UnregisterShip();
         }

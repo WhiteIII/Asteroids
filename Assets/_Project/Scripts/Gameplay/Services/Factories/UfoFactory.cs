@@ -1,5 +1,8 @@
-using _Project.Scripts.Gameplay.Enemies;
-using _Project.Scripts.Gameplay.GameLoopSystem;
+using _Project.Scripts.Data;
+using _Project.Scripts.Gameplay.Ai.Base;
+using _Project.Scripts.Gameplay.Ai.Implementation;
+using _Project.Scripts.Gameplay.Characters;
+using _Project.Scripts.Gameplay.Characters.Base;
 using UnityEngine;
 using Zenject;
 
@@ -7,14 +10,37 @@ namespace _Project.Scripts.Gameplay.Services.Factories
 {
     public class UfoFactory : PlaceholderFactory<Ufo>
     {
-        private readonly IGameLoopCreator _creator;
-        private readonly GameObject _ufoPrefab;
-        
+        private readonly CharacterCreator _characterCreator;
+        private readonly AiActorCreator _aiActorCreator;
+        private readonly Ufo _ufoPrefab;
+        private readonly UfoStatsData _stats;
+
+        public UfoFactory(
+            AiActorCreator aiActorCreator,
+            Ufo ufoPrefab,
+            UfoStatsData stats,
+            CharacterCreator characterCreator)
+        {
+            _aiActorCreator = aiActorCreator;
+            _ufoPrefab = ufoPrefab;
+            _stats = stats;
+            _characterCreator = characterCreator;
+        }
+
         public override Ufo Create()
         {
-            Ufo ufo = _creator.CreateMonoBehaviourObject<Ufo>(_ufoPrefab);
-            
-            return base.Create();
+            Ufo ufo = _characterCreator.CreateNonGameLoopCharacter(_ufoPrefab);
+            _aiActorCreator.Create(
+                new BaseRule(ufo.MoveToPlayer, () => ufo.PlayerIsClose == false),
+                new BaseRule(ufo.Attack, () => ufo.PlayerIsClose && ufo.InCooldown == false),
+                new BaseRule(ufo.StopMoving, () => ufo.PlayerIsClose && ufo.IsMovingStoped == false));
+            ufo.Initialize(
+                _stats.BulletFlyingSpeed,
+                _stats.AttackDistance,
+                _stats.AttackCooldown,
+                _stats.MovementSpeed);
+
+            return ufo;
         }        
     }
 }

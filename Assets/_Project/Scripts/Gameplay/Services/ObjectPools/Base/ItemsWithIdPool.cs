@@ -8,9 +8,9 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
         where TItem : IEnableAndDisableItem, IItemWithId<TId>
     {
         protected ItemsWithIdPool(
-            IFactory<TItem> factory,
+            Func<TItem> createMethod,
             Func<TId> idGenerator, 
-            bool disableItemOnCreate = false) : base(factory, idGenerator, disableItemOnCreate)
+            bool disableItemOnCreate = false) : base(createMethod, idGenerator, disableItemOnCreate)
         {
         }
 

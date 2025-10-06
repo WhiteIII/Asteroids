@@ -1,28 +1,24 @@
-using _Project.Scripts.Gameplay.Ai.Base;
+using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.Services.Repositories;
 using _Project.Scripts.Gameplay.Ship;
-using _Project.Scripts.Gameplay.Enemies.Base;
-using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.Services.Components;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
 using _Project.Scripts.Gameplay.Services.Targets.Implementation;
 using UnityEngine;
-using Zenject;
 using static UnityEngine.Mathf;
 using static UnityEngine.Time;
 using static UnityEngine.Vector2;
 
-namespace _Project.Scripts.Gameplay.Enemies
+namespace _Project.Scripts.Gameplay.Characters
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(UfoTarget))]
-    [RequireComponent(typeof(GameObjectContext))]
-    public class Ufo : KillableCharacter, IInitializableUpdatableObject
+    [RequireComponent(typeof(AttackController))]
+    public class Ufo : KillableCharacter
     {
         private AttackController _attackController;
         private ICharacterRepository _characterRepository;
         private AiAgentMovement _movement;
-        private AiActor _actor;
         private float _attackDistance;
         private float _attackCooldown;
         private float _currentCooldown;
@@ -31,27 +27,23 @@ namespace _Project.Scripts.Gameplay.Enemies
         public bool InCooldown => _currentCooldown > .1f;
         public bool IsMovingStoped { get; private set; }
         
-        [Inject] private void Construct(AiActor actor) => 
-            _actor = actor;
-        
         public void Initialize(
             float bulletFlyingSpeed,
             float attackDistance,
-            float attackCooldown)
+            float attackCooldown,
+            float movementSpeed)
         {
             _attackDistance = attackDistance;
             _attackCooldown = attackCooldown;
             
             SetupKillableCharacter();
             _attackController.Initialize(bulletFlyingSpeed);
+            _movement.Initialize(movementSpeed);
         }
 
         private void Update() => 
             _currentCooldown = Max(0, _currentCooldown - deltaTime);
-
-        public IUpdatable[] GetAllUpdatableObjects() => 
-            new IUpdatable[] { _actor };
-
+        
         public void Attack()
         {
             _currentCooldown = _attackCooldown;
@@ -69,6 +61,9 @@ namespace _Project.Scripts.Gameplay.Enemies
             _movement.StopMoving();
             IsMovingStoped = true;
         }
+        
+        public void SetPosition(Vector2 position) => 
+            _movement.SetPosition(position);
 
         protected override void OnTouchTarget(ITarget target)
         {

@@ -8,5 +8,6 @@ namespace _Project.Scripts.Data
         [field: SerializeField] public float MovementSpeed { get; private set; }
         [field: SerializeField] public float BulletFlyingSpeed { get; private set; }
         [field: SerializeField] public float AttackCooldown { get; private set; }
+        [field: SerializeField] public float AttackDistance { get; private set; }
     }
 }

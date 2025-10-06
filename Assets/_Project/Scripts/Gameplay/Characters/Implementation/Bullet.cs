@@ -1,12 +1,12 @@
 using System;
-using _Project.Scripts.Gameplay.Enemies.Base;
+using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.Services.Components;
 using _Project.Scripts.Gameplay.Services.Targets;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Enemies
+namespace _Project.Scripts.Gameplay.Characters
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(RigidbodyMovement))]
@@ -55,14 +55,26 @@ namespace _Project.Scripts.Gameplay.Enemies
         
         protected override void OnTouchTarget(ITarget target)
         {
-            if (target is IKillableTarget killableTarget)
+            if (target is not IKillableTarget killableTarget)
             {
-                Type killableTargetType = killableTarget.GetType();
-                if (killableTargetType != _ignoreTargetType || 
-                    _secondIgnoreTargetType != killableTarget.GetType())
-                    killableTarget.Kill();
+                ReleaseCharacter();
+                return;
             }
-            ReleaseCharacter();
+
+            Type killableTargetType = killableTarget.GetType();
+            if (killableTargetType != _ignoreTargetType)
+            {
+                killableTarget.Kill();
+                ReleaseCharacter();
+            }
+            else if (_secondIgnoreTargetType != null)
+            {
+                if (killableTargetType != _secondIgnoreTargetType)
+                {
+                    killableTarget.Kill();
+                    ReleaseCharacter();
+                }
+            }
         }
     }
 }

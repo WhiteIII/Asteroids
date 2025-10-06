@@ -5,18 +5,18 @@ namespace _Project.Scripts.Gameplay.Ai.Implementation
 {
     public class BaseRule : IRule
     {
-        private readonly Action _onAttack;
+        private readonly Action _onExecute;
         private readonly Func<bool> _canExecute;
 
         public bool CanExecute => _canExecute();
         
-        public BaseRule(Action onAttack, Func<bool> canExecute)
+        public BaseRule(Action onExecute, Func<bool> canExecute)
         {
-            _onAttack = onAttack;
+            _onExecute = onExecute;
             _canExecute = canExecute;
         }
         
         public void Execute() => 
-            _onAttack?.Invoke();
+            _onExecute?.Invoke();
     }
 }

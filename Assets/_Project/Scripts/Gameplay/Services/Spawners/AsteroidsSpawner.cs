@@ -1,5 +1,5 @@
 using _Project.Scripts.Data;
-using _Project.Scripts.Gameplay.Enemies;
+using _Project.Scripts.Gameplay.Characters;
 using _Project.Scripts.Gameplay.Services.ObjectPools;
 using UnityEngine;
 

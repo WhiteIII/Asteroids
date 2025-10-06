@@ -2,7 +2,7 @@ using _Project.Scripts.Gameplay.Services.Targets;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
 using R3;
 
-namespace _Project.Scripts.Gameplay.Enemies.Base
+namespace _Project.Scripts.Gameplay.Characters.Base
 {
     public abstract class KillableCharacter : ReleasedCharacter
     {

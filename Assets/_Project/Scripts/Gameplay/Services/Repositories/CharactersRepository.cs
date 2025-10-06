@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using _Project.Scripts.Gameplay.Enemies.Base;
+using _Project.Scripts.Gameplay.Characters.Base;
 
 namespace _Project.Scripts.Gameplay.Services.Repositories
 {

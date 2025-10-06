@@ -12,13 +12,7 @@ namespace _Project.Scripts.Bootstrap.Installers
     {
         [Header("Data")]
         [SerializeField] private GameSettingsData _gameSettingsData;
-        
-        [Header("CorePrefabs")]
-        [SerializeField] private GameObject _shipPrefab;
-        [SerializeField] private GameObject _bulletPrefab;
-        [SerializeField] private GameObject _asteroidPrefab;
-        [SerializeField] private GameObject _smallAsteroidPrefab;
-        
+
         [Header("OnScene")]
         [SerializeField] private Camera _camera;
         

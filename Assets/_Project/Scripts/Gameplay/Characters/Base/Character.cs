@@ -1,7 +1,7 @@
 using _Project.Scripts.Gameplay.Services.ObjectPools.Base;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Enemies.Base
+namespace _Project.Scripts.Gameplay.Characters.Base
 {
     public abstract class Character : 
         MonoBehaviour,

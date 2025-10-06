@@ -10,7 +10,7 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
     public abstract class BasePoolWithId<TItem, TId> : IDisposable
         where TItem : IEnableAndDisableItem, IItemWithId<TId>
     {
-        private readonly IFactory<TItem> _factory;
+        private readonly Func<TItem> _createMethod;
         private readonly Func<TId> _idGenerator;
         private readonly Action<TItem> _onGet;
         private readonly Action<TItem> _onRelease;
@@ -20,17 +20,17 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
         private readonly CompositeDisposable  _disposables = new();
 
         protected BasePoolWithId(
-            IFactory<TItem> factory, 
+            Func<TItem> createMethod,
             Func<TId> idGenerator,  
             bool disableItemOnCreate = false,
             Action<TItem> onGet = null,
             Action<TItem> onRelease = null)
         {
-            _factory = factory;
             _idGenerator = idGenerator;
             _disableItemOnCreate = disableItemOnCreate;
             _onGet = onGet;
             _onRelease = onRelease;
+            _createMethod = createMethod;
         }
 
         public void Dispose() => 
@@ -59,7 +59,7 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
         private TItem CreateItemAndAddInEnabledItemsDictionary()
         {
             TId id = _idGenerator();
-            TItem item = _factory.Create();
+            TItem item = _createMethod.Invoke();
             if (_disableItemOnCreate)
                 item.Disable();
             item.SetID(id);

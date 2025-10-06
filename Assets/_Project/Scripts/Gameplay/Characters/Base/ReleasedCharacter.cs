@@ -1,11 +1,10 @@
 using _Project.Scripts.Gameplay.Services.Components;
 using _Project.Scripts.Gameplay.Services.ObjectPools.Base;
-using _Project.Scripts.Gameplay.Services.Targets;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
 using R3;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Enemies.Base
+namespace _Project.Scripts.Gameplay.Characters.Base
 {
     [RequireComponent(typeof(CollisionHandler))]
     public abstract class ReleasedCharacter : Character, IItemWithId<string>

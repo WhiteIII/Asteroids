@@ -1,8 +1,6 @@
-using _Project.Scripts.Gameplay.GameLoopSystem;
-
 namespace _Project.Scripts.Gameplay.Ai.Base
 {
-    public class AiActor : IUpdatable
+    public class AiActor : IAiActor
     {
         private readonly IRule[] _rules;
 

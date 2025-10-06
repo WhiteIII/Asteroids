@@ -1,5 +1,5 @@
 using System;
-using _Project.Scripts.Gameplay.Enemies;
+using _Project.Scripts.Gameplay.Characters;
 using _Project.Scripts.Gameplay.Services.ObjectPools;
 using _Project.Scripts.Gameplay.Services.Targets;
 using _Project.Scripts.Gameplay.Services.Targets.Base;

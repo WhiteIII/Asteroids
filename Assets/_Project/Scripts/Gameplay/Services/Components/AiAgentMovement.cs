@@ -20,6 +20,13 @@ namespace _Project.Scripts.Gameplay.Services.Components
                 
         private void Awake() => 
             _agent = GetComponent<NavMeshAgent>();
+
+        public void SetPosition(Vector2 position)
+        {
+            _agent.enabled = false;
+            transform.position = position;
+            _agent.enabled = true;
+        }
         
         public async void MoveTo(Vector2 shipPosition)
         {

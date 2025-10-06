@@ -1,11 +1,11 @@
-using _Project.Scripts.Gameplay.Enemies.Base;
+using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.Services.Components;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
 using _Project.Scripts.Gameplay.Services.Targets.Implementation;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Enemies
+namespace _Project.Scripts.Gameplay.Characters
 {
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(AsteroidTarget))]

@@ -16,12 +16,18 @@ namespace _Project.Scripts.Gameplay.GameLoopSystem
             _instantiator = instantiator;
         }
 
+        public T Create<T>(T prefab)
+            where T : MonoBehaviour, IGameLoopObject
+        {
+            return RegisterObject(_instantiator.InstantiatePrefab(prefab).GetComponent<T>());
+        }
+        
         public T CreateMonoBehaviourObject<T>(GameObject prefab) 
             where T : MonoBehaviour, IGameLoopObject
         {
             return RegisterObject(_instantiator.InstantiatePrefab(prefab).GetComponent<T>());
         }
-
+        
         public T Create<T>(params object[] parameters)
             where T : IGameLoopObject
         {
@@ -42,6 +48,7 @@ namespace _Project.Scripts.Gameplay.GameLoopSystem
     public interface IGameLoopCreator
     {
         T CreateMonoBehaviourObject<T>(GameObject prefab) where T : MonoBehaviour, IGameLoopObject;
+        T Create<T>(T prefab) where T : MonoBehaviour, IGameLoopObject;
         T Create<T>(params object[] parameters) where T : IGameLoopObject;
     }
 }

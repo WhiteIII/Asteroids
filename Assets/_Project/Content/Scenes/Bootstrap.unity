@@ -572,11 +572,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameSettingsData: {fileID: 11400000, guid: 491cd263c424c8845bf5f0a60770fc0e, type: 2}
-  _shipStats: {fileID: 11400000, guid: a176893ffadba274f96e2924dc871547, type: 2}
-  _shipPrefab: {fileID: 6278801559816506689, guid: 8413d23ec6b5fd742a22c638656ad203, type: 3}
-  _bulletPrefab: {fileID: 7723277109537424967, guid: a8db8eca41e7e074da1cc1ca970b031f, type: 3}
-  _asteroidPrefab: {fileID: 2972102453149434029, guid: 16f6e41a84d8f4f43a35c8d26645cc33, type: 3}
-  _smallAsteroidPrefab: {fileID: 6296949373485058737, guid: 8a3917379ebee3b4a9d157388a1c0efb, type: 3}
   _camera: {fileID: 519420031}
 --- !u!114 &1616966649
 MonoBehaviour:
@@ -641,6 +636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiRoot: {fileID: 1026150207}
   _menuWindowPrefab: {fileID: 917768163187643302, guid: f6613a15c2527ce45a6e19480d92eb58, type: 3}
+  _gameOverWindowPrefab: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

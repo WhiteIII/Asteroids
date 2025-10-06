@@ -10,12 +10,12 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
         private readonly Action<TItem, TParameter> _actionOnGetWithParameter;
         
         protected ItemsWithIdAndParameterPool(
-            IFactory<TItem> factory, 
+            Func<TItem> createMethod, 
             Func<TId> idGenerator, 
             Action<TItem, TParameter> actionOnGetWithParameter,
             bool disableItemOnCreate = false,
             Action<TItem> onRelease = null) : 
-            base(factory, idGenerator, disableItemOnCreate, null, onRelease)
+            base(createMethod, idGenerator, disableItemOnCreate, null, onRelease)
         {
             _actionOnGetWithParameter = actionOnGetWithParameter;
         }

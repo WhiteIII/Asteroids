@@ -1,6 +1,7 @@
 using System;
 using _Project.Scripts.Data;
-using _Project.Scripts.Gameplay.Enemies;
+using _Project.Scripts.Gameplay.Characters;
+using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.Services.Repositories;
 using UnityEngine;
 using Zenject;
@@ -12,12 +13,12 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
     public class AsteroidsPool : ItemsWithIdAndParameterPool<Asteroid, string, Vector2>
     {
         public AsteroidsPool(
-            [Inject(Id = "AsteroidsFactory")]IFactory<Asteroid> factory,
-            CharactersRepository repository,
+            CharacterCreator characterCreator,
+            Asteroid prefab,
             SmallAsteroidsPool smallAsteroidsPool,
             AsteroidsData asteroidsData) : 
             base(
-                factory, 
+                () => characterCreator.CreateGameLoopCharacter(prefab), 
                 () => Guid.NewGuid().ToString(),
                 (asteroid, spawnPosition) => asteroid.SetPosition(spawnPosition),
                 true,
