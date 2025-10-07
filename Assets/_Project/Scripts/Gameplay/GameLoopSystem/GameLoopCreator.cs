@@ -22,19 +22,13 @@ namespace _Project.Scripts.Gameplay.GameLoopSystem
             return RegisterObject(_instantiator.InstantiatePrefab(prefab).GetComponent<T>());
         }
         
-        public T CreateMonoBehaviourObject<T>(GameObject prefab) 
-            where T : MonoBehaviour, IGameLoopObject
-        {
-            return RegisterObject(_instantiator.InstantiatePrefab(prefab).GetComponent<T>());
-        }
-        
         public T Create<T>(params object[] parameters)
             where T : IGameLoopObject
         {
             return RegisterObject(_instantiator.Instantiate<T>(parameters));
         }
 
-        private T RegisterObject<T>(T gameLoopObject)
+        public T RegisterObject<T>(T gameLoopObject)
             where T : IGameLoopObject
         {
             if (gameLoopObject is IUpdatable updatable)
@@ -47,7 +41,7 @@ namespace _Project.Scripts.Gameplay.GameLoopSystem
 
     public interface IGameLoopCreator
     {
-        T CreateMonoBehaviourObject<T>(GameObject prefab) where T : MonoBehaviour, IGameLoopObject;
+        T RegisterObject<T>(T gameLoopObject) where T : IGameLoopObject;
         T Create<T>(T prefab) where T : MonoBehaviour, IGameLoopObject;
         T Create<T>(params object[] parameters) where T : IGameLoopObject;
     }

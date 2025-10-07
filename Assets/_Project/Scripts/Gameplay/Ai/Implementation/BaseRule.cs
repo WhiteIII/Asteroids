@@ -8,7 +8,7 @@ namespace _Project.Scripts.Gameplay.Ai.Implementation
         private readonly Action _onExecute;
         private readonly Func<bool> _canExecute;
 
-        public bool CanExecute => _canExecute();
+        public bool CanExecute => _canExecute.Invoke();
         
         public BaseRule(Action onExecute, Func<bool> canExecute)
         {

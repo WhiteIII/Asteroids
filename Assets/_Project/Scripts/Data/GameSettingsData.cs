@@ -7,5 +7,6 @@ namespace _Project.Scripts.Data
     {
         [field: SerializeField] public float SpawnOffsetOutSideCameraVision { get; private set; }
         [field: SerializeField] public float AsteroidsSpawnCoolDown { get; private set; }
+        [field: SerializeField] public float UfoSpawnCoolDown { get; private set; }
     }
 }

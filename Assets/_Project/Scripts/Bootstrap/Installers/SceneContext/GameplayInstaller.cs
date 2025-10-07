@@ -31,12 +31,14 @@ namespace _Project.Scripts.Bootstrap.Installers
         
         public override void InstallBindings()
         {
+            Container.Bind<GameSettingsData>().AsSingle();
             Container.BindInterfacesTo<GameLoop>().AsSingle();
             Container.BindInterfacesTo<GameLoopRegisterController>().AsSingle();
             Container.BindInterfacesTo<GameLoopCreator>().AsSingle();
             Container.Bind<AiActorsRepository>().AsSingle();
             Container.Bind<AiActorCreator>().AsSingle();
             Container.Bind<CharacterCreator>().AsSingle();
+            Container.Bind<SpawnersRepository>().AsSingle();
             Container
                 .BindFactoryCustomInterface<Ship, ShipFactory, IFactory<Ship>>()
                 .WithFactoryArguments(_shipPrefab, _shipStats);
@@ -50,7 +52,11 @@ namespace _Project.Scripts.Bootstrap.Installers
             Container.Bind<AsteroidsSpawner>().AsSingle().WithArguments(_asteroidsData);
             Container.Bind<UfoSpawner>().AsSingle();
             Container
-                .BindInterfacesAndSelfTo<SpawnersController>()
+                .Bind<SpawnerControllerCreator<UfoSpawner>>()
+                .AsSingle()
+                .WithArguments(_gameSettingsData.UfoSpawnCoolDown);
+            Container
+                .Bind<SpawnerControllerCreator<AsteroidsSpawner>>()
                 .AsSingle()
                 .WithArguments(_gameSettingsData.AsteroidsSpawnCoolDown);
             Container.BindInterfacesTo<GameplayEntryPoint>().AsSingle();

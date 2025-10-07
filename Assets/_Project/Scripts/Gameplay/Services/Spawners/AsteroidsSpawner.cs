@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Services.Spawners
 {
-    public class AsteroidsSpawner
+    public class AsteroidsSpawner : ISpawner
     {
         private readonly AsteroidsPool _asteroidsPool;
         private readonly SmallAsteroidsPool _smallAsteroidsPool;

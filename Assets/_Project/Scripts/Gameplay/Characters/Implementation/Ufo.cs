@@ -5,6 +5,7 @@ using _Project.Scripts.Gameplay.Services.Components;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
 using _Project.Scripts.Gameplay.Services.Targets.Implementation;
 using UnityEngine;
+using Zenject;
 using static UnityEngine.Mathf;
 using static UnityEngine.Time;
 using static UnityEngine.Vector2;
@@ -14,6 +15,7 @@ namespace _Project.Scripts.Gameplay.Characters
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(UfoTarget))]
     [RequireComponent(typeof(AttackController))]
+    [RequireComponent(typeof(AiAgentMovement))]
     public class Ufo : KillableCharacter
     {
         private AttackController _attackController;
@@ -27,6 +29,9 @@ namespace _Project.Scripts.Gameplay.Characters
         public bool InCooldown => _currentCooldown > .1f;
         public bool IsMovingStoped { get; private set; }
         
+        [Inject] private void Construct(ICharacterRepository repository) => 
+            _characterRepository = repository;
+        
         public void Initialize(
             float bulletFlyingSpeed,
             float attackDistance,
@@ -39,6 +44,12 @@ namespace _Project.Scripts.Gameplay.Characters
             SetupKillableCharacter();
             _attackController.Initialize(bulletFlyingSpeed);
             _movement.Initialize(movementSpeed);
+        }
+
+        private void Awake()
+        {
+            _attackController = GetComponent<AttackController>();
+            _movement = GetComponent<AiAgentMovement>();
         }
 
         private void Update() => 
