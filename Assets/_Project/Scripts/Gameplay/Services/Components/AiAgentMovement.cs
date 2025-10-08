@@ -5,9 +5,9 @@ using UnityEngine.AI;
 namespace _Project.Scripts.Gameplay.Services.Components
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    internal class AiAgentMovement : MonoBehaviour
+    internal class AiAgentMovement : MonoBehaviour, IAiAgentMovement
     {
-        private readonly float _updatePath = 0.2f;
+        private readonly float _updatePath = 0.1f;
         private NavMeshAgent _agent;
         private float _movementSpeed;
         private bool _inCoolDown;
@@ -21,13 +21,9 @@ namespace _Project.Scripts.Gameplay.Services.Components
         private void Awake() => 
             _agent = GetComponent<NavMeshAgent>();
 
-        public void SetPosition(Vector2 position)
-        {
-            _agent.enabled = false;
+        public void SetPosition(Vector2 position) => 
             transform.position = position;
-            _agent.enabled = true;
-        }
-        
+
         public async void MoveTo(Vector2 shipPosition)
         {
             Enable();

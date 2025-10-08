@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SpawnOffsetOutSideCameraVision>k__BackingField: 5
   <AsteroidsSpawnCoolDown>k__BackingField: 3
+  <UfoSpawnCoolDown>k__BackingField: 6

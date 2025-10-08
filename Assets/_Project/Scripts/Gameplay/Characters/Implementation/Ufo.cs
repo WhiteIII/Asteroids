@@ -12,15 +12,14 @@ using static UnityEngine.Vector2;
 
 namespace _Project.Scripts.Gameplay.Characters
 {
-    [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(UfoTarget))]
     [RequireComponent(typeof(AttackController))]
-    [RequireComponent(typeof(AiAgentMovement))]
+    [RequireComponent(typeof(SimpleAiMovement))]
     public class Ufo : KillableCharacter
     {
         private AttackController _attackController;
         private ICharacterRepository _characterRepository;
-        private AiAgentMovement _movement;
+        private IAiAgentMovement _movement;
         private float _attackDistance;
         private float _attackCooldown;
         private float _currentCooldown;
@@ -49,7 +48,7 @@ namespace _Project.Scripts.Gameplay.Characters
         private void Awake()
         {
             _attackController = GetComponent<AttackController>();
-            _movement = GetComponent<AiAgentMovement>();
+            _movement = GetComponent<IAiAgentMovement>();
         }
 
         private void Update() => 
@@ -67,12 +66,9 @@ namespace _Project.Scripts.Gameplay.Characters
             _movement.MoveTo(_characterRepository.Ship.Position);
         }
 
-        public void StopMoving()
-        {
-            _movement.StopMoving();
+        public void StopMoving() =>
             IsMovingStoped = true;
-        }
-        
+
         public void SetPosition(Vector2 position) => 
             _movement.SetPosition(position);
 
