@@ -38,7 +38,6 @@ namespace _Project.Scripts.Bootstrap.Installers
             Container.Bind<AiActorsRepository>().AsSingle();
             Container.Bind<AiActorCreator>().AsSingle();
             Container.Bind<CharacterCreator>().AsSingle();
-            Container.Bind<SpawnersRepository>().AsSingle();
             Container
                 .BindFactoryCustomInterface<Ship, ShipFactory, IFactory<Ship>>()
                 .WithFactoryArguments(_shipPrefab, _shipStats);
@@ -49,16 +48,18 @@ namespace _Project.Scripts.Bootstrap.Installers
             Container.BindInterfacesAndSelfTo<AsteroidsPool>().AsSingle().WithArguments(_asteroidsData, _asteroidPrefab);
             Container.BindInterfacesAndSelfTo<BulletsPool>().AsSingle().WithArguments(_bulletPrefab);
             Container.BindInterfacesAndSelfTo<UfoPool>().AsSingle();
-            Container.Bind<AsteroidsSpawner>().AsSingle().WithArguments(_asteroidsData);
-            Container.Bind<UfoSpawner>().AsSingle();
+            Container.BindInterfacesAndSelfTo<AsteroidsSpawner>().AsSingle().WithArguments(_asteroidsData);
+            Container.BindInterfacesAndSelfTo<UfoSpawner>().AsSingle();
             Container
-                .Bind<SpawnerControllerCreator<UfoSpawner>>()
-                .AsSingle()
-                .WithArguments(_gameSettingsData.UfoSpawnCoolDown);
-            Container
-                .Bind<SpawnerControllerCreator<AsteroidsSpawner>>()
+                .BindInterfacesAndSelfTo<SpawnerController<AsteroidsSpawner>>()
                 .AsSingle()
                 .WithArguments(_gameSettingsData.AsteroidsSpawnCoolDown);
+            Container
+                .BindInterfacesAndSelfTo<SpawnerController<UfoSpawner>>()
+                .AsSingle()
+                .WithArguments(_gameSettingsData.UfoSpawnCoolDown);
+            Container.Bind<SpawnersAndControllersRepository>().AsSingle();
+
             Container.BindInterfacesTo<GameplayEntryPoint>().AsSingle();
         } 
     }

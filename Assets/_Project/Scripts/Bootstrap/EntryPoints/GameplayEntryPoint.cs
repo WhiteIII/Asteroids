@@ -1,7 +1,6 @@
 using System;
 using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Services.Repositories;
-using _Project.Scripts.Gameplay.Services.Spawners;
 using _Project.Scripts.Gameplay.Ship;
 using _Project.Scripts.SceneSwitcher;
 using UnityEngine;
@@ -15,54 +14,45 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly CharactersRepository _charactersRepository;
         private readonly ISceneController _sceneController;
         private readonly AiActorsRepository _aiActorsRepository;
-        private readonly SpawnersRepository _spawnersRepository;
-        private readonly SpawnerControllerCreator<UfoSpawner> _ufoSpawnerControllerCreator;
-        private readonly SpawnerControllerCreator<AsteroidsSpawner> _asteroidSpawnerControllerCreator;
-        
+        private readonly SpawnersAndControllersRepository _spawnersAndControllersRepository;
+
         public GameplayEntryPoint(
             IFactory<Ship> shipFactory,
             CharactersRepository charactersRepository, 
             ISceneController sceneController,
             AiActorsRepository aiActorsRepository, 
-            SpawnersRepository spawnersRepository, 
-            SpawnerControllerCreator<UfoSpawner> ufoSpawnerControllerCreator,
-            SpawnerControllerCreator<AsteroidsSpawner> asteroidSpawnerControllerCreator)
+            SpawnersAndControllersRepository spawnersAndControllersRepository)
         {
             _shipFactory = shipFactory;
             _charactersRepository = charactersRepository;
             _sceneController = sceneController;
             _aiActorsRepository = aiActorsRepository;
-            _spawnersRepository = spawnersRepository;
-            _ufoSpawnerControllerCreator = ufoSpawnerControllerCreator;
-            _asteroidSpawnerControllerCreator = asteroidSpawnerControllerCreator;
+            _spawnersAndControllersRepository = spawnersAndControllersRepository;
         }
 
         public void Initialize()
         {
             SetupShip();
-            SetupSpawners();
         }
         
         public void Dispose()
         {
             _aiActorsRepository.Clear();
-            _spawnersRepository.Clear();
+            _spawnersAndControllersRepository.Clear();
             _charactersRepository.ClearAllCharactersList();
             _charactersRepository.UnregisterShip();
         }
 
-        public void SetupSpawners()
-        {
-            _ufoSpawnerControllerCreator.Create();
-            _asteroidSpawnerControllerCreator.Create();
-        }
-        
         private void SetupShip()
         {
             _shipFactory.Create();
             _charactersRepository.Ship.SetPosition(Vector2.zero);
             _charactersRepository.Ship.SetRotation(Quaternion.identity);
-            _charactersRepository.Ship.SetOnDeadEvent(_sceneController.GoToMenu);
+            _charactersRepository.Ship.SetOnDeadEvent(() =>
+            {
+                _spawnersAndControllersRepository.StopAllSpawnerControllers();
+                _sceneController.GoToMenu();
+            });
         }
 
     }

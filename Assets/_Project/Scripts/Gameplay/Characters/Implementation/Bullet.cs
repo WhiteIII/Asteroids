@@ -62,18 +62,18 @@ namespace _Project.Scripts.Gameplay.Characters
             }
 
             Type killableTargetType = killableTarget.GetType();
-            if (killableTargetType != _ignoreTargetType)
+            if (_secondIgnoreTargetType != null)
             {
-                killableTarget.Kill();
-                ReleaseCharacter();
-            }
-            else if (_secondIgnoreTargetType != null)
-            {
-                if (killableTargetType != _secondIgnoreTargetType)
+                if (killableTargetType != _secondIgnoreTargetType && killableTargetType != _ignoreTargetType)
                 {
                     killableTarget.Kill();
                     ReleaseCharacter();
                 }
+            }
+            else if (killableTargetType != _ignoreTargetType)
+            {
+                killableTarget.Kill();
+                ReleaseCharacter();
             }
         }
     }

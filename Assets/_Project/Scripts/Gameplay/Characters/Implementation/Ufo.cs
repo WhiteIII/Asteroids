@@ -57,7 +57,8 @@ namespace _Project.Scripts.Gameplay.Characters
         public void Attack()
         {
             _currentCooldown = _attackCooldown;
-            _attackController.Shoot<UfoTarget, AsteroidTarget>(_characterRepository.Ship.Position - Position);
+            _attackController.Shoot<UfoTarget, AsteroidTarget>(
+                (_characterRepository.Ship.Position - Position).normalized);
         }
 
         public void MoveToPlayer()
