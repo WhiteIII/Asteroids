@@ -5,6 +5,7 @@ using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.InputSystem;
 using _Project.Scripts.Gameplay.Services.Targets.Implementation;
+using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 using Zenject;
@@ -29,6 +30,9 @@ namespace _Project.Scripts.Gameplay.Ship
         private IInputHandler _inputHandler;
         private ShipStatsData _stats;
         
+        public Observable<float> OnLazerCooldownChanged { get; private set; }
+        public Observable<int> OnLazerChargeCountChanged { get; private set; }
+        
         [Inject]
         private void Construct(IInputHandler inputHandler, ShipStatsData stats)
         {
@@ -43,6 +47,7 @@ namespace _Project.Scripts.Gameplay.Ship
                 _stats.LazerActivityTime, 
                 _stats.LazerRechargeTime,
                 _stats.LazerChargeCount);
+            _lazerController.SetIgnoredTargetType<ShipTarget>();
             _inputHandler
                 .OnSpacePressed
                 .Subscribe(_ => Shoot())
@@ -50,7 +55,7 @@ namespace _Project.Scripts.Gameplay.Ship
             _inputHandler
                 .OnEKeyPressed
                 .Where(_ => _lazerController.AttackIsDone)
-                .Subscribe(_ => _lazerController.Shoot(_cancellationTokenSource.Token))
+                .Subscribe(_ => _lazerController.Shoot(_cancellationTokenSource.Token).Forget())
                 .AddTo(_disposables);
         }
 
@@ -60,6 +65,9 @@ namespace _Project.Scripts.Gameplay.Ship
             _attackController = GetComponent<AttackController>();
             _rotationController = GetComponent<RotationController>();
             _lazerController = GetComponent<LazerController>();
+
+            OnLazerChargeCountChanged = _lazerController.CurrentChargesCount;
+            OnLazerCooldownChanged = _lazerController.CurrentCoolDown;
         }
         
         public IUpdatable[] GetAllUpdatableObjects() => 

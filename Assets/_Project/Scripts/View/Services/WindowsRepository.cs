@@ -44,7 +44,7 @@ namespace _Project.Scripts.View.Services
             if (!window)
                 return;
             await window.Close();
-            Destroy<MenuWindow>();
+            Destroy<T>();
         }
     }
 }

@@ -1,8 +1,9 @@
 using System;
-using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Services.Repositories;
 using _Project.Scripts.Gameplay.Ship;
 using _Project.Scripts.SceneSwitcher;
+using _Project.Scripts.View.Implementation;
+using _Project.Scripts.View.Services;
 using UnityEngine;
 using Zenject;
 
@@ -15,28 +16,36 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly ISceneController _sceneController;
         private readonly AiActorsRepository _aiActorsRepository;
         private readonly SpawnersAndControllersRepository _spawnersAndControllersRepository;
+        private readonly IFactory<ShipStatsWindow> _shipStatsWindowFactory;
+        private readonly WindowsRepository _windowsRepository;
 
         public GameplayEntryPoint(
             IFactory<Ship> shipFactory,
             CharactersRepository charactersRepository, 
             ISceneController sceneController,
             AiActorsRepository aiActorsRepository, 
-            SpawnersAndControllersRepository spawnersAndControllersRepository)
+            SpawnersAndControllersRepository spawnersAndControllersRepository,
+            IFactory<ShipStatsWindow> shipStatsWindowFactory, 
+            WindowsRepository windowsRepository)
         {
             _shipFactory = shipFactory;
             _charactersRepository = charactersRepository;
             _sceneController = sceneController;
             _aiActorsRepository = aiActorsRepository;
             _spawnersAndControllersRepository = spawnersAndControllersRepository;
+            _shipStatsWindowFactory = shipStatsWindowFactory;
+            _windowsRepository = windowsRepository;
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
             SetupShip();
+            await _shipStatsWindowFactory.Create().Open();
         }
         
-        public void Dispose()
+        public async void Dispose()
         {
+            await _windowsRepository.TryCloseAndDestroyWindow<ShipStatsWindow>();
             _aiActorsRepository.Clear();
             _spawnersAndControllersRepository.Clear();
             _charactersRepository.ClearAllCharactersList();

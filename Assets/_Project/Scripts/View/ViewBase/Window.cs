@@ -47,7 +47,7 @@ namespace _Project.Scripts.View
 
         protected virtual void OnSetup() { }
         protected virtual void OnDestroyMethod() { }
-        protected abstract void Enable();
-        protected abstract void Disable();
+        protected virtual void Enable() { }
+        protected virtual void Disable() { }
     }
 }

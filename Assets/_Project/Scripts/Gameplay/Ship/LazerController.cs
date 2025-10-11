@@ -2,6 +2,7 @@ using System.Threading;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
 using Cysharp.Threading.Tasks;
+using R3;
 using UnityEngine;
 using static UnityEngine.Mathf;
 using static UnityEngine.Time;
@@ -12,23 +13,24 @@ namespace _Project.Scripts.Gameplay.Ship
     {
         [SerializeField] private Lazer _lazer;
 
+        public readonly ReactiveProperty<int> CurrentChargesCount = new();
+        public readonly ReactiveProperty<float> CurrentCoolDown = new();
+        
+        private float _coolDown;
         private int _maxChargesCount;
         private float _lifeTime;
-        private float _coolDown;
         
-        private int _currentChargesCount;
-        private float _currentCoolDown;
         private bool _isActive;
 
-        public bool AttackIsDone => _currentChargesCount > 0 && _isActive == false;
+        public bool AttackIsDone => CurrentChargesCount.Value > 0 && _isActive == false;
         
         public void Initialize(float lifeTime, float coolDown, int maxChargesCount)
         {
             _lifeTime = lifeTime;
             _coolDown = coolDown;
             _maxChargesCount = maxChargesCount;
-            _currentChargesCount = _maxChargesCount;
-            _currentCoolDown = _coolDown;
+            CurrentChargesCount.Value = _maxChargesCount;
+            CurrentCoolDown.Value = _coolDown;
         }
 
         public void SetIgnoredTargetType<T>()
@@ -39,25 +41,25 @@ namespace _Project.Scripts.Gameplay.Ship
         
         public void GameLoopUpdate()
         {
-            if (_currentChargesCount == _maxChargesCount)
+            if (CurrentChargesCount.CurrentValue == _maxChargesCount)
                 return;
             
-            _currentCoolDown = Min(_coolDown, _currentCoolDown + deltaTime);
+            CurrentCoolDown.Value = Min(_coolDown, CurrentCoolDown.CurrentValue + deltaTime);
             
-            if (_currentCoolDown == _coolDown)
+            if (CurrentCoolDown.CurrentValue == _coolDown)
             {
-                _currentCoolDown = 0;
-                _currentChargesCount++;
+                CurrentCoolDown.Value = 0;
+                CurrentChargesCount.Value++;
             }
         }
 
-        public async void Shoot(CancellationToken token = default)
+        public async UniTask Shoot(CancellationToken token = default)
         {
             token.ThrowIfCancellationRequested();
-            _currentChargesCount--;
+            CurrentChargesCount.Value--;
             _lazer.ShowLazer();
             _isActive = true;
-            await UniTask.WaitForSeconds(_lifeTime);
+            await UniTask.WaitForSeconds(_lifeTime, cancellationToken: token);
             token.ThrowIfCancellationRequested();
             _isActive = false;
             _lazer.HideLazer();

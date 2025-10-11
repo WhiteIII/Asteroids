@@ -1,5 +1,4 @@
 using _Project.Scripts.ViewModel;
-using UnityEngine;
 using Zenject;
 
 namespace _Project.Scripts.View.Services
@@ -8,33 +7,41 @@ namespace _Project.Scripts.View.Services
         where TViewModel : IViewModel
         where TWindow :  Window<TViewModel>
     {
-        private readonly TViewModel _viewModel;
-        private readonly GameObject _prefab;
-        private readonly Transform _parent;
+        protected readonly TViewModel ViewModel;
+        
+        private readonly TWindow _prefab;
+        private readonly UIRoot _uiRoot;
         private readonly IInstantiator _instantiator;
         private readonly WindowsRepository _windowsRepository;
 
         protected BaseWindowFactory(
             TViewModel viewModel,
-            GameObject prefab,
-            Transform parent,
+            TWindow prefab,
+            UIRoot uiRoot,
             IInstantiator instantiator,
             WindowsRepository windowsRepository)
         {
-            _viewModel = viewModel;
+            ViewModel = viewModel;
             _prefab = prefab;
-            _parent = parent;
+            _uiRoot = uiRoot;
             _instantiator = instantiator;
             _windowsRepository = windowsRepository;
         }
 
         public override TWindow Create()
         {
+            TWindow window = CreateWindow();
+            window.Setup(ViewModel);
+            return window;
+        }
+        
+        protected TWindow CreateWindow()
+        {
             TWindow window = _instantiator
-                .InstantiatePrefab(_prefab, _parent)
+                .InstantiatePrefab(_prefab)
                 .GetComponent<TWindow>();
+            _uiRoot.AddWindow(window.transform);
             _windowsRepository.Register(window);
-            window.Setup(_viewModel);
             return window;
         }
     }

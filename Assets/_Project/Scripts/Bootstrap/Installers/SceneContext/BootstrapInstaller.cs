@@ -21,7 +21,7 @@ namespace _Project.Scripts.Bootstrap.Installers
         {
             Container.Bind<ShipStatsData>().FromInstance(_shipStatsData).AsSingle();
             Container.BindInterfacesTo<InputHandler>().AsSingle();
-            Container.BindInterfacesAndSelfTo<CharactersRepository>().AsSingle().MoveIntoAllSubContainers();
+            Container.BindInterfacesAndSelfTo<CharactersRepository>().AsSingle();
             Container
                 .BindInterfacesTo<SpawnPositionHelper>()
                 .AsSingle()
