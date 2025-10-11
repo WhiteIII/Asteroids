@@ -572,6 +572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameSettingsData: {fileID: 11400000, guid: 491cd263c424c8845bf5f0a60770fc0e, type: 2}
+  _shipStatsData: {fileID: 11400000, guid: a176893ffadba274f96e2924dc871547, type: 2}
   _camera: {fileID: 519420031}
 --- !u!114 &1616966649
 MonoBehaviour:

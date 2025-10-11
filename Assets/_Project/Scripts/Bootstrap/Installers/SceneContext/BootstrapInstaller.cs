@@ -12,12 +12,14 @@ namespace _Project.Scripts.Bootstrap.Installers
     {
         [Header("Data")]
         [SerializeField] private GameSettingsData _gameSettingsData;
+        [SerializeField] private ShipStatsData _shipStatsData;
 
         [Header("OnScene")]
         [SerializeField] private Camera _camera;
         
         public override void InstallBindings()
         {
+            Container.Bind<ShipStatsData>().FromInstance(_shipStatsData).AsSingle();
             Container.BindInterfacesTo<InputHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<CharactersRepository>().AsSingle().MoveIntoAllSubContainers();
             Container

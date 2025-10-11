@@ -1,3 +1,4 @@
+using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.InputSystem;
 using UnityEngine;
@@ -12,14 +13,12 @@ namespace _Project.Scripts.Gameplay.Ship
         private IInputHandler _inputHandler;
         private float _speed;
 
-        [Inject] private void Construct(IInputHandler inputHandler) => 
-            _inputHandler = inputHandler;
-        
-        public void Initialize(
-            float speed)
+        [Inject]
+        private void Construct(IInputHandler inputHandler, ShipStatsData stats)
         {
-            _speed = speed;
-        }
+            _speed = stats.MovementSpeed;
+            _inputHandler = inputHandler;
+        } 
 
         private void Awake() => 
             _rigidbody = GetComponent<Rigidbody2D>();

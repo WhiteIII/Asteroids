@@ -5,16 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b03fc07a-0e6a-443e-9c95-d8f0976e3a70" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Ship/Lazer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Ship/Lazer.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Ship/LazerController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Ship/LazerController.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Asteroids/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Asteroids/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/EntryPoints/GameplayEntryPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/EntryPoints/GameplayEntryPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Content/Data/ShipStats.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Content/Data/ShipStats.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Content/Data/UfoStatsData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Content/Data/UfoStatsData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Content/Prefabs/Ship.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Content/Prefabs/Ship.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Content/Scenes/Bootstrap.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Content/Scenes/Bootstrap.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/BootstrapInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/BootstrapInstaller.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/GameplayInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/GameplayInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Characters/Implementation/Bullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Characters/Implementation/Bullet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/GameLoopSystem/GameLoop.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/GameLoopSystem/GameLoop.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Repositories/SpawnersRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Repositories/SpawnersAndControllersRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Repositories/SpawnersRepository.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Repositories/SpawnersAndControllersRepository.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Spawners/SpawnerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Spawners/SpawnerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Spawners/SpawnerControllerCreator.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Spawners/SpawnerControllerCreator.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Data/ShipStatsData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Data/ShipStatsData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/InputSystem/InputHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/InputSystem/InputHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Factories/ShipFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Factories/ShipFactory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Ship/RotationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Ship/RotationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Ship/Ship.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Ship/Ship.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Ship/ShipMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Ship/ShipMovement.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,15 +132,13 @@
       <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="365740">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="365740" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list>
-          <MonoRuntime />
-        </list>
+        <list />
       </option>
       <option name="selectedOptions">
         <list />
@@ -197,7 +202,10 @@
       <workItem from="1759833302603" duration="457000" />
       <workItem from="1759852224396" duration="5320000" />
       <workItem from="1759913875710" duration="4137000" />
-      <workItem from="1760023490075" duration="6104000" />
+      <workItem from="1760023490075" duration="6935000" />
+      <workItem from="1760185189943" duration="171000" />
+      <workItem from="1760185628015" duration="71000" />
+      <workItem from="1760185748192" duration="9235000" />
     </task>
     <servers />
   </component>
@@ -241,19 +249,6 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Characters/Implementation/Bullet.cs</url>
-          <line>56</line>
-          <properties documentPath="C:\Users\as250\Asteroids\Assets\_Project\Scripts\Gameplay\Characters\Implementation\Bullet.cs" containingFunctionPresentation="Method 'OnTouchTarget'">
-            <startOffsets>
-              <option value="1820" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1821" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

@@ -1,4 +1,6 @@
 using System;
+using System.Threading;
+using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.InputSystem;
@@ -14,29 +16,41 @@ namespace _Project.Scripts.Gameplay.Ship
     [RequireComponent(typeof(AttackController))]
     [RequireComponent(typeof(ShipMovement))]
     [RequireComponent(typeof(RotationController))]
-    public class Ship : Character, IInitializableUpdatableObject
+    [RequireComponent(typeof(LazerController))]
+    public class Ship : Character, IInitializable, IInitializableUpdatableObject
     {
         private readonly CompositeDisposable _disposables = new();
+        private readonly CancellationTokenSource _cancellationTokenSource = new();
         
         private ShipMovement _shipMovement;
         private AttackController _attackController;
         private RotationController _rotationController;
+        private LazerController _lazerController;
         private IInputHandler _inputHandler;
+        private ShipStatsData _stats;
         
-        [Inject] private void Construct(IInputHandler inputHandler) =>
-            _inputHandler = inputHandler;
-        
-        public void Initialize(
-            float movementSpeed,
-            float bulletFlyingSpeed,
-            float rotationSpeed)
+        [Inject]
+        private void Construct(IInputHandler inputHandler, ShipStatsData stats)
         {
-            _shipMovement.Initialize(movementSpeed);
-            _attackController.Initialize(bulletFlyingSpeed);
-            _rotationController.Initialize(rotationSpeed);
+            _inputHandler = inputHandler;
+            _stats = stats;
+        }
+        
+        public void Initialize()
+        {
+            _attackController.Initialize(_stats.BulletFlyingSpeed);
+            _lazerController.Initialize(
+                _stats.LazerActivityTime, 
+                _stats.LazerRechargeTime,
+                _stats.LazerChargeCount);
             _inputHandler
                 .OnSpacePressed
                 .Subscribe(_ => Shoot())
+                .AddTo(_disposables);
+            _inputHandler
+                .OnEKeyPressed
+                .Where(_ => _lazerController.AttackIsDone)
+                .Subscribe(_ => _lazerController.Shoot(_cancellationTokenSource.Token))
                 .AddTo(_disposables);
         }
 
@@ -45,13 +59,18 @@ namespace _Project.Scripts.Gameplay.Ship
             _shipMovement = GetComponent<ShipMovement>();
             _attackController = GetComponent<AttackController>();
             _rotationController = GetComponent<RotationController>();
+            _lazerController = GetComponent<LazerController>();
         }
         
         public IUpdatable[] GetAllUpdatableObjects() => 
-            new IUpdatable[] { _shipMovement, _rotationController };
+            new IUpdatable[] { _shipMovement, _rotationController, _lazerController };
 
-        private void OnDestroy() => 
+        private void OnDestroy()
+        {
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource.Dispose();
             _disposables.Dispose();
+        }
 
         public void SetPosition(Vector2 position) => 
             _shipMovement.SetPosition(position);

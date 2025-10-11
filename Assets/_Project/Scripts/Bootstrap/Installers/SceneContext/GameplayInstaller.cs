@@ -19,7 +19,6 @@ namespace _Project.Scripts.Bootstrap.Installers
         [Header("Data")]
         [SerializeField] private GameSettingsData _gameSettingsData;
         [SerializeField] private AsteroidsData _asteroidsData;
-        [SerializeField] private ShipStatsData _shipStats;
         [SerializeField] private UfoStatsData _ufoStatsData;
         
         [Header("Prefabs")]
@@ -40,7 +39,7 @@ namespace _Project.Scripts.Bootstrap.Installers
             Container.Bind<CharacterCreator>().AsSingle();
             Container
                 .BindFactoryCustomInterface<Ship, ShipFactory, IFactory<Ship>>()
-                .WithFactoryArguments(_shipPrefab, _shipStats);
+                .WithFactoryArguments(_shipPrefab);
             Container
                 .BindFactoryCustomInterface<Ufo, UfoFactory, IFactory<Ufo>>()
                 .WithFactoryArguments(_ufoPrefab, _ufoStatsData);

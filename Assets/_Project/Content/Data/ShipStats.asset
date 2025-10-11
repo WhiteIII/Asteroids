@@ -15,3 +15,6 @@ MonoBehaviour:
   <MovementSpeed>k__BackingField: 200
   <BulletFlyingSpeed>k__BackingField: 20
   <RotationSpeed>k__BackingField: 150
+  <LazerActivityTime>k__BackingField: 1
+  <LazerRechargeTime>k__BackingField: 4
+  <LazerChargeCount>k__BackingField: 5

@@ -8,5 +8,8 @@ namespace _Project.Scripts.Data
         [field: SerializeField] public float MovementSpeed { get; private set; }
         [field: SerializeField] public float BulletFlyingSpeed { get; private set; }
         [field: SerializeField] public float RotationSpeed { get; private set; }
+        [field: SerializeField] public float LazerActivityTime { get; private set; }
+        [field: SerializeField] public float LazerRechargeTime { get; private set; }
+        [field: SerializeField] public int LazerChargeCount { get; private set; }  
     }
 }
