@@ -30,7 +30,6 @@ namespace _Project.Scripts.Gameplay.Ship
             _coolDown = coolDown;
             _maxChargesCount = maxChargesCount;
             CurrentChargesCount.Value = _maxChargesCount;
-            CurrentCoolDown.Value = _coolDown;
         }
 
         public void SetIgnoredTargetType<T>()
