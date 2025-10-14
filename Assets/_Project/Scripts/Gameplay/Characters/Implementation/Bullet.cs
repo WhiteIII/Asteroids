@@ -18,7 +18,7 @@ namespace _Project.Scripts.Gameplay.Characters
         private Type _ignoreTargetType;
         private Type _secondIgnoreTargetType;
 
-        private void Awake()
+        protected override void OnAwake()
         {
             SetupReleaseCharacter();
             _bulletMovement = GetComponent<RigidbodyMovement>();

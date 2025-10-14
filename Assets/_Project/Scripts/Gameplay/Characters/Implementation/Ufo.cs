@@ -24,7 +24,9 @@ namespace _Project.Scripts.Gameplay.Characters
         private float _attackCooldown;
         private float _currentCooldown;
 
-        public bool PlayerIsClose => Distance(Position, _characterRepository.Ship.Position) <= _attackDistance;
+        public bool PlayerIsClose => Distance(
+            Position.CurrentValue, 
+            _characterRepository.Ship.Position.CurrentValue) <= _attackDistance;
         public bool InCooldown => _currentCooldown > .1f;
         public bool IsMovingStoped { get; private set; }
         
@@ -45,7 +47,7 @@ namespace _Project.Scripts.Gameplay.Characters
             _movement.Initialize(movementSpeed);
         }
 
-        private void Awake()
+        protected override void OnAwake()
         {
             _attackController = GetComponent<AttackController>();
             _movement = GetComponent<IAiAgentMovement>();
@@ -58,13 +60,13 @@ namespace _Project.Scripts.Gameplay.Characters
         {
             _currentCooldown = _attackCooldown;
             _attackController.Shoot<UfoTarget, AsteroidTarget>(
-                (_characterRepository.Ship.Position - Position).normalized);
+                (_characterRepository.Ship.Position.CurrentValue - Position.CurrentValue).normalized);
         }
 
         public void MoveToPlayer()
         {
             IsMovingStoped = false;
-            _movement.MoveTo(_characterRepository.Ship.Position);
+            _movement.MoveTo(_characterRepository.Ship.Position.CurrentValue);
         }
 
         public void StopMoving() =>
@@ -77,6 +79,5 @@ namespace _Project.Scripts.Gameplay.Characters
         {
             throw new System.NotImplementedException();
         }
-
     }
 }

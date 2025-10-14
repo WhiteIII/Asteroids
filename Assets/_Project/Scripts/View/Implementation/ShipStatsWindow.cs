@@ -9,19 +9,22 @@ namespace _Project.Scripts.View.Implementation
     {
         [SerializeField] private TMP_Text _chargeCountText;
         [SerializeField] private TMP_Text _cooldownText;
+        [SerializeField] private TMP_Text _positionText;
 
-        private readonly CompositeDisposable _disposables = new();
-        
         protected override void OnSetup()
         {
             ViewModel
                 .OnChargeCountChanged
                 .Subscribe(x => _chargeCountText.text = $"Lazer charge count: {x} / {ViewModel.MaxChargeCount}")
-                .AddTo(_disposables);
+                .AddTo(this);
             ViewModel
                 .OnCooldownChanged
                 .Subscribe(x => _cooldownText.text = $"Lazer cooldown: {x:F} / {ViewModel.LazerCooldown}")
-                .AddTo(_disposables);
+                .AddTo(this);
+            ViewModel
+                .OnPositionChanged
+                .Subscribe(x => _positionText.text = $"Lazer position: {x}")
+                .AddTo(this);
         }
     }
 }

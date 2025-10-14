@@ -10,7 +10,7 @@ namespace _Project.Scripts.Gameplay.Characters.Base
     public abstract class ReleasedCharacter : Character, IItemWithId<string>
     {
         public Subject<string> Release { get; } = new();
-        public readonly CompositeDisposable Disposable = new();
+        protected readonly CompositeDisposable Disposable = new();
 
         private CollisionHandler _collisionHandler;
         private string _id;

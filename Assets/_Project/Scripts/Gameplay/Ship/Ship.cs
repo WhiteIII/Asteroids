@@ -59,7 +59,7 @@ namespace _Project.Scripts.Gameplay.Ship
                 .AddTo(_disposables);
         }
 
-        private void Awake()
+        protected override void OnAwake()
         {
             _shipMovement = GetComponent<ShipMovement>();
             _attackController = GetComponent<AttackController>();

@@ -1,6 +1,7 @@
 using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Services.Repositories;
 using R3;
+using UnityEngine;
 
 namespace _Project.Scripts.ViewModel.Implementation
 {
@@ -8,6 +9,7 @@ namespace _Project.Scripts.ViewModel.Implementation
     {
         public Observable<float> OnCooldownChanged { get; private set; }
         public Observable<int> OnChargeCountChanged { get; private set; }
+        public Observable<Vector3> OnPositionChanged { get; private set; }
         
         private readonly ICharacterRepository _characterRepository; 
         
@@ -25,6 +27,7 @@ namespace _Project.Scripts.ViewModel.Implementation
         {
             OnCooldownChanged = _characterRepository.Ship.OnLazerCooldownChanged;
             OnChargeCountChanged = _characterRepository.Ship.OnLazerChargeCountChanged;
+            OnPositionChanged = _characterRepository.Ship.Position;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace _Project.Scripts.Gameplay.Characters
         
         public Vector2 Direction => _movement.Direction;
 
-        private void Awake()
+        protected override void OnAwake()
         {
             _movement = GetComponent<RigidbodyMovement>();
             SetupKillableCharacter();

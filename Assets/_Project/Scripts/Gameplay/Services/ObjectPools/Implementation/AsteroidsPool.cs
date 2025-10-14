@@ -30,7 +30,7 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
 
                     for (int i = 0; i < spawnCount; i++)
                     {
-                        Asteroid asteroid = smallAsteroidsPool.Get(x.Position);
+                        Asteroid asteroid = smallAsteroidsPool.Get(x.Position.CurrentValue);
                         asteroid.SendAsteroidOnDirection(
                             new Vector2(
                                 x.Direction.x + Random.Range(
