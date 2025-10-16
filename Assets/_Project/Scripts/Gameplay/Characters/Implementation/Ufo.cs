@@ -77,7 +77,7 @@ namespace _Project.Scripts.Gameplay.Characters
 
         protected override void OnTouchTarget(ITarget target)
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
         }
     }
 }

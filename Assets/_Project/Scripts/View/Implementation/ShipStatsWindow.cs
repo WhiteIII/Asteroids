@@ -10,6 +10,8 @@ namespace _Project.Scripts.View.Implementation
         [SerializeField] private TMP_Text _chargeCountText;
         [SerializeField] private TMP_Text _cooldownText;
         [SerializeField] private TMP_Text _positionText;
+        [SerializeField] private TMP_Text _rotationText;
+        [SerializeField] private TMP_Text _velocityText;
 
         protected override void OnSetup()
         {
@@ -24,6 +26,14 @@ namespace _Project.Scripts.View.Implementation
             ViewModel
                 .OnPositionChanged
                 .Subscribe(x => _positionText.text = $"Lazer position: {x}")
+                .AddTo(this);
+            ViewModel
+                .OnRotationChanged
+                .Subscribe(x =>  _rotationText.text = $"Ship rotation: {x}")
+                .AddTo(this);
+            ViewModel
+                .OnVelocityChanged
+                .Subscribe(x => _velocityText.text = $"Ship velocity: {x:F}")
                 .AddTo(this);
         }
     }

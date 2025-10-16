@@ -7,7 +7,6 @@ using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Characters
 {
-    [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(AsteroidTarget))]
     [RequireComponent(typeof(RigidbodyMovement))]
     public class Asteroid : 
@@ -15,12 +14,14 @@ namespace _Project.Scripts.Gameplay.Characters
         IInitializableUpdatableObject
     {
         private RigidbodyMovement _movement;
+        private int _points;
         
         public Vector2 Direction => _movement.Direction;
 
         protected override void OnAwake()
         {
             _movement = GetComponent<RigidbodyMovement>();
+            
             SetupKillableCharacter();
         } 
         

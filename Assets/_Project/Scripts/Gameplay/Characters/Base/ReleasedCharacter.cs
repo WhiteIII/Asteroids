@@ -10,7 +10,6 @@ namespace _Project.Scripts.Gameplay.Characters.Base
     public abstract class ReleasedCharacter : Character, IItemWithId<string>
     {
         public Subject<string> Release { get; } = new();
-        protected readonly CompositeDisposable Disposable = new();
 
         private CollisionHandler _collisionHandler;
         private string _id;
@@ -22,11 +21,8 @@ namespace _Project.Scripts.Gameplay.Characters.Base
             _collisionHandler
                 .OnTouchTarget
                 .Subscribe(OnTouchTarget)
-                .AddTo(Disposable);             
+                .AddTo(this);             
         }
-        
-        private void OnDestroy() => 
-            Disposable.Dispose();
         
         public void SetID(string id) => 
             _id = id;

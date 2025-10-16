@@ -3,7 +3,7 @@ using UnityEngine;
 namespace _Project.Scripts.Data
 {
     [CreateAssetMenu(menuName = "_Project/AsteroidsData", fileName = "AsteroidsData")]
-    public class AsteroidsData : ScriptableObject
+    public class AsteroidsData : EnemyData
     {
         [field: SerializeField] public float DirectionDeviationFrom { get; private set; }
         [field: SerializeField] public float DirectionDeviationTo { get; private set; }

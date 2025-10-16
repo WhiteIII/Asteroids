@@ -10,6 +10,8 @@ namespace _Project.Scripts.ViewModel.Implementation
         public Observable<float> OnCooldownChanged { get; private set; }
         public Observable<int> OnChargeCountChanged { get; private set; }
         public Observable<Vector3> OnPositionChanged { get; private set; }
+        public Observable<Vector3> OnRotationChanged { get; private set; }
+        public Observable<float> OnVelocityChanged { get; private set; }
         
         private readonly ICharacterRepository _characterRepository; 
         
@@ -28,6 +30,8 @@ namespace _Project.Scripts.ViewModel.Implementation
             OnCooldownChanged = _characterRepository.Ship.OnLazerCooldownChanged;
             OnChargeCountChanged = _characterRepository.Ship.OnLazerChargeCountChanged;
             OnPositionChanged = _characterRepository.Ship.Position;
+            OnRotationChanged = _characterRepository.Ship.Rotation;
+            OnVelocityChanged = _characterRepository.Ship.Acceleration;
         }
     }
 }

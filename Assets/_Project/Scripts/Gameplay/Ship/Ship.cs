@@ -12,7 +12,6 @@ using Zenject;
 
 namespace _Project.Scripts.Gameplay.Ship
 {
-    [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(ShipTarget))]
     [RequireComponent(typeof(AttackController))]
     [RequireComponent(typeof(ShipMovement))]
@@ -20,7 +19,6 @@ namespace _Project.Scripts.Gameplay.Ship
     [RequireComponent(typeof(LazerController))]
     public class Ship : Character, IInitializable, IInitializableUpdatableObject
     {
-        private readonly CompositeDisposable _disposables = new();
         private readonly CancellationTokenSource _cancellationTokenSource = new();
         
         private ShipMovement _shipMovement;
@@ -51,12 +49,12 @@ namespace _Project.Scripts.Gameplay.Ship
             _inputHandler
                 .OnSpacePressed
                 .Subscribe(_ => Shoot())
-                .AddTo(_disposables);
+                .AddTo(this);
             _inputHandler
                 .OnEKeyPressed
                 .Where(_ => _lazerController.AttackIsDone)
                 .Subscribe(_ => _lazerController.Shoot(_cancellationTokenSource.Token).Forget())
-                .AddTo(_disposables);
+                .AddTo(this);
         }
 
         protected override void OnAwake()
@@ -77,7 +75,6 @@ namespace _Project.Scripts.Gameplay.Ship
         {
             _cancellationTokenSource.Cancel();
             _cancellationTokenSource.Dispose();
-            _disposables.Dispose();
         }
 
         public void SetPosition(Vector2 position) => 
@@ -90,7 +87,7 @@ namespace _Project.Scripts.Gameplay.Ship
             GetComponent<ShipTarget>()
                 .OnKill
                 .Subscribe(_ => onDeadEvent?.Invoke())
-                .AddTo(_disposables);
+                .AddTo(this);
         
         private void Shoot() => 
             _attackController.Shoot<ShipTarget>(transform.rotation * Vector2.up);

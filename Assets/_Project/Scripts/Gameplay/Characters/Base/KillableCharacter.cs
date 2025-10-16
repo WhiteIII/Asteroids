@@ -1,22 +1,23 @@
-using _Project.Scripts.Gameplay.Services.Targets;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
 using R3;
+using System;
 
 namespace _Project.Scripts.Gameplay.Characters.Base
 {
     public abstract class KillableCharacter : ReleasedCharacter
     {
-        private IKillableTargetWithReactiveProperty _target;
+        private BaseKillableTarget _target;
         
-        protected void SetupKillableCharacter()
+        protected void SetupKillableCharacter(Action onKill = null)
         {
             SetupReleaseCharacter();
-            _target = GetComponent<IKillableTargetWithReactiveProperty>();
+            _target = GetComponent<BaseKillableTarget>();
 
+            _target.SetOnKillEvent(onKill);
             _target
                 .OnKill
                 .Subscribe(_ => ReleaseCharacter())
-                .AddTo(Disposable);
+                .AddTo(this);
         }
     }
 }

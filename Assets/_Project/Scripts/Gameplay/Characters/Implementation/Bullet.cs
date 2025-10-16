@@ -8,7 +8,6 @@ using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Characters
 {
-    [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(RigidbodyMovement))]
     public class Bullet :
         ReleasedCharacter,
