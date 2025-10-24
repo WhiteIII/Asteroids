@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b28533b56a7c40849c4347b680dc04a4, type: 3}
   m_Name: AsteroidsData
   m_EditorClassIdentifier: 
+  <Points>k__BackingField: 10
+  <SmallAsteroidsPoints>k__BackingField: 5
   <DirectionDeviationFrom>k__BackingField: -5
   <DirectionDeviationTo>k__BackingField: 5
   <RandomSpeedFrom>k__BackingField: 3

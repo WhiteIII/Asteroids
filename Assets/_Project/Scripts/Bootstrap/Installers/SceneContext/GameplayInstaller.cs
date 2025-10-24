@@ -30,7 +30,10 @@ namespace _Project.Scripts.Bootstrap.Installers
         
         public override void InstallBindings()
         {
-            Container.Bind<GameSettingsData>().AsSingle();
+            Container.Bind<GameSettingsData>().FromInstance(_gameSettingsData).AsSingle();
+            Container.Bind<AsteroidsData>().FromInstance(_asteroidsData).AsSingle();
+            Container.Bind<UfoStatsData>().FromInstance(_ufoStatsData).AsSingle();
+            Container.BindInterfacesAndSelfTo<PointsCounter>().AsSingle();
             Container.BindInterfacesTo<GameLoop>().AsSingle();
             Container.BindInterfacesTo<GameLoopRegisterController>().AsSingle();
             Container.BindInterfacesTo<GameLoopCreator>().AsSingle();
@@ -42,12 +45,12 @@ namespace _Project.Scripts.Bootstrap.Installers
                 .WithFactoryArguments(_shipPrefab);
             Container
                 .BindFactoryCustomInterface<Ufo, UfoFactory, IFactory<Ufo>>()
-                .WithFactoryArguments(_ufoPrefab, _ufoStatsData);
+                .WithFactoryArguments(_ufoPrefab);
             Container.BindInterfacesAndSelfTo<SmallAsteroidsPool>().AsSingle().WithArguments(_smallAsteroidPrefab);
-            Container.BindInterfacesAndSelfTo<AsteroidsPool>().AsSingle().WithArguments(_asteroidsData, _asteroidPrefab);
+            Container.BindInterfacesAndSelfTo<AsteroidsPool>().AsSingle().WithArguments(_asteroidPrefab);
             Container.BindInterfacesAndSelfTo<BulletsPool>().AsSingle().WithArguments(_bulletPrefab);
             Container.BindInterfacesAndSelfTo<UfoPool>().AsSingle();
-            Container.BindInterfacesAndSelfTo<AsteroidsSpawner>().AsSingle().WithArguments(_asteroidsData);
+            Container.BindInterfacesAndSelfTo<AsteroidsSpawner>().AsSingle();
             Container.BindInterfacesAndSelfTo<UfoSpawner>().AsSingle();
             Container
                 .BindInterfacesAndSelfTo<SpawnerController<AsteroidsSpawner>>()

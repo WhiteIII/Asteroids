@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a51e2ee3bf45838ab055fd3dea366a, type: 3}
   m_Name: UfoStatsData
   m_EditorClassIdentifier: 
+  <Points>k__BackingField: 20
   <MovementSpeed>k__BackingField: 3
   <BulletFlyingSpeed>k__BackingField: 4
   <AttackCooldown>k__BackingField: 2

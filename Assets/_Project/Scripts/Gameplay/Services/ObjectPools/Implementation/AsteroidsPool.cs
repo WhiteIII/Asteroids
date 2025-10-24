@@ -18,30 +18,32 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
             SmallAsteroidsPool smallAsteroidsPool,
             AsteroidsData asteroidsData) : 
             base(
-                () => characterCreator.CreateGameLoopCharacter(prefab), 
+                () =>
+                {
+                    Asteroid asteroid = characterCreator.CreateGameLoopCharacter(prefab);
+                    asteroid.SetupAsteroid(() => {
+                        int spawnCount = Random.Range(
+                            asteroidsData.SpawnedSmallAsteroidsOnDeadCountForm, 
+                            asteroidsData.SpawnedSmallAsteroidsOnDeadCountTo + 1);
+
+                        for (int i = 0; i < spawnCount; i++)
+                        {
+                            Asteroid smallAsteroid = smallAsteroidsPool.Get(asteroid.Position.CurrentValue);
+                            smallAsteroid.SendAsteroidOnDirection(
+                                new Vector2(
+                                    asteroid.Direction.x + Random.Range(
+                                        asteroidsData.DirectionDeviationFrom, 
+                                        asteroidsData.DirectionDeviationTo), 
+                                    asteroid.Direction.y + Random.Range(
+                                        asteroidsData.DirectionDeviationFrom, 
+                                        asteroidsData.DirectionDeviationTo)).normalized,
+                                Random.Range(asteroidsData.RandomSpeedFrom,  asteroidsData.RandomSpeedTo));
+                        }});
+                    return asteroid;
+                }, 
                 () => Guid.NewGuid().ToString(),
                 (asteroid, spawnPosition) => asteroid.SetPosition(spawnPosition),
-                true,
-                (x) =>
-                {
-                    int spawnCount = Random.Range(
-                        asteroidsData.SpawnedSmallAsteroidsOnDeadCountForm, 
-                        asteroidsData.SpawnedSmallAsteroidsOnDeadCountTo + 1);
-
-                    for (int i = 0; i < spawnCount; i++)
-                    {
-                        Asteroid asteroid = smallAsteroidsPool.Get(x.Position.CurrentValue);
-                        asteroid.SendAsteroidOnDirection(
-                            new Vector2(
-                                x.Direction.x + Random.Range(
-                                    asteroidsData.DirectionDeviationFrom, 
-                                    asteroidsData.DirectionDeviationTo), 
-                                x.Direction.y + Random.Range(
-                                    asteroidsData.DirectionDeviationFrom, 
-                                    asteroidsData.DirectionDeviationTo)).normalized,
-                            Random.Range(asteroidsData.RandomSpeedFrom,  asteroidsData.RandomSpeedTo));
-                    }
-                })
+                true)
         {
         }
     }

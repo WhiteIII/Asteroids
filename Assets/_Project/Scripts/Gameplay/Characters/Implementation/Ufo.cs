@@ -1,3 +1,4 @@
+using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.Services.Repositories;
 using _Project.Scripts.Gameplay.Ship;
@@ -20,37 +21,31 @@ namespace _Project.Scripts.Gameplay.Characters
         private AttackController _attackController;
         private ICharacterRepository _characterRepository;
         private IAiAgentMovement _movement;
-        private float _attackDistance;
-        private float _attackCooldown;
+        private PointsCounter _pointsCounter;
+        private UfoStatsData _stats;
         private float _currentCooldown;
 
         public bool PlayerIsClose => Distance(
             Position.CurrentValue, 
-            _characterRepository.Ship.Position.CurrentValue) <= _attackDistance;
+            _characterRepository.Ship.Position.CurrentValue) <= _stats.AttackDistance;
         public bool InCooldown => _currentCooldown > .1f;
         public bool IsMovingStoped { get; private set; }
-        
-        [Inject] private void Construct(ICharacterRepository repository) => 
-            _characterRepository = repository;
-        
-        public void Initialize(
-            float bulletFlyingSpeed,
-            float attackDistance,
-            float attackCooldown,
-            float movementSpeed)
-        {
-            _attackDistance = attackDistance;
-            _attackCooldown = attackCooldown;
-            
-            SetupKillableCharacter();
-            _attackController.Initialize(bulletFlyingSpeed);
-            _movement.Initialize(movementSpeed);
-        }
 
+        [Inject]
+        private void Construct(ICharacterRepository repository, UfoStatsData stats, PointsCounter pointsCounter)
+        {
+            _characterRepository = repository;
+            _pointsCounter = pointsCounter;
+            _stats = stats;
+        } 
+        
         protected override void OnAwake()
         {
             _attackController = GetComponent<AttackController>();
             _movement = GetComponent<IAiAgentMovement>();
+            _attackController.Initialize(_stats.BulletFlyingSpeed);
+            _movement.Initialize(_stats.MovementSpeed);
+            SetupKillableCharacter(() => _pointsCounter.AddPoints(_stats.Points));
         }
 
         private void Update() => 
@@ -58,7 +53,7 @@ namespace _Project.Scripts.Gameplay.Characters
         
         public void Attack()
         {
-            _currentCooldown = _attackCooldown;
+            _currentCooldown = _stats.AttackCooldown;
             _attackController.Shoot<UfoTarget, AsteroidTarget>(
                 (_characterRepository.Ship.Position.CurrentValue - Position.CurrentValue).normalized);
         }
@@ -72,7 +67,7 @@ namespace _Project.Scripts.Gameplay.Characters
         public void StopMoving() =>
             IsMovingStoped = true;
 
-        public void SetPosition(Vector2 position) => 
+        public override void SetPosition(Vector2 position) => 
             _movement.SetPosition(position);
 
         protected override void OnTouchTarget(ITarget target)

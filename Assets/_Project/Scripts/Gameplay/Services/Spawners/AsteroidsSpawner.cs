@@ -1,7 +1,9 @@
+using System;
 using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Characters;
 using _Project.Scripts.Gameplay.Services.ObjectPools;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace _Project.Scripts.Gameplay.Services.Spawners
 {
@@ -30,14 +32,15 @@ namespace _Project.Scripts.Gameplay.Services.Spawners
             Vector2 spawnPosition = _positionHelper.GetSpawnPosition();
             Asteroid asteroid = poolNumber switch
             {
-                0 => _asteroidsPool.Get(spawnPosition),
-                1 => _smallAsteroidsPool.Get(spawnPosition),
-                _ => _asteroidsPool.Get(spawnPosition)
+                0 => GetRandomAsteroid(() => _asteroidsPool.Get(spawnPosition), _asteroidsData.Points),
+                1 => GetRandomAsteroid(
+                    () => _smallAsteroidsPool.Get(spawnPosition), 
+                    _asteroidsData.SmallAsteroidsPoints),
+                _ => GetRandomAsteroid(() => _asteroidsPool.Get(spawnPosition), _asteroidsData.Points)
             };
-                
+            
             asteroid.SendAsteroidOnDirection(
-                GetDirection(
-                    spawnPosition),
+                GetDirection(spawnPosition),
                 Random.Range(_asteroidsData.RandomSpeedFrom, _asteroidsData.RandomSpeedTo));
         }
 
@@ -46,5 +49,12 @@ namespace _Project.Scripts.Gameplay.Services.Spawners
                 spawnPosition.x + Random.Range(_asteroidsData.DirectionDeviationFrom, _asteroidsData.DirectionDeviationTo), 
                 spawnPosition.y + Random.Range(_asteroidsData.DirectionDeviationFrom, _asteroidsData.DirectionDeviationTo)))
             .normalized;
+
+        private Asteroid GetRandomAsteroid(Func<Asteroid> spawnMethod, int points)
+        {
+            Asteroid asteroid = spawnMethod();
+            asteroid.SetPoints(points);
+            return asteroid;
+        }
     }
 }

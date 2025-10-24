@@ -19,13 +19,14 @@ namespace _Project.Scripts.Bootstrap.Installers
         
         public override void InstallBindings()
         {
+            Container.Bind<Camera>().FromInstance(_camera).AsSingle();
             Container.Bind<ShipStatsData>().FromInstance(_shipStatsData).AsSingle();
             Container.BindInterfacesTo<InputHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<CharactersRepository>().AsSingle();
             Container
                 .BindInterfacesTo<SpawnPositionHelper>()
                 .AsSingle()
-                .WithArguments(_camera, _gameSettingsData.SpawnOffsetOutSideCameraVision)
+                .WithArguments(_gameSettingsData.SpawnOffsetOutSideCameraVision)
                 .MoveIntoAllSubContainers();
             
             Container.BindInterfacesTo<BootstrapEntryPoint>().AsSingle();

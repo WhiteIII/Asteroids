@@ -5,6 +5,7 @@ namespace _Project.Scripts.Data
     [CreateAssetMenu(menuName = "_Project/AsteroidsData", fileName = "AsteroidsData")]
     public class AsteroidsData : EnemyData
     {
+        [field: SerializeField] public int SmallAsteroidsPoints { get; private set; }
         [field: SerializeField] public float DirectionDeviationFrom { get; private set; }
         [field: SerializeField] public float DirectionDeviationTo { get; private set; }
         [field: SerializeField] public float RandomSpeedFrom { get; private set; }

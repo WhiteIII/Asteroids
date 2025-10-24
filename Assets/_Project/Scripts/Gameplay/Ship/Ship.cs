@@ -4,6 +4,7 @@ using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.InputSystem;
+using _Project.Scripts.Gameplay.Services.Components;
 using _Project.Scripts.Gameplay.Services.Targets.Implementation;
 using Cysharp.Threading.Tasks;
 using R3;
@@ -17,7 +18,8 @@ namespace _Project.Scripts.Gameplay.Ship
     [RequireComponent(typeof(ShipMovement))]
     [RequireComponent(typeof(RotationController))]
     [RequireComponent(typeof(LazerController))]
-    public class Ship : Character, IInitializable, IInitializableUpdatableObject
+    [RequireComponent(typeof(ActionOnGoingOutOrInCameraVisionField))]
+    public class Ship : Character, IInitializableUpdatableObject
     {
         private readonly CancellationTokenSource _cancellationTokenSource = new();
         
@@ -25,6 +27,7 @@ namespace _Project.Scripts.Gameplay.Ship
         private AttackController _attackController;
         private RotationController _rotationController;
         private LazerController _lazerController;
+        private ActionOnGoingOutOrInCameraVisionField _cameraFieldService;
         private IInputHandler _inputHandler;
         private ShipStatsData _stats;
         
@@ -37,9 +40,19 @@ namespace _Project.Scripts.Gameplay.Ship
             _inputHandler = inputHandler;
             _stats = stats;
         }
-        
-        public void Initialize()
+
+        protected override void OnAwake()
         {
+            _shipMovement = GetComponent<ShipMovement>();
+            _attackController = GetComponent<AttackController>();
+            _rotationController = GetComponent<RotationController>();
+            _lazerController = GetComponent<LazerController>();
+            _cameraFieldService = GetComponent<ActionOnGoingOutOrInCameraVisionField>();
+
+            OnLazerChargeCountChanged = _lazerController.CurrentChargesCount;
+            OnLazerCooldownChanged = _lazerController.CurrentCoolDown;
+            
+            _cameraFieldService.Initialize(null, ChangePositionOnGoingOutCameraVisionField);
             _attackController.Initialize(_stats.BulletFlyingSpeed);
             _lazerController.Initialize(
                 _stats.LazerActivityTime, 
@@ -56,17 +69,6 @@ namespace _Project.Scripts.Gameplay.Ship
                 .Subscribe(_ => _lazerController.Shoot(_cancellationTokenSource.Token).Forget())
                 .AddTo(this);
         }
-
-        protected override void OnAwake()
-        {
-            _shipMovement = GetComponent<ShipMovement>();
-            _attackController = GetComponent<AttackController>();
-            _rotationController = GetComponent<RotationController>();
-            _lazerController = GetComponent<LazerController>();
-
-            OnLazerChargeCountChanged = _lazerController.CurrentChargesCount;
-            OnLazerCooldownChanged = _lazerController.CurrentCoolDown;
-        }
         
         public IUpdatable[] GetAllUpdatableObjects() => 
             new IUpdatable[] { _shipMovement, _rotationController, _lazerController };
@@ -77,7 +79,7 @@ namespace _Project.Scripts.Gameplay.Ship
             _cancellationTokenSource.Dispose();
         }
 
-        public void SetPosition(Vector2 position) => 
+        public override void SetPosition(Vector2 position) => 
             _shipMovement.SetPosition(position);
         
         public void SetRotation(Quaternion rotation) =>
@@ -91,5 +93,8 @@ namespace _Project.Scripts.Gameplay.Ship
         
         private void Shoot() => 
             _attackController.Shoot<ShipTarget>(transform.rotation * Vector2.up);
+
+        private void ChangePositionOnGoingOutCameraVisionField() => 
+            SetPosition(-Position.CurrentValue);
     }
 }

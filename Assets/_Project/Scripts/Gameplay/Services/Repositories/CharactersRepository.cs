@@ -10,11 +10,8 @@ namespace _Project.Scripts.Gameplay.Services.Repositories
         
         public Ship.Ship Ship { get; private set; }
 
-        public Ship.Ship RegisterShip(Ship.Ship ship)
-        {
+        private void RegisterShip(Ship.Ship ship) => 
             Ship = ship;
-            return Ship;
-        }
 
         public int CharactersCount<T>()
             where T : ICharacter
@@ -31,7 +28,10 @@ namespace _Project.Scripts.Gameplay.Services.Repositories
         public T Register<T>(T character) 
             where T : ICharacter
         {
-            _charactersList.Add(character);
+            if (character is Ship.Ship ship && !Ship)
+                RegisterShip(ship);
+            else 
+                _charactersList.Add(character);
             return character;
         }
 

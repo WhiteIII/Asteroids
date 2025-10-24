@@ -1,9 +1,12 @@
+using System;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.Services.Components;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
 using _Project.Scripts.Gameplay.Services.Targets.Implementation;
+using _Project.Scripts.Gameplay.Ship;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.Gameplay.Characters
 {
@@ -14,27 +17,42 @@ namespace _Project.Scripts.Gameplay.Characters
         IInitializableUpdatableObject
     {
         private RigidbodyMovement _movement;
+        private PointsCounter _pointsCounter;
         private int _points;
         
         public Vector2 Direction => _movement.Direction;
 
-        protected override void OnAwake()
-        {
+        [Inject] private void Construct(PointsCounter pointsCounter) =>
+            _pointsCounter = pointsCounter;
+
+        protected override void OnAwake() => 
             _movement = GetComponent<RigidbodyMovement>();
-            
-            SetupKillableCharacter();
-        } 
+
+        public void SetupAsteroid(Action onDeadAction = null)
+        {
+            SetupKillableCharacter(() =>
+            {
+                onDeadAction?.Invoke();
+                _pointsCounter.AddPoints(_points);
+            });
+        }
         
         public IUpdatable[] GetAllUpdatableObjects() => 
             new IUpdatable[] { _movement };
 
         protected override void OnTouchTarget(ITarget target)
         {
+            if (IsVisible == false)
+                return;
+            
             if (target is ShipTarget shipTarget)
                 shipTarget.Kill();
             else if (target is Barrier _)
                 ReleaseCharacter();
         }
+        
+        public void SetPoints(int points) => 
+            _points = points;
         
         public void SendAsteroidOnDirection(Vector2 direction, float speed)
         {
@@ -42,7 +60,7 @@ namespace _Project.Scripts.Gameplay.Characters
             _movement.SetMovementSpeed(speed);
         }
 
-        public void SetPosition(Vector2 position) => 
+        public override void SetPosition(Vector2 position) => 
             _movement.SetPosition(position);
     }
 }

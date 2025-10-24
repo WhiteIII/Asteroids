@@ -24,9 +24,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             await menuWindow.Open();
         }
 
-        public async void Dispose()
-        {
+        public async void Dispose() =>
             await _windowsRepository.TryCloseAndDestroyWindow<MenuWindow>();
-        }
     }
 }

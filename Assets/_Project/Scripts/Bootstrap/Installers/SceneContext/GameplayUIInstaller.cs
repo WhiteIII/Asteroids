@@ -10,11 +10,20 @@ namespace _Project.Scripts.Bootstrap.Installers
     {
         [SerializeField] private GameOverWindow _gameOverWindowPrefab;
         [SerializeField] private ShipStatsWindow _shipStatsWindowPrefab;
+        [SerializeField] private PlayerPointsWindow _playerPointsWindowPrefab;
         
         public override void InstallBindings()
         {
             Container.Bind<GameOverWindowViewModel>().AsSingle();
             Container.Bind<ShipStatsViewModel>().AsSingle();
+            Container.Bind<PlayerPointsViewModel>().AsSingle();
+            
+            Container
+                .BindFactoryCustomInterface<
+                    PlayerPointsWindow, 
+                    BaseWindowFactory<PlayerPointsWindow, PlayerPointsViewModel>,
+                    IFactory<PlayerPointsWindow>>()
+                .WithFactoryArguments(_playerPointsWindowPrefab);
             Container
                 .BindFactoryCustomInterface<
                     GameOverWindow, 

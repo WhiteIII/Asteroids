@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Gameplay.Services.ObjectPools.Base;
 using R3;
-using Zenject;
 
 namespace _Project.Scripts.Gameplay.Services.ObjectPools
 {

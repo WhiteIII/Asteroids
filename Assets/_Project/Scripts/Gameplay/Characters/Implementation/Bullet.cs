@@ -2,7 +2,6 @@ using System;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.Services.Components;
-using _Project.Scripts.Gameplay.Services.Targets;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
 using UnityEngine;
 
@@ -32,7 +31,7 @@ namespace _Project.Scripts.Gameplay.Characters
         public void SetFlySpeed(float speed) =>
             _bulletMovement.SetMovementSpeed(speed);
         
-        public void SetPosition(Vector2 position) => 
+        public override void SetPosition(Vector2 position) => 
             _bulletMovement.SetPosition(position);
         
         public void SetRotation(Quaternion rotation) =>
@@ -42,6 +41,7 @@ namespace _Project.Scripts.Gameplay.Characters
             where T : ITarget
         {
             _ignoreTargetType = typeof(T);
+            _secondIgnoreTargetType = null;
         }
 
         public void SetIgnoreTarget<T1, T2>()

@@ -737,6 +737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameOverWindowPrefab: {fileID: 8961337795491995666, guid: 4d041bfbcfab57e47977ed1e3f39992e, type: 3}
   _shipStatsWindowPrefab: {fileID: 1498387824892762680, guid: 214fc43966c940542abc482729d8b9df, type: 3}
+  _playerPointsWindowPrefab: {fileID: 5608955582622096645, guid: fb4527f49f99349478dc1585de7b1671, type: 3}
 --- !u!1 &1535276691
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,9 +1,7 @@
 using System;
 using _Project.Scripts.Gameplay.Characters;
 using _Project.Scripts.Gameplay.Characters.Base;
-using _Project.Scripts.Gameplay.Services.Repositories;
 using UnityEngine;
-using Zenject;
 
 namespace _Project.Scripts.Gameplay.Services.ObjectPools
 {
@@ -13,7 +11,12 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
             CharacterCreator creator,
             Asteroid prefab) : 
             base(
-                () => creator.CreateGameLoopCharacter(prefab), 
+                () =>
+                {
+                    Asteroid asteroid = creator.CreateGameLoopCharacter(prefab);
+                    asteroid.SetupAsteroid();
+                    return asteroid;
+                }, 
                 () => Guid.NewGuid().ToString(),
                 (asteroid, parameter) => asteroid.SetPosition(parameter),
                 true)

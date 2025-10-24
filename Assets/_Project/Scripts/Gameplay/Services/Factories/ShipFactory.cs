@@ -1,5 +1,4 @@
-using _Project.Scripts.Gameplay.GameLoopSystem;
-using _Project.Scripts.Gameplay.Services.Repositories;
+using _Project.Scripts.Gameplay.Characters.Base;
 using Zenject;
 
 namespace _Project.Scripts.Gameplay.Services.Factories
@@ -7,23 +6,17 @@ namespace _Project.Scripts.Gameplay.Services.Factories
     public class ShipFactory : PlaceholderFactory<Ship.Ship>
     {
         private readonly Ship.Ship _shipPrefab;
-        private readonly IGameLoopCreator _creator;
-        private readonly CharactersRepository _repository;
+        private readonly CharacterCreator _characterCreator;
 
-        public ShipFactory(
-            Ship.Ship shipPrefab,
-            IGameLoopCreator creator,
-            CharactersRepository repository)
+        public ShipFactory(Ship.Ship shipPrefab, CharacterCreator characterCreator)
         {
             _shipPrefab = shipPrefab;
-            _creator = creator;
-            _repository = repository;
+            _characterCreator = characterCreator;
         }
 
         public override Ship.Ship Create()
         {
-            Ship.Ship ship = _repository.RegisterShip(_creator.Create(_shipPrefab));
-            ship.Initialize();
+            Ship.Ship ship = _characterCreator.CreateGameLoopCharacter(_shipPrefab);
             
             return ship;
         }

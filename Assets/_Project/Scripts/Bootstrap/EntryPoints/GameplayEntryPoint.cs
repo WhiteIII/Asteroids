@@ -17,6 +17,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly AiActorsRepository _aiActorsRepository;
         private readonly SpawnersAndControllersRepository _spawnersAndControllersRepository;
         private readonly IFactory<ShipStatsWindow> _shipStatsWindowFactory;
+        private readonly IFactory<PlayerPointsWindow> _playerPointsWindowFactory;
         private readonly WindowsRepository _windowsRepository;
 
         public GameplayEntryPoint(
@@ -26,7 +27,8 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             AiActorsRepository aiActorsRepository, 
             SpawnersAndControllersRepository spawnersAndControllersRepository,
             IFactory<ShipStatsWindow> shipStatsWindowFactory, 
-            WindowsRepository windowsRepository)
+            WindowsRepository windowsRepository, 
+            IFactory<PlayerPointsWindow> playerPointsWindowFactory)
         {
             _shipFactory = shipFactory;
             _charactersRepository = charactersRepository;
@@ -35,17 +37,20 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _spawnersAndControllersRepository = spawnersAndControllersRepository;
             _shipStatsWindowFactory = shipStatsWindowFactory;
             _windowsRepository = windowsRepository;
+            _playerPointsWindowFactory = playerPointsWindowFactory;
         }
 
         public async void Initialize()
         {
             SetupShip();
             await _shipStatsWindowFactory.Create().Open();
+            await _playerPointsWindowFactory.Create().Open();
         }
         
         public async void Dispose()
         {
             await _windowsRepository.TryCloseAndDestroyWindow<ShipStatsWindow>();
+            await _windowsRepository.TryCloseAndDestroyWindow<PlayerPointsWindow>();
             _aiActorsRepository.Clear();
             _spawnersAndControllersRepository.Clear();
             _charactersRepository.ClearAllCharactersList();
