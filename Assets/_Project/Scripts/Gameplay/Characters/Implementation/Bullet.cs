@@ -54,7 +54,7 @@ namespace _Project.Scripts.Gameplay.Characters
         
         protected override void OnTouchTarget(ITarget target)
         {
-            if (target is not IKillableTarget killableTarget)
+            if (target is not IKillableTarget killableTarget || IsVisible == false)
             {
                 ReleaseCharacter();
                 return;

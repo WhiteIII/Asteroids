@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Gameplay.Services.ObjectPools.Base;
 using R3;
+using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Services.ObjectPools
 {
@@ -68,6 +69,9 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
         
         private void Release(TId id)
         {
+            if (_disabledItemsDictionary.ContainsKey(id))
+                return;
+            
             _disabledItemsDictionary.Add(id, _enabledItemsDictionary[id]);
             _onRelease?.Invoke(_enabledItemsDictionary[id]);
             _enabledItemsDictionary.Remove(id);

@@ -27,7 +27,7 @@ namespace _Project.Scripts.Gameplay.Services.Factories
             Ufo ufo = _characterCreator.CreateNonGameLoopCharacter(_ufoPrefab);
             _aiActorCreator.Create(
                 new BaseRule(ufo.MoveToPlayer, () => ufo.PlayerIsClose == false),
-                new BaseRule(ufo.Attack, () => ufo.PlayerIsClose && ufo.InCooldown == false),
+                new BaseRule(ufo.Attack, () => ufo.PlayerIsClose && ufo.InCooldown == false && ufo.IsVisible),
                 new BaseRule(ufo.StopMoving, () => ufo.PlayerIsClose && ufo.IsMovingStoped == false));
 
             return ufo;

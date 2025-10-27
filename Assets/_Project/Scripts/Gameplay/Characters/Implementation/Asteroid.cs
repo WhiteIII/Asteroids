@@ -42,10 +42,7 @@ namespace _Project.Scripts.Gameplay.Characters
 
         protected override void OnTouchTarget(ITarget target)
         {
-            if (IsVisible == false)
-                return;
-            
-            if (target is ShipTarget shipTarget)
+            if (target is ShipTarget shipTarget && IsVisible)
                 shipTarget.Kill();
             else if (target is Barrier _)
                 ReleaseCharacter();
