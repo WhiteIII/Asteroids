@@ -14,8 +14,19 @@ namespace _Project.Scripts.Gameplay.InputSystem
         public Subject<Unit> OnSpacePressed { get; } = new();
         public Subject<Unit> OnEKeyPressed { get; } = new();
 
+        private bool _isActive;
+        
+        public void Enable() => 
+            _isActive = true;
+        
+        public void Disable() => 
+            _isActive = false;
+        
         public void Tick()
         {
+            if (_isActive == false)
+                return;
+            
             Vertical.Value = Input.GetAxis(VERTICAL);
             Horizontal.Value = Input.GetAxis(HORIZONTAL);
             

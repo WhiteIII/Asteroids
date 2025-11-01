@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.Gameplay.GameLoopSystem;
+using _Project.Scripts.Gameplay.InputSystem;
 using _Project.Scripts.Gameplay.Services.Repositories;
 using _Project.Scripts.Gameplay.Ship;
 using _Project.Scripts.View.Implementation;
@@ -21,6 +22,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly IFactory<GameOverWindow> _gameOverWindowFactory;
         private readonly IGameLoop _gameLoop;
         private readonly WindowsRepository _windowsRepository;
+        private readonly InputHandler _inputHandler;
 
         public GameplayEntryPoint(
             IFactory<Ship> shipFactory,
@@ -31,7 +33,8 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             WindowsRepository windowsRepository, 
             IFactory<PlayerPointsWindow> playerPointsWindowFactory, 
             IFactory<GameOverWindow> gameOverWindowFactory,
-            IGameLoop gameLoop)
+            IGameLoop gameLoop,
+            InputHandler inputHandler)
         {
             _shipFactory = shipFactory;
             _charactersRepository = charactersRepository;
@@ -42,11 +45,13 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _playerPointsWindowFactory = playerPointsWindowFactory;
             _gameOverWindowFactory = gameOverWindowFactory;
             _gameLoop = gameLoop;
+            _inputHandler = inputHandler;
         }
 
         public async void Initialize()
         {
             SetupShip();
+            _inputHandler.Enable();
             await _shipStatsWindowFactory.Create().Open();
             await _playerPointsWindowFactory.Create().Open();
         }
@@ -67,9 +72,10 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _shipFactory.Create();
             _charactersRepository.Ship.SetPosition(Vector2.zero);
             _charactersRepository.Ship.SetRotation(Quaternion.identity);
-            _charactersRepository.Ship.SetOnDeadEvent(() =>
+            _charactersRepository.Ship.AddOnDeadEvent(() =>
             {
                 _spawnersAndControllersRepository.StopAllSpawnerControllers();
+                _inputHandler.Disable();
                 _gameLoop.Pause();
                 _gameOverWindowFactory.Create().Open().Forget();
             });

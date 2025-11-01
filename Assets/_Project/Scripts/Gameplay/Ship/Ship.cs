@@ -30,6 +30,7 @@ namespace _Project.Scripts.Gameplay.Ship
         private ActionOnGoingOutOrInCameraVisionField _cameraFieldService;
         private IInputHandler _inputHandler;
         private ShipStatsData _stats;
+        private Action _onDeadEvent;
         
         public Observable<float> OnLazerCooldownChanged { get; private set; }
         public Observable<int> OnLazerChargeCountChanged { get; private set; }
@@ -48,7 +49,14 @@ namespace _Project.Scripts.Gameplay.Ship
             _rotationController = GetComponent<RotationController>();
             _lazerController = GetComponent<LazerController>();
             _cameraFieldService = GetComponent<ActionOnGoingOutOrInCameraVisionField>();
-
+            
+            GetComponent<ShipTarget>()
+                .OnKill
+                .Subscribe(_ => _onDeadEvent?.Invoke())
+                .AddTo(this);
+            
+            _onDeadEvent += _shipMovement.StopShip;
+            
             OnLazerChargeCountChanged = _lazerController.CurrentChargesCount;
             OnLazerCooldownChanged = _lazerController.CurrentCoolDown;
             
@@ -85,11 +93,8 @@ namespace _Project.Scripts.Gameplay.Ship
         public void SetRotation(Quaternion rotation) =>
             _rotationController.SetRotation(rotation);
         
-        public void SetOnDeadEvent(Action onDeadEvent) =>
-            GetComponent<ShipTarget>()
-                .OnKill
-                .Subscribe(_ => onDeadEvent?.Invoke())
-                .AddTo(this);
+        public void AddOnDeadEvent(Action onDeadEvent) =>
+            _onDeadEvent += onDeadEvent;
         
         private void Shoot() => 
             _attackController.Shoot<ShipTarget>(transform.rotation * Vector2.up);

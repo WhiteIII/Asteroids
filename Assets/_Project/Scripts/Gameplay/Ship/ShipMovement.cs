@@ -1,3 +1,4 @@
+using System;
 using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.InputSystem;
@@ -28,6 +29,9 @@ namespace _Project.Scripts.Gameplay.Ship
 
         public void SetPosition(Vector2 position) => 
             _rigidbody.MovePosition(position);
+        
+        public void StopShip() => 
+            _rigidbody.linearVelocity = Vector2.zero;
 
         private void Move() =>
             _rigidbody.AddForce(
