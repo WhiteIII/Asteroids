@@ -25,7 +25,7 @@ namespace _Project.Scripts.View.Implementation
                 .AddTo(this);
             ViewModel
                 .OnPositionChanged
-                .Subscribe(x => _positionText.text = $"Lazer position: {x}")
+                .Subscribe(x => _positionText.text = $"Ship position: {x}")
                 .AddTo(this);
             ViewModel
                 .OnRotationChanged

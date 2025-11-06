@@ -5,6 +5,7 @@ using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.InputSystem;
 using _Project.Scripts.Gameplay.Services.Components;
+using _Project.Scripts.Gameplay.Services.Components.View;
 using _Project.Scripts.Gameplay.Services.Targets.Implementation;
 using Cysharp.Threading.Tasks;
 using R3;
@@ -23,6 +24,8 @@ namespace _Project.Scripts.Gameplay.Ship
     {
         private readonly CancellationTokenSource _cancellationTokenSource = new();
         
+        [SerializeField] private DeathAnimationController _deathAnimationController;
+        
         private ShipMovement _shipMovement;
         private AttackController _attackController;
         private RotationController _rotationController;
@@ -30,7 +33,6 @@ namespace _Project.Scripts.Gameplay.Ship
         private ActionOnGoingOutOrInCameraVisionField _cameraFieldService;
         private IInputHandler _inputHandler;
         private ShipStatsData _stats;
-        private Action _onDeadEvent;
         
         public Observable<float> OnLazerCooldownChanged { get; private set; }
         public Observable<int> OnLazerChargeCountChanged { get; private set; }
@@ -49,13 +51,6 @@ namespace _Project.Scripts.Gameplay.Ship
             _rotationController = GetComponent<RotationController>();
             _lazerController = GetComponent<LazerController>();
             _cameraFieldService = GetComponent<ActionOnGoingOutOrInCameraVisionField>();
-            
-            GetComponent<ShipTarget>()
-                .OnKill
-                .Subscribe(_ => _onDeadEvent?.Invoke())
-                .AddTo(this);
-            
-            _onDeadEvent += _shipMovement.StopShip;
             
             OnLazerChargeCountChanged = _lazerController.CurrentChargesCount;
             OnLazerCooldownChanged = _lazerController.CurrentCoolDown;
@@ -93,8 +88,20 @@ namespace _Project.Scripts.Gameplay.Ship
         public void SetRotation(Quaternion rotation) =>
             _rotationController.SetRotation(rotation);
         
-        public void AddOnDeadEvent(Action onDeadEvent) =>
-            _onDeadEvent += onDeadEvent;
+        public void SetOnDeadEvent(Action onDeadEvent) =>
+            GetComponent<ShipTarget>()
+                .OnKill
+                .Subscribe(_ => onDeadEvent?.Invoke())
+                .AddTo(this);
+
+        public async UniTask PlayDeathAnimationAsync()
+        {
+            DisableFbx();
+            await _deathAnimationController.PlayAnimationAsync();
+        }
+        
+        public void StopShip() => 
+            _shipMovement.StopShip();
         
         private void Shoot() => 
             _attackController.Shoot<ShipTarget>(transform.rotation * Vector2.up);

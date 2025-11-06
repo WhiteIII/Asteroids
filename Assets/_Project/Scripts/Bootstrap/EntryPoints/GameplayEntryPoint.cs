@@ -72,11 +72,13 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _shipFactory.Create();
             _charactersRepository.Ship.SetPosition(Vector2.zero);
             _charactersRepository.Ship.SetRotation(Quaternion.identity);
-            _charactersRepository.Ship.AddOnDeadEvent(() =>
+            _charactersRepository.Ship.SetOnDeadEvent(async () =>
             {
                 _spawnersAndControllersRepository.StopAllSpawnerControllers();
                 _inputHandler.Disable();
                 _gameLoop.Pause();
+                _charactersRepository.Ship.StopShip();
+                await _charactersRepository.Ship.PlayDeathAnimationAsync();
                 _gameOverWindowFactory.Create().Open().Forget();
             });
         }

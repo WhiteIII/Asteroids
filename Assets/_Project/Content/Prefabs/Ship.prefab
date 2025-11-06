@@ -363,6 +363,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3313799873366708896}
   - {fileID: 5407816156428491356}
   - {fileID: 827130699160092930}
   - {fileID: 2197420266887200889}
@@ -456,6 +457,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1ecbdb8f86743e40a3c431305d222ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fbx: {fileID: 9142624310102159014}
+  _deathAnimationController: {fileID: 5739856350888205254}
 --- !u!114 &4508245367479432009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,3 +699,80 @@ Transform:
   - {fileID: 1010822504930096183}
   m_Father: {fileID: 5206426768228975377}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &3892801412929994049
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5206426768228975377}
+    m_Modifications:
+    - target: {fileID: 2016197767253553121, guid: f2a2bc1b57c105e43889e192f9322fc8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.36268497
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016197767253553121, guid: f2a2bc1b57c105e43889e192f9322fc8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.38329214
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016197767253553121, guid: f2a2bc1b57c105e43889e192f9322fc8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.011905581
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016197767253553121, guid: f2a2bc1b57c105e43889e192f9322fc8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016197767253553121, guid: f2a2bc1b57c105e43889e192f9322fc8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016197767253553121, guid: f2a2bc1b57c105e43889e192f9322fc8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016197767253553121, guid: f2a2bc1b57c105e43889e192f9322fc8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016197767253553121, guid: f2a2bc1b57c105e43889e192f9322fc8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016197767253553121, guid: f2a2bc1b57c105e43889e192f9322fc8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2016197767253553121, guid: f2a2bc1b57c105e43889e192f9322fc8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2941076890808907548, guid: f2a2bc1b57c105e43889e192f9322fc8, type: 3}
+      propertyPath: m_Name
+      value: DeathEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 2941076890808907548, guid: f2a2bc1b57c105e43889e192f9322fc8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f2a2bc1b57c105e43889e192f9322fc8, type: 3}
+--- !u!4 &3313799873366708896 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2016197767253553121, guid: f2a2bc1b57c105e43889e192f9322fc8, type: 3}
+  m_PrefabInstance: {fileID: 3892801412929994049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5739856350888205254 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8767966081301259911, guid: f2a2bc1b57c105e43889e192f9322fc8, type: 3}
+  m_PrefabInstance: {fileID: 3892801412929994049}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcb9f13a90aa8794ab5e75813c511bfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

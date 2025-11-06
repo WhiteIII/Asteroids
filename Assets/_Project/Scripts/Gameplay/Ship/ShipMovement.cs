@@ -29,7 +29,7 @@ namespace _Project.Scripts.Gameplay.Ship
 
         public void SetPosition(Vector2 position) => 
             _rigidbody.MovePosition(position);
-        
+
         public void StopShip() => 
             _rigidbody.linearVelocity = Vector2.zero;
 
