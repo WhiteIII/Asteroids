@@ -6,6 +6,7 @@ namespace _Project.Scripts.Gameplay.GameLoopSystem
     public class GameLoop : IGameLoop, ITickable
     {
         private readonly List<IUpdatable> _updatables = new();
+        private readonly List<IPausedCharacter> _pausedCharacters = new();
         private readonly Queue<IUpdatable> _addedUpdateablesQueue = new();
         private readonly Queue<IUpdatable> _removedUpdateablesQueue = new();
         
@@ -25,14 +26,24 @@ namespace _Project.Scripts.Gameplay.GameLoopSystem
                 _updatables.Remove(_removedUpdateablesQueue.Dequeue());
         }
         
-        public void Add(IUpdatable updatable) =>
+        public void AddUpdatable(IUpdatable updatable) =>
             _addedUpdateablesQueue.Enqueue(updatable);
         
-        public void Remove(IUpdatable updatable) => 
+        public void RemoveUpdatable(IUpdatable updatable) => 
             _removedUpdateablesQueue.Enqueue(updatable);
         
-        public void Pause() => 
+        public void AddPausedObject(IPausedCharacter pausedObject) => 
+            _pausedCharacters.Add(pausedObject);
+        
+        public void RemovePausedObject(IPausedCharacter pausedObject) => 
+            _pausedCharacters.Remove(pausedObject);
+
+        public void Pause()
+        {
             _isPaused = true;
+            foreach (IPausedCharacter pausedObject in  _pausedCharacters)
+                pausedObject.OnPause();
+        }
 
         public void Resume() =>
             _isPaused = false;

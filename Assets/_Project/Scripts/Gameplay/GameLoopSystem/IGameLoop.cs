@@ -2,8 +2,10 @@ namespace _Project.Scripts.Gameplay.GameLoopSystem
 {
     public interface IGameLoop
     {
-        void Add(IUpdatable item);
-        void Remove(IUpdatable item);
+        void AddUpdatable(IUpdatable item);
+        void RemoveUpdatable(IUpdatable item);
+        void AddPausedObject(IPausedCharacter item);
+        void RemovePausedObject(IPausedCharacter item);
         void Resume();
         void Pause();
     }

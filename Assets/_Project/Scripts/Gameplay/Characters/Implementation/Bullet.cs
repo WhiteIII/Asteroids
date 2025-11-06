@@ -22,8 +22,8 @@ namespace _Project.Scripts.Gameplay.Characters
             _bulletMovement = GetComponent<RigidbodyMovement>();
         }
 
-        public IUpdatable[] GetAllUpdatableObjects() => 
-            new IUpdatable[] { _bulletMovement };
+        public IGameLoopObject[] GetAllGameLoopObjects() => 
+            new IGameLoopObject[] { _bulletMovement };
         
         public void SetDirection(Vector2 direction) =>
             _bulletMovement.SetDirection(direction);

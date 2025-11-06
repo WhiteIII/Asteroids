@@ -78,8 +78,8 @@ namespace _Project.Scripts.Gameplay.Ship
                 .AddTo(this);
         }
         
-        public IUpdatable[] GetAllUpdatableObjects() => 
-            new IUpdatable[] { _shipMovement, _rotationController, _lazerController };
+        public IGameLoopObject[] GetAllGameLoopObjects() => 
+            new IGameLoopObject[] { _shipMovement, _rotationController, _lazerController };
 
         private void OnDestroy()
         {

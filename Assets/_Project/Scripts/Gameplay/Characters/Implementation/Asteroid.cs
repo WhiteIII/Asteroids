@@ -2,6 +2,7 @@ using System;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.Services.Components;
+using _Project.Scripts.Gameplay.Services.Components.View;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
 using _Project.Scripts.Gameplay.Services.Targets.Implementation;
 using _Project.Scripts.Gameplay.Ship;
@@ -12,12 +13,15 @@ namespace _Project.Scripts.Gameplay.Characters
 {
     [RequireComponent(typeof(AsteroidTarget))]
     [RequireComponent(typeof(RigidbodyMovement))]
+    [RequireComponent(typeof(AsteroidView))]
     public class Asteroid : 
         KillableCharacter,
-        IInitializableUpdatableObject
+        IInitializableUpdatableObject,
+        IPausedCharacter
     {
         private RigidbodyMovement _movement;
         private PointsCounter _pointsCounter;
+        private AsteroidView _asteroidView;
         private int _points;
         
         public Vector2 Direction => _movement.Direction;
@@ -25,8 +29,12 @@ namespace _Project.Scripts.Gameplay.Characters
         [Inject] private void Construct(PointsCounter pointsCounter) =>
             _pointsCounter = pointsCounter;
 
-        protected override void OnAwake() => 
+        protected override void OnAwake()
+        {
+            _asteroidView = GetComponent<AsteroidView>();
             _movement = GetComponent<RigidbodyMovement>();
+            _asteroidView.StartAnimation();
+        }
 
         public void SetupAsteroid(Action onDeadAction = null)
         {
@@ -37,8 +45,8 @@ namespace _Project.Scripts.Gameplay.Characters
             });
         }
         
-        public IUpdatable[] GetAllUpdatableObjects() => 
-            new IUpdatable[] { _movement };
+        public IGameLoopObject[] GetAllGameLoopObjects() => 
+            new IGameLoopObject[] { _movement, this };
 
         protected override void OnTouchTarget(ITarget target)
         {
@@ -59,5 +67,8 @@ namespace _Project.Scripts.Gameplay.Characters
 
         public override void SetPosition(Vector2 position) => 
             _movement.SetPosition(position);
+
+        public void OnPause() => 
+            _asteroidView.StopAnimation();
     }
 }
