@@ -1,6 +1,8 @@
 using System;
 using _Project.Scripts.Gameplay.Services.Components;
+using _Project.Scripts.Gameplay.Services.Components.View;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
+using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 
@@ -9,6 +11,8 @@ namespace _Project.Scripts.Gameplay.Ship
     [RequireComponent(typeof(CollisionHandler))]
     public class Lazer : MonoBehaviour
     {
+        [SerializeField] private SfxController _sfxController;
+        
         private readonly CompositeDisposable _disposable = new();
         
         private Type _ignoredTargetType; 
@@ -36,9 +40,12 @@ namespace _Project.Scripts.Gameplay.Ship
             if (target is IKillableTarget killableTarget)
                 killableTarget.Kill();
         }
-        
-        public void ShowLazer() => 
+
+        public void ShowLazer()
+        {
+            _sfxController.PlayAudioClipAsync().Forget();
             gameObject.SetActive(true);
+        }
 
         public void HideLazer() => 
             gameObject.SetActive(false);

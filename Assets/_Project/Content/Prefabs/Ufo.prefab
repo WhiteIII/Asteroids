@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 1794318367567354047}
   - component: {fileID: 7941409087971119382}
   - component: {fileID: 2301858713233538027}
+  - component: {fileID: 1754742387032140380}
   m_Layer: 0
   m_Name: Ufo
   m_TagString: Untagged
@@ -151,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPoint: {fileID: 7754306283886999479}
+  _shootSfx: {fileID: 1754742387032140380}
 --- !u!58 &1794318367567354047
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -212,6 +214,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _renderZone: {fileID: 5206133184718504706}
+--- !u!114 &1754742387032140380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3331572685235939565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9975c72e32278e44b8e619221b3d53c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioClip: {fileID: 8300000, guid: 626fe774df2dc0345908de34e602f231, type: 3}
 --- !u!1 &4308243984477983723
 GameObject:
   m_ObjectHideFlags: 0

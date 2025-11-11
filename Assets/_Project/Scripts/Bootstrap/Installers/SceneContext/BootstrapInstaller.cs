@@ -16,10 +16,12 @@ namespace _Project.Scripts.Bootstrap.Installers
 
         [Header("OnScene")]
         [SerializeField] private Camera _camera;
+        [SerializeField] private AudioSource _audioSource;
         
         public override void InstallBindings()
         {
             Container.Bind<Camera>().FromInstance(_camera).AsSingle();
+            Container.Bind<AudioSource>().FromInstance(_audioSource).AsSingle();
             Container.Bind<ShipStatsData>().FromInstance(_shipStatsData).AsSingle();
             Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<CharactersRepository>().AsSingle();
