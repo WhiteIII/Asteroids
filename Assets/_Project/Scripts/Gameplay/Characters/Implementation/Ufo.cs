@@ -3,7 +3,6 @@ using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.Services.Repositories;
 using _Project.Scripts.Gameplay.Ship;
 using _Project.Scripts.Gameplay.Services.Components;
-using _Project.Scripts.Gameplay.Services.Components.View;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
 using _Project.Scripts.Gameplay.Services.Targets.Implementation;
 using UnityEngine;

@@ -25,23 +25,25 @@ namespace _Project.Scripts.Gameplay.Ship
         public void Initialize(float bulletFlyingSpeed) => 
             _bulletFlyingSpeed = bulletFlyingSpeed;
 
-        public void Shoot<T>(Vector2 direction) 
+        public async void Shoot<T>(Vector2 direction) 
             where T : IKillableTarget
         {
             _shootSfx.PlayAudioClipAsync().Forget();
-            CreateAndSetupBullet(direction).SetIgnoreTarget<T>();
+            Bullet bullet = await CreateAndSetupBullet(direction); 
+            bullet.SetIgnoreTarget<T>();
         }
 
-        public void Shoot<T1, T2>(Vector2 direction) 
+        public async void Shoot<T1, T2>(Vector2 direction) 
             where T1 : IKillableTarget where T2 : IKillableTarget
         {
             _shootSfx.PlayAudioClipAsync().Forget();
-            CreateAndSetupBullet(direction).SetIgnoreTarget<T1, T2>();
+            Bullet bullet = await CreateAndSetupBullet(direction); 
+            bullet.SetIgnoreTarget<T1, T2>();
         }
 
-        private Bullet CreateAndSetupBullet(Vector2 direction)
+        private async UniTask<Bullet> CreateAndSetupBullet(Vector2 direction)
         {
-            Bullet bullet = _bulletsPool.Get(_spawnPoint.position);
+            Bullet bullet = await _bulletsPool.Get(_spawnPoint.position);
             bullet.SetRotation(GetRotation(direction));
             bullet.SetDirection(direction);
             bullet.SetFlySpeed(_bulletFlyingSpeed);

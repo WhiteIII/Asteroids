@@ -1,6 +1,6 @@
 using System;
 using _Project.Scripts.Gameplay.Services.ObjectPools.Base;
-using Zenject;
+using Cysharp.Threading.Tasks;
 
 namespace _Project.Scripts.Gameplay.Services.ObjectPools
 {
@@ -8,15 +8,15 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
         where TItem : IEnableAndDisableItem, IItemWithId<TId>
     {
         protected ItemsWithIdPool(
-            Func<TItem> createMethod,
+            Func<UniTask<TItem>> createMethod,
             Func<TId> idGenerator, 
             bool disableItemOnCreate = false) : base(createMethod, idGenerator, disableItemOnCreate)
         {
         }
 
-        public TItem Get()
+        public async UniTask<TItem> Get()
         {
-            TItem item = GetFromPool();
+            TItem item = await GetFromPool();
             item.Enable();
             return item;
         } 

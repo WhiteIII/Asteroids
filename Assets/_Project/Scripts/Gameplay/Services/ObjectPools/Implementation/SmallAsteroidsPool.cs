@@ -7,13 +7,13 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
 {
     public class SmallAsteroidsPool : ItemsWithIdAndParameterPool<Asteroid, string, Vector2>
     {
-        public SmallAsteroidsPool(
-            CharacterCreator creator,
-            Asteroid prefab) : 
+        private const string ID = "SmallAsteroid";
+        
+        public SmallAsteroidsPool(CharacterCreator creator) : 
             base(
-                () =>
+                async () =>
                 {
-                    Asteroid asteroid = creator.CreateGameLoopCharacter(prefab);
+                    Asteroid asteroid = await creator.CreateGameLoopCharacter<Asteroid>(ID);
                     asteroid.SetupAsteroid();
                     return asteroid;
                 }, 

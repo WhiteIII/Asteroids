@@ -1,3 +1,5 @@
+using _Project.Scripts.Common;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -6,26 +8,31 @@ namespace _Project.Scripts.Gameplay.GameLoopSystem
     public class GameLoopCreator : IGameLoopCreator
     {
         private readonly IGameLoopRegisterController _gameLoopRegisterController;
-        private readonly IInstantiator _instantiator;
+        private readonly DiContainer _container;
+        private readonly LocalAssetProvider _localAssetProvider;
 
         public GameLoopCreator(
             IGameLoopRegisterController gameLoopRegisterController, 
-            IInstantiator instantiator)
+            DiContainer container,
+            LocalAssetProvider localAssetProvider)
         {
             _gameLoopRegisterController = gameLoopRegisterController;
-            _instantiator = instantiator;
+            _container = container;
+            _localAssetProvider = localAssetProvider;
         }
 
-        public T Create<T>(T prefab)
+        public async UniTask<T> Create<T>(string id)
             where T : MonoBehaviour, IGameLoopObject
         {
-            return RegisterObject(_instantiator.InstantiatePrefab(prefab).GetComponent<T>());
+            T createdObject = await _localAssetProvider.LoadAsync<T>(id);
+            _container.Inject(createdObject);
+            return RegisterObject(createdObject);
         }
         
         public T Create<T>(params object[] parameters)
             where T : IGameLoopObject
         {
-            return RegisterObject(_instantiator.Instantiate<T>(parameters));
+            return RegisterObject(_container.Instantiate<T>(parameters));
         }
 
         public T RegisterObject<T>(T gameLoopObject)
@@ -42,7 +49,7 @@ namespace _Project.Scripts.Gameplay.GameLoopSystem
     public interface IGameLoopCreator
     {
         T RegisterObject<T>(T gameLoopObject) where T : IGameLoopObject;
-        T Create<T>(T prefab) where T : MonoBehaviour, IGameLoopObject;
+        UniTask<T> Create<T>(string id) where T : MonoBehaviour, IGameLoopObject;
         T Create<T>(params object[] parameters) where T : IGameLoopObject;
     }
 }

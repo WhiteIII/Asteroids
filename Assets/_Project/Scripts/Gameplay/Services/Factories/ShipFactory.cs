@@ -1,24 +1,19 @@
 using _Project.Scripts.Gameplay.Characters.Base;
+using Cysharp.Threading.Tasks;
 using Zenject;
 
 namespace _Project.Scripts.Gameplay.Services.Factories
 {
-    public class ShipFactory : PlaceholderFactory<Ship.Ship>
+    public class ShipFactory : PlaceholderFactory<UniTask<Ship.Ship>>
     {
-        private readonly Ship.Ship _shipPrefab;
+        private const string ID = "Ship";
+
         private readonly CharacterCreator _characterCreator;
 
-        public ShipFactory(Ship.Ship shipPrefab, CharacterCreator characterCreator)
-        {
-            _shipPrefab = shipPrefab;
+        public ShipFactory(CharacterCreator characterCreator) => 
             _characterCreator = characterCreator;
-        }
 
-        public override Ship.Ship Create()
-        {
-            Ship.Ship ship = _characterCreator.CreateGameLoopCharacter(_shipPrefab);
-            
-            return ship;
-        }
+        public override UniTask<Ship.Ship> Create() => 
+            _characterCreator.CreateGameLoopCharacter<Ship.Ship>(ID);
     }
 }

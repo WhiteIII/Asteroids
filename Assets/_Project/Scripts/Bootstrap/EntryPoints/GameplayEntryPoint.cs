@@ -13,26 +13,26 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
 {
     public class GameplayEntryPoint : IInitializable, IDisposable
     {
-        private readonly IFactory<Ship> _shipFactory;
+        private readonly IFactory<UniTask<Ship>> _shipFactory;
         private readonly CharactersRepository _charactersRepository;
         private readonly AiActorsRepository _aiActorsRepository;
         private readonly SpawnersAndControllersRepository _spawnersAndControllersRepository;
-        private readonly IFactory<ShipStatsWindow> _shipStatsWindowFactory;
-        private readonly IFactory<PlayerPointsWindow> _playerPointsWindowFactory;
-        private readonly IFactory<GameOverWindow> _gameOverWindowFactory;
+        private readonly IFactory<UniTask<ShipStatsWindow>> _shipStatsWindowFactory;
+        private readonly IFactory<UniTask<PlayerPointsWindow>> _playerPointsWindowFactory;
+        private readonly IFactory<UniTask<GameOverWindow>> _gameOverWindowFactory;
         private readonly IGameLoop _gameLoop;
         private readonly WindowsRepository _windowsRepository;
         private readonly InputHandler _inputHandler;
 
         public GameplayEntryPoint(
-            IFactory<Ship> shipFactory,
+            IFactory<UniTask<Ship>> shipFactory,
             CharactersRepository charactersRepository,
             AiActorsRepository aiActorsRepository, 
             SpawnersAndControllersRepository spawnersAndControllersRepository,
-            IFactory<ShipStatsWindow> shipStatsWindowFactory, 
+            IFactory<UniTask<ShipStatsWindow>> shipStatsWindowFactory, 
             WindowsRepository windowsRepository, 
-            IFactory<PlayerPointsWindow> playerPointsWindowFactory, 
-            IFactory<GameOverWindow> gameOverWindowFactory,
+            IFactory<UniTask<PlayerPointsWindow>> playerPointsWindowFactory, 
+            IFactory<UniTask<GameOverWindow>> gameOverWindowFactory,
             IGameLoop gameLoop,
             InputHandler inputHandler)
         {
@@ -50,10 +50,13 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
 
         public async void Initialize()
         {
-            SetupShip();
+            await SetupShip();
             _inputHandler.Enable();
-            await _shipStatsWindowFactory.Create().Open();
-            await _playerPointsWindowFactory.Create().Open();
+            
+            ShipStatsWindow shipStatsWindow = await _shipStatsWindowFactory.Create();
+            PlayerPointsWindow playerPointsWindow = await _playerPointsWindowFactory.Create();
+            await shipStatsWindow.Open();
+            await playerPointsWindow.Open();
         }
         
         public async void Dispose()
@@ -63,13 +66,13 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             await _windowsRepository.TryCloseAndDestroyWindow<GameOverWindow>();
             _aiActorsRepository.Clear();
             _spawnersAndControllersRepository.Clear();
-            _charactersRepository.ClearAllCharactersList();
-            _charactersRepository.UnregisterShip();
+            _charactersRepository.DestroyAllCharacters();
+            _charactersRepository.DestroyShip();
         }
 
-        private void SetupShip()
-        {
-            _shipFactory.Create();
+        private async UniTask SetupShip()
+        { 
+            await _shipFactory.Create();
             _charactersRepository.Ship.SetPosition(Vector2.zero);
             _charactersRepository.Ship.SetRotation(Quaternion.identity);
             _charactersRepository.Ship.SetOnDeadEvent(async () =>
@@ -79,7 +82,8 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
                 _gameLoop.Pause();
                 _charactersRepository.Ship.StopShip();
                 await _charactersRepository.Ship.PlayDeathAnimationAsync();
-                _gameOverWindowFactory.Create().Open().Forget();
+                GameOverWindow gameOverWindow = await _gameOverWindowFactory.Create();
+                await gameOverWindow.Open();
             });
         }
     }

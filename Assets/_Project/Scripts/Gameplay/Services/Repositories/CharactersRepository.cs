@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Project.Scripts.Common;
 using _Project.Scripts.Gameplay.Characters.Base;
 
 namespace _Project.Scripts.Gameplay.Services.Repositories
@@ -8,6 +9,11 @@ namespace _Project.Scripts.Gameplay.Services.Repositories
     {
         private readonly List<ICharacter> _charactersList = new();
         
+        private readonly LocalAssetProvider _localAssetProvider;
+
+        public CharactersRepository(LocalAssetProvider localAssetProvider) =>
+            _localAssetProvider = localAssetProvider;
+
         public Ship.Ship Ship { get; private set; }
 
         private void RegisterShip(Ship.Ship ship) => 
@@ -34,20 +40,23 @@ namespace _Project.Scripts.Gameplay.Services.Repositories
                 _charactersList.Add(character);
             return character;
         }
-
-        public void UnregisterShip()
+        
+        public void DestroyShip()
         {
             if (Ship is IDisposable disposable)
                 disposable.Dispose();
+            _localAssetProvider.Unload(Ship);
             Ship = null;
-        } 
-        
-        public void ClearAllCharactersList()
+        }
+
+        public void DestroyAllCharacters()
         {
             foreach (ICharacter character in _charactersList)
             {
                 if (character is IDisposable disposable)
                     disposable.Dispose();
+                if (character is Character characterMonoBehaviour)
+                    _localAssetProvider.Unload(characterMonoBehaviour);
             }
             _charactersList.Clear();
         }

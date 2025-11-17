@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.Gameplay.Services.ObjectPools.Base;
+using Cysharp.Threading.Tasks;
 using Zenject;
 
 namespace _Project.Scripts.Gameplay.Services.ObjectPools
@@ -10,7 +11,7 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
         private readonly Action<TItem, TParameter> _actionOnGetWithParameter;
         
         protected ItemsWithIdAndParameterPool(
-            Func<TItem> createMethod, 
+            Func<UniTask<TItem>> createMethod, 
             Func<TId> idGenerator, 
             Action<TItem, TParameter> actionOnGetWithParameter,
             bool disableItemOnCreate = false,
@@ -20,9 +21,9 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
             _actionOnGetWithParameter = actionOnGetWithParameter;
         }
 
-        public TItem Get(TParameter parameter)
+        public async UniTask<TItem> Get(TParameter parameter)
         {
-            TItem item = GetFromPool();
+            TItem item = await GetFromPool();
             _actionOnGetWithParameter.Invoke(item, parameter);
             item.Enable();
             return item;

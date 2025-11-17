@@ -9,6 +9,7 @@ using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Ai.Base;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.Services.Repositories;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -20,13 +21,6 @@ namespace _Project.Scripts.Bootstrap.Installers
         [SerializeField] private GameSettingsData _gameSettingsData;
         [SerializeField] private AsteroidsData _asteroidsData;
         [SerializeField] private UfoStatsData _ufoStatsData;
-        
-        [Header("Prefabs")]
-        [SerializeField] private Asteroid _asteroidPrefab;
-        [SerializeField] private Ship _shipPrefab;
-        [SerializeField] private Asteroid _smallAsteroidPrefab;
-        [SerializeField] private Bullet _bulletPrefab;
-        [SerializeField] private Ufo _ufoPrefab;
         
         public override void InstallBindings()
         {
@@ -41,14 +35,12 @@ namespace _Project.Scripts.Bootstrap.Installers
             Container.Bind<AiActorCreator>().AsSingle();
             Container.Bind<CharacterCreator>().AsSingle();
             Container
-                .BindFactoryCustomInterface<Ship, ShipFactory, IFactory<Ship>>()
-                .WithFactoryArguments(_shipPrefab);
+                .BindFactoryCustomInterface<UniTask<Ship>, ShipFactory, IFactory<UniTask<Ship>>>();
             Container
-                .BindFactoryCustomInterface<Ufo, UfoFactory, IFactory<Ufo>>()
-                .WithFactoryArguments(_ufoPrefab);
-            Container.BindInterfacesAndSelfTo<SmallAsteroidsPool>().AsSingle().WithArguments(_smallAsteroidPrefab);
-            Container.BindInterfacesAndSelfTo<AsteroidsPool>().AsSingle().WithArguments(_asteroidPrefab);
-            Container.BindInterfacesAndSelfTo<BulletsPool>().AsSingle().WithArguments(_bulletPrefab);
+                .BindFactoryCustomInterface<UniTask<Ufo>, UfoFactory, IFactory<UniTask<Ufo>>>();
+            Container.BindInterfacesAndSelfTo<SmallAsteroidsPool>().AsSingle();
+            Container.BindInterfacesAndSelfTo<AsteroidsPool>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BulletsPool>().AsSingle();
             Container.BindInterfacesAndSelfTo<UfoPool>().AsSingle();
             Container.BindInterfacesAndSelfTo<AsteroidsSpawner>().AsSingle();
             Container.BindInterfacesAndSelfTo<UfoSpawner>().AsSingle();
