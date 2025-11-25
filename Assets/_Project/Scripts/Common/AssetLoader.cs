@@ -15,10 +15,12 @@ namespace _Project.Scripts.Common
             _assetsReference = assetsReference;
         }
 
-        public async UniTask LoadAssetsAsync()
+        public UniTask[] GetLoadedAsyncOperations()
         {
-            foreach (AssetReference assetReference in _assetsReference)
-                await _localAssetProvider.LoadAsync(assetReference);
+            UniTask[] tasks = new UniTask[_assetsReference.Length];
+            for (int i = 0; i < _assetsReference.Length; i++)
+                tasks[i] = _localAssetProvider.LoadAsync(_assetsReference[i]);
+            return tasks;
         }
     }
 }

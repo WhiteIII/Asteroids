@@ -662,7 +662,6 @@ GameObject:
   - component: {fileID: 1616966650}
   - component: {fileID: 1616966649}
   - component: {fileID: 1616966648}
-  - component: {fileID: 1616966651}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -686,6 +685,13 @@ MonoBehaviour:
   _shipStatsData: {fileID: 11400000, guid: a176893ffadba274f96e2924dc871547, type: 2}
   _camera: {fileID: 519420031}
   _audioSource: {fileID: 519420033}
+  _uiRoot: {fileID: 1026150208}
+  _loadingWindowAssetReference:
+    m_AssetGUID: 4bf522c739b0e3c4fa451ed68e930e9b
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
 --- !u!114 &1616966649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,7 +707,6 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1616966648}
-  - {fileID: 1616966651}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -735,19 +740,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1616966651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1616966647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d8be5f4214e4a5d8b03342d09d1842e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _uiRoot: {fileID: 1026150208}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

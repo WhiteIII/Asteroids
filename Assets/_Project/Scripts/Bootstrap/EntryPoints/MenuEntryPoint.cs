@@ -2,7 +2,7 @@ using System;
 using _Project.Scripts.Common;
 using _Project.Scripts.View.Implementation;
 using _Project.Scripts.View.Services;
-using UnityEngine.AddressableAssets;
+using _Project.Scripts.ViewModel.Implementation;
 using Zenject;
 
 namespace _Project.Scripts.Bootstrap.EntryPoints
@@ -13,24 +13,29 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly WindowsRepository _windowsRepository;
         private readonly AssetLoader _assetLoader;
         private readonly LocalAssetProvider _localAssetProvider;
+        private readonly LoadingWindowViewModel _loadingWindowViewModel;
         
         public MenuEntryPoint(
             IFactory<MenuWindow> menuWindowFactory,
             WindowsRepository windowsRepository, 
             AssetLoader assetLoader,
-            LocalAssetProvider localAssetProvider)
+            LocalAssetProvider localAssetProvider,
+            LoadingWindowViewModel loadingWindowViewModel)
         {
             _menuWindowFactory = menuWindowFactory;
             _windowsRepository = windowsRepository;
             _assetLoader = assetLoader;
             _localAssetProvider = localAssetProvider;
+            _loadingWindowViewModel = loadingWindowViewModel;
         }
 
         public async void Initialize()
         {
-            await _assetLoader.LoadAssetsAsync();
-            MenuWindow menuWindow = _menuWindowFactory.Create();
-            await menuWindow.Open();
+            LoadingWindow loadingWindow = _windowsRepository.Get<LoadingWindow>();
+            await loadingWindow.Open();
+            await _loadingWindowViewModel.StartLoadingAsync(_assetLoader.GetLoadedAsyncOperations());
+            await loadingWindow.Close();
+            await _menuWindowFactory.Create().Open();
         }
 
         public async void Dispose()

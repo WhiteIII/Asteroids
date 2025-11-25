@@ -18,7 +18,7 @@ namespace _Project.Scripts.Common
         }
         
         public T GetAsset<T>(AssetReference assetReference) where T : Object => _loadedAssets[assetReference] as T;
-
+        
         public void ReleaseAllAssets()
         {
             foreach (object asset in _loadedAssets.Values)

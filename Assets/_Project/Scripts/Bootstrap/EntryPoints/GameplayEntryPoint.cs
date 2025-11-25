@@ -6,6 +6,7 @@ using _Project.Scripts.Gameplay.Services.Repositories;
 using _Project.Scripts.Gameplay.Ship;
 using _Project.Scripts.View.Implementation;
 using _Project.Scripts.View.Services;
+using _Project.Scripts.ViewModel.Implementation;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -26,6 +27,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly InputHandler _inputHandler;
         private readonly AssetLoader _assetLoader;
         private readonly LocalAssetProvider _localAssetProvider;
+        private readonly LoadingWindowViewModel _loadingWindowViewModel;
 
         public GameplayEntryPoint(
             IFactory<Ship> shipFactory,
@@ -39,7 +41,8 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             IGameLoop gameLoop,
             InputHandler inputHandler, 
             AssetLoader assetLoader, 
-            LocalAssetProvider localAssetProvider)
+            LocalAssetProvider localAssetProvider, 
+            LoadingWindowViewModel loadingWindowViewModel)
         {
             _shipFactory = shipFactory;
             _charactersRepository = charactersRepository;
@@ -53,11 +56,15 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _inputHandler = inputHandler;
             _assetLoader = assetLoader;
             _localAssetProvider = localAssetProvider;
+            _loadingWindowViewModel = loadingWindowViewModel;
         }
 
         public async void Initialize()
         {
-            await _assetLoader.LoadAssetsAsync();
+            LoadingWindow loadingWindow = _windowsRepository.Get<LoadingWindow>();
+            await loadingWindow.Open();
+            await _loadingWindowViewModel.StartLoadingAsync(_assetLoader.GetLoadedAsyncOperations());
+            await loadingWindow.Close();
             SetupShip();
             _inputHandler.Enable();
             await _shipStatsWindowFactory.Create().Open();
@@ -67,9 +74,11 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         
         public async void Dispose()
         {
-            await _windowsRepository.TryCloseAndDestroyWindow<ShipStatsWindow>();
-            await _windowsRepository.TryCloseAndDestroyWindow<PlayerPointsWindow>();
-            await _windowsRepository.TryCloseAndDestroyWindow<GameOverWindow>();
+            await UniTask.WhenAll(
+                _windowsRepository.TryCloseAndDestroyWindow<ShipStatsWindow>(),
+                _windowsRepository.TryCloseAndDestroyWindow<PlayerPointsWindow>(),
+                _windowsRepository.TryCloseAndDestroyWindow<GameOverWindow>());
+            await _windowsRepository.Get<LoadingWindow>().Open();
             _aiActorsRepository.Clear();
             _spawnersAndControllersRepository.Clear();
             _charactersRepository.ClearAllCharactersList();
