@@ -1,20 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8403147901926041012
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
-  m_Name: ContentUpdateGroupSchema
-  m_EditorClassIdentifier: 
-  m_Group: {fileID: 0}
-  m_StaticContent: 0
---- !u!114 &-5080572113045038676
+--- !u!114 &-4075224269299562587
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,7 +58,21 @@ MonoBehaviour:
   m_Name: Packed Assets
   m_EditorClassIdentifier: 
   m_SchemaObjects:
-  - {fileID: -5080572113045038676}
-  - {fileID: -8403147901926041012}
+  - {fileID: -4075224269299562587}
+  - {fileID: 6188578429015660930}
   m_Description: Pack assets into asset bundles.
   m_Settings: {fileID: 11400000, guid: 83fd9f324c039aa4d92211531ba323f1, type: 2}
+--- !u!114 &6188578429015660930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
+  m_Name: ContentUpdateGroupSchema
+  m_EditorClassIdentifier: 
+  m_Group: {fileID: 0}
+  m_StaticContent: 0

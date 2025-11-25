@@ -2,29 +2,30 @@ using _Project.Scripts.Gameplay.Ai.Base;
 using _Project.Scripts.Gameplay.Ai.Implementation;
 using _Project.Scripts.Gameplay.Characters;
 using _Project.Scripts.Gameplay.Characters.Base;
-using Cysharp.Threading.Tasks;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace _Project.Scripts.Gameplay.Services.Factories
 {
-    public class UfoFactory : PlaceholderFactory<UniTask<Ufo>>
+    public class UfoFactory : PlaceholderFactory<Ufo>
     {
-        private const string ID = "Ufo";
-        
         private readonly CharacterCreator _characterCreator;
         private readonly AiActorCreator _aiActorCreator;
+        private readonly AssetReference _ufoAssetReference;
 
         public UfoFactory(
             AiActorCreator aiActorCreator,
-            CharacterCreator characterCreator)
+            CharacterCreator characterCreator, 
+            AssetReference ufoAssetReference)
         {
             _aiActorCreator = aiActorCreator;
             _characterCreator = characterCreator;
+            _ufoAssetReference = ufoAssetReference;
         }
 
-        public override async UniTask<Ufo> Create()
+        public override Ufo Create()
         {
-            Ufo ufo = await _characterCreator.CreateNonGameLoopCharacter<Ufo>(ID);
+            Ufo ufo = _characterCreator.CreateNonGameLoopCharacter<Ufo>(_ufoAssetReference);
             _aiActorCreator.Create(
                 new BaseRule(ufo.MoveToPlayer, () => ufo.PlayerIsClose == false && ufo.IsAlive),
                 new BaseRule(ufo.Attack, () => ufo.PlayerIsClose && ufo.InCooldown == false && ufo.IsVisible && ufo.IsAlive),

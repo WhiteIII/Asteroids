@@ -3,8 +3,8 @@ using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Characters;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.Services.Repositories;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Zenject;
 using Random = UnityEngine.Random;
 
@@ -13,24 +13,23 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
 {
     public class AsteroidsPool : ItemsWithIdAndParameterPool<Asteroid, string, Vector2>
     {
-        private const string ID = "Asteroid";
-        
         public AsteroidsPool(
             CharacterCreator characterCreator,
+            AssetReference asteroidAssetReference,
             SmallAsteroidsPool smallAsteroidsPool,
             AsteroidsData asteroidsData) : 
             base(
-                async () =>
+                () =>
                 {
-                    Asteroid asteroid = await characterCreator.CreateGameLoopCharacter<Asteroid>(ID);
-                    asteroid.SetupAsteroid(async () => {
+                    Asteroid asteroid = characterCreator.CreateGameLoopCharacter<Asteroid>(asteroidAssetReference);
+                    asteroid.SetupAsteroid(() => {
                         int spawnCount = Random.Range(
                             asteroidsData.SpawnedSmallAsteroidsOnDeadCountForm, 
                             asteroidsData.SpawnedSmallAsteroidsOnDeadCountTo + 1);
 
                         for (int i = 0; i < spawnCount; i++)
                         {
-                            Asteroid smallAsteroid = await smallAsteroidsPool.Get(asteroid.Position.CurrentValue);
+                            Asteroid smallAsteroid = smallAsteroidsPool.Get(asteroid.Position.CurrentValue);
                             smallAsteroid.SendAsteroidOnDirection(
                                 new Vector2(
                                     asteroid.Direction.x + Random.Range(

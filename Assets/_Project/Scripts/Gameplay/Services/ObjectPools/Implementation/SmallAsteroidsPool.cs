@@ -2,18 +2,19 @@ using System;
 using _Project.Scripts.Gameplay.Characters;
 using _Project.Scripts.Gameplay.Characters.Base;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace _Project.Scripts.Gameplay.Services.ObjectPools
 {
     public class SmallAsteroidsPool : ItemsWithIdAndParameterPool<Asteroid, string, Vector2>
     {
-        private const string ID = "SmallAsteroid";
-        
-        public SmallAsteroidsPool(CharacterCreator creator) : 
+        public SmallAsteroidsPool(
+            CharacterCreator creator,
+            AssetReference smallAsteroidAssetReferences) : 
             base(
-                async () =>
+                () =>
                 {
-                    Asteroid asteroid = await creator.CreateGameLoopCharacter<Asteroid>(ID);
+                    Asteroid asteroid = creator.CreateGameLoopCharacter<Asteroid>(smallAsteroidAssetReferences);
                     asteroid.SetupAsteroid();
                     return asteroid;
                 }, 

@@ -17,13 +17,9 @@ namespace _Project.Scripts.Gameplay.Services.Repositories
                 RegisterController(controller);
         }
         
-        public ISpawnerController RegisterController(ISpawnerController controller)
-        {
+        public void RegisterController(ISpawnerController controller) => 
             _spawnerControllers.Add(controller);
-            controller.Enable();
-            return controller;
-        }
-        
+
         public void UnregisterController(ISpawnerController controller) =>
             _spawnerControllers.Remove(controller);
 
@@ -37,6 +33,12 @@ namespace _Project.Scripts.Gameplay.Services.Repositories
         public void UnregisterSpawner(ISpawner spawner) => 
             _spawners.Remove(spawner);
 
+        public void StartAllSpawners()
+        {
+            foreach (ISpawnerController controller in _spawnerControllers)
+                controller.Enable();
+        }
+        
         public void StopAllSpawnerControllers()
         {
             foreach (ISpawnerController controller in  _spawnerControllers)

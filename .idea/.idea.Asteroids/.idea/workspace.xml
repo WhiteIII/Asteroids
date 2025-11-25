@@ -5,44 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b03fc07a-0e6a-443e-9c95-d8f0976e3a70" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/SaveLoad.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/SaveLoad.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Asteroids/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Asteroids/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Content/Prefabs/AsteroidsPrefabs/AsteroidPrefab.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Content/Prefabs/AsteroidsPrefabs/AsteroidPrefab.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Content/Prefabs/AsteroidsPrefabs/SmallAsteroidPrefab.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Content/Prefabs/AsteroidsPrefabs/SmallAsteroidPrefab.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Bootstrap.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Bootstrap.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/EntryPoints/GameplayEntryPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/EntryPoints/GameplayEntryPoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/EntryPoints/MenuEntryPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/EntryPoints/MenuEntryPoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/ProjectContext/SceneControllerInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/ProjectContext/SceneControllerInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/GameplayInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/GameplayInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/GameplayUIInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/GameplayUIInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/MenuInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/MenuInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Characters/Base/CharacterCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Characters/Base/CharacterCreator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Characters/Implementation/Ufo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Characters/Implementation/Ufo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/GameLoopSystem/GameLoopCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/GameLoopSystem/GameLoopCreator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Gameplay.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Gameplay.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/PlayerSaveLoadData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/PlayerSaveLoadData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/SaveLoadController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/SaveLoadController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/SaveLoadController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/SaveLoadController.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Components/AttackController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Components/AttackController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Factories/ShipFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Factories/ShipFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Factories/UfoFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Factories/UfoFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/ObjectPools/Base/BasePoolWithId.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/ObjectPools/Base/BasePoolWithId.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/ObjectPools/Base/ItemsWithIdAndParameterPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/ObjectPools/Base/ItemsWithIdAndParameterPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/ObjectPools/Base/ItemsWithIdPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/ObjectPools/Base/ItemsWithIdPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/ObjectPools/Implementation/AsteroidsPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/ObjectPools/Implementation/AsteroidsPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/ObjectPools/Implementation/BulletsPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/ObjectPools/Implementation/BulletsPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/ObjectPools/Implementation/SmallAsteroidsPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/ObjectPools/Implementation/SmallAsteroidsPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/ObjectPools/Implementation/UfoPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/ObjectPools/Implementation/UfoPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Repositories/CharactersRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Repositories/CharactersRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Spawners/AsteroidsSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Spawners/AsteroidsSpawner.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Services/Factories/BaseWindowFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Services/Factories/BaseWindowFactory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Services/Factories/ShipStatsWindowFactory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Services/Factories/ShipStatsWindowFactory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Services/WindowsRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Services/WindowsRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/View.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/View.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +37,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/612ea0208cc847f49d539e6511ed3cd51df400/a8/d62ac1d9/Component.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/612ea0208cc847f49d539e6511ed3cd51df400/e5/08a5e2f7/MonoBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/612ea0208cc847f49d539e6511ed3cd51df400/ea/ce76a23f/Transform.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/612ea0208cc847f49d539e6511ed3cd51df400/ff/ba13272d/GameObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6ed905f187a142ab9f1748f9acd422a11faa00/df/66c7f148/LayoutDataStore.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a6479622a9314fcba3eb70d4da8dd46092e00/18/8aa60fb7/Observable.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a6479622a9314fcba3eb70d4da8dd46092e00/19/fcd557ae/ObservableSubscribeExtensions.cs" root0="FORCE_HIGHLIGHTING" />
@@ -83,6 +47,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b5aa24f9063f4ba0aff6663c6e68b70b2f200/ba/763c3aef/Rigidbody2D.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../ArchStream/Assets/_Project/Logic/Common/Infrastructure/BootstrapInstaller.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Common/LocalAssetProvider.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Data/AsteroidsData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Data/ShipStatsData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Ai/Implementation/BaseRule.cs" root0="FORCE_HIGHLIGHTING" />
@@ -119,7 +84,7 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develope&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Add-addressables-branch&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -165,15 +130,13 @@
       <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="348756">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="348756" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
-        <list>
-          <MonoRuntime />
-        </list>
+        <list />
       </option>
       <option name="selectedOptions">
         <list />
@@ -263,8 +226,8 @@
       <workItem from="1762412838508" duration="3000" />
       <workItem from="1762412862745" duration="1246000" />
       <workItem from="1762459135048" duration="4705000" />
-      <workItem from="1762858502775" duration="2851000" />
-      <workItem from="1763401272097" duration="7214000" />
+      <workItem from="1762858499568" duration="37000" />
+      <workItem from="1763588140880" duration="1449000" />
     </task>
     <servers />
   </component>
@@ -308,19 +271,6 @@
           <properties exception="System.Threading.ThreadAbortException" breakIfHandledByOtherCode="false" displayValue="System.Threading.ThreadAbortException" />
           <option name="timeStamp" value="3" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Characters/Implementation/Ufo.cs</url>
-          <line>42</line>
-          <properties documentPath="C:\Users\as250\Asteroids\Assets\_Project\Scripts\Gameplay\Characters\Implementation\Ufo.cs" containingFunctionPresentation="Method 'OnAwake'">
-            <startOffsets>
-              <option value="1606" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1607" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

@@ -2,7 +2,6 @@ using System;
 using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Characters;
 using _Project.Scripts.Gameplay.Services.ObjectPools;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -27,17 +26,22 @@ namespace _Project.Scripts.Gameplay.Services.Spawners
             _smallAsteroidsPool = smallAsteroidsPool;
         }
 
-        public async void Spawn()
+        public void Spawn()
         {
             int poolNumber = Random.Range(0, 2);
             Vector2 spawnPosition = _positionHelper.GetSpawnPosition();
-            UniTask<Asteroid> asteroidCreateTask = poolNumber switch
+            Asteroid asteroid = poolNumber switch
             {
-                0 => GetRandomAsteroid(() => _asteroidsPool.Get(spawnPosition), _asteroidsData.Points, spawnPosition),
-                1 => GetRandomAsteroid(() => _smallAsteroidsPool.Get(spawnPosition), _asteroidsData.SmallAsteroidsPoints, spawnPosition),
-                _ => GetRandomAsteroid(() => _asteroidsPool.Get(spawnPosition), _asteroidsData.Points,  spawnPosition)
+                0 => GetRandomAsteroid(() => _asteroidsPool.Get(spawnPosition), _asteroidsData.Points),
+                1 => GetRandomAsteroid(
+                    () => _smallAsteroidsPool.Get(spawnPosition), 
+                    _asteroidsData.SmallAsteroidsPoints),
+                _ => GetRandomAsteroid(() => _asteroidsPool.Get(spawnPosition), _asteroidsData.Points)
             };
-            await asteroidCreateTask;
+            
+            asteroid.SendAsteroidOnDirection(
+                GetDirection(spawnPosition),
+                Random.Range(_asteroidsData.RandomSpeedFrom, _asteroidsData.RandomSpeedTo));
         }
 
         private Vector2 GetDirection(Vector2 spawnPosition) =>
@@ -46,13 +50,10 @@ namespace _Project.Scripts.Gameplay.Services.Spawners
                 spawnPosition.y + Random.Range(_asteroidsData.DirectionDeviationFrom, _asteroidsData.DirectionDeviationTo)))
             .normalized;
 
-        private async UniTask<Asteroid> GetRandomAsteroid(Func<UniTask<Asteroid>> spawnMethod, int points, Vector2 spawnPosition)
+        private Asteroid GetRandomAsteroid(Func<Asteroid> spawnMethod, int points)
         {
-            Asteroid asteroid = await spawnMethod();
+            Asteroid asteroid = spawnMethod();
             asteroid.SetPoints(points);
-            asteroid.SendAsteroidOnDirection(
-                GetDirection(spawnPosition),
-                Random.Range(_asteroidsData.RandomSpeedFrom, _asteroidsData.RandomSpeedTo));
             return asteroid;
         }
     }

@@ -1,19 +1,21 @@
 using _Project.Scripts.Gameplay.Characters.Base;
-using Cysharp.Threading.Tasks;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace _Project.Scripts.Gameplay.Services.Factories
 {
-    public class ShipFactory : PlaceholderFactory<UniTask<Ship.Ship>>
+    public class ShipFactory : PlaceholderFactory<Ship.Ship>
     {
-        private const string ID = "Ship";
-
+        private readonly AssetReference _shipPrefabReference;
         private readonly CharacterCreator _characterCreator;
 
-        public ShipFactory(CharacterCreator characterCreator) => 
+        public ShipFactory(CharacterCreator characterCreator, AssetReference shipPrefabReference)
+        {
             _characterCreator = characterCreator;
+            _shipPrefabReference = shipPrefabReference;
+        }
 
-        public override UniTask<Ship.Ship> Create() => 
-            _characterCreator.CreateGameLoopCharacter<Ship.Ship>(ID);
+        public override Ship.Ship Create() =>
+            _characterCreator.CreateGameLoopCharacter<Ship.Ship>(_shipPrefabReference);
     }
 }

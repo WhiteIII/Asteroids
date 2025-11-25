@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468a46d0ae32c3544b7d98094e6448a9, type: 3}
   m_Name: AddressableAssetSettings
   m_EditorClassIdentifier: 
-  m_DefaultGroup: 8fd9826a05d6ef94d9e92bf0984f8b20
+  m_DefaultGroup: 4dbc78dad4323364aa607d40fff33f4c
   m_currentHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -66,34 +66,34 @@ MonoBehaviour:
   m_ProfileSettings:
     m_Profiles:
     - m_InheritedParent: 
-      m_Id: a850c6e2a42d2d2479218596a0ca045c
+      m_Id: 72014f072b2e75447802a171de8c2a1c
       m_ProfileName: Default
       m_Values:
-      - m_Id: 23cac98282124d641b4f27a482835005
-        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
-      - m_Id: 70b78fb8e322ccd45bf5f0b3f75bcf14
-        m_Value: <undefined>
-      - m_Id: 9cec519c1059003488760b718a75d66e
-        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
-      - m_Id: f3d36cbd74c32254c870e6a35bea1023
+      - m_Id: 0231edb7dc5cb7c49b6677380ba9d6ea
         m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
-      - m_Id: f76406c325973e84399266e3ce90ee71
+      - m_Id: 09a370cf82936f947aa08e479f518c11
         m_Value: 'ServerData/[BuildTarget]'
+      - m_Id: 462757da9ac556f40a14804a7b898132
+        m_Value: <undefined>
+      - m_Id: 6a5532b77a1144a4c8422e7c8cc7d509
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: f9c87f43c0a21b54f96f58053ddabe50
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
     m_ProfileEntryNames:
-    - m_Id: 23cac98282124d641b4f27a482835005
-      m_Name: Local.LoadPath
-      m_InlineUsage: 0
-    - m_Id: 70b78fb8e322ccd45bf5f0b3f75bcf14
-      m_Name: Remote.LoadPath
-      m_InlineUsage: 0
-    - m_Id: 9cec519c1059003488760b718a75d66e
-      m_Name: Local.BuildPath
-      m_InlineUsage: 0
-    - m_Id: f3d36cbd74c32254c870e6a35bea1023
+    - m_Id: 0231edb7dc5cb7c49b6677380ba9d6ea
       m_Name: BuildTarget
       m_InlineUsage: 0
-    - m_Id: f76406c325973e84399266e3ce90ee71
+    - m_Id: 09a370cf82936f947aa08e479f518c11
       m_Name: Remote.BuildPath
+      m_InlineUsage: 0
+    - m_Id: 462757da9ac556f40a14804a7b898132
+      m_Name: Remote.LoadPath
+      m_InlineUsage: 0
+    - m_Id: 6a5532b77a1144a4c8422e7c8cc7d509
+      m_Name: Local.LoadPath
+      m_InlineUsage: 0
+    - m_Id: f9c87f43c0a21b54f96f58053ddabe50
+      m_Name: Local.BuildPath
       m_InlineUsage: 0
     m_ProfileVersion: 1
   m_LabelTable:
@@ -111,4 +111,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8e5004708a6a6c043ae1439763b206f5, type: 2}
   - {fileID: 11400000, guid: 1c9091391deeac145a0047b7e2bfdc12, type: 2}
   - {fileID: 11400000, guid: ba80bce0fb0b694438b9d00ecdc5c77d, type: 2}
-  m_ActiveProfileId: a850c6e2a42d2d2479218596a0ca045c
+  m_ActiveProfileId: 72014f072b2e75447802a171de8c2a1c

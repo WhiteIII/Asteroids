@@ -678,7 +678,6 @@ GameObject:
   - component: {fileID: 983024289}
   - component: {fileID: 983024288}
   - component: {fileID: 983024290}
-  - component: {fileID: 983024291}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -701,7 +700,6 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 983024290}
-  - {fileID: 983024291}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -750,26 +748,54 @@ MonoBehaviour:
   _gameSettingsData: {fileID: 11400000, guid: 491cd263c424c8845bf5f0a60770fc0e, type: 2}
   _asteroidsData: {fileID: 11400000, guid: 51b6422c647b1314f96a95220ede2833, type: 2}
   _ufoStatsData: {fileID: 11400000, guid: 5449d712540f0ec4b916acb442e8db71, type: 2}
-  _asteroidPrefab: {fileID: 1167200997528534106, guid: 16f6e41a84d8f4f43a35c8d26645cc33, type: 3}
-  _shipPrefab: {fileID: 7966163102477903758, guid: 8413d23ec6b5fd742a22c638656ad203, type: 3}
-  _smallAsteroidPrefab: {fileID: 7957577310013716038, guid: 8a3917379ebee3b4a9d157388a1c0efb, type: 3}
-  _bulletPrefab: {fileID: 2213777328779185814, guid: a8db8eca41e7e074da1cc1ca970b031f, type: 3}
-  _ufoPrefab: {fileID: 4654995017252690374, guid: 4bf84ca2c2f8d9449882cae82ddc9d30, type: 3}
---- !u!114 &983024291
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 983024287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d17e08a83bf478aa5a73c78d16eeb6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameOverWindowPrefab: {fileID: 8961337795491995666, guid: 4d041bfbcfab57e47977ed1e3f39992e, type: 3}
-  _shipStatsWindowPrefab: {fileID: 1498387824892762680, guid: 214fc43966c940542abc482729d8b9df, type: 3}
-  _playerPointsWindowPrefab: {fileID: 5608955582622096645, guid: fb4527f49f99349478dc1585de7b1671, type: 3}
+  _asteroidPrefabReference:
+    m_AssetGUID: 16f6e41a84d8f4f43a35c8d26645cc33
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _shipPrefabReference:
+    m_AssetGUID: 8413d23ec6b5fd742a22c638656ad203
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _smallAsteroidPrefabReference:
+    m_AssetGUID: 8a3917379ebee3b4a9d157388a1c0efb
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _bulletPrefabReference:
+    m_AssetGUID: a8db8eca41e7e074da1cc1ca970b031f
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _ufoPrefabReference:
+    m_AssetGUID: 4bf84ca2c2f8d9449882cae82ddc9d30
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _playerPointsWindowPrefabReference:
+    m_AssetGUID: fb4527f49f99349478dc1585de7b1671
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _shipStatsWindowPrefabReference:
+    m_AssetGUID: 214fc43966c940542abc482729d8b9df
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _gameOverWindowPrefabReference:
+    m_AssetGUID: 4d041bfbcfab57e47977ed1e3f39992e
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
 --- !u!1 &1535276691
 GameObject:
   m_ObjectHideFlags: 0

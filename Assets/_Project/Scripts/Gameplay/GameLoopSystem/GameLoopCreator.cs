@@ -1,6 +1,6 @@
 using _Project.Scripts.Common;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace _Project.Scripts.Gameplay.GameLoopSystem
@@ -8,32 +8,23 @@ namespace _Project.Scripts.Gameplay.GameLoopSystem
     public class GameLoopCreator : IGameLoopCreator
     {
         private readonly IGameLoopRegisterController _gameLoopRegisterController;
-        private readonly DiContainer _container;
+        private readonly IInstantiator _instantiator;
         private readonly LocalAssetProvider _localAssetProvider;
 
         public GameLoopCreator(
             IGameLoopRegisterController gameLoopRegisterController, 
-            DiContainer container,
+            IInstantiator instantiator, 
             LocalAssetProvider localAssetProvider)
         {
             _gameLoopRegisterController = gameLoopRegisterController;
-            _container = container;
+            _instantiator = instantiator;
             _localAssetProvider = localAssetProvider;
         }
 
-        public async UniTask<T> Create<T>(string id)
-            where T : MonoBehaviour, IGameLoopObject
-        {
-            T createdObject = await _localAssetProvider.LoadAsync<T>(id);
-            _container.Inject(createdObject);
-            return RegisterObject(createdObject);
-        }
-        
-        public T Create<T>(params object[] parameters)
-            where T : IGameLoopObject
-        {
-            return RegisterObject(_container.Instantiate<T>(parameters));
-        }
+        public T Create<T>(AssetReference assetReference) where T : MonoBehaviour, IGameLoopObject =>
+            RegisterObject(
+                _instantiator.InstantiatePrefab(
+                    _localAssetProvider.GetAsset<GameObject>(assetReference)).GetComponent<T>());
 
         public T RegisterObject<T>(T gameLoopObject)
             where T : IGameLoopObject
@@ -49,7 +40,6 @@ namespace _Project.Scripts.Gameplay.GameLoopSystem
     public interface IGameLoopCreator
     {
         T RegisterObject<T>(T gameLoopObject) where T : IGameLoopObject;
-        UniTask<T> Create<T>(string id) where T : MonoBehaviour, IGameLoopObject;
-        T Create<T>(params object[] parameters) where T : IGameLoopObject;
+        T Create<T>(AssetReference assetReference) where T : MonoBehaviour, IGameLoopObject;
     }
 }

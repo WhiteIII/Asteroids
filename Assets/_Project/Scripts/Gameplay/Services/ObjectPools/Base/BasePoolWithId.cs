@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Gameplay.Services.ObjectPools.Base;
-using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 
@@ -11,7 +10,7 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
     public abstract class BasePoolWithId<TItem, TId> : IDisposable
         where TItem : IEnableAndDisableItem, IItemWithId<TId>
     {
-        private readonly Func<UniTask<TItem>> _createMethod;
+        private readonly Func<TItem> _createMethod;
         private readonly Func<TId> _idGenerator;
         private readonly Action<TItem> _onGet;
         private readonly Action<TItem> _onRelease;
@@ -21,7 +20,7 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
         private readonly CompositeDisposable  _disposables = new();
 
         protected BasePoolWithId(
-            Func<UniTask<TItem>> createMethod,
+            Func<TItem> createMethod,
             Func<TId> idGenerator,  
             bool disableItemOnCreate = false,
             Action<TItem> onGet = null,
@@ -37,11 +36,11 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
         public void Dispose() => 
             _disposables.Dispose();
 
-        protected async UniTask<TItem> GetFromPool()
+        protected TItem GetFromPool()
         {
             if (_disabledItemsDictionary.Count == 0)
             {
-                TItem item = await CreateItemAndAddInEnabledItemsDictionary();
+                TItem item = CreateItemAndAddInEnabledItemsDictionary();
                 _onGet?.Invoke(item);
                 item
                     .Release
@@ -57,10 +56,10 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
             return itemAndId.Value;
         }
         
-        private async UniTask<TItem> CreateItemAndAddInEnabledItemsDictionary()
+        private TItem CreateItemAndAddInEnabledItemsDictionary()
         {
             TId id = _idGenerator();
-            TItem item = await _createMethod.Invoke();
+            TItem item = _createMethod.Invoke();
             if (_disableItemOnCreate)
                 item.Disable();
             item.SetID(id);

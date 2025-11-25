@@ -1,26 +1,29 @@
 using _Project.Scripts.Bootstrap.EntryPoints;
+using _Project.Scripts.Common;
 using _Project.Scripts.View.Implementation;
 using _Project.Scripts.View.Services;
 using _Project.Scripts.ViewModel.Implementation;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace _Project.Scripts.Bootstrap.Installers
 {
     internal class MenuInstaller : MonoInstaller
     {
-        private const string ID = "MenuWindow";
+        [Header("AssetForMenuScene:")]
+        [SerializeField] private AssetReference _menuWindowPrefabReference;
         
         public override void InstallBindings()
         {
+            Container.Bind<AssetLoader>().AsSingle().WithArguments(new[] { _menuWindowPrefabReference });
             Container.BindInterfacesAndSelfTo<MenuViewModel>().AsSingle();
             Container
                 .BindFactoryCustomInterface<
-                    UniTask<MenuWindow>, 
+                    MenuWindow, 
                     BaseWindowFactory<MenuWindow, MenuViewModel>, 
-                    IFactory<UniTask<MenuWindow>>>()
-                .WithFactoryArguments(ID);
+                    IFactory<MenuWindow>>()
+                .WithFactoryArguments(_menuWindowPrefabReference);
             
             Container.BindInterfacesTo<MenuEntryPoint>().AsSingle();
         }

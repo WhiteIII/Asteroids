@@ -1,22 +1,29 @@
-using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using static UnityEngine.AddressableAssets.Addressables;
+using UnityEngine.AddressableAssets;
 
 namespace _Project.Scripts.Common
 {
     public class LocalAssetProvider
     {
-        public async UniTask<T> LoadAsync<T>(string id) where T : MonoBehaviour
+        private readonly Dictionary<AssetReference, Object> _loadedAssets = new();
+
+        public async UniTask LoadAsync(AssetReference assetReference)
         {
-             GameObject createdObject = await InstantiateAsync(id).Task;
-            
-             if (createdObject.TryGetComponent(out T result))
-                 return result;
-             throw new Exception("Component not found on loaded asset!");
+            if (_loadedAssets.ContainsKey(assetReference))
+                return;
+            Object asset = await Addressables.LoadAssetAsync<Object>(assetReference).Task;
+            _loadedAssets.Add(assetReference, asset);
         }
         
-        public void Unload<T>(T loadedObject) where T : MonoBehaviour => 
-            ReleaseInstance(loadedObject.gameObject);
+        public T GetAsset<T>(AssetReference assetReference) where T : Object => _loadedAssets[assetReference] as T;
+
+        public void ReleaseAllAssets()
+        {
+            foreach (object asset in _loadedAssets.Values)
+                Addressables.Release(asset);
+            _loadedAssets.Clear();
+        }
     }
 }

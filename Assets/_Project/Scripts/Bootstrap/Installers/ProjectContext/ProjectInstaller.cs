@@ -4,7 +4,7 @@ using Zenject;
 
 namespace _Project.Scripts.Bootstrap.Installers
 {
-    internal class SceneControllerInstaller : MonoInstaller
+    internal class ProjectInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {

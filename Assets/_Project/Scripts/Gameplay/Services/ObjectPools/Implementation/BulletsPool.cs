@@ -1,18 +1,20 @@
 using System;
 using _Project.Scripts.Gameplay.Characters;
 using _Project.Scripts.Gameplay.Characters.Base;
+using _Project.Scripts.Gameplay.Services.Repositories;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using Zenject;
 
 namespace _Project.Scripts.Gameplay.Services.ObjectPools
 {
     public class BulletsPool : ItemsWithIdAndParameterPool<Bullet, string, Vector2>
     {
-        private const string ID = "Bullet";
-        
         public BulletsPool(
+            AssetReference assetReference,
             CharacterCreator characterCreator) :
             base(
-                () => characterCreator.CreateGameLoopCharacter<Bullet>(ID), 
+                () => characterCreator.CreateGameLoopCharacter<Bullet>(assetReference), 
                 () => Guid.NewGuid().ToString(),
                 (bullet, position) => bullet.SetPosition(position),
                 true)

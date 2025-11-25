@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using _Project.Scripts.Common;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -8,11 +7,6 @@ namespace _Project.Scripts.View.Services
     public class WindowsRepository
     {
         private readonly List<IWindow> _windows = new();
-
-        private readonly LocalAssetProvider _localAssetProvider;
-
-        public WindowsRepository(LocalAssetProvider localAssetProvider) =>
-            _localAssetProvider = localAssetProvider;
 
         public T Get<T>()
             where T : class, IWindow
@@ -36,7 +30,7 @@ namespace _Project.Scripts.View.Services
                 if (window is T behaviorWindow)
                 {
                     _windows.Remove(window);
-                    _localAssetProvider.Unload(behaviorWindow);
+                    Object.Destroy(behaviorWindow.gameObject);
                     return;
                 }
             }

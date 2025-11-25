@@ -1,39 +1,19 @@
 using UnityEngine;
-using Zenject;
 
 namespace _Project.Scripts.Gameplay.SaveLoadSystem
 {
-    public class SaveLoadController : MonoBehaviour, IInitializable
+    public class SaveLoadController
     {
-        //private LevelProgress _levelProgress;
-        private PlayerSaveLoadData _currentSaveData;
-
-        [Inject] private SaveLoad _saveLoad;
+        private string Path => Application.persistentDataPath;
         
-        [Inject] private void Construct(SaveLoad saveLoad) => 
-            _saveLoad = saveLoad;
-        
-        public void Initialize()
+        /*public PlayerSaveLoadData Load()
         {
-            _currentSaveData = _saveLoad.Load();
+            
+        }*/
 
-            //_levelProgress.SetCurrentLevelIndex(_currentSaveData.CurrentLevel);
-        }
-
-        private void OnApplicationQuit()
+        public void Save(PlayerSaveLoadData data)
         {
-            Save();
-        }
-
-        private void OnDestroy()
-        {
-            Save();
-        }
-
-        public void Save()
-        {
-            //_currentSaveData.CurrentLevel = _levelProgress.GetCurrentLevelIndex();
-            _saveLoad.Save(_currentSaveData);
+            
         }
     }
 }

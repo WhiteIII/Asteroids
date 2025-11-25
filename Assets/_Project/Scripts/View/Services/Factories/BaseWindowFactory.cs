@@ -1,49 +1,51 @@
 using _Project.Scripts.Common;
 using _Project.Scripts.ViewModel;
-using Cysharp.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
 namespace _Project.Scripts.View.Services
 {
-    public class BaseWindowFactory<TWindow, TViewModel> : PlaceholderFactory<UniTask<TWindow>>
+    public class BaseWindowFactory<TWindow, TViewModel> : PlaceholderFactory<TWindow>
         where TViewModel : IViewModel
         where TWindow :  Window<TViewModel>
     {
         protected readonly TViewModel ViewModel;
 
-        private readonly string _prefabId;
         private readonly UIRoot _uiRoot;
-        private readonly DiContainer _container;
-        private readonly LocalAssetProvider _localAssetProvider;
+        private readonly IInstantiator _instantiator;
         private readonly WindowsRepository _windowsRepository;
+        private readonly LocalAssetProvider _localAssetProvider;
+        private readonly AssetReference _prefabReference;
 
         protected BaseWindowFactory(
             TViewModel viewModel,
             UIRoot uiRoot,
-            WindowsRepository windowsRepository,
-            string prefabId, 
-            LocalAssetProvider localAssetProvider,
-            DiContainer container)
+            IInstantiator instantiator,
+            WindowsRepository windowsRepository, 
+            LocalAssetProvider localAssetProvider, 
+            AssetReference prefabReference)
         {
             ViewModel = viewModel;
             _uiRoot = uiRoot;
+            _instantiator = instantiator;
             _windowsRepository = windowsRepository;
-            _prefabId = prefabId;
             _localAssetProvider = localAssetProvider;
-            _container = container;
+            _prefabReference = prefabReference;
         }
 
-        public override async UniTask<TWindow> Create()
+        public override TWindow Create()
         {
-            TWindow window = await CreateWindow();
+            TWindow window = CreateWindow();
             window.Setup(ViewModel);
             return window;
         }
         
-        protected async UniTask<TWindow> CreateWindow()
+        protected TWindow CreateWindow()
         {
-            TWindow window = await _localAssetProvider.LoadAsync<TWindow>(_prefabId);
-            _container.Inject(window);
+            TWindow window = _instantiator
+                .InstantiatePrefab(_localAssetProvider.GetAsset<GameObject>(_prefabReference))
+                .GetComponent<TWindow>();
             _uiRoot.AddWindow(window.transform);
             _windowsRepository.Register(window);
             return window;

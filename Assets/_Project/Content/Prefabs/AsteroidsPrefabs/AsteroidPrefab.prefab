@@ -50,7 +50,7 @@ GameObject:
   - component: {fileID: 5520486932791678464}
   - component: {fileID: 5395536693046431878}
   m_Layer: 0
-  m_Name: Asteroid
+  m_Name: AsteroidPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -13,8 +13,53 @@ MonoBehaviour:
   m_Name: Default Local Group
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
-  m_GUID: 8fd9826a05d6ef94d9e92bf0984f8b20
-  m_SerializeEntries: []
+  m_GUID: 4dbc78dad4323364aa607d40fff33f4c
+  m_SerializeEntries:
+  - m_GUID: 16f6e41a84d8f4f43a35c8d26645cc33
+    m_Address: Asteroid
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 214fc43966c940542abc482729d8b9df
+    m_Address: ShipStatsWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4bf84ca2c2f8d9449882cae82ddc9d30
+    m_Address: Ufo
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d041bfbcfab57e47977ed1e3f39992e
+    m_Address: GameOverWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8413d23ec6b5fd742a22c638656ad203
+    m_Address: Ship
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a3917379ebee3b4a9d157388a1c0efb
+    m_Address: SmallAsteroid
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a8db8eca41e7e074da1cc1ca970b031f
+    m_Address: Bullet
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6613a15c2527ce45a6e19480d92eb58
+    m_Address: MenuWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb4527f49f99349478dc1585de7b1671
+    m_Address: PlayerPointsView
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 83fd9f324c039aa4d92211531ba323f1, type: 2}
   m_SchemaSet:
