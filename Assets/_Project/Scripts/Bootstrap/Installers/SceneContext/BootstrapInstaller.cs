@@ -14,18 +14,18 @@ namespace _Project.Scripts.Bootstrap.Installers
 {
     internal class BootstrapInstaller : MonoInstaller
     {
-        [Header("Data:")]
-        [SerializeField] private GameSettingsData _gameSettingsData;
+        [Header("Data:")] [SerializeField] private GameSettingsData _gameSettingsData;
         [SerializeField] private ShipStatsData _shipStatsData;
 
-        [Header("OnScene:")]
-        [SerializeField] private Camera _camera;
+        [Header("OnScene:")] [SerializeField] private Camera _camera;
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private UIRoot _uiRoot;
 
-        [Header("PrefabRefs:")]
-        [SerializeField] private AssetReference _loadingWindowAssetReference;
-        
+        [Header("PrefabRefs:")] [SerializeField]
+        private AssetReference _loadingWindowAssetReference;
+
+        [SerializeField] private AssetReference _bestRecordWindowAssetReference;
+
         public override void InstallBindings()
         {
             Container.Bind<UIRoot>().FromInstance(_uiRoot).AsSingle();
@@ -41,16 +41,31 @@ namespace _Project.Scripts.Bootstrap.Installers
                 .AsSingle()
                 .WithArguments(_gameSettingsData.SpawnOffsetOutSideCameraVision)
                 .MoveIntoAllSubContainers();
-                        
+
+            Container
+                .Bind<AssetReference>()
+                .WithId("LoadingWindowAssetReference")
+                .FromInstance(_loadingWindowAssetReference);
+            Container
+                .Bind<AssetReference>()
+                .WithId("BestRecordWindowAssetReference")
+                .FromInstance(_bestRecordWindowAssetReference);
+
+            Container.Bind<PlayerBestRecordViewModel>().AsSingle();
+            Container.BindFactoryCustomInterface<
+                    BestRecordWindow,
+                    BaseWindowFactory<BestRecordWindow, PlayerBestRecordViewModel>,
+                    IFactory<BestRecordWindow>>()
+                .WithFactoryArguments(_bestRecordWindowAssetReference);
             Container.Bind<LoadingWindowViewModel>().AsSingle();
             Container
                 .BindFactoryCustomInterface<
-                    LoadingWindow, 
+                    LoadingWindow,
                     BaseWindowFactory<LoadingWindow, LoadingWindowViewModel>,
                     IFactory<LoadingWindow>>()
                 .WithFactoryArguments(_loadingWindowAssetReference);
-            
-            Container.BindInterfacesTo<BootstrapEntryPoint>().AsSingle().WithArguments(_loadingWindowAssetReference);
+
+            Container.BindInterfacesTo<BootstrapEntryPoint>().AsSingle();
         }
     }
 }

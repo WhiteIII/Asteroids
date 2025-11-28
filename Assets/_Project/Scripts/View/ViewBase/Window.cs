@@ -9,7 +9,10 @@ namespace _Project.Scripts.View
     public abstract class Window<T> : MonoBehaviour, IWindow<T>
         where T : IViewModel
     {
+        public bool IsOpen { get; private set; }
+        
         protected T ViewModel { get; private set; }
+        
         private IWindowAnimation _animation;
         
         public void Setup(T viewModel)
@@ -35,19 +38,23 @@ namespace _Project.Scripts.View
 
         public async UniTask Open()
         {
-            Enable();
+            gameObject.SetActive(true);
+            IsOpen = true;
+            OnOpenAnimationStart();
             await _animation.PlayShowAnimationAsync();
         }
 
         public async UniTask Close()
         {
+            IsOpen = false;
             await _animation.PlayCloseAnimationAsync();
-            Disable();
+            OnCloseAnimationEnd();
+            gameObject.SetActive(false);
         }
 
         protected virtual void OnSetup() { }
         protected virtual void OnDestroyMethod() { }
-        protected virtual void Enable() { }
-        protected virtual void Disable() { }
+        protected virtual void OnOpenAnimationStart() { }
+        protected virtual void  OnCloseAnimationEnd() { }
     }
 }

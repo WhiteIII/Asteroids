@@ -2,6 +2,8 @@ using System;
 using _Project.Scripts.Common;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.InputSystem;
+using _Project.Scripts.Gameplay.SaveLoadSystem;
+using _Project.Scripts.Gameplay.Services.Factories;
 using _Project.Scripts.Gameplay.Services.Repositories;
 using _Project.Scripts.Gameplay.Ship;
 using _Project.Scripts.View.Implementation;
@@ -15,7 +17,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
 {
     public class GameplayEntryPoint : IInitializable
     {
-        private readonly IFactory<Ship> _shipFactory;
+        private readonly IFactory<ShipSpawnArgs, Ship> _shipFactory;
         private readonly CharactersRepository _charactersRepository;
         private readonly AiActorsRepository _aiActorsRepository;
         private readonly SpawnersAndControllersRepository _spawnersAndControllersRepository;
@@ -26,11 +28,13 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly WindowsRepository _windowsRepository;
         private readonly InputHandler _inputHandler;
         private readonly AssetLoader _assetLoader;
-        private readonly LocalAssetProvider _localAssetProvider;
+        private readonly LocalAssetsProvider _localAssetsProvider;
         private readonly LoadingWindowViewModel _loadingWindowViewModel;
+        private readonly SaveLoad _saveLoad;
+        private readonly IPointsCounter _pointsCounter;
 
         public GameplayEntryPoint(
-            IFactory<Ship> shipFactory,
+            IFactory<ShipSpawnArgs, Ship> shipFactory,
             CharactersRepository charactersRepository,
             AiActorsRepository aiActorsRepository, 
             SpawnersAndControllersRepository spawnersAndControllersRepository,
@@ -41,8 +45,10 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             IGameLoop gameLoop,
             InputHandler inputHandler, 
             AssetLoader assetLoader, 
-            LocalAssetProvider localAssetProvider, 
-            LoadingWindowViewModel loadingWindowViewModel)
+            LocalAssetsProvider localAssetsProvider, 
+            LoadingWindowViewModel loadingWindowViewModel,
+            IPointsCounter pointsCounter, 
+            SaveLoad saveLoad)
         {
             _shipFactory = shipFactory;
             _charactersRepository = charactersRepository;
@@ -55,17 +61,17 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _gameLoop = gameLoop;
             _inputHandler = inputHandler;
             _assetLoader = assetLoader;
-            _localAssetProvider = localAssetProvider;
+            _localAssetsProvider = localAssetsProvider;
             _loadingWindowViewModel = loadingWindowViewModel;
+            _pointsCounter = pointsCounter;
+            _saveLoad = saveLoad;
         }
 
         public async void Initialize()
         {
-            LoadingWindow loadingWindow = _windowsRepository.Get<LoadingWindow>();
-            await loadingWindow.Open();
             await _loadingWindowViewModel.StartLoadingAsync(_assetLoader.GetLoadedAsyncOperations());
-            await loadingWindow.Close();
-            SetupShip();
+            await _windowsRepository.Get<LoadingWindow>().Close();
+            CreateShip();
             _inputHandler.Enable();
             await _shipStatsWindowFactory.Create().Open();
             await _playerPointsWindowFactory.Create().Open();
@@ -83,23 +89,34 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _spawnersAndControllersRepository.Clear();
             _charactersRepository.ClearAllCharactersList();
             _charactersRepository.UnregisterShip();
-            _localAssetProvider.ReleaseAllAssets();
+            _localAssetsProvider.ReleaseAllAssets();
         }
         
-        private void SetupShip()
-        {
-            _shipFactory.Create();
-            _charactersRepository.Ship.SetPosition(Vector2.zero);
-            _charactersRepository.Ship.SetRotation(Quaternion.identity);
-            _charactersRepository.Ship.SetOnDeadEvent(async () =>
+        private void CreateShip() =>
+            _shipFactory.Create(new ShipSpawnArgs
             {
-                _spawnersAndControllersRepository.StopAllSpawnerControllers();
-                _inputHandler.Disable();
-                _gameLoop.Pause();
-                _charactersRepository.Ship.StopShip();
-                await _charactersRepository.Ship.PlayDeathAnimationAsync();
-                _gameOverWindowFactory.Create(OnQuitEvent).Open().Forget();
+                Position = Vector2.zero,
+                Rotation = Quaternion.identity,
+                OnDead = async () =>
+                {
+                    TryWriteBestRecord();
+                    _spawnersAndControllersRepository.StopAllSpawnerControllers();
+                    _inputHandler.Disable();
+                    _gameLoop.Pause();
+                    _charactersRepository.Ship.StopShip();
+                    await _charactersRepository.Ship.PlayDeathAnimationAsync();
+                    _gameOverWindowFactory.Create(OnQuitEvent).Open().Forget();
+                }
             });
+
+        private void TryWriteBestRecord()
+        {
+            PlayerSaveLoadData saveLoadData = _saveLoad.Load();
+            if (saveLoadData.BestRecord < _pointsCounter.Points.CurrentValue)
+            {
+                saveLoadData.BestRecord = _pointsCounter.Points.CurrentValue;
+                _saveLoad.Save(saveLoadData);
+            }
         }
     }
 }

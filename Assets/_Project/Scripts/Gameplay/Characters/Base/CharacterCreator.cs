@@ -12,24 +12,24 @@ namespace _Project.Scripts.Gameplay.Characters.Base
         private readonly IInstantiator _instantiator;
         private readonly IGameLoopCreator _gameLoopCreator;
         private readonly CharactersRepository _charactersRepository;
-        private readonly LocalAssetProvider _localAssetProvider;
+        private readonly LocalAssetsProvider _localAssetsProvider;
 
         public CharacterCreator(
             IInstantiator instantiator, 
             IGameLoopCreator gameLoopCreator,
             CharactersRepository charactersRepository, 
-            LocalAssetProvider localAssetProvider)
+            LocalAssetsProvider localAssetsProvider)
         {
             _instantiator = instantiator;
             _gameLoopCreator = gameLoopCreator;
             _charactersRepository = charactersRepository;
-            _localAssetProvider = localAssetProvider;
+            _localAssetsProvider = localAssetsProvider;
         }
 
         public T CreateNonGameLoopCharacter<T>(AssetReference assetReference) where T : Character =>
             _charactersRepository.Register(
                 _instantiator.InstantiatePrefab(
-                    _localAssetProvider.GetAsset<GameObject>(assetReference)).GetComponent<T>());
+                    _localAssetsProvider.GetAsset<GameObject>(assetReference)).GetComponent<T>());
 
         public T CreateGameLoopCharacter<T>(AssetReference assetReference) where T : Character, IGameLoopObject =>
             _charactersRepository.Register(_gameLoopCreator.Create<T>(assetReference));

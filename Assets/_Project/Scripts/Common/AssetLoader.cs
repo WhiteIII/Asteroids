@@ -6,12 +6,12 @@ namespace _Project.Scripts.Common
 {
     public class AssetLoader
     {
-        private readonly LocalAssetProvider _localAssetProvider;
+        private readonly LocalAssetsProvider _localAssetsProvider;
         private readonly AssetReference[] _assetsReference;
 
-        public AssetLoader(LocalAssetProvider localAssetProvider, AssetReference[] assetsReference)
+        public AssetLoader(LocalAssetsProvider localAssetsProvider, AssetReference[] assetsReference)
         {
-            _localAssetProvider = localAssetProvider;
+            _localAssetsProvider = localAssetsProvider;
             _assetsReference = assetsReference;
         }
 
@@ -19,7 +19,7 @@ namespace _Project.Scripts.Common
         {
             UniTask[] tasks = new UniTask[_assetsReference.Length];
             for (int i = 0; i < _assetsReference.Length; i++)
-                tasks[i] = _localAssetProvider.LoadAsync(_assetsReference[i]);
+                tasks[i] = _localAssetsProvider.LoadAsync(_assetsReference[i]);
             return tasks;
         }
     }

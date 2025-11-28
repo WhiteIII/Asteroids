@@ -9,22 +9,22 @@ namespace _Project.Scripts.Gameplay.GameLoopSystem
     {
         private readonly IGameLoopRegisterController _gameLoopRegisterController;
         private readonly IInstantiator _instantiator;
-        private readonly LocalAssetProvider _localAssetProvider;
+        private readonly LocalAssetsProvider _localAssetsProvider;
 
         public GameLoopCreator(
             IGameLoopRegisterController gameLoopRegisterController, 
             IInstantiator instantiator, 
-            LocalAssetProvider localAssetProvider)
+            LocalAssetsProvider localAssetsProvider)
         {
             _gameLoopRegisterController = gameLoopRegisterController;
             _instantiator = instantiator;
-            _localAssetProvider = localAssetProvider;
+            _localAssetsProvider = localAssetsProvider;
         }
 
         public T Create<T>(AssetReference assetReference) where T : MonoBehaviour, IGameLoopObject =>
             RegisterObject(
                 _instantiator.InstantiatePrefab(
-                    _localAssetProvider.GetAsset<GameObject>(assetReference)).GetComponent<T>());
+                    _localAssetsProvider.GetAsset<GameObject>(assetReference)).GetComponent<T>());
 
         public T RegisterObject<T>(T gameLoopObject)
             where T : IGameLoopObject

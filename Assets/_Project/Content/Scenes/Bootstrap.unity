@@ -692,6 +692,12 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
+  _bestRecordWindowAssetReference:
+    m_AssetGUID: 7b9e27a8a34656145bdb361cece505cb
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
 --- !u!114 &1616966649
 MonoBehaviour:
   m_ObjectHideFlags: 0

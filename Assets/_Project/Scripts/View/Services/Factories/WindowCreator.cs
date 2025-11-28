@@ -11,18 +11,18 @@ namespace _Project.Scripts.View.Services
         private readonly UIRoot _uiRoot;
         private readonly IInstantiator _instantiator;
         private readonly WindowsRepository _windowsRepository;
-        private readonly LocalAssetProvider _localAssetProvider;
+        private readonly LocalAssetsProvider _localAssetsProvider;
 
         public WindowCreator(
             UIRoot uiRoot,
             IInstantiator instantiator,
             WindowsRepository windowsRepository,
-            LocalAssetProvider localAssetProvider)
+            LocalAssetsProvider localAssetsProvider)
         {
             _uiRoot = uiRoot;
             _instantiator = instantiator;
             _windowsRepository = windowsRepository;
-            _localAssetProvider = localAssetProvider;
+            _localAssetsProvider = localAssetsProvider;
         }
 
         public TWindow Create<TWindow, TViewModel>(TViewModel viewModel, AssetReference prefabReference)
@@ -30,7 +30,7 @@ namespace _Project.Scripts.View.Services
             where TWindow : Window<TViewModel>
         {
             TWindow window = _instantiator
-                .InstantiatePrefab(_localAssetProvider.GetAsset<GameObject>(prefabReference))
+                .InstantiatePrefab(_localAssetsProvider.GetAsset<GameObject>(prefabReference))
                 .GetComponent<TWindow>();
             _uiRoot.AddWindow(window.transform);
             _windowsRepository.Register(window);

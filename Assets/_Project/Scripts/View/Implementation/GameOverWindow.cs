@@ -1,4 +1,5 @@
 using _Project.Scripts.ViewModel.Implementation;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,10 +15,10 @@ namespace _Project.Scripts.View.Implementation
         protected override void OnDestroyMethod() => 
             _goToMenuButton.onClick.RemoveListener(ViewModel.GoToMenu);
 
-        protected override void Enable() => 
+        protected override void OnOpenAnimationStart() => 
             _goToMenuButton.enabled = true;
 
-        protected override void Disable() =>
+        protected override void OnCloseAnimationEnd() =>
             _goToMenuButton.enabled = false;
     }
 }

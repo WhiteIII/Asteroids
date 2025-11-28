@@ -5,7 +5,7 @@ using UnityEngine.AddressableAssets;
 
 namespace _Project.Scripts.Common
 {
-    public class LocalAssetProvider
+    public class LocalAssetsProvider
     {
         private readonly Dictionary<AssetReference, Object> _loadedAssets = new();
 

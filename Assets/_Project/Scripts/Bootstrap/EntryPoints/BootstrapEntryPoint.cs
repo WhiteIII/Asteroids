@@ -10,25 +10,33 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
     {
         private readonly ISceneController _sceneController;
         private readonly IFactory<LoadingWindow> _loadingWindowFactory;
-        private readonly LocalAssetProvider _localAssetProvider;
+        private readonly IFactory<BestRecordWindow> _bestRecordWindowFactory;
+        private readonly LocalAssetsProvider _localAssetsProvider;
         private readonly AssetReference _loadingWindowAssetReference;
+        private readonly AssetReference _bestRecordWindowAssetReference;
 
         public BootstrapEntryPoint(
             ISceneController sceneController,
             IFactory<LoadingWindow> loadingWindowFactory,
-            LocalAssetProvider localAssetProvider, 
-            AssetReference loadingWindowAssetReference)
+            LocalAssetsProvider localAssetsProvider, 
+            [Inject(Id = "LoadingWindowAssetReference")]AssetReference loadingWindowAssetReference,
+            [Inject(Id = "BestRecordWindowAssetReference")]AssetReference bestRecordWindowAssetReference, 
+            IFactory<BestRecordWindow> bestRecordWindowFactory)
         {
             _sceneController = sceneController;
             _loadingWindowFactory = loadingWindowFactory;
-            _localAssetProvider = localAssetProvider;
+            _localAssetsProvider = localAssetsProvider;
             _loadingWindowAssetReference = loadingWindowAssetReference;
+            _bestRecordWindowAssetReference = bestRecordWindowAssetReference;
+            _bestRecordWindowFactory = bestRecordWindowFactory;
         }
 
         public async void Initialize()
         {
-            await _localAssetProvider.LoadAsync(_loadingWindowAssetReference);
+            await _localAssetsProvider.LoadAsync(_loadingWindowAssetReference);
+            await _localAssetsProvider.LoadAsync(_bestRecordWindowAssetReference);
             _loadingWindowFactory.Create();
+            _bestRecordWindowFactory.Create();
             _sceneController.GoToMenu();
         }
     }

@@ -1,4 +1,5 @@
 using _Project.Scripts.ViewModel.Implementation;
+using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +16,7 @@ namespace _Project.Scripts.View.Implementation
                 .Subscribe(x => _slider.value = x)
                 .AddTo(this);
 
-        protected override void Enable() => 
+        protected override void OnOpenAnimationStart() => 
             ViewModel.ResetLoadingProgress();
     }
 }

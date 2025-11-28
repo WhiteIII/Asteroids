@@ -62,7 +62,7 @@ namespace _Project.Scripts.Bootstrap.Installers
             Container.Bind<AiActorCreator>().AsSingle();
             Container.Bind<CharacterCreator>().AsSingle();
             Container
-                .BindFactoryCustomInterface<Ship, ShipFactory, IFactory<Ship>>()
+                .BindFactoryCustomInterface<ShipSpawnArgs, Ship, ShipFactory, IFactory<ShipSpawnArgs, Ship>>()
                 .WithFactoryArguments(_shipPrefabReference);
             Container
                 .BindFactoryCustomInterface<Ufo, UfoFactory, IFactory<Ufo>>()
