@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 137329688604116638}
   - component: {fileID: 3209206002443783452}
   - component: {fileID: 1498387824892762680}
-  - component: {fileID: 8039480242181858709}
+  - component: {fileID: 2474310022468591563}
   m_Layer: 5
   m_Name: ShipStatsWindow
   m_TagString: Untagged
@@ -79,7 +79,7 @@ MonoBehaviour:
   _positionText: {fileID: 5051020332777500983}
   _rotationText: {fileID: 5894545726174259135}
   _velocityText: {fileID: 1768830747655234515}
---- !u!114 &8039480242181858709
+--- !u!114 &2474310022468591563
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -88,9 +88,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 4667082441275073044}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a0f17f0cfb640eeb4d72383d4743c81, type: 3}
+  m_Script: {fileID: 11500000, guid: 9361e45e6a1348569e76843815e5b971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _configs:
+  - <From>k__BackingField: {x: -100, y: -35}
+    <To>k__BackingField: {x: 113, y: -35}
+    <RectTransform>k__BackingField: {fileID: 8286477098927313406}
+  - <From>k__BackingField: {x: -100, y: -60}
+    <To>k__BackingField: {x: 113, y: -60}
+    <RectTransform>k__BackingField: {fileID: 2015120539967486095}
+  - <From>k__BackingField: {x: -100, y: -86}
+    <To>k__BackingField: {x: 113, y: -86}
+    <RectTransform>k__BackingField: {fileID: 8033193783381924326}
+  - <From>k__BackingField: {x: -100, y: -110}
+    <To>k__BackingField: {x: 113, y: -110}
+    <RectTransform>k__BackingField: {fileID: 9127332895732251359}
+  - <From>k__BackingField: {x: -100, y: -135}
+    <To>k__BackingField: {x: 113, y: -135}
+    <RectTransform>k__BackingField: {fileID: 8760945894207954955}
+  _duration: 0.2
+  _cooldown: 0.05
 --- !u!1 &5904465989687335367
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +183,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 113, y: -60}
+  m_AnchoredPosition: {x: -100, y: -60}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2052337911629000211
@@ -301,7 +319,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 113, y: -86}
+  m_AnchoredPosition: {x: -100, y: -86}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8547708217105871686
@@ -437,7 +455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 113, y: -35}
+  m_AnchoredPosition: {x: -100, y: -35}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3893854163884611476
@@ -573,7 +591,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 113, y: -135.4}
+  m_AnchoredPosition: {x: -100, y: -135}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2279904659257126191
@@ -709,7 +727,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 113, y: -110.4}
+  m_AnchoredPosition: {x: -100, y: -110}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &287018117231082570
@@ -740,7 +758,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Ship position: '
+  m_text: 'Ship rotation: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 154dd7efa6c0747458968873e4ace38d, type: 2}
   m_sharedMaterial: {fileID: -4678555966777019912, guid: 154dd7efa6c0747458968873e4ace38d, type: 2}

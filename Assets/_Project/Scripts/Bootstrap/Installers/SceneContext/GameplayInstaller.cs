@@ -1,3 +1,4 @@
+using System;
 using _Project.Scripts.Bootstrap.EntryPoints;
 using _Project.Scripts.Common;
 using _Project.Scripts.Gameplay.Characters;
@@ -13,6 +14,7 @@ using _Project.Scripts.Gameplay.Services.Repositories;
 using _Project.Scripts.View.Implementation;
 using _Project.Scripts.View.Services;
 using _Project.Scripts.ViewModel.Implementation;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
@@ -93,9 +95,10 @@ namespace _Project.Scripts.Bootstrap.Installers
                 .WithFactoryArguments(_playerPointsWindowPrefabReference);
             Container
                 .BindFactoryCustomInterface<
+                    Func<UniTask>,
                     GameOverWindow, 
-                    BaseWindowFactory<GameOverWindow, GameOverWindowViewModel>, 
-                    IFactory<GameOverWindow>>()
+                    GameOverWindowFactory,
+                    IFactory<Func<UniTask>, GameOverWindow>>()
                 .WithFactoryArguments(_gameOverWindowPrefabReference);
             Container
                 .BindFactoryCustomInterface<

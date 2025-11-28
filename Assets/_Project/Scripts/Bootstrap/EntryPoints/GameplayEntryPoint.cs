@@ -13,7 +13,7 @@ using Zenject;
 
 namespace _Project.Scripts.Bootstrap.EntryPoints
 {
-    public class GameplayEntryPoint : IInitializable, IDisposable
+    public class GameplayEntryPoint : IInitializable
     {
         private readonly IFactory<Ship> _shipFactory;
         private readonly CharactersRepository _charactersRepository;
@@ -21,7 +21,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly SpawnersAndControllersRepository _spawnersAndControllersRepository;
         private readonly IFactory<ShipStatsWindow> _shipStatsWindowFactory;
         private readonly IFactory<PlayerPointsWindow> _playerPointsWindowFactory;
-        private readonly IFactory<GameOverWindow> _gameOverWindowFactory;
+        private readonly IFactory<Func<UniTask>, GameOverWindow> _gameOverWindowFactory;
         private readonly IGameLoop _gameLoop;
         private readonly WindowsRepository _windowsRepository;
         private readonly InputHandler _inputHandler;
@@ -37,7 +37,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             IFactory<ShipStatsWindow> shipStatsWindowFactory, 
             WindowsRepository windowsRepository, 
             IFactory<PlayerPointsWindow> playerPointsWindowFactory, 
-            IFactory<GameOverWindow> gameOverWindowFactory,
+            IFactory<Func<UniTask>, GameOverWindow> gameOverWindowFactory,
             IGameLoop gameLoop,
             InputHandler inputHandler, 
             AssetLoader assetLoader, 
@@ -71,8 +71,8 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             await _playerPointsWindowFactory.Create().Open();
             _spawnersAndControllersRepository.StartAllSpawners();
         }
-        
-        public async void Dispose()
+
+        private async UniTask OnQuitEvent()
         {
             await UniTask.WhenAll(
                 _windowsRepository.TryCloseAndDestroyWindow<ShipStatsWindow>(),
@@ -85,7 +85,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _charactersRepository.UnregisterShip();
             _localAssetProvider.ReleaseAllAssets();
         }
-
+        
         private void SetupShip()
         {
             _shipFactory.Create();
@@ -98,7 +98,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
                 _gameLoop.Pause();
                 _charactersRepository.Ship.StopShip();
                 await _charactersRepository.Ship.PlayDeathAnimationAsync();
-                _gameOverWindowFactory.Create().Open().Forget();
+                _gameOverWindowFactory.Create(OnQuitEvent).Open().Forget();
             });
         }
     }

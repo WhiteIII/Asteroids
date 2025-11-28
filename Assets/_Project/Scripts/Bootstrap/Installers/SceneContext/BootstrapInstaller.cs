@@ -30,6 +30,7 @@ namespace _Project.Scripts.Bootstrap.Installers
         {
             Container.Bind<UIRoot>().FromInstance(_uiRoot).AsSingle();
             Container.Bind<WindowsRepository>().AsSingle();
+            Container.Bind<WindowCreator>().AsSingle();
             Container.Bind<Camera>().FromInstance(_camera).AsSingle();
             Container.Bind<AudioSource>().FromInstance(_audioSource).AsSingle();
             Container.Bind<ShipStatsData>().FromInstance(_shipStatsData).AsSingle();

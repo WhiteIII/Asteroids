@@ -1,6 +1,4 @@
-using _Project.Scripts.Common;
 using _Project.Scripts.ViewModel;
-using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
@@ -11,44 +9,47 @@ namespace _Project.Scripts.View.Services
         where TWindow :  Window<TViewModel>
     {
         protected readonly TViewModel ViewModel;
-
-        private readonly UIRoot _uiRoot;
-        private readonly IInstantiator _instantiator;
-        private readonly WindowsRepository _windowsRepository;
-        private readonly LocalAssetProvider _localAssetProvider;
+        
         private readonly AssetReference _prefabReference;
-
+        private readonly WindowCreator _windowCreator;
+        
         protected BaseWindowFactory(
-            TViewModel viewModel,
-            UIRoot uiRoot,
-            IInstantiator instantiator,
-            WindowsRepository windowsRepository, 
-            LocalAssetProvider localAssetProvider, 
-            AssetReference prefabReference)
+            TViewModel viewModel, 
+            AssetReference prefabReference, 
+            WindowCreator windowCreator)
         {
             ViewModel = viewModel;
-            _uiRoot = uiRoot;
-            _instantiator = instantiator;
-            _windowsRepository = windowsRepository;
-            _localAssetProvider = localAssetProvider;
             _prefabReference = prefabReference;
+            _windowCreator = windowCreator;
         }
 
-        public override TWindow Create()
+        public override TWindow Create() =>
+            CreateFromCreator();
+        
+        protected TWindow CreateFromCreator() =>
+            _windowCreator.Create<TWindow, TViewModel>(ViewModel, _prefabReference);
+    }
+
+    public abstract class BaseWindowFactory<TWindow, TViewModel, TParametor> : PlaceholderFactory<TParametor, TWindow>
+        where TViewModel : IViewModel
+        where TWindow :  Window<TViewModel>
+    {
+        protected readonly TViewModel ViewModel;
+        
+        private readonly AssetReference _prefabReference;
+        private readonly WindowCreator _windowCreator;
+        
+        protected BaseWindowFactory(
+            TViewModel viewModel, 
+            AssetReference prefabReference, 
+            WindowCreator windowCreator)
         {
-            TWindow window = CreateWindow();
-            window.Setup(ViewModel);
-            return window;
+            ViewModel = viewModel;
+            _prefabReference = prefabReference;
+            _windowCreator = windowCreator;
         }
         
-        protected TWindow CreateWindow()
-        {
-            TWindow window = _instantiator
-                .InstantiatePrefab(_localAssetProvider.GetAsset<GameObject>(_prefabReference))
-                .GetComponent<TWindow>();
-            _uiRoot.AddWindow(window.transform);
-            _windowsRepository.Register(window);
-            return window;
-        }
+        protected TWindow CreateFromCreator() =>
+            _windowCreator.Create<TWindow, TViewModel>(ViewModel, _prefabReference);
     }
 }
