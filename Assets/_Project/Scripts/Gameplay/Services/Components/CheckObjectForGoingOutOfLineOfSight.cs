@@ -8,31 +8,30 @@ namespace _Project.Scripts.Gameplay.Services.Components
         [SerializeField] private Renderer _renderZone;
 
         private Camera _camera;
-        
-        public bool IsVisible => CheckVisible();
+
+        public bool IsVisible
+        {
+            get
+            {
+                Vector3[] corners = GetBoundsCorners(_renderZone.bounds);
+                int visibleCorners = 0;
+                foreach (Vector3 corner in corners)
+                {
+                    Vector3 viewportPoint = _camera.WorldToViewportPoint(corner);
+            
+                    if (viewportPoint.x >= 0 && viewportPoint.x <= 1 && 
+                        viewportPoint.y >= 0 && viewportPoint.y <= 1 && 
+                        viewportPoint.z > 0)
+                    {
+                        visibleCorners++;
+                    }
+                }
+                return visibleCorners > 0;
+            }
+        }
         
         [Inject] private void Construct(Camera camera) =>  
             _camera = camera;
-        
-        private bool CheckVisible()
-        {
-            Vector3[] corners = GetBoundsCorners(_renderZone.bounds);
-            int visibleCorners = 0;
-        
-            foreach (Vector3 corner in corners)
-            {
-                Vector3 viewportPoint = _camera.WorldToViewportPoint(corner);
-            
-                if (viewportPoint.x >= 0 && viewportPoint.x <= 1 && 
-                    viewportPoint.y >= 0 && viewportPoint.y <= 1 && 
-                    viewportPoint.z > 0)
-                {
-                    visibleCorners++;
-                }
-            }
-        
-            return visibleCorners > 0;
-        }
         
         private Vector3[] GetBoundsCorners(Bounds bounds)
         {
