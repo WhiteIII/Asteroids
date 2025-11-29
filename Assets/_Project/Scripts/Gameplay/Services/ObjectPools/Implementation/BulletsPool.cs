@@ -1,10 +1,8 @@
 using System;
 using _Project.Scripts.Gameplay.Characters;
 using _Project.Scripts.Gameplay.Characters.Base;
-using _Project.Scripts.Gameplay.Services.Repositories;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using Zenject;
 
 namespace _Project.Scripts.Gameplay.Services.ObjectPools
 {

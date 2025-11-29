@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace _Project.Scripts.View
 {
-    internal class ShipStatsWindowAnimation : MonoBehaviour, IWindowAnimation
+    internal class WindowMoveAnimation : MonoBehaviour, IWindowAnimation
     {
-        [Header("ShipStatsRectTransforms:")]
+        [Header("WindowElements:")]
         [SerializeField] private MoveAnimationConfig[] _configs;
         
         [Header("Settings:")]

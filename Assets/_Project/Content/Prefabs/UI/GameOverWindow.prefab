@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 96.3}
+  m_AnchoredPosition: {x: 451, y: 93}
   m_SizeDelta: {x: 191.4, y: 60.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3733856662616800058
@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -76.09}
+  m_AnchoredPosition: {x: -355, y: -76}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &766691684604769013
@@ -267,10 +267,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5900505837125897330}
   - component: {fileID: 2130110683092195592}
-  - component: {fileID: 2497975975735361105}
   - component: {fileID: 2532781045430796868}
   - component: {fileID: 8961337795491995666}
-  - component: {fileID: 9139592306729819067}
+  - component: {fileID: 5914142825316606666}
   m_Layer: 5
   m_Name: GameOverWindow
   m_TagString: Untagged
@@ -322,29 +321,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &2497975975735361105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4402901321243240560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
 --- !u!114 &2532781045430796868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _goToMenuButton: {fileID: 1118935193811410240}
---- !u!114 &9139592306729819067
+--- !u!114 &5914142825316606666
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -384,9 +360,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 4402901321243240560}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a0f17f0cfb640eeb4d72383d4743c81, type: 3}
+  m_Script: {fileID: 11500000, guid: 9361e45e6a1348569e76843815e5b971, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _configs:
+  - <From>k__BackingField: {x: -355, y: -76}
+    <To>k__BackingField: {x: 0, y: -76}
+    <RectTransform>k__BackingField: {fileID: 2259242999218432538}
+  - <From>k__BackingField: {x: 451, y: 93}
+    <To>k__BackingField: {x: 0, y: 93}
+    <RectTransform>k__BackingField: {fileID: 1784938198738442694}
+  _duration: 0.2
+  _cooldown: 0
 --- !u!1 &8323219197548087095
 GameObject:
   m_ObjectHideFlags: 0

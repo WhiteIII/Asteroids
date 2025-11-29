@@ -2,10 +2,8 @@ using System;
 using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Characters;
 using _Project.Scripts.Gameplay.Characters.Base;
-using _Project.Scripts.Gameplay.Services.Repositories;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using Zenject;
 using Random = UnityEngine.Random;
 
 
@@ -43,7 +41,11 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
                     return asteroid;
                 }, 
                 () => Guid.NewGuid().ToString(),
-                (asteroid, spawnPosition) => asteroid.SetPosition(spawnPosition),
+                (asteroid, spawnPosition) =>
+                {
+                    asteroid.Revive();
+                    asteroid.SetPosition(spawnPosition);
+                },
                 true)
         {
         }

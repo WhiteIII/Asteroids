@@ -2,6 +2,7 @@ using _Project.Scripts.Gameplay.Ai.Base;
 using _Project.Scripts.Gameplay.Ai.Implementation;
 using _Project.Scripts.Gameplay.Characters;
 using _Project.Scripts.Gameplay.Characters.Base;
+using _Project.Scripts.Gameplay.Characters.Implementation;
 using UnityEngine.AddressableAssets;
 using Zenject;
 

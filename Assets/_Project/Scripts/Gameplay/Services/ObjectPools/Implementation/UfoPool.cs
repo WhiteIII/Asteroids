@@ -1,5 +1,5 @@
 using System;
-using _Project.Scripts.Gameplay.Characters;
+using _Project.Scripts.Gameplay.Characters.Implementation;
 using UnityEngine;
 using Zenject;
 
@@ -12,7 +12,11 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
             base(
                 () => ufoFactory.Create(), 
                 () => Guid.NewGuid().ToString(),
-                (ufo, position) => ufo.SetPosition(position),
+                (ufo, position) =>
+                {
+                    ufo.Revive();
+                    ufo.SetPosition(position);
+                },
                 true)
         {
             

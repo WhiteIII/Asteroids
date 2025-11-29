@@ -19,7 +19,11 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
                     return asteroid;
                 }, 
                 () => Guid.NewGuid().ToString(),
-                (asteroid, parameter) => asteroid.SetPosition(parameter),
+                (asteroid, parameter) =>
+                {
+                    asteroid.Revive();
+                    asteroid.SetPosition(parameter);
+                },
                 true)
         {
         }

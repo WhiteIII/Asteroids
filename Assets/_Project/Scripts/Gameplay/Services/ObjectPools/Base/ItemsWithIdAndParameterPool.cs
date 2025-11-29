@@ -1,6 +1,5 @@
 using System;
 using _Project.Scripts.Gameplay.Services.ObjectPools.Base;
-using Zenject;
 
 namespace _Project.Scripts.Gameplay.Services.ObjectPools
 {

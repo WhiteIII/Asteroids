@@ -26,5 +26,8 @@ namespace _Project.Scripts.Gameplay.Characters.Base
                 })
                 .AddTo(this);
         }
+        
+        public void Revive() =>
+            IsAlive = true;
     }
 }

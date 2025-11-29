@@ -10,6 +10,7 @@ using _Project.Scripts.Gameplay.Ship;
 using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Ai.Base;
 using _Project.Scripts.Gameplay.Characters.Base;
+using _Project.Scripts.Gameplay.Characters.Implementation;
 using _Project.Scripts.Gameplay.Services.Repositories;
 using _Project.Scripts.View.Implementation;
 using _Project.Scripts.View.Services;
