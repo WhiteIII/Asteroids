@@ -5,6 +5,7 @@ using _Project.Scripts.Gameplay.Services.Spawners;
 using _Project.Scripts.Data;
 using _Project.Scripts.View.Implementation;
 using _Project.Scripts.View.Services;
+using _Project.Scripts.View.Services.Factories;
 using _Project.Scripts.ViewModel.Implementation;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -14,16 +15,17 @@ namespace _Project.Scripts.Bootstrap.Installers
 {
     internal class BootstrapInstaller : MonoInstaller
     {
-        [Header("Data:")] [SerializeField] private GameSettingsData _gameSettingsData;
+        [Header("Data:")] 
+        [SerializeField] private GameSettingsData _gameSettingsData;
         [SerializeField] private ShipStatsData _shipStatsData;
 
-        [Header("OnScene:")] [SerializeField] private Camera _camera;
+        [Header("OnScene:")] 
+        [SerializeField] private Camera _camera;
         [SerializeField] private AudioSource _audioSource;
         [SerializeField] private UIRoot _uiRoot;
 
-        [Header("PrefabRefs:")] [SerializeField]
-        private AssetReference _loadingWindowAssetReference;
-
+        [Header("PrefabRefs:")] 
+        [SerializeField] private AssetReference _loadingWindowAssetReference;
         [SerializeField] private AssetReference _bestRecordWindowAssetReference;
 
         public override void InstallBindings()

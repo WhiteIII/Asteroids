@@ -13,6 +13,9 @@ namespace _Project.Scripts.Gameplay.Characters.Base
 
         private CollisionHandler _collisionHandler;
         private string _id;
+        
+        public void SetID(string id) => 
+            _id = id;
 
         protected void SetupReleaseCharacter()
         {
@@ -23,9 +26,6 @@ namespace _Project.Scripts.Gameplay.Characters.Base
                 .Subscribe(OnTouchTarget)
                 .AddTo(this);             
         }
-        
-        public void SetID(string id) => 
-            _id = id;
         
         protected void ReleaseCharacter() => 
             Release.OnNext(_id);

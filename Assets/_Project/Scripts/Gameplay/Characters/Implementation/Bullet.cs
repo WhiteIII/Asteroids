@@ -31,7 +31,7 @@ namespace _Project.Scripts.Gameplay.Characters
         public void SetFlySpeed(float speed) =>
             _bulletMovement.SetMovementSpeed(speed);
         
-        public override void SetPosition(Vector2 position) => 
+        public void SetPosition(Vector2 position) => 
             _bulletMovement.SetPosition(position);
         
         public void SetRotation(Quaternion rotation) =>

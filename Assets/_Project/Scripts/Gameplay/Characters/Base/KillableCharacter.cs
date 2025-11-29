@@ -10,6 +10,9 @@ namespace _Project.Scripts.Gameplay.Characters.Base
         
         public bool IsAlive { get; private set; }
         
+        public void Revive() =>
+            IsAlive = true;
+        
         protected void SetupKillableCharacter(Action onKill = null)
         {
             IsAlive = true;
@@ -26,8 +29,5 @@ namespace _Project.Scripts.Gameplay.Characters.Base
                 })
                 .AddTo(this);
         }
-        
-        public void Revive() =>
-            IsAlive = true;
     }
 }

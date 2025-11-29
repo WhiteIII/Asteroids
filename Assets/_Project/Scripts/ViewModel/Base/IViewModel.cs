@@ -1,4 +1,4 @@
-namespace _Project.Scripts.ViewModel
+namespace _Project.Scripts.ViewModel.Base
 {
     public interface IViewModel
     {

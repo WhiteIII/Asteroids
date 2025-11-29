@@ -1,7 +1,8 @@
+using _Project.Scripts.View.Animations.Base;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace _Project.Scripts.View
+namespace _Project.Scripts.View.Animations.Implementation
 {
     internal class RegularAnimation : MonoBehaviour, IWindowAnimation
     {

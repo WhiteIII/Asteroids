@@ -67,7 +67,7 @@ namespace _Project.Scripts.Gameplay.Characters.Implementation
         public void StopMoving() =>
             IsMovingStoped = true;
 
-        public override void SetPosition(Vector2 position) => 
+        public void SetPosition(Vector2 position) => 
             _movement.SetPosition(position);
 
         protected override void OnTouchTarget(ITarget target)

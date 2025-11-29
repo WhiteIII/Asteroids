@@ -1,5 +1,5 @@
-using System;
 using _Project.Scripts.ViewModel;
+using _Project.Scripts.ViewModel.Base;
 using Cysharp.Threading.Tasks;
 
 namespace _Project.Scripts.View

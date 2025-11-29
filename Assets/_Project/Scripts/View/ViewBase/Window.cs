@@ -1,5 +1,8 @@
 using System;
+using _Project.Scripts.View.Animations.Base;
+using _Project.Scripts.View.Animations.Implementation;
 using _Project.Scripts.ViewModel;
+using _Project.Scripts.ViewModel.Base;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -9,11 +12,11 @@ namespace _Project.Scripts.View
     public abstract class Window<T> : MonoBehaviour, IWindow<T>
         where T : IViewModel
     {
+        private IWindowAnimation _animation;
+        
         public bool IsOpen { get; private set; }
         
         protected T ViewModel { get; private set; }
-        
-        private IWindowAnimation _animation;
         
         public void Setup(T viewModel)
         {

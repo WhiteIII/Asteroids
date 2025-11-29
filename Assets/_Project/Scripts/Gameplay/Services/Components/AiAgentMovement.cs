@@ -8,6 +8,7 @@ namespace _Project.Scripts.Gameplay.Services.Components
     internal class AiAgentMovement : MonoBehaviour, IAiAgentMovement
     {
         private readonly float _updatePath = 0.1f;
+        
         private NavMeshAgent _agent;
         private float _movementSpeed;
         private bool _inCoolDown;

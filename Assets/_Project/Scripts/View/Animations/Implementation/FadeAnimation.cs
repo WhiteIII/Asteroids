@@ -2,7 +2,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
-namespace _Project.Scripts.View
+namespace _Project.Scripts.View.Animations.Implementation
 {
     internal class FadeAnimation
     {   

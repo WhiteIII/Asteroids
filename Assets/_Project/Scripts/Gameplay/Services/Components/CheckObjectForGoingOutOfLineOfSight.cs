@@ -10,7 +10,6 @@ namespace _Project.Scripts.Gameplay.Services.Components
         private Camera _camera;
         
         public bool IsVisible => CheckVisible();
-
         
         [Inject] private void Construct(Camera camera) =>  
             _camera = camera;

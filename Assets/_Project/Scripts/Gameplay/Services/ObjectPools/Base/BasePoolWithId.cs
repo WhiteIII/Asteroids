@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using _Project.Scripts.Gameplay.Services.ObjectPools.Base;
 using R3;
 
-namespace _Project.Scripts.Gameplay.Services.ObjectPools
+namespace _Project.Scripts.Gameplay.Services.ObjectPools.Base
 {
     public abstract class BasePoolWithId<TItem, TId> : IDisposable
         where TItem : IEnableAndDisableItem, IItemWithId<TId>

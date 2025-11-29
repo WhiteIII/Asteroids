@@ -4,7 +4,7 @@ using _Project.Scripts.ViewModel.Implementation;
 using Cysharp.Threading.Tasks;
 using UnityEngine.AddressableAssets;
 
-namespace _Project.Scripts.View.Services
+namespace _Project.Scripts.View.Services.Factories
 {
     public class GameOverWindowFactory : BaseWindowFactory<GameOverWindow, GameOverWindowViewModel, Func<UniTask>>
     {

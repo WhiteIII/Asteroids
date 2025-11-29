@@ -18,7 +18,6 @@ namespace _Project.Scripts.Gameplay.Services.Spawners
             int side = Random.Range(0, 4);
             Vector2 bottomLeft = _camera.ViewportToWorldPoint(new Vector2(0, 0));
             Vector2 bottomRight = _camera.ViewportToWorldPoint(new Vector2(1, 0));
-            Vector2 topLeft = _camera.ViewportToWorldPoint(new Vector2(0, 1));
             Vector2 topRight = _camera.ViewportToWorldPoint(new Vector2(1, 1));
             float halfCameraVisionHeight = topRight.y / 2f; 
             float halfCameraVisionLenght = topRight.x / 2f; 

@@ -1,5 +1,6 @@
 using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Services.Repositories;
+using _Project.Scripts.ViewModel.Base;
 using R3;
 using UnityEngine;
 

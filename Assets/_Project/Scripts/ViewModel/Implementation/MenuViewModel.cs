@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.SceneSwitcher;
+using _Project.Scripts.ViewModel.Base;
 using Cysharp.Threading.Tasks;
 
 namespace _Project.Scripts.ViewModel.Implementation

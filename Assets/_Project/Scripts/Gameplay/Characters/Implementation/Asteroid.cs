@@ -48,14 +48,6 @@ namespace _Project.Scripts.Gameplay.Characters
         public IGameLoopObject[] GetAllGameLoopObjects() => 
             new IGameLoopObject[] { _movement, this };
 
-        protected override void OnTouchTarget(ITarget target)
-        {
-            if (target is ShipTarget shipTarget && IsVisible)
-                shipTarget.Kill();
-            else if (target is Barrier _)
-                ReleaseCharacter();
-        }
-        
         public void SetPoints(int points) => 
             _points = points;
         
@@ -65,10 +57,18 @@ namespace _Project.Scripts.Gameplay.Characters
             _movement.SetMovementSpeed(speed);
         }
 
-        public override void SetPosition(Vector2 position) => 
+        public void SetPosition(Vector2 position) => 
             _movement.SetPosition(position);
 
         public void OnPause() => 
             _asteroidView.StopAnimation();
+        
+        protected override void OnTouchTarget(ITarget target)
+        {
+            if (target is ShipTarget shipTarget && IsVisible)
+                shipTarget.Kill();
+            else if (target is Barrier _)
+                ReleaseCharacter();
+        }
     }
 }

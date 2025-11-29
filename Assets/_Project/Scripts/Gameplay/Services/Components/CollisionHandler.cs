@@ -1,4 +1,3 @@
-using _Project.Scripts.Gameplay.Services.Targets;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
 using R3;
 using UnityEngine;

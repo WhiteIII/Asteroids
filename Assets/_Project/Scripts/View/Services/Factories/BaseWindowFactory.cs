@@ -1,8 +1,9 @@
 using _Project.Scripts.ViewModel;
+using _Project.Scripts.ViewModel.Base;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
-namespace _Project.Scripts.View.Services
+namespace _Project.Scripts.View.Services.Factories
 {
     public class BaseWindowFactory<TWindow, TViewModel> : PlaceholderFactory<TWindow>
         where TViewModel : IViewModel

@@ -1,4 +1,5 @@
 using _Project.Scripts.Gameplay.Ship;
+using _Project.Scripts.ViewModel.Base;
 using R3;
 
 namespace _Project.Scripts.ViewModel.Implementation

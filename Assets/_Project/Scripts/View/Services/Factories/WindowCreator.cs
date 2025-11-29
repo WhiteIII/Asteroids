@@ -1,10 +1,11 @@
 using _Project.Scripts.Common;
 using _Project.Scripts.ViewModel;
+using _Project.Scripts.ViewModel.Base;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
-namespace _Project.Scripts.View.Services
+namespace _Project.Scripts.View.Services.Factories
 {
     public class WindowCreator
     {

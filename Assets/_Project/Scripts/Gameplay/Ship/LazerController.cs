@@ -11,15 +11,14 @@ namespace _Project.Scripts.Gameplay.Ship
 {
     public class LazerController : MonoBehaviour, IUpdatable
     {
-        [SerializeField] private Lazer _lazer;
-
         public readonly ReactiveProperty<int> CurrentChargesCount = new();
         public readonly ReactiveProperty<float> CurrentCoolDown = new();
         
+        [SerializeField] private Lazer _lazer;
+
         private float _coolDown;
         private int _maxChargesCount;
         private float _lifeTime;
-        
         private bool _isActive;
 
         public bool AttackIsDone => CurrentChargesCount.Value > 0 && _isActive == false;

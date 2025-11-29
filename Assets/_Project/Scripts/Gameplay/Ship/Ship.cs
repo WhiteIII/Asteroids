@@ -22,9 +22,9 @@ namespace _Project.Scripts.Gameplay.Ship
     [RequireComponent(typeof(ActionOnGoingOutOrInCameraVisionField))]
     public class Ship : Character, IInitializableUpdatableObject
     {
-        private readonly CancellationTokenSource _cancellationTokenSource = new();
-        
         [SerializeField] private DeathAnimationController _deathAnimationController;
+        
+        private readonly CancellationTokenSource _cancellationTokenSource = new();
         
         private ShipMovement _shipMovement;
         private AttackController _attackController;
@@ -82,7 +82,7 @@ namespace _Project.Scripts.Gameplay.Ship
             _cancellationTokenSource.Dispose();
         }
 
-        public override void SetPosition(Vector2 position) => 
+        public void SetPosition(Vector2 position) => 
             _shipMovement.SetPosition(position);
         
         public void SetRotation(Quaternion rotation) =>

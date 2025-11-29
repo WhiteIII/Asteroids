@@ -1,5 +1,4 @@
 using _Project.Scripts.ViewModel.Implementation;
-using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 using UnityEngine.UI;

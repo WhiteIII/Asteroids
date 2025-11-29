@@ -1,4 +1,5 @@
 using _Project.Scripts.Gameplay.SaveLoadSystem;
+using _Project.Scripts.ViewModel.Base;
 
 namespace _Project.Scripts.ViewModel.Implementation
 {

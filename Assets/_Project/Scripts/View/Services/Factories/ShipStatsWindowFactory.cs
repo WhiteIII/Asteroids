@@ -2,7 +2,7 @@ using _Project.Scripts.View.Implementation;
 using _Project.Scripts.ViewModel.Implementation;
 using UnityEngine.AddressableAssets;
 
-namespace _Project.Scripts.View.Services
+namespace _Project.Scripts.View.Services.Factories
 {
     public class ShipStatsWindowFactory : BaseWindowFactory<ShipStatsWindow, ShipStatsViewModel>
     {

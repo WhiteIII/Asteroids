@@ -13,11 +13,11 @@ namespace _Project.Scripts.Gameplay.Characters.Base
         ICharacter,
         IEnableAndDisableItem
     {
-        [SerializeField] private GameObject _fbx;
-        
         public ReadOnlyReactiveProperty<Vector3> Position { get; private set; }
         public ReadOnlyReactiveProperty<Vector3> Rotation { get; private set; }
         public ReadOnlyReactiveProperty<float> Acceleration { get; private set; }
+        
+        [SerializeField] private GameObject _fbx;
         
         private CheckObjectForGoingOutOfLineOfSight _checkObjectForGoingOutOfLineOfSight;
 
@@ -49,8 +49,6 @@ namespace _Project.Scripts.Gameplay.Characters.Base
 
         public void DisableFbx() => 
             _fbx.SetActive(false);
-        
-        public abstract void SetPosition(Vector2 position); 
         
         protected virtual void OnAwake() { }
     }
