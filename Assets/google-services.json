@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "673986536210",
+    "project_id": "asteroids-5652b",
+    "storage_bucket": "asteroids-5652b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673986536210:android:28542c4ebce58ef4e489cb",
+        "android_client_info": {
+          "package_name": "com.company.asteroids"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgJ0UNLJ_NL6xFYxSPp0Ek29o2lbbKhOY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
