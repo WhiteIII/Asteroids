@@ -3,10 +3,11 @@ using _Project.Scripts.Gameplay.Characters.Base;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
+using _Project.Scripts.Gameplay.ShipBase;
 
 namespace _Project.Scripts.Gameplay.Services.Factories
 {
-    public class ShipFactory : PlaceholderFactory<ShipSpawnArgs, Ship.Ship>
+    public class ShipFactory : PlaceholderFactory<ShipSpawnArgs, Ship>
     {
         private readonly AssetReference _shipPrefabReference;
         private readonly CharacterCreator _characterCreator;
@@ -17,9 +18,9 @@ namespace _Project.Scripts.Gameplay.Services.Factories
             _shipPrefabReference = shipPrefabReference;
         }
 
-        public override Ship.Ship Create(ShipSpawnArgs spawnArgs)
+        public override Ship Create(ShipSpawnArgs spawnArgs)
         {
-            Ship.Ship ship = _characterCreator.CreateGameLoopCharacter<Ship.Ship>(_shipPrefabReference);
+            Ship ship = _characterCreator.CreateGameLoopCharacter<Ship>(_shipPrefabReference);
             ship.SetPosition(spawnArgs.Position);
             ship.SetRotation(spawnArgs.Rotation);
             ship.SetOnDeadEvent(spawnArgs.OnDead);

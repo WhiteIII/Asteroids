@@ -7,7 +7,7 @@ using UnityEngine;
 using Zenject;
 using static UnityEngine.Mathf;
 
-namespace _Project.Scripts.Gameplay.Ship
+namespace _Project.Scripts.Gameplay.Services.Components
 {
     public class AttackController : MonoBehaviour
     {

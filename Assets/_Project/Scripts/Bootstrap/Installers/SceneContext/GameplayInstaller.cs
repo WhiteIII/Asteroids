@@ -1,19 +1,17 @@
 using System;
 using _Project.Scripts.Bootstrap.EntryPoints;
 using _Project.Scripts.Common;
-using _Project.Scripts.Gameplay.Characters;
-using _Project.Scripts.Gameplay.GameLoopSystem;
-using _Project.Scripts.Gameplay.Services.Factories;
-using _Project.Scripts.Gameplay.Services.ObjectPools;
-using _Project.Scripts.Gameplay.Services.Spawners;
-using _Project.Scripts.Gameplay.Ship;
 using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Ai.Base;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.Characters.Implementation;
+using _Project.Scripts.Gameplay.GameLoopSystem;
+using _Project.Scripts.Gameplay.Services.Factories;
+using _Project.Scripts.Gameplay.Services.ObjectPools;
 using _Project.Scripts.Gameplay.Services.Repositories;
+using _Project.Scripts.Gameplay.Services.Spawners;
+using _Project.Scripts.Gameplay.ShipBase;
 using _Project.Scripts.View.Implementation;
-using _Project.Scripts.View.Services;
 using _Project.Scripts.View.Services.Factories;
 using _Project.Scripts.ViewModel.Implementation;
 using Cysharp.Threading.Tasks;
@@ -21,7 +19,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
-namespace _Project.Scripts.Bootstrap.Installers
+namespace _Project.Scripts.Bootstrap.Installers.SceneContext
 {
     internal class GameplayInstaller : MonoInstaller
     {

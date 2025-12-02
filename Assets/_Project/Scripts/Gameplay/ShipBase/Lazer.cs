@@ -6,7 +6,7 @@ using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 
-namespace _Project.Scripts.Gameplay.Ship
+namespace _Project.Scripts.Gameplay.ShipBase
 {
     [RequireComponent(typeof(CollisionHandler))]
     public class Lazer : MonoBehaviour

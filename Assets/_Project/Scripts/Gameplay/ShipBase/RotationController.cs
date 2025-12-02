@@ -1,4 +1,3 @@
-using System;
 using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.GameLoopSystem;
@@ -7,7 +6,7 @@ using UnityEngine;
 using Zenject;
 using static UnityEngine.Time;
 
-namespace _Project.Scripts.Gameplay.Ship
+namespace _Project.Scripts.Gameplay.ShipBase
 {
     public class RotationController : MonoBehaviour, IUpdatable
     {

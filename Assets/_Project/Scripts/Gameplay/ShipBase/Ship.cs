@@ -12,7 +12,7 @@ using R3;
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.Gameplay.Ship
+namespace _Project.Scripts.Gameplay.ShipBase
 {
     [RequireComponent(typeof(ShipTarget))]
     [RequireComponent(typeof(AttackController))]

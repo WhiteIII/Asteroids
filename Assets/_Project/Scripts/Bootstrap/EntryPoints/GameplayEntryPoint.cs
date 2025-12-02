@@ -5,7 +5,7 @@ using _Project.Scripts.Gameplay.InputSystem;
 using _Project.Scripts.Gameplay.SaveLoadSystem;
 using _Project.Scripts.Gameplay.Services.Factories;
 using _Project.Scripts.Gameplay.Services.Repositories;
-using _Project.Scripts.Gameplay.Ship;
+using _Project.Scripts.Gameplay.ShipBase;
 using _Project.Scripts.View.Implementation;
 using _Project.Scripts.View.Services;
 using _Project.Scripts.ViewModel.Implementation;

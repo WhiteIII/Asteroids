@@ -1,6 +1,6 @@
 using R3;
 
-namespace _Project.Scripts.Gameplay.Ship
+namespace _Project.Scripts.Gameplay.ShipBase
 {
     public class PointsCounter : IPointsCounter
     {

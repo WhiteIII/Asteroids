@@ -1,4 +1,3 @@
-using System;
 using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.InputSystem;
@@ -6,7 +5,7 @@ using UnityEngine;
 using Zenject;
 using static UnityEngine.Time;
 
-namespace _Project.Scripts.Gameplay.Ship
+namespace _Project.Scripts.Gameplay.ShipBase
 {
     public class ShipMovement : MonoBehaviour, IUpdatable
     {

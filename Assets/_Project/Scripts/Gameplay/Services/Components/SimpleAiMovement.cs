@@ -18,9 +18,7 @@ namespace _Project.Scripts.Gameplay.Services.Components
         public void MoveTo(Vector2 shipPosition) =>
             _rigidbody.MovePosition(
                 _rigidbody.position + 
-                (shipPosition - _rigidbody.position).normalized * 
-                _movementSpeed * 
-                deltaTime);
+                (shipPosition - _rigidbody.position).normalized * (_movementSpeed * deltaTime));
 
         public void SetPosition(Vector2 position) => 
             transform.position = position;

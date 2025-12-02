@@ -7,7 +7,7 @@ using UnityEngine;
 using static UnityEngine.Mathf;
 using static UnityEngine.Time;
 
-namespace _Project.Scripts.Gameplay.Ship
+namespace _Project.Scripts.Gameplay.ShipBase
 {
     public class LazerController : MonoBehaviour, IUpdatable
     {

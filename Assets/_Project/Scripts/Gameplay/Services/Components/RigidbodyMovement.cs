@@ -15,7 +15,7 @@ namespace _Project.Scripts.Gameplay.Services.Components
             _rigidbody = GetComponent<Rigidbody2D>();
         
         public void GameLoopUpdate() => 
-            _rigidbody.MovePosition(_rigidbody.position + Direction * _speed * deltaTime);
+            _rigidbody.MovePosition(_rigidbody.position + Direction * (_speed * deltaTime));
 
         public void SetMovementSpeed(float speed) => 
             _speed = speed;

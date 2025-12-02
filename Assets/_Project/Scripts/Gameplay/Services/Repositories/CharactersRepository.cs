@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _Project.Scripts.Gameplay.Characters.Base;
+using _Project.Scripts.Gameplay.ShipBase;
 
 namespace _Project.Scripts.Gameplay.Services.Repositories
 {
@@ -8,9 +9,9 @@ namespace _Project.Scripts.Gameplay.Services.Repositories
     {
         private readonly List<ICharacter> _charactersList = new();
         
-        public Ship.Ship Ship { get; private set; }
+        public Ship Ship { get; private set; }
 
-        private void RegisterShip(Ship.Ship ship) => 
+        private void RegisterShip(Ship ship) => 
             Ship = ship;
 
         public int CharactersCount<T>()
@@ -28,7 +29,7 @@ namespace _Project.Scripts.Gameplay.Services.Repositories
         public T Register<T>(T character) 
             where T : ICharacter
         {
-            if (character is Ship.Ship ship && !Ship)
+            if (character is Ship ship && !Ship)
                 RegisterShip(ship);
             else 
                 _charactersList.Add(character);
@@ -55,7 +56,7 @@ namespace _Project.Scripts.Gameplay.Services.Repositories
 
     public interface ICharacterRepository
     {
-        Ship.Ship Ship { get; }
+        Ship Ship { get; }
         int CharactersCount<T>() where T : ICharacter;
     }
 }
