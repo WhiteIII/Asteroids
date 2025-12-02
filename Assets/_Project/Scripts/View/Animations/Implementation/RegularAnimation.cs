@@ -6,10 +6,16 @@ namespace _Project.Scripts.View.Animations.Implementation
 {
     internal class RegularAnimation : MonoBehaviour, IWindowAnimation
     {
-        public async UniTask PlayCloseAnimationAsync() => 
+        public async UniTask PlayCloseAnimationAsync()
+        {
             gameObject.SetActive(false);
+            await UniTask.Yield();
+        }
 
-        public async UniTask PlayShowAnimationAsync() =>
+        public async UniTask PlayShowAnimationAsync()
+        {
             gameObject.SetActive(true);
+            await UniTask.Yield();
+        }
     }
 }
