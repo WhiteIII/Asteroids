@@ -34,10 +34,8 @@ namespace _Project.Scripts.Gameplay.ShipBase
 
         private void Move() =>
             _rigidbody.AddForce(
-                _rigidbody.transform.rotation *
-                Vector2.up *
-                Mathf.Max(_inputHandler.Vertical.Value, 0f) * 
-                _speed * 
-                deltaTime, ForceMode2D.Force);
+                _rigidbody.transform.rotation * 
+                Vector2.up * 
+                (Mathf.Max(_inputHandler.Vertical.Value, 0f) * _speed * deltaTime), ForceMode2D.Force);
     }
 }

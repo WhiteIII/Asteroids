@@ -1,8 +1,6 @@
-using _Project.Scripts.Common;
 using _Project.Scripts.Common.Services.AssetsManagement;
 using _Project.Scripts.SceneSwitcher;
 using _Project.Scripts.View.Implementation;
-using Firebase.Extensions;
 using UnityEngine.AddressableAssets;
 using Zenject;
 

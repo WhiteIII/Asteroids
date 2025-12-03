@@ -7,6 +7,8 @@ using _Project.Scripts.Gameplay.Ai.Base;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.Characters.Implementation;
 using _Project.Scripts.Gameplay.GameLoopSystem;
+using _Project.Scripts.Gameplay.GameProgress;
+using _Project.Scripts.Gameplay.Services.AnalyticEmplementation;
 using _Project.Scripts.Gameplay.Services.Factories;
 using _Project.Scripts.Gameplay.Services.ObjectPools;
 using _Project.Scripts.Gameplay.Services.Repositories;
@@ -44,7 +46,7 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
             Container.Bind<GameSettingsData>().FromInstance(_gameSettingsData).AsSingle();
             Container.Bind<AsteroidsData>().FromInstance(_asteroidsData).AsSingle();
             Container.Bind<UfoStatsData>().FromInstance(_ufoStatsData).AsSingle();
-            Container.Bind<AssetLoader>().AsSingle().WithArguments(new AssetReference[]
+            Container.Bind<AssetLoader>().AsSingle().WithArguments(new[]
             {
                 _asteroidPrefabReference, 
                 _shipPrefabReference,  
@@ -55,7 +57,9 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
                 _shipStatsWindowPrefabReference,
                 _gameOverWindowPrefabReference
             });
-            Container.BindInterfacesAndSelfTo<PointsAndKillsCounter>().AsSingle();
+            Container.BindInterfacesAndSelfTo<WeaponsUsageCounter>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PointsAndKillsAndKillsCounterCounter>().AsSingle();
+            Container.Bind<StartGameAndEndGameEventSender>().AsSingle();
             Container.BindInterfacesTo<GameLoop>().AsSingle();
             Container.BindInterfacesTo<GameLoopRegisterController>().AsSingle();
             Container.BindInterfacesTo<GameLoopCreator>().AsSingle();

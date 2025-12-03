@@ -1,3 +1,4 @@
+using _Project.Scripts.Gameplay.GameProgress;
 using _Project.Scripts.Gameplay.ShipBase;
 using _Project.Scripts.ViewModel.Base;
 using R3;
@@ -8,7 +9,7 @@ namespace _Project.Scripts.ViewModel.Implementation
     {
         public readonly Observable<int> OnPointsChanged;
 
-        public PlayerPointsViewModel(IPointsCounter pointsCounter) => 
-            OnPointsChanged = pointsCounter.Points;
+        public PlayerPointsViewModel(IPointsAndKillsCounterCounter pointsAndKillsCounterCounter) => 
+            OnPointsChanged = pointsAndKillsCounterCounter.Points;
     }
 }

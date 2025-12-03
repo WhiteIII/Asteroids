@@ -1,8 +1,11 @@
 using System;
 using System.Threading;
+using _Project.Scripts.Common.Services.Analytics.Base;
+using _Project.Scripts.Common.Services.Analytics.Implementation.Data;
 using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.GameLoopSystem;
+using _Project.Scripts.Gameplay.GameProgress;
 using _Project.Scripts.Gameplay.InputSystem;
 using _Project.Scripts.Gameplay.Services.Components;
 using _Project.Scripts.Gameplay.Services.Components.View;
@@ -26,6 +29,8 @@ namespace _Project.Scripts.Gameplay.ShipBase
         
         private readonly CancellationTokenSource _cancellationTokenSource = new();
         
+        private IEventSender _eventSender;
+        private WeaponsUsageCounter _weaponsUsageCounter;
         private ShipMovement _shipMovement;
         private AttackController _attackController;
         private RotationController _rotationController;
@@ -38,10 +43,16 @@ namespace _Project.Scripts.Gameplay.ShipBase
         public Observable<int> OnLazerChargeCountChanged { get; private set; }
         
         [Inject]
-        private void Construct(IInputHandler inputHandler, ShipStatsData stats)
+        private void Construct(
+            IInputHandler inputHandler,
+            ShipStatsData stats,
+            WeaponsUsageCounter weaponsUsageCounter,
+            IEventSender eventSender)
         {
             _inputHandler = inputHandler;
             _stats = stats;
+            _weaponsUsageCounter = weaponsUsageCounter;
+            _eventSender = eventSender;
         }
 
         protected override void OnAwake()
@@ -69,7 +80,7 @@ namespace _Project.Scripts.Gameplay.ShipBase
             _inputHandler
                 .OnEKeyPressed
                 .Where(_ => _lazerController.AttackIsDone)
-                .Subscribe(_ => _lazerController.Shoot(_cancellationTokenSource.Token).Forget())
+                .Subscribe(_ => ShootByLazer())
                 .AddTo(this);
         }
         
@@ -102,9 +113,19 @@ namespace _Project.Scripts.Gameplay.ShipBase
         
         public void StopShip() => 
             _shipMovement.StopShip();
+
+        private void ShootByLazer()
+        {
+            _eventSender.SendEvent<AnalyticDataOnLazerUsed>();
+            _lazerController.Shoot(_cancellationTokenSource.Token).Forget();
+            _weaponsUsageCounter.AddLazerUsageCount();
+        }
         
-        private void Shoot() => 
+        private void Shoot()
+        {
+            _weaponsUsageCounter.AddBaseWeaponUsageCount();
             _attackController.Shoot<ShipTarget>(transform.rotation * Vector2.up);
+        }
 
         private void ChangePositionOnGoingOutCameraVisionField() => 
             SetPosition(-Position.CurrentValue);

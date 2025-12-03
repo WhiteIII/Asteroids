@@ -1,5 +1,6 @@
 using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Characters.Base;
+using _Project.Scripts.Gameplay.GameProgress;
 using _Project.Scripts.Gameplay.Services.Components;
 using _Project.Scripts.Gameplay.Services.Repositories;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
@@ -21,7 +22,7 @@ namespace _Project.Scripts.Gameplay.Characters.Implementation
         private AttackController _attackController;
         private ICharacterRepository _characterRepository;
         private IAiAgentMovement _movement;
-        private PointsAndKillsCounter _pointsAndKillsCounter;
+        private PointsAndKillsAndKillsCounterCounter _pointsAndKillsAndKillsCounterCounter;
         private UfoStatsData _stats;
         private float _currentCooldown;
 
@@ -32,10 +33,10 @@ namespace _Project.Scripts.Gameplay.Characters.Implementation
         public bool IsMovingStoped { get; private set; }
 
         [Inject]
-        private void Construct(ICharacterRepository repository, UfoStatsData stats, PointsAndKillsCounter pointsAndKillsCounter)
+        private void Construct(ICharacterRepository repository, UfoStatsData stats, PointsAndKillsAndKillsCounterCounter pointsAndKillsAndKillsCounterCounter)
         {
             _characterRepository = repository;
-            _pointsAndKillsCounter = pointsAndKillsCounter;
+            _pointsAndKillsAndKillsCounterCounter = pointsAndKillsAndKillsCounterCounter;
             _stats = stats;
         } 
         
@@ -45,7 +46,7 @@ namespace _Project.Scripts.Gameplay.Characters.Implementation
             _movement = GetComponent<IAiAgentMovement>();
             _attackController.Initialize(_stats.BulletFlyingSpeed);
             _movement.Initialize(_stats.MovementSpeed);
-            SetupKillableCharacter(() => _pointsAndKillsCounter.AddPoints(_stats.Points));
+            SetupKillableCharacter(() => _pointsAndKillsAndKillsCounterCounter.AddKill<Ufo>(_stats.Points));
         }
 
         private void Update() => 

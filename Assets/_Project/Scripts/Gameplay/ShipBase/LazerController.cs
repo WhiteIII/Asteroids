@@ -1,9 +1,11 @@
 using System.Threading;
 using _Project.Scripts.Gameplay.GameLoopSystem;
+using _Project.Scripts.Gameplay.GameProgress;
 using _Project.Scripts.Gameplay.Services.Targets.Base;
 using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
+using Zenject;
 using static UnityEngine.Mathf;
 using static UnityEngine.Time;
 

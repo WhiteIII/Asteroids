@@ -7,8 +7,8 @@ namespace _Project.Scripts.Common.Services.Analytics.Implementation
 {
     public class FireBaseEventSender : IEventSender
     {
-        public void SendEvent<T>(T analyticEvent) where T : IAnalyticData => 
-            FirebaseAnalytics.LogEvent(analyticEvent.ID);
+        public void SendEvent<T>() where T : IAnalyticData, new() => 
+            FirebaseAnalytics.LogEvent(new T().ID);
 
         public void SendEvent<TData, TParametor>(TData analyticEvent) 
             where TData : IAnalyticData<TParametor>

@@ -13,8 +13,6 @@ namespace _Project.Scripts.Gameplay.ShipBase
     {
         [SerializeField] private SfxController _sfxController;
         
-        private readonly CompositeDisposable _disposable = new();
-        
         private Type _ignoredTargetType; 
 
         public void SetIgnoredTargetType<T>()
@@ -27,10 +25,7 @@ namespace _Project.Scripts.Gameplay.ShipBase
             GetComponent<CollisionHandler>()
                 .OnTouchTarget
                 .Subscribe(OnLazerEnter)
-                .AddTo(_disposable);
-        
-        private void OnDestroy() => 
-            _disposable.Dispose();
+                .AddTo(this);
 
         private void OnLazerEnter(ITarget target)
         {
