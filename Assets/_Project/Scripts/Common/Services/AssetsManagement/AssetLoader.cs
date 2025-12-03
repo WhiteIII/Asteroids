@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine.AddressableAssets;
 
-namespace _Project.Scripts.Common
+namespace _Project.Scripts.Common.Services.AssetsManagement
 {
     public class AssetLoader
     {

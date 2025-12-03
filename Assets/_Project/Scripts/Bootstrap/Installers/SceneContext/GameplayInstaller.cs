@@ -1,6 +1,7 @@
 using System;
 using _Project.Scripts.Bootstrap.EntryPoints;
 using _Project.Scripts.Common;
+using _Project.Scripts.Common.Services.AssetsManagement;
 using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Ai.Base;
 using _Project.Scripts.Gameplay.Characters.Base;
@@ -54,7 +55,7 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
                 _shipStatsWindowPrefabReference,
                 _gameOverWindowPrefabReference
             });
-            Container.BindInterfacesAndSelfTo<PointsCounter>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PointsAndKillsCounter>().AsSingle();
             Container.BindInterfacesTo<GameLoop>().AsSingle();
             Container.BindInterfacesTo<GameLoopRegisterController>().AsSingle();
             Container.BindInterfacesTo<GameLoopCreator>().AsSingle();

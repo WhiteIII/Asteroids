@@ -1,4 +1,5 @@
 using _Project.Scripts.Common;
+using _Project.Scripts.Common.Services.AssetsManagement;
 using _Project.Scripts.ViewModel;
 using _Project.Scripts.ViewModel.Base;
 using UnityEngine;

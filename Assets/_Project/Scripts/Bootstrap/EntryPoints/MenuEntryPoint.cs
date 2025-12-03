@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.Common;
+using _Project.Scripts.Common.Services.AssetsManagement;
 using _Project.Scripts.View.Implementation;
 using _Project.Scripts.View.Services;
 using _Project.Scripts.ViewModel.Implementation;

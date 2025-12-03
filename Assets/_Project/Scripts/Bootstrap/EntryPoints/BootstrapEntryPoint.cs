@@ -1,6 +1,8 @@
 using _Project.Scripts.Common;
+using _Project.Scripts.Common.Services.AssetsManagement;
 using _Project.Scripts.SceneSwitcher;
 using _Project.Scripts.View.Implementation;
+using Firebase.Extensions;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
@@ -37,6 +39,9 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             await _localAssetsProvider.LoadAsync(_bestRecordWindowAssetReference);
             _loadingWindowFactory.Create();
             _bestRecordWindowFactory.Create();
+
+            await Firebase.FirebaseApp.CheckAndFixDependenciesAsync();
+            
             _sceneController.GoToMenu();
         }
     }
