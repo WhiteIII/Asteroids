@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id">
+  <string name="gcm_defaultSenderId" translatable="false">673986536210</string>
+  <string name="google_storage_bucket" translatable="false">asteroids-5652b.firebasestorage.app</string>
+  <string name="project_id" translatable="false">asteroids-5652b</string>
+  <string name="google_api_key" translatable="false">AIzaSyBgJ0UNLJ_NL6xFYxSPp0Ek29o2lbbKhOY</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBgJ0UNLJ_NL6xFYxSPp0Ek29o2lbbKhOY</string>
+  <string name="google_app_id" translatable="false">1:673986536210:android:e5d87f1570302954e489cb</string>
+</resources>

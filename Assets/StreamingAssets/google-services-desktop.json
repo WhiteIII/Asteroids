@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:673986536210:android:28542c4ebce58ef4e489cb",
+        "mobilesdk_app_id": "1:673986536210:android:e5d87f1570302954e489cb",
         "android_client_info": {
-          "package_name": "com.company.asteroids"
+          "package_name": "com.defaultdompany.asteroids"
         }
       },
       "oauth_client": [],
