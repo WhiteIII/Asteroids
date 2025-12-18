@@ -28,7 +28,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly IFactory<Func<UniTask>, GameOverWindow> _gameOverWindowFactory;
         private readonly IGameLoop _gameLoop;
         private readonly WindowsRepository _windowsRepository;
-        private readonly InputHandler _inputHandler;
+        private readonly IInputHandlerController _keyBoardReadOnlyInputHandler;
         private readonly AssetLoader _assetLoader;
         private readonly LocalAssetsProvider _localAssetsProvider;
         private readonly LoadingWindowViewModel _loadingWindowViewModel;
@@ -46,7 +46,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             IFactory<PlayerPointsWindow> playerPointsWindowFactory, 
             IFactory<Func<UniTask>, GameOverWindow> gameOverWindowFactory,
             IGameLoop gameLoop,
-            InputHandler inputHandler, 
+            IInputHandlerController keyBoardReadOnlyInputHandler, 
             AssetLoader assetLoader, 
             LocalAssetsProvider localAssetsProvider, 
             LoadingWindowViewModel loadingWindowViewModel,
@@ -63,7 +63,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _playerPointsWindowFactory = playerPointsWindowFactory;
             _gameOverWindowFactory = gameOverWindowFactory;
             _gameLoop = gameLoop;
-            _inputHandler = inputHandler;
+            _keyBoardReadOnlyInputHandler = keyBoardReadOnlyInputHandler;
             _assetLoader = assetLoader;
             _localAssetsProvider = localAssetsProvider;
             _loadingWindowViewModel = loadingWindowViewModel;
@@ -75,10 +75,11 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         public async void Initialize()
         {
             _eventSender.SendStartGameEvent();
+            _windowsRepository.Get<MobileInputWindow>().Open().Forget();
             await _loadingWindowViewModel.StartLoadingAsync(_assetLoader.GetLoadedAsyncOperations());
             await _windowsRepository.Get<LoadingWindow>().Close();
             CreateShip();
-            _inputHandler.Enable();
+            _keyBoardReadOnlyInputHandler.Enable();
             await _shipStatsWindowFactory.Create().Open();
             await _playerPointsWindowFactory.Create().Open();
             _spawnersAndControllersRepository.StartAllSpawners();
@@ -91,6 +92,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
                 _windowsRepository.TryCloseAndDestroyWindow<PlayerPointsWindow>(),
                 _windowsRepository.TryCloseAndDestroyWindow<GameOverWindow>());
             await _windowsRepository.Get<LoadingWindow>().Open();
+            _windowsRepository.Get<MobileInputWindow>().Close().Forget();
             _aiActorsRepository.Clear();
             _spawnersAndControllersRepository.Clear();
             _charactersRepository.ClearAllCharactersList();
@@ -108,7 +110,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
                     _eventSender.SendEndGameEvent();
                     TryWriteBestRecord();
                     _spawnersAndControllersRepository.StopAllSpawnerControllers();
-                    _inputHandler.Disable();
+                    _keyBoardReadOnlyInputHandler.Disable();
                     _gameLoop.Pause();
                     _charactersRepository.Ship.StopShip();
                     await _charactersRepository.Ship.PlayDeathAnimationAsync();

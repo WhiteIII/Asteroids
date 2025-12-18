@@ -1,6 +1,5 @@
 using System;
 using _Project.Scripts.Bootstrap.EntryPoints;
-using _Project.Scripts.Common;
 using _Project.Scripts.Common.Services.AssetsManagement;
 using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Ai.Base;
@@ -8,6 +7,7 @@ using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.Characters.Implementation;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.GameProgress;
+using _Project.Scripts.Gameplay.InputSystem;
 using _Project.Scripts.Gameplay.Services.AnalyticEmplementation;
 using _Project.Scripts.Gameplay.Services.Factories;
 using _Project.Scripts.Gameplay.Services.ObjectPools;
@@ -43,6 +43,7 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
         
         public override void InstallBindings()
         {
+            Container.BindInterfacesTo<MobileInputHandler>().AsSingle();
             Container.Bind<GameSettingsData>().FromInstance(_gameSettingsData).AsSingle();
             Container.Bind<AsteroidsData>().FromInstance(_asteroidsData).AsSingle();
             Container.Bind<UfoStatsData>().FromInstance(_ufoStatsData).AsSingle();

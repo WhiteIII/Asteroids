@@ -27,6 +27,7 @@ namespace _Project.Scripts.Bootstrap.Installers
         [Header("PrefabRefs:")] 
         [SerializeField] private AssetReference _loadingWindowAssetReference;
         [SerializeField] private AssetReference _bestRecordWindowAssetReference;
+        [SerializeField] private AssetReference _mobileInputWindowAssetReference;
 
         public override void InstallBindings()
         {
@@ -36,7 +37,6 @@ namespace _Project.Scripts.Bootstrap.Installers
             Container.Bind<Camera>().FromInstance(_camera).AsSingle();
             Container.Bind<AudioSource>().FromInstance(_audioSource).AsSingle();
             Container.Bind<ShipStatsData>().FromInstance(_shipStatsData).AsSingle();
-            Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle();
             Container.BindInterfacesAndSelfTo<CharactersRepository>().AsSingle();
             Container
                 .BindInterfacesTo<SpawnPositionHelper>()
@@ -52,6 +52,10 @@ namespace _Project.Scripts.Bootstrap.Installers
                 .Bind<AssetReference>()
                 .WithId("BestRecordWindowAssetReference")
                 .FromInstance(_bestRecordWindowAssetReference);
+            Container
+                .Bind<AssetReference>()
+                .WithId("MobileInputWindowAssetReference")
+                .FromInstance(_mobileInputWindowAssetReference);
 
             Container.Bind<PlayerBestRecordViewModel>().AsSingle();
             Container.BindFactoryCustomInterface<
@@ -60,12 +64,17 @@ namespace _Project.Scripts.Bootstrap.Installers
                     IFactory<BestRecordWindow>>()
                 .WithFactoryArguments(_bestRecordWindowAssetReference);
             Container.Bind<LoadingWindowViewModel>().AsSingle();
-            Container
-                .BindFactoryCustomInterface<
+            Container.BindFactoryCustomInterface<
                     LoadingWindow,
                     BaseWindowFactory<LoadingWindow, LoadingWindowViewModel>,
                     IFactory<LoadingWindow>>()
                 .WithFactoryArguments(_loadingWindowAssetReference);
+            Container.BindInterfacesAndSelfTo<MobileInputViewModel>().AsSingle();
+            Container.BindFactoryCustomInterface<
+                    MobileInputWindow,
+                    BaseWindowFactory<MobileInputWindow, MobileInputViewModel>,
+                    IFactory<MobileInputWindow>>()
+                .WithFactoryArguments(_mobileInputWindowAssetReference);
 
             Container.BindInterfacesTo<BootstrapEntryPoint>().AsSingle();
         }

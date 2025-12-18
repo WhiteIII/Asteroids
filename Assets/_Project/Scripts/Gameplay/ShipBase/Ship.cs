@@ -36,7 +36,7 @@ namespace _Project.Scripts.Gameplay.ShipBase
         private RotationController _rotationController;
         private LazerController _lazerController;
         private ActionOnGoingOutOrInCameraVisionField _cameraFieldService;
-        private IInputHandler _inputHandler;
+        private IReadOnlyInputHandler _inputHandler;
         private ShipStatsData _stats;
         
         public Observable<float> OnLazerCooldownChanged { get; private set; }
@@ -44,12 +44,12 @@ namespace _Project.Scripts.Gameplay.ShipBase
         
         [Inject]
         private void Construct(
-            IInputHandler inputHandler,
+            IReadOnlyInputHandler readOnlyInputHandler,
             ShipStatsData stats,
             WeaponsUsageCounter weaponsUsageCounter,
             IEventSender eventSender)
         {
-            _inputHandler = inputHandler;
+            _inputHandler = readOnlyInputHandler;
             _stats = stats;
             _weaponsUsageCounter = weaponsUsageCounter;
             _eventSender = eventSender;

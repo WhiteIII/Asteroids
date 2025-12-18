@@ -10,14 +10,14 @@ namespace _Project.Scripts.Gameplay.ShipBase
     public class ShipMovement : MonoBehaviour, IUpdatable
     {
         private Rigidbody2D _rigidbody;
-        private IInputHandler _inputHandler;
+        private IReadOnlyInputHandler _readOnlyInputHandler;
         private float _speed;
 
         [Inject]
-        private void Construct(IInputHandler inputHandler, ShipStatsData stats)
+        private void Construct(IReadOnlyInputHandler readOnlyInputHandler, ShipStatsData stats)
         {
             _speed = stats.MovementSpeed;
-            _inputHandler = inputHandler;
+            _readOnlyInputHandler = readOnlyInputHandler;
         } 
 
         private void Awake() => 
@@ -36,6 +36,6 @@ namespace _Project.Scripts.Gameplay.ShipBase
             _rigidbody.AddForce(
                 _rigidbody.transform.rotation * 
                 Vector2.up * 
-                (Mathf.Max(_inputHandler.Vertical.Value, 0f) * _speed * deltaTime), ForceMode2D.Force);
+                (Mathf.Max(_readOnlyInputHandler.Vertical.CurrentValue, 0f) * _speed * deltaTime), ForceMode2D.Force);
     }
 }

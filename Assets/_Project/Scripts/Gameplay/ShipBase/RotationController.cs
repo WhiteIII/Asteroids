@@ -11,13 +11,13 @@ namespace _Project.Scripts.Gameplay.ShipBase
     public class RotationController : MonoBehaviour, IUpdatable
     {
         private Character _character;
-        private IInputHandler _inputHandler;
+        private IReadOnlyInputHandler _readOnlyInputHandler;
         private float _rotationSpeed;
 
         [Inject]
-        private void Construct(IInputHandler inputHandler, ShipStatsData stats)
+        private void Construct(IReadOnlyInputHandler readOnlyInputHandler, ShipStatsData stats)
         {
-            _inputHandler = inputHandler;
+            _readOnlyInputHandler = readOnlyInputHandler;
             _rotationSpeed = stats.RotationSpeed;
         }
 
@@ -32,7 +32,7 @@ namespace _Project.Scripts.Gameplay.ShipBase
             transform.Rotate(
                 0f,
                 0f,
-                -_inputHandler.Horizontal.Value * _rotationSpeed * deltaTime);
+                -_readOnlyInputHandler.Horizontal.CurrentValue * _rotationSpeed * deltaTime);
         }
 
         public void SetRotation(Quaternion rotation) => 

@@ -698,6 +698,12 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
+  _mobileInputWindowAssetReference:
+    m_AssetGUID: 50d6ecd70f0497a41872c799c23e69ae
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
 --- !u!114 &1616966649
 MonoBehaviour:
   m_ObjectHideFlags: 0
