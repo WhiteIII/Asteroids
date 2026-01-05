@@ -1,4 +1,5 @@
 using System;
+using _Project.Scripts.Common.Services.Ads.Base;
 using _Project.Scripts.Common.Services.AssetsManagement;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.GameProgress;
@@ -35,6 +36,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly SaveLoad _saveLoad;
         private readonly IPointsAndKillsCounterCounter _pointsAndKillsCounterCounter;
         private readonly StartGameAndEndGameEventSender _eventSender;
+        private readonly IInterstitialAd _interstitialAd;
 
         public GameplayEntryPoint(
             IFactory<ShipSpawnArgs, Ship> shipFactory,
@@ -52,7 +54,8 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             LoadingWindowViewModel loadingWindowViewModel,
             IPointsAndKillsCounterCounter pointsAndKillsCounterCounter, 
             SaveLoad saveLoad, 
-            StartGameAndEndGameEventSender eventSender)
+            StartGameAndEndGameEventSender eventSender, 
+            IInterstitialAd interstitialAd)
         {
             _shipFactory = shipFactory;
             _charactersRepository = charactersRepository;
@@ -70,6 +73,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _pointsAndKillsCounterCounter = pointsAndKillsCounterCounter;
             _saveLoad = saveLoad;
             _eventSender = eventSender;
+            _interstitialAd = interstitialAd;
         }
 
         public async void Initialize()
@@ -83,6 +87,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             await _shipStatsWindowFactory.Create().Open();
             await _playerPointsWindowFactory.Create().Open();
             _spawnersAndControllersRepository.StartAllSpawners();
+            await _interstitialAd.LoadAdAsync();
         }
 
         private async UniTask OnQuitEvent()
@@ -91,6 +96,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
                 _windowsRepository.TryCloseAndDestroyWindow<ShipStatsWindow>(),
                 _windowsRepository.TryCloseAndDestroyWindow<PlayerPointsWindow>(),
                 _windowsRepository.TryCloseAndDestroyWindow<GameOverWindow>());
+            await _interstitialAd.ShowAdAsync();
             await _windowsRepository.Get<LoadingWindow>().Open();
             _windowsRepository.Get<MobileInputWindow>().Close().Forget();
             _aiActorsRepository.Clear();

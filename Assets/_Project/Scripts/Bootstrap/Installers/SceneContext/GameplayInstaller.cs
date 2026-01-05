@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.Bootstrap.EntryPoints;
+using _Project.Scripts.Common.Services.Ads.Implementation;
 using _Project.Scripts.Common.Services.AssetsManagement;
 using _Project.Scripts.Data;
 using _Project.Scripts.Gameplay.Ai.Base;
@@ -44,6 +45,7 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
         public override void InstallBindings()
         {
             Container.BindInterfacesTo<MobileInputHandler>().AsSingle();
+            Container.BindInterfacesTo<UnityAdsInterstitial>().AsSingle();
             Container.Bind<GameSettingsData>().FromInstance(_gameSettingsData).AsSingle();
             Container.Bind<AsteroidsData>().FromInstance(_asteroidsData).AsSingle();
             Container.Bind<UfoStatsData>().FromInstance(_ufoStatsData).AsSingle();
