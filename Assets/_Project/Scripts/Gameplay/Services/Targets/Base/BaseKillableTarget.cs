@@ -6,8 +6,10 @@ namespace _Project.Scripts.Gameplay.Services.Targets.Base
 {
     public class BaseKillableTarget : MonoBehaviour, IKillableTargetWithReactiveProperty
     {
-        public Subject<Unit> OnKill { get; } = new();
+        public Observable<Unit> OnKill => _onKillSubject;
 
+        private readonly Subject<Unit> _onKillSubject = new();
+        
         private Action _onKill;
 
         public void SetOnKillEvent(Action onKill) => 
@@ -16,7 +18,7 @@ namespace _Project.Scripts.Gameplay.Services.Targets.Base
         public void Kill()
         {
             _onKill?.Invoke();
-            OnKill.OnNext(Unit.Default);
+            _onKillSubject.OnNext(Unit.Default);
         }
     }
 }

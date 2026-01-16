@@ -26,5 +26,8 @@ namespace _Project.Scripts.View.Implementation
             
             ViewModel.SetObservables(fireButtonObservable, lazerFireButtonObservable, axis);
         }
+
+        protected override void OnOpenAnimationStart() => 
+            _movementStick.MoveToInitialPosition();
     }
 }

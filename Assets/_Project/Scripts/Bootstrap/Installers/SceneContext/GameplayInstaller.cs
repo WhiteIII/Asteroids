@@ -1,4 +1,3 @@
-using System;
 using _Project.Scripts.Bootstrap.EntryPoints;
 using _Project.Scripts.Common.Services.Ads.Implementation;
 using _Project.Scripts.Common.Services.AssetsManagement;
@@ -18,7 +17,6 @@ using _Project.Scripts.Gameplay.ShipBase;
 using _Project.Scripts.View.Implementation;
 using _Project.Scripts.View.Services.Factories;
 using _Project.Scripts.ViewModel.Implementation;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
@@ -46,6 +44,7 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
         {
             Container.BindInterfacesTo<MobileInputHandler>().AsSingle();
             Container.BindInterfacesTo<UnityAdsInterstitial>().AsSingle();
+            Container.BindInterfacesTo<UnityRewardedAd>().AsSingle();
             Container.Bind<GameSettingsData>().FromInstance(_gameSettingsData).AsSingle();
             Container.Bind<AsteroidsData>().FromInstance(_asteroidsData).AsSingle();
             Container.Bind<UfoStatsData>().FromInstance(_ufoStatsData).AsSingle();
@@ -91,7 +90,7 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
                 .WithArguments(_gameSettingsData.UfoSpawnCoolDown);
             Container.Bind<SpawnersAndControllersRepository>().AsSingle();
             
-            Container.Bind<GameOverWindowViewModel>().AsSingle();
+            Container.BindInterfacesAndSelfTo<GameOverWindowViewModel>().AsSingle();
             Container.Bind<ShipStatsViewModel>().AsSingle();
             Container.Bind<PlayerPointsViewModel>().AsSingle();
             
@@ -103,10 +102,11 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
                 .WithFactoryArguments(_playerPointsWindowPrefabReference);
             Container
                 .BindFactoryCustomInterface<
-                    Func<UniTask>,
+                    OnQuitEvent,
+                    OnReviveEvent,
                     GameOverWindow, 
                     GameOverWindowFactory,
-                    IFactory<Func<UniTask>, GameOverWindow>>()
+                    IFactory<OnQuitEvent, OnReviveEvent, GameOverWindow>>()
                 .WithFactoryArguments(_gameOverWindowPrefabReference);
             Container
                 .BindFactoryCustomInterface<

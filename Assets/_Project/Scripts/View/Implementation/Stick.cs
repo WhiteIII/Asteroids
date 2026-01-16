@@ -60,7 +60,7 @@ namespace _Project.Scripts.View.Implementation
             _rectTransform.localPosition = localPoint;
         }
         
-        private void MoveToInitialPosition() => 
+        public void MoveToInitialPosition() => 
             _rectTransform.anchoredPosition = _initialAnchoredPosition;
         
         private void MoveTo(Vector2 cursorPosition)

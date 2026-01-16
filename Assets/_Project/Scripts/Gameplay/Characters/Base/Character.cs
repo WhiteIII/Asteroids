@@ -47,6 +47,9 @@ namespace _Project.Scripts.Gameplay.Characters.Base
         public void Disable() => 
             gameObject.SetActive(false);
 
+        public void EnableFbx() => 
+            _fbx.SetActive(true);
+        
         public void DisableFbx() => 
             _fbx.SetActive(false);
         

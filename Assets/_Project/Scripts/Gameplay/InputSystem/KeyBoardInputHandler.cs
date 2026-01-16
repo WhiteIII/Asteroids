@@ -4,7 +4,7 @@ using Zenject;
 
 namespace _Project.Scripts.Gameplay.InputSystem
 {
-    public class KeyBoardReadOnlyInputHandler : IReadOnlyInputHandler, IInputHandlerController, ITickable
+    public class KeyBoardInputHandler : IReadOnlyInputHandler, IInputHandlerController, ITickable
     {
         private const string VERTICAL = "Vertical";
         private const string HORIZONTAL = "Horizontal";

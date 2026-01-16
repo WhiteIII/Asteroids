@@ -46,10 +46,7 @@ namespace _Project.Scripts.Gameplay.Services.Components
             return bullet;
         }
         
-        private Quaternion GetRotation(Vector3 direction)
-        {
-            float angle = Atan2(direction.y, direction.x) * Rad2Deg;
-            return Quaternion.Euler(0, 0, angle);
-        }
+        private Quaternion GetRotation(Vector3 direction) => 
+            Quaternion.Euler(0, 0, Atan2(direction.y, direction.x) * Rad2Deg);
     }
 }

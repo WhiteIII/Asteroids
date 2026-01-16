@@ -18,6 +18,21 @@ namespace _Project.Scripts.View.Services
             }
             return null;
         }
+
+        public bool TryGet<T>(out T foundWindow)
+            where T : class, IWindow
+        {
+            foreach (IWindow window in _windows)
+            {
+                if (window is T result)
+                {
+                    foundWindow = result;
+                    return true;
+                }
+            }
+            foundWindow = null;
+            return false;
+        }
         
         public void Register(IWindow window) => 
             _windows.Add(window);

@@ -4,6 +4,6 @@ namespace _Project.Scripts.Gameplay.Services.Targets.Base
 {
     public interface IKillableTargetWithReactiveProperty : IKillableTarget
     {
-        Subject<Unit> OnKill { get; }
+        Observable<Unit> OnKill { get; }
     }
 }

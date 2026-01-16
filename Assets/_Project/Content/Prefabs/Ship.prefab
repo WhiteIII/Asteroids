@@ -5177,6 +5177,7 @@ GameObject:
   - component: {fileID: 268159401525218690}
   - component: {fileID: 4081217368250372794}
   - component: {fileID: 4192948313243724953}
+  - component: {fileID: 435131992983289083}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -5293,6 +5294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _fbx: {fileID: 9142624310102159014}
   _deathAnimationController: {fileID: 5739856350888205254}
+  _immortalTime: 1.5
 --- !u!114 &4508245367479432009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5382,6 +5384,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioClip: {fileID: 8300000, guid: 808d3a3daa3b8c6408a0e023e96f23db, type: 3}
+--- !u!114 &435131992983289083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6278801559816506689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 260ddf878ff94f7b87ec55b3a08ce409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fbx: {fileID: 9142624310102159014}
+  _coolDown: 0.15
 --- !u!1 &8425278884498808795
 GameObject:
   m_ObjectHideFlags: 0

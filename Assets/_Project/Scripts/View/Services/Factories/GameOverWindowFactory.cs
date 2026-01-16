@@ -1,12 +1,11 @@
-using System;
 using _Project.Scripts.View.Implementation;
 using _Project.Scripts.ViewModel.Implementation;
-using Cysharp.Threading.Tasks;
 using UnityEngine.AddressableAssets;
 
 namespace _Project.Scripts.View.Services.Factories
 {
-    public class GameOverWindowFactory : BaseWindowFactory<GameOverWindow, GameOverWindowViewModel, Func<UniTask>>
+    public class GameOverWindowFactory : BaseWindowFactory<GameOverWindow, GameOverWindowViewModel, 
+        OnQuitEvent, OnReviveEvent>
     {
         public GameOverWindowFactory(
             GameOverWindowViewModel viewModel,
@@ -15,10 +14,11 @@ namespace _Project.Scripts.View.Services.Factories
         {
         }
 
-        public override GameOverWindow Create(Func<UniTask> onQiutEvent)
+        public override GameOverWindow Create(OnQuitEvent onQuitEvent, OnReviveEvent onReviveEvent)
         {
             GameOverWindow window = CreateFromCreator();
-            ViewModel.SetOnQuitEvent(onQiutEvent);
+            ViewModel.SetOnQuitEvent(onQuitEvent);
+            ViewModel.SetOnReviveEvent(onReviveEvent);
             return window;
         }
     }

@@ -23,9 +23,11 @@ namespace _Project.Scripts.Gameplay.ShipBase
     [RequireComponent(typeof(RotationController))]
     [RequireComponent(typeof(LazerController))]
     [RequireComponent(typeof(ActionOnGoingOutOrInCameraVisionField))]
+    [RequireComponent(typeof(ImmortalAnimation))]
     public class Ship : Character, IInitializableUpdatableObject
     {
         [SerializeField] private DeathAnimationController _deathAnimationController;
+        [SerializeField] private float _immortalTime;
         
         private readonly CancellationTokenSource _cancellationTokenSource = new();
         
@@ -38,6 +40,8 @@ namespace _Project.Scripts.Gameplay.ShipBase
         private ActionOnGoingOutOrInCameraVisionField _cameraFieldService;
         private IReadOnlyInputHandler _inputHandler;
         private ShipStatsData _stats;
+        private ImmortalAnimation _immortalAnimation;
+        private bool _isImmortal;
         
         public Observable<float> OnLazerCooldownChanged { get; private set; }
         public Observable<int> OnLazerChargeCountChanged { get; private set; }
@@ -62,6 +66,7 @@ namespace _Project.Scripts.Gameplay.ShipBase
             _rotationController = GetComponent<RotationController>();
             _lazerController = GetComponent<LazerController>();
             _cameraFieldService = GetComponent<ActionOnGoingOutOrInCameraVisionField>();
+            _immortalAnimation = GetComponent<ImmortalAnimation>();
             
             OnLazerChargeCountChanged = _lazerController.CurrentChargesCount;
             OnLazerCooldownChanged = _lazerController.CurrentCoolDown;
@@ -82,6 +87,7 @@ namespace _Project.Scripts.Gameplay.ShipBase
                 .Where(_ => _lazerController.AttackIsDone)
                 .Subscribe(_ => ShootByLazer())
                 .AddTo(this);
+            _isImmortal = false;
         }
         
         public IGameLoopObject[] GetAllGameLoopObjects() => 
@@ -102,6 +108,7 @@ namespace _Project.Scripts.Gameplay.ShipBase
         public void SetOnDeadEvent(Action onDeadEvent) =>
             GetComponent<ShipTarget>()
                 .OnKill
+                .Where(_ => _isImmortal == false)
                 .Subscribe(_ => onDeadEvent?.Invoke())
                 .AddTo(this);
 
@@ -110,7 +117,17 @@ namespace _Project.Scripts.Gameplay.ShipBase
             DisableFbx();
             await _deathAnimationController.PlayAnimationAsync();
         }
-        
+
+        public async void Revive()
+        {
+            EnableFbx();
+            _isImmortal = true;
+            _immortalAnimation.StartAnimation();
+            await UniTask.WaitForSeconds(_immortalTime);
+            _immortalAnimation.StopAnimation();
+            _isImmortal =  false;
+        }
+
         public void StopShip() => 
             _shipMovement.StopShip();
 

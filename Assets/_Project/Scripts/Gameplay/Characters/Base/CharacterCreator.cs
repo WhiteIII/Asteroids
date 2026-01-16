@@ -1,4 +1,3 @@
-using _Project.Scripts.Common;
 using _Project.Scripts.Common.Services.AssetsManagement;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.Services.Repositories;

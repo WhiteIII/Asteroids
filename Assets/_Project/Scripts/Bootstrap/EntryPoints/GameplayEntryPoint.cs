@@ -26,10 +26,10 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly SpawnersAndControllersRepository _spawnersAndControllersRepository;
         private readonly IFactory<ShipStatsWindow> _shipStatsWindowFactory;
         private readonly IFactory<PlayerPointsWindow> _playerPointsWindowFactory;
-        private readonly IFactory<Func<UniTask>, GameOverWindow> _gameOverWindowFactory;
+        private readonly IFactory<OnQuitEvent, OnReviveEvent, GameOverWindow> _gameOverWindowFactory;
         private readonly IGameLoop _gameLoop;
         private readonly WindowsRepository _windowsRepository;
-        private readonly IInputHandlerController _keyBoardReadOnlyInputHandler;
+        private readonly IInputHandlerController _inputHandler;
         private readonly AssetLoader _assetLoader;
         private readonly LocalAssetsProvider _localAssetsProvider;
         private readonly LoadingWindowViewModel _loadingWindowViewModel;
@@ -46,9 +46,9 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             IFactory<ShipStatsWindow> shipStatsWindowFactory, 
             WindowsRepository windowsRepository, 
             IFactory<PlayerPointsWindow> playerPointsWindowFactory, 
-            IFactory<Func<UniTask>, GameOverWindow> gameOverWindowFactory,
+            IFactory<OnQuitEvent, OnReviveEvent, GameOverWindow> gameOverWindowFactory,
             IGameLoop gameLoop,
-            IInputHandlerController keyBoardReadOnlyInputHandler, 
+            IInputHandlerController inputHandler, 
             AssetLoader assetLoader, 
             LocalAssetsProvider localAssetsProvider, 
             LoadingWindowViewModel loadingWindowViewModel,
@@ -66,7 +66,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _playerPointsWindowFactory = playerPointsWindowFactory;
             _gameOverWindowFactory = gameOverWindowFactory;
             _gameLoop = gameLoop;
-            _keyBoardReadOnlyInputHandler = keyBoardReadOnlyInputHandler;
+            _inputHandler = inputHandler;
             _assetLoader = assetLoader;
             _localAssetsProvider = localAssetsProvider;
             _loadingWindowViewModel = loadingWindowViewModel;
@@ -83,7 +83,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             await _loadingWindowViewModel.StartLoadingAsync(_assetLoader.GetLoadedAsyncOperations());
             await _windowsRepository.Get<LoadingWindow>().Close();
             CreateShip();
-            _keyBoardReadOnlyInputHandler.Enable();
+            _inputHandler.Enable();
             await _shipStatsWindowFactory.Create().Open();
             await _playerPointsWindowFactory.Create().Open();
             _spawnersAndControllersRepository.StartAllSpawners();
@@ -116,14 +116,30 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
                     _eventSender.SendEndGameEvent();
                     TryWriteBestRecord();
                     _spawnersAndControllersRepository.StopAllSpawnerControllers();
-                    _keyBoardReadOnlyInputHandler.Disable();
+                    _inputHandler.Disable();
                     _gameLoop.Pause();
                     _charactersRepository.Ship.StopShip();
                     await _charactersRepository.Ship.PlayDeathAnimationAsync();
-                    _gameOverWindowFactory.Create(OnQuitEvent).Open().Forget();
+                    if (_windowsRepository.TryGet(out MobileInputWindow mobileInputWindow))
+                        await mobileInputWindow.Close();
+                    if (_windowsRepository.TryGet(out GameOverWindow gameOverWindow))
+                        await gameOverWindow.Open();
+                    else
+                        await _gameOverWindowFactory.Create(OnQuitEvent, OnPlayerRevive).Open();
                 }
             });
 
+        private async UniTask OnPlayerRevive()
+        {
+            await _windowsRepository.Get<GameOverWindow>().Close();
+            if (_windowsRepository.TryGet(out MobileInputWindow mobileInputWindow))
+                await mobileInputWindow.Open();
+            _charactersRepository.Ship.Revive();
+            _inputHandler.Enable();
+            _gameLoop.Resume();
+            _spawnersAndControllersRepository.StartAllSpawners();
+        }
+        
         private void TryWriteBestRecord()
         {
             PlayerSaveLoadData saveLoadData = _saveLoad.Load();
