@@ -1,5 +1,4 @@
 using System;
-using _Project.Scripts.Common;
 using _Project.Scripts.Common.Services.AssetsManagement;
 using _Project.Scripts.View.Implementation;
 using _Project.Scripts.View.Services;
@@ -34,14 +33,14 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         public async void Initialize()
         {
             await _loadingWindowViewModel.StartLoadingAsync(_assetLoader.GetLoadedAsyncOperations());
-            await _windowsRepository.Get<LoadingWindow>().Close();
-            await _menuWindowFactory.Create(OnQuitAsync).Open();
+            await _windowsRepository.Get<LoadingWindow>().CloseAsync();
+            await _menuWindowFactory.Create(OnQuitAsync).OpenAsync();
         }
 
         private async UniTask OnQuitAsync()
         {
             await _windowsRepository.TryCloseAndDestroyWindow<MenuWindow>();
-            await _windowsRepository.Get<LoadingWindow>().Open();
+            await _windowsRepository.Get<LoadingWindow>().OpenAsync();
             _localAssetsProvider.ReleaseAllAssets();
         }
     }

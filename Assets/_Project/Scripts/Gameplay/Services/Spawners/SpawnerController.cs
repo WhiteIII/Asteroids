@@ -9,19 +9,19 @@ namespace _Project.Scripts.Gameplay.Services.Spawners
         where T : ISpawner
     {
         private readonly T _spawner;
-        private readonly float _spawnCooldown;
         
+        private float _spawnCooldown;
         private float _currentSpawnCooldown;
         private bool _isActive;
         
         private bool InCooldown => _currentSpawnCooldown > .1f;
                 
-        public SpawnerController(T spawner, float spawnCooldown)
-        {
+        public SpawnerController(T spawner) => 
             _spawner = spawner;
-            _spawnCooldown = spawnCooldown;
-        }
-        
+
+        public void SetSpawnCooldown(float cooldown) => 
+            _spawnCooldown = cooldown;
+
         public void Tick()
         {
             if (_isActive == false)
@@ -41,10 +41,11 @@ namespace _Project.Scripts.Gameplay.Services.Spawners
         
         public void Disable() => 
             _isActive = false;
+
     }
 
     public interface ISpawnerController : IEnableAndDisableItem
     {
-        
+        void SetSpawnCooldown(float cooldown);
     }
 }

@@ -1,7 +1,7 @@
 using _Project.Scripts.Bootstrap.EntryPoints;
 using _Project.Scripts.Common.Services.Ads.Implementation;
 using _Project.Scripts.Common.Services.AssetsManagement;
-using _Project.Scripts.Data;
+using _Project.Scripts.Data.Implementation;
 using _Project.Scripts.Gameplay.Ai.Base;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.Characters.Implementation;
@@ -25,11 +25,6 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
 {
     internal class GameplayInstaller : MonoInstaller
     {
-        [Header("Data")]
-        [SerializeField] private GameSettingsData _gameSettingsData;
-        [SerializeField] private AsteroidsData _asteroidsData;
-        [SerializeField] private UfoStatsData _ufoStatsData;
-        
         [Header("AssetForGameplayScene:")]
         [SerializeField] private AssetReference _asteroidPrefabReference;
         [SerializeField] private AssetReference _shipPrefabReference;
@@ -45,9 +40,6 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
             Container.BindInterfacesTo<MobileInputHandler>().AsSingle();
             Container.BindInterfacesTo<UnityAdsInterstitial>().AsSingle();
             Container.BindInterfacesTo<UnityRewardedAd>().AsSingle();
-            Container.Bind<GameSettingsData>().FromInstance(_gameSettingsData).AsSingle();
-            Container.Bind<AsteroidsData>().FromInstance(_asteroidsData).AsSingle();
-            Container.Bind<UfoStatsData>().FromInstance(_ufoStatsData).AsSingle();
             Container.Bind<AssetLoader>().AsSingle().WithArguments(new[]
             {
                 _asteroidPrefabReference, 
@@ -82,12 +74,10 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
             Container.BindInterfacesAndSelfTo<UfoSpawner>().AsSingle();
             Container
                 .BindInterfacesAndSelfTo<SpawnerController<AsteroidsSpawner>>()
-                .AsSingle()
-                .WithArguments(_gameSettingsData.AsteroidsSpawnCoolDown);
+                .AsSingle();
             Container
                 .BindInterfacesAndSelfTo<SpawnerController<UfoSpawner>>()
-                .AsSingle()
-                .WithArguments(_gameSettingsData.UfoSpawnCoolDown);
+                .AsSingle();
             Container.Bind<SpawnersAndControllersRepository>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<GameOverWindowViewModel>().AsSingle();

@@ -3,6 +3,9 @@ using System.Threading;
 using _Project.Scripts.Common.Services.Analytics.Base;
 using _Project.Scripts.Common.Services.Analytics.Implementation.Data;
 using _Project.Scripts.Data;
+using _Project.Scripts.Data.Base;
+using _Project.Scripts.Data.Implementation;
+using _Project.Scripts.Data.Services.Repositories.Base;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.GameProgress;
@@ -39,7 +42,7 @@ namespace _Project.Scripts.Gameplay.ShipBase
         private LazerController _lazerController;
         private ActionOnGoingOutOrInCameraVisionField _cameraFieldService;
         private IReadOnlyInputHandler _inputHandler;
-        private ShipStatsData _stats;
+        private ShipStatsConfig _stats;
         private ImmortalAnimation _immortalAnimation;
         private bool _isImmortal;
         
@@ -49,12 +52,12 @@ namespace _Project.Scripts.Gameplay.ShipBase
         [Inject]
         private void Construct(
             IReadOnlyInputHandler readOnlyInputHandler,
-            ShipStatsData stats,
+            IDataRepository dataRepository,
             WeaponsUsageCounter weaponsUsageCounter,
             IEventSender eventSender)
         {
             _inputHandler = readOnlyInputHandler;
-            _stats = stats;
+            _stats = dataRepository.GetData<ShipStatsConfig>();
             _weaponsUsageCounter = weaponsUsageCounter;
             _eventSender = eventSender;
         }

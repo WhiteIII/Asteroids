@@ -1,8 +1,8 @@
 using _Project.Scripts.Bootstrap.EntryPoints;
-using _Project.Scripts.Gameplay.InputSystem;
+using _Project.Scripts.Common.Services.RemoteConfig.Implementation;
 using _Project.Scripts.Gameplay.Services.Repositories;
 using _Project.Scripts.Gameplay.Services.Spawners;
-using _Project.Scripts.Data;
+using _Project.Scripts.Data.Services.Repositories.Implementation;
 using _Project.Scripts.View.Implementation;
 using _Project.Scripts.View.Services;
 using _Project.Scripts.View.Services.Factories;
@@ -15,9 +15,8 @@ namespace _Project.Scripts.Bootstrap.Installers
 {
     internal class BootstrapInstaller : MonoInstaller
     {
-        [Header("Data:")] 
-        [SerializeField] private GameSettingsData _gameSettingsData;
-        [SerializeField] private ShipStatsData _shipStatsData;
+        [Header("Data")]
+        [SerializeField] private LocalDataRepository _localDataRepository;
 
         [Header("OnScene:")] 
         [SerializeField] private Camera _camera;
@@ -31,17 +30,18 @@ namespace _Project.Scripts.Bootstrap.Installers
 
         public override void InstallBindings()
         {
+            Container.BindInterfacesTo<FireBaseRemoteConfigService>().AsSingle();
+            Container.BindInterfacesTo<RemoteConfigDefaultsInitializer>().AsSingle().WithArguments(_localDataRepository);
+            Container.BindInterfacesTo<RemoteConfigRepository>().AsSingle();
             Container.Bind<UIRoot>().FromInstance(_uiRoot).AsSingle();
             Container.Bind<WindowsRepository>().AsSingle();
             Container.Bind<WindowCreator>().AsSingle();
             Container.Bind<Camera>().FromInstance(_camera).AsSingle();
             Container.Bind<AudioSource>().FromInstance(_audioSource).AsSingle();
-            Container.Bind<ShipStatsData>().FromInstance(_shipStatsData).AsSingle();
             Container.BindInterfacesAndSelfTo<CharactersRepository>().AsSingle();
             Container
                 .BindInterfacesTo<SpawnPositionHelper>()
                 .AsSingle()
-                .WithArguments(_gameSettingsData.SpawnOffsetOutSideCameraVision)
                 .MoveIntoAllSubContainers();
 
             Container

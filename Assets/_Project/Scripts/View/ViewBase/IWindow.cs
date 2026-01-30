@@ -12,7 +12,7 @@ namespace _Project.Scripts.View
 
     public interface IWindow
     {
-        UniTask Open();
-        UniTask Close();
+        UniTask OpenAsync();
+        UniTask CloseAsync();
     }
 }

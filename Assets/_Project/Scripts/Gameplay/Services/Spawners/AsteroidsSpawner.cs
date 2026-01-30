@@ -1,5 +1,8 @@
 using System;
 using _Project.Scripts.Data;
+using _Project.Scripts.Data.Base;
+using _Project.Scripts.Data.Implementation;
+using _Project.Scripts.Data.Services.Repositories.Base;
 using _Project.Scripts.Gameplay.Characters;
 using _Project.Scripts.Gameplay.Services.ObjectPools;
 using UnityEngine;
@@ -12,17 +15,17 @@ namespace _Project.Scripts.Gameplay.Services.Spawners
         private readonly AsteroidsPool _asteroidsPool;
         private readonly SmallAsteroidsPool _smallAsteroidsPool;
         private readonly ISpawnPositionHelper _positionHelper;
-        private readonly AsteroidsData _asteroidsData;
+        private readonly AsteroidsConfig _asteroidsData;
 
         public AsteroidsSpawner(
             AsteroidsPool asteroidsPool,
             ISpawnPositionHelper positionHelper,
-            AsteroidsData asteroidsData,
+            IDataRepository dataRepository,
             SmallAsteroidsPool smallAsteroidsPool)
         {
             _asteroidsPool = asteroidsPool;
             _positionHelper = positionHelper;
-            _asteroidsData = asteroidsData;
+            _asteroidsData = dataRepository.GetData<AsteroidsConfig>();
             _smallAsteroidsPool = smallAsteroidsPool;
         }
 

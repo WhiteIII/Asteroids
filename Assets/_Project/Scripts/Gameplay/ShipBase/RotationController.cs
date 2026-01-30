@@ -1,4 +1,7 @@
 using _Project.Scripts.Data;
+using _Project.Scripts.Data.Base;
+using _Project.Scripts.Data.Implementation;
+using _Project.Scripts.Data.Services.Repositories.Base;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.InputSystem;
@@ -15,10 +18,10 @@ namespace _Project.Scripts.Gameplay.ShipBase
         private float _rotationSpeed;
 
         [Inject]
-        private void Construct(IReadOnlyInputHandler readOnlyInputHandler, ShipStatsData stats)
+        private void Construct(IReadOnlyInputHandler readOnlyInputHandler, IDataRepository dataRepository)
         {
             _readOnlyInputHandler = readOnlyInputHandler;
-            _rotationSpeed = stats.RotationSpeed;
+            _rotationSpeed = dataRepository.GetData<ShipStatsConfig>().RotationSpeed;
         }
 
         private void Awake() => 

@@ -1,4 +1,7 @@
 using _Project.Scripts.Data;
+using _Project.Scripts.Data.Base;
+using _Project.Scripts.Data.Implementation;
+using _Project.Scripts.Data.Services.Repositories.Base;
 using _Project.Scripts.Gameplay.Services.Repositories;
 using _Project.Scripts.ViewModel.Base;
 using R3;
@@ -19,9 +22,10 @@ namespace _Project.Scripts.ViewModel.Implementation
         public int MaxChargeCount { get; private set; } 
         public float LazerCooldown { get; private set; }
         
-        public ShipStatsViewModel(ShipStatsData stats, ICharacterRepository characterRepository)
+        public ShipStatsViewModel(IDataRepository dataRepository, ICharacterRepository characterRepository)
         {
             _characterRepository = characterRepository;
+            ShipStatsConfig stats = dataRepository.GetData<ShipStatsConfig>();
             MaxChargeCount = stats.LazerChargeCount;
             LazerCooldown = stats.LazerRechargeTime;
         }

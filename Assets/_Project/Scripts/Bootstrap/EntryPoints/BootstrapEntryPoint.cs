@@ -1,5 +1,5 @@
 using _Project.Scripts.Common.Services.AssetsManagement;
-using _Project.Scripts.Data;
+using _Project.Scripts.Common.Services.RemoteConfig.Base;
 using _Project.Scripts.SceneSwitcher;
 using _Project.Scripts.View.Implementation;
 using Cysharp.Threading.Tasks;
@@ -18,7 +18,8 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly AssetReference _loadingWindowAssetReference;
         private readonly AssetReference _bestRecordWindowAssetReference;
         private readonly AssetReference _mobileInputWindowAssetReference;
-
+        private readonly IRemoteConfigService _remoteConfigService;
+        
         public BootstrapEntryPoint(
             ISceneController sceneController,
             IFactory<LoadingWindow> loadingWindowFactory,
@@ -27,7 +28,8 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             [Inject(Id = "BestRecordWindowAssetReference")]AssetReference bestRecordWindowAssetReference, 
             [Inject(Id = "MobileInputWindowAssetReference")]AssetReference mobileInputWindowAssetReference,
             IFactory<BestRecordWindow> bestRecordWindowFactory,
-            IFactory<MobileInputWindow> mobileInputWindowFactory)
+            IFactory<MobileInputWindow> mobileInputWindowFactory, 
+            IRemoteConfigService remoteConfigService)
         {
             _sceneController = sceneController;
             _loadingWindowFactory = loadingWindowFactory;
@@ -37,6 +39,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _mobileInputWindowAssetReference = mobileInputWindowAssetReference;
             _bestRecordWindowFactory = bestRecordWindowFactory;
             _mobileInputWindowFactory = mobileInputWindowFactory;
+            _remoteConfigService = remoteConfigService;
         }
 
         public async void Initialize()
@@ -46,9 +49,11 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             await _localAssetsProvider.LoadAsync(_mobileInputWindowAssetReference);
             _loadingWindowFactory.Create();
             _bestRecordWindowFactory.Create();
-            _mobileInputWindowFactory.Create().Close().Forget();
+            _mobileInputWindowFactory.Create().CloseAsync().Forget();
 
             await Firebase.FirebaseApp.CheckAndFixDependenciesAsync();
+            await _remoteConfigService.FetchAsync();
+            await _remoteConfigService.ActivateAsync();
             
             _sceneController.GoToMenu();
         }

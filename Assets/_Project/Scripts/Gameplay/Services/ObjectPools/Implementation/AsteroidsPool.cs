@@ -1,5 +1,7 @@
 using System;
-using _Project.Scripts.Data;
+using _Project.Scripts.Data.Base;
+using _Project.Scripts.Data.Implementation;
+using _Project.Scripts.Data.Services.Repositories.Base;
 using _Project.Scripts.Gameplay.Characters;
 using _Project.Scripts.Gameplay.Characters.Base;
 using UnityEngine;
@@ -15,10 +17,11 @@ namespace _Project.Scripts.Gameplay.Services.ObjectPools
             CharacterCreator characterCreator,
             AssetReference asteroidAssetReference,
             SmallAsteroidsPool smallAsteroidsPool,
-            AsteroidsData asteroidsData) : 
+            IDataRepository dataRepository) : 
             base(
                 () =>
                 {
+                    AsteroidsConfig asteroidsData = dataRepository.GetData<AsteroidsConfig>();
                     Asteroid asteroid = characterCreator.CreateGameLoopCharacter<Asteroid>(asteroidAssetReference);
                     asteroid.SetupAsteroid(() => {
                         int spawnCount = Random.Range(

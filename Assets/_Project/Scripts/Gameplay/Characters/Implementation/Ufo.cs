@@ -1,4 +1,7 @@
 using _Project.Scripts.Data;
+using _Project.Scripts.Data.Base;
+using _Project.Scripts.Data.Implementation;
+using _Project.Scripts.Data.Services.Repositories.Base;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.GameProgress;
 using _Project.Scripts.Gameplay.Services.Components;
@@ -23,7 +26,7 @@ namespace _Project.Scripts.Gameplay.Characters.Implementation
         private ICharacterRepository _characterRepository;
         private IAiAgentMovement _movement;
         private PointsAndKillsAndKillsCounterCounter _pointsAndKillsAndKillsCounterCounter;
-        private UfoStatsData _stats;
+        private UfoStatsConfig _stats;
         private float _currentCooldown;
 
         public bool PlayerIsClose => Distance(
@@ -32,12 +35,14 @@ namespace _Project.Scripts.Gameplay.Characters.Implementation
         public bool InCooldown => _currentCooldown > .1f;
         public bool IsMovingStoped { get; private set; }
 
-        [Inject]
-        private void Construct(ICharacterRepository repository, UfoStatsData stats, PointsAndKillsAndKillsCounterCounter pointsAndKillsAndKillsCounterCounter)
+        [Inject] private void Construct(
+            ICharacterRepository repository, 
+            IDataRepository dataRepository, 
+            PointsAndKillsAndKillsCounterCounter pointsAndKillsAndKillsCounterCounter)
         {
             _characterRepository = repository;
             _pointsAndKillsAndKillsCounterCounter = pointsAndKillsAndKillsCounterCounter;
-            _stats = stats;
+            _stats = dataRepository.GetData<UfoStatsConfig>();
         } 
         
         protected override void OnAwake()

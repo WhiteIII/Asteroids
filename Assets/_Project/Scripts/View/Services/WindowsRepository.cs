@@ -57,7 +57,7 @@ namespace _Project.Scripts.View.Services
             T window = Get<T>();
             if (!window)
                 return;
-            await window.Close();
+            await window.CloseAsync();
             Destroy<T>();
         }
     }

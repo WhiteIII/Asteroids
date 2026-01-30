@@ -1,12 +1,17 @@
 using System.IO;
+using _Project.Scripts.Common.Services.SerializerDeserializer.Base;
 using UnityEngine;
-using static Newtonsoft.Json.JsonConvert;
 
 namespace _Project.Scripts.Gameplay.SaveLoadSystem
 {
     public class SaveLoad
     {
+        private readonly ISerializerDeserializer _serializerDeserializer;
+        
         private string FilePath => Path.Combine(Application.persistentDataPath, "PlayerData.txt");
+
+        public SaveLoad(ISerializerDeserializer serializerDeserializer) =>
+            _serializerDeserializer = serializerDeserializer;
 
         public PlayerSaveLoadData Load()
         {
@@ -17,12 +22,12 @@ namespace _Project.Scripts.Gameplay.SaveLoadSystem
                 return initialData;
             }
             string playerSaveDataJson = File.ReadAllText(FilePath);
-            return DeserializeObject<PlayerSaveLoadData>(playerSaveDataJson);
+            return _serializerDeserializer.Deserialize<PlayerSaveLoadData>(playerSaveDataJson);
         }
 
         public void Save(PlayerSaveLoadData data)
         {
-            string playerSaveDataJson = SerializeObject(data);
+            string playerSaveDataJson = _serializerDeserializer.Serialize(data);
             File.WriteAllText(FilePath, playerSaveDataJson);
         }
     }

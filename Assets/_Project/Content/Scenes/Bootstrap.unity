@@ -682,8 +682,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7132af884e57d747814ec536c47119f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameSettingsData: {fileID: 11400000, guid: 491cd263c424c8845bf5f0a60770fc0e, type: 2}
-  _shipStatsData: {fileID: 11400000, guid: a176893ffadba274f96e2924dc871547, type: 2}
+  _localDataRepository: {fileID: 11400000, guid: 157312d1283356e43b58efd506e6b4af, type: 2}
+  _remoteConfigKeys: {fileID: 11400000, guid: 0597201f1b1321b41b5d1107b7920c22, type: 2}
   _camera: {fileID: 519420031}
   _audioSource: {fileID: 519420033}
   _uiRoot: {fileID: 1026150208}

@@ -1,4 +1,7 @@
 using _Project.Scripts.Data;
+using _Project.Scripts.Data.Base;
+using _Project.Scripts.Data.Implementation;
+using _Project.Scripts.Data.Services.Repositories.Base;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.InputSystem;
 using UnityEngine;
@@ -14,9 +17,9 @@ namespace _Project.Scripts.Gameplay.ShipBase
         private float _speed;
 
         [Inject]
-        private void Construct(IReadOnlyInputHandler readOnlyInputHandler, ShipStatsData stats)
+        private void Construct(IReadOnlyInputHandler readOnlyInputHandler, IDataRepository dataRepository)
         {
-            _speed = stats.MovementSpeed;
+            _speed = dataRepository.GetData<ShipStatsConfig>().MovementSpeed;
             _readOnlyInputHandler = readOnlyInputHandler;
         } 
 

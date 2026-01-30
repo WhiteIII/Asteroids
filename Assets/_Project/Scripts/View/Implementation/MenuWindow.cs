@@ -26,7 +26,7 @@ namespace _Project.Scripts.View.Implementation
         {
             _playButton.enabled = true;
             if (ViewModel.WhetherToShowBestRecord)
-                _repository.Get<BestRecordWindow>().Open().Forget();
+                _repository.Get<BestRecordWindow>().OpenAsync().Forget();
         }
 
         protected override void OnCloseAnimationEnd()
@@ -38,7 +38,7 @@ namespace _Project.Scripts.View.Implementation
             
             BestRecordWindow bestRecordWindow = _repository.Get<BestRecordWindow>();
             if (bestRecordWindow.IsOpen) 
-                bestRecordWindow.Close().Forget();
+                bestRecordWindow.CloseAsync().Forget();
         }
     }
 }

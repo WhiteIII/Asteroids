@@ -16,6 +16,17 @@ namespace _Project.Scripts.Gameplay.Services.Repositories
             foreach (ISpawnerController controller in spawnerControllers)
                 RegisterController(controller);
         }
+
+        public T GetSpawnerController<T>() 
+            where T : class, ISpawnerController
+        {
+            foreach (ISpawnerController controller in _spawnerControllers)
+            {
+                if (controller is T concreteController)
+                    return concreteController;
+            }
+            return null;
+        }
         
         public void RegisterController(ISpawnerController controller) => 
             _spawnerControllers.Add(controller);

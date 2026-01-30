@@ -39,7 +39,7 @@ namespace _Project.Scripts.View
             OnDestroyMethod();
         }
 
-        public async UniTask Open()
+        public async UniTask OpenAsync()
         {
             gameObject.SetActive(true);
             IsOpen = true;
@@ -47,7 +47,7 @@ namespace _Project.Scripts.View
             await _animation.PlayShowAnimationAsync();
         }
 
-        public async UniTask Close()
+        public async UniTask CloseAsync()
         {
             IsOpen = false;
             await _animation.PlayCloseAnimationAsync();

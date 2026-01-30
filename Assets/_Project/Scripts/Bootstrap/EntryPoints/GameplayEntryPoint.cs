@@ -1,6 +1,9 @@
-using System;
 using _Project.Scripts.Common.Services.Ads.Base;
 using _Project.Scripts.Common.Services.AssetsManagement;
+using _Project.Scripts.Data.Base;
+using _Project.Scripts.Data.Implementation;
+using _Project.Scripts.Data.Services.Repositories.Base;
+using _Project.Scripts.Gameplay.Characters;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.GameProgress;
 using _Project.Scripts.Gameplay.InputSystem;
@@ -8,6 +11,7 @@ using _Project.Scripts.Gameplay.SaveLoadSystem;
 using _Project.Scripts.Gameplay.Services.AnalyticEmplementation;
 using _Project.Scripts.Gameplay.Services.Factories;
 using _Project.Scripts.Gameplay.Services.Repositories;
+using _Project.Scripts.Gameplay.Services.Spawners;
 using _Project.Scripts.Gameplay.ShipBase;
 using _Project.Scripts.View.Implementation;
 using _Project.Scripts.View.Services;
@@ -37,6 +41,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly IPointsAndKillsCounterCounter _pointsAndKillsCounterCounter;
         private readonly StartGameAndEndGameEventSender _eventSender;
         private readonly IInterstitialAd _interstitialAd;
+        private readonly IDataRepository _dataRepository;
 
         public GameplayEntryPoint(
             IFactory<ShipSpawnArgs, Ship> shipFactory,
@@ -55,7 +60,8 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             IPointsAndKillsCounterCounter pointsAndKillsCounterCounter, 
             SaveLoad saveLoad, 
             StartGameAndEndGameEventSender eventSender, 
-            IInterstitialAd interstitialAd)
+            IInterstitialAd interstitialAd, 
+            IDataRepository dataRepository)
         {
             _shipFactory = shipFactory;
             _charactersRepository = charactersRepository;
@@ -74,18 +80,26 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _saveLoad = saveLoad;
             _eventSender = eventSender;
             _interstitialAd = interstitialAd;
+            _dataRepository = dataRepository;
         }
 
         public async void Initialize()
         {
             _eventSender.SendStartGameEvent();
-            _windowsRepository.Get<MobileInputWindow>().Open().Forget();
+            _windowsRepository.Get<MobileInputWindow>().OpenAsync().Forget();
             await _loadingWindowViewModel.StartLoadingAsync(_assetLoader.GetLoadedAsyncOperations());
-            await _windowsRepository.Get<LoadingWindow>().Close();
+            await _windowsRepository.Get<LoadingWindow>().CloseAsync();
             CreateShip();
             _inputHandler.Enable();
-            await _shipStatsWindowFactory.Create().Open();
-            await _playerPointsWindowFactory.Create().Open();
+            await _shipStatsWindowFactory.Create().OpenAsync();
+            await _playerPointsWindowFactory.Create().OpenAsync();
+            GameSettingsConfig gameSettingsData = _dataRepository.GetData<GameSettingsConfig>();
+            _spawnersAndControllersRepository
+                .GetSpawnerController<SpawnerController<AsteroidsSpawner>>()
+                .SetSpawnCooldown(gameSettingsData.AsteroidsSpawnCoolDown);
+            _spawnersAndControllersRepository
+                .GetSpawnerController<SpawnerController<UfoSpawner>>()
+                .SetSpawnCooldown(gameSettingsData.UfoSpawnCoolDown);
             _spawnersAndControllersRepository.StartAllSpawners();
             await _interstitialAd.LoadAdAsync();
         }
@@ -97,8 +111,8 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
                 _windowsRepository.TryCloseAndDestroyWindow<PlayerPointsWindow>(),
                 _windowsRepository.TryCloseAndDestroyWindow<GameOverWindow>());
             await _interstitialAd.ShowAdAsync();
-            await _windowsRepository.Get<LoadingWindow>().Open();
-            _windowsRepository.Get<MobileInputWindow>().Close().Forget();
+            await _windowsRepository.Get<LoadingWindow>().OpenAsync();
+            _windowsRepository.Get<MobileInputWindow>().CloseAsync().Forget();
             _aiActorsRepository.Clear();
             _spawnersAndControllersRepository.Clear();
             _charactersRepository.ClearAllCharactersList();
@@ -121,19 +135,19 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
                     _charactersRepository.Ship.StopShip();
                     await _charactersRepository.Ship.PlayDeathAnimationAsync();
                     if (_windowsRepository.TryGet(out MobileInputWindow mobileInputWindow))
-                        await mobileInputWindow.Close();
+                        await mobileInputWindow.CloseAsync();
                     if (_windowsRepository.TryGet(out GameOverWindow gameOverWindow))
-                        await gameOverWindow.Open();
+                        await gameOverWindow.OpenAsync();
                     else
-                        await _gameOverWindowFactory.Create(OnQuitEvent, OnPlayerRevive).Open();
+                        await _gameOverWindowFactory.Create(OnQuitEvent, OnPlayerRevive).OpenAsync();
                 }
             });
 
         private async UniTask OnPlayerRevive()
         {
-            await _windowsRepository.Get<GameOverWindow>().Close();
+            await _windowsRepository.Get<GameOverWindow>().CloseAsync();
             if (_windowsRepository.TryGet(out MobileInputWindow mobileInputWindow))
-                await mobileInputWindow.Open();
+                await mobileInputWindow.OpenAsync();
             _charactersRepository.Ship.Revive();
             _inputHandler.Enable();
             _gameLoop.Resume();

@@ -1,3 +1,5 @@
+using _Project.Scripts.Data.Implementation;
+using _Project.Scripts.Data.Services.Repositories.Base;
 using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.Services.Spawners
@@ -7,10 +9,10 @@ namespace _Project.Scripts.Gameplay.Services.Spawners
         private readonly Camera _camera;
         private readonly float _offsetOnCameraBoard;
 
-        public SpawnPositionHelper(Camera camera, float offsetOnCameraBoard)
+        public SpawnPositionHelper(Camera camera, IDataRepository dataRepository)
         {
             _camera = camera;
-            _offsetOnCameraBoard = offsetOnCameraBoard;
+            _offsetOnCameraBoard = dataRepository.GetData<GameSettingsConfig>().SpawnOffsetOutSideCameraVision;
         }
 
         public Vector2 GetSpawnPosition()

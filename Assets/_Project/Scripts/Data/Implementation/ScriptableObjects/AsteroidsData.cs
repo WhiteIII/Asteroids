@@ -1,9 +1,10 @@
+using _Project.Scripts.Data.Base;
 using UnityEngine;
 
-namespace _Project.Scripts.Data
+namespace _Project.Scripts.Data.Implementation
 {
     [CreateAssetMenu(menuName = "_Project/AsteroidsData", fileName = "AsteroidsData")]
-    public class AsteroidsData : EnemyData
+    public class AsteroidsData : EnemyData, IAsteroidsData
     {
         [field: SerializeField] public int SmallAsteroidsPoints { get; private set; }
         [field: SerializeField] public float DirectionDeviationFrom { get; private set; }
