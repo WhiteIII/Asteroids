@@ -1,4 +1,6 @@
 using _Project.Scripts.Bootstrap.EntryPoints;
+using _Project.Scripts.Common.Services.InAppPurchase.Data;
+using _Project.Scripts.Common.Services.InAppPurchase.Implementation;
 using _Project.Scripts.Common.Services.RemoteConfig.Implementation;
 using _Project.Scripts.Gameplay.Services.Repositories;
 using _Project.Scripts.Gameplay.Services.Spawners;
@@ -17,6 +19,7 @@ namespace _Project.Scripts.Bootstrap.Installers
     {
         [Header("Data")]
         [SerializeField] private LocalDataRepository _localDataRepository;
+        [SerializeField] private InAppPurchaseIdList _inAppPurchaseIdList;
 
         [Header("OnScene:")] 
         [SerializeField] private Camera _camera;
@@ -30,6 +33,8 @@ namespace _Project.Scripts.Bootstrap.Installers
 
         public override void InstallBindings()
         {
+            Container.Bind<InAppPurchaseIdList>().FromInstance(_inAppPurchaseIdList).AsSingle();
+            Container.BindInterfacesTo<UnityInApp>().AsSingle();
             Container.BindInterfacesTo<FireBaseRemoteConfigService>().AsSingle();
             Container.BindInterfacesTo<RemoteConfigDefaultsInitializer>().AsSingle().WithArguments(_localDataRepository);
             Container.BindInterfacesTo<RemoteConfigRepository>().AsSingle();
@@ -56,7 +61,7 @@ namespace _Project.Scripts.Bootstrap.Installers
                 .Bind<AssetReference>()
                 .WithId("MobileInputWindowAssetReference")
                 .FromInstance(_mobileInputWindowAssetReference);
-
+            
             Container.Bind<PlayerBestRecordViewModel>().AsSingle();
             Container.BindFactoryCustomInterface<
                     BestRecordWindow,

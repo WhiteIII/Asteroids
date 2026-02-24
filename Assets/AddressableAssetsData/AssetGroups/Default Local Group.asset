@@ -25,6 +25,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 31e173f0913305c4c88c749242acd83b
+    m_Address: OffAdsWindow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4bf522c739b0e3c4fa451ed68e930e9b
     m_Address: LoadingWindow
     m_ReadOnly: 0

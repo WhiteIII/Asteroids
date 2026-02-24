@@ -1,7 +1,6 @@
 using _Project.Scripts.Bootstrap.EntryPoints;
 using _Project.Scripts.Common.Services.Ads.Implementation;
 using _Project.Scripts.Common.Services.AssetsManagement;
-using _Project.Scripts.Data.Implementation;
 using _Project.Scripts.Gameplay.Ai.Base;
 using _Project.Scripts.Gameplay.Characters.Base;
 using _Project.Scripts.Gameplay.Characters.Implementation;

@@ -15,10 +15,16 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
     {
         [Header("AssetForMenuScene:")]
         [SerializeField] private AssetReference _menuWindowPrefabReference;
+        [SerializeField] private AssetReference _offAdsWindowAssetReference;
 
         public override void InstallBindings()
         {
             Container.Bind<AssetLoader>().AsSingle().WithArguments(new[] { _menuWindowPrefabReference });
+            Container
+                .Bind<AssetReference>()
+                .WithId("OffAdsWindowAssetReference")
+                .FromInstance(_offAdsWindowAssetReference);
+            
             Container.BindInterfacesAndSelfTo<MenuViewModel>().AsSingle();
             Container
                 .BindFactoryCustomInterface<
@@ -27,6 +33,13 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
                     MenuWindowFactory, 
                     IFactory<Func<UniTask>, MenuWindow>>()
                 .WithFactoryArguments(_menuWindowPrefabReference);
+            Container.Bind<OffAdsPurchaseViewModel>().AsSingle();
+            Container.BindFactoryCustomInterface<
+                    Action,
+                    OffAdsWindow, 
+                    InAppPurchaseWindowFactory<OffAdsWindow, OffAdsPurchaseViewModel>, 
+                    IFactory<Action, OffAdsWindow>>()
+                .WithFactoryArguments(_offAdsWindowAssetReference);
             
             Container.BindInterfacesTo<MenuEntryPoint>().AsSingle();
         }

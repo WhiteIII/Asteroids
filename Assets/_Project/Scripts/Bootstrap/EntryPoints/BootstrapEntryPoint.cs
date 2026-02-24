@@ -1,8 +1,10 @@
 using _Project.Scripts.Common.Services.AssetsManagement;
 using _Project.Scripts.Common.Services.RemoteConfig.Base;
+using _Project.Scripts.Gameplay.SaveLoadSystem;
 using _Project.Scripts.SceneSwitcher;
 using _Project.Scripts.View.Implementation;
 using Cysharp.Threading.Tasks;
+using Unity.Services.Core;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
@@ -19,7 +21,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly AssetReference _bestRecordWindowAssetReference;
         private readonly AssetReference _mobileInputWindowAssetReference;
         private readonly IRemoteConfigService _remoteConfigService;
-        
+
         public BootstrapEntryPoint(
             ISceneController sceneController,
             IFactory<LoadingWindow> loadingWindowFactory,
@@ -51,6 +53,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _bestRecordWindowFactory.Create();
             _mobileInputWindowFactory.Create().CloseAsync().Forget();
 
+            await UnityServices.InitializeAsync();
             await Firebase.FirebaseApp.CheckAndFixDependenciesAsync();
             await _remoteConfigService.FetchAsync();
             await _remoteConfigService.ActivateAsync();

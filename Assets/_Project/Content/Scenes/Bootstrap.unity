@@ -683,7 +683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _localDataRepository: {fileID: 11400000, guid: 157312d1283356e43b58efd506e6b4af, type: 2}
-  _remoteConfigKeys: {fileID: 11400000, guid: 0597201f1b1321b41b5d1107b7920c22, type: 2}
+  _inAppPurchaseIdList: {fileID: 11400000, guid: feda4ee3ecbbf80449856be47e423f1f, type: 2}
   _camera: {fileID: 519420031}
   _audioSource: {fileID: 519420033}
   _uiRoot: {fileID: 1026150208}

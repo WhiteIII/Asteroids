@@ -18,6 +18,7 @@ namespace _Project.Scripts.Gameplay.SaveLoadSystem
             if (File.Exists(FilePath) == false)
             {
                 PlayerSaveLoadData initialData = new();
+                initialData.AdsIsOff = false;
                 Save(initialData);
                 return initialData;
             }

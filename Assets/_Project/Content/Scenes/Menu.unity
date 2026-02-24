@@ -362,6 +362,12 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
+  _offAdsWindowAssetReference:
+    m_AssetGUID: 31e173f0913305c4c88c749242acd83b
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
 --- !u!1 &1870693708
 GameObject:
   m_ObjectHideFlags: 0

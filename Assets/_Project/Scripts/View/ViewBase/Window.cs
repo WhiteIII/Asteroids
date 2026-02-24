@@ -9,13 +9,9 @@ using Zenject;
 
 namespace _Project.Scripts.View
 {
-    public abstract class Window<T> : MonoBehaviour, IWindow<T>
+    public abstract class Window<T> : Window, IWindow<T>
         where T : IViewModel
     {
-        private IWindowAnimation _animation;
-        
-        public bool IsOpen { get; private set; }
-        
         protected T ViewModel { get; private set; }
         
         public void Setup(T viewModel)
@@ -24,9 +20,6 @@ namespace _Project.Scripts.View
             
             if (ViewModel is IInitializable initializable)
                 initializable.Initialize();
-            
-            if (TryGetComponent(out _animation) == false)
-                gameObject.AddComponent<RegularAnimation>();
 
             OnSetup();
         }
@@ -38,7 +31,20 @@ namespace _Project.Scripts.View
             
             OnDestroyMethod();
         }
+    }
 
+    public abstract class Window : MonoBehaviour, IWindow
+    {
+        private IWindowAnimation _animation;
+        
+        public bool IsOpen { get; private set; }
+
+        private void Awake()
+        {
+            if (TryGetComponent(out _animation) == false)
+                gameObject.AddComponent<RegularAnimation>();
+        }
+        
         public async UniTask OpenAsync()
         {
             gameObject.SetActive(true);
@@ -54,7 +60,7 @@ namespace _Project.Scripts.View
             OnCloseAnimationEnd();
             gameObject.SetActive(false);
         }
-
+        
         protected virtual void OnSetup() { }
         protected virtual void OnDestroyMethod() { }
         protected virtual void OnOpenAnimationStart() { }

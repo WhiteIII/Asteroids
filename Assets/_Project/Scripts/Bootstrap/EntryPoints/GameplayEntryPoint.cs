@@ -1,9 +1,7 @@
 using _Project.Scripts.Common.Services.Ads.Base;
 using _Project.Scripts.Common.Services.AssetsManagement;
-using _Project.Scripts.Data.Base;
 using _Project.Scripts.Data.Implementation;
 using _Project.Scripts.Data.Services.Repositories.Base;
-using _Project.Scripts.Gameplay.Characters;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.GameProgress;
 using _Project.Scripts.Gameplay.InputSystem;
@@ -110,7 +108,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
                 _windowsRepository.TryCloseAndDestroyWindow<ShipStatsWindow>(),
                 _windowsRepository.TryCloseAndDestroyWindow<PlayerPointsWindow>(),
                 _windowsRepository.TryCloseAndDestroyWindow<GameOverWindow>());
-            await _interstitialAd.ShowAdAsync();
+            await TryShowAd();
             await _windowsRepository.Get<LoadingWindow>().OpenAsync();
             _windowsRepository.Get<MobileInputWindow>().CloseAsync().Forget();
             _aiActorsRepository.Clear();
@@ -118,6 +116,12 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _charactersRepository.ClearAllCharactersList();
             _charactersRepository.UnregisterShip();
             _localAssetsProvider.ReleaseAllAssets();
+        }
+
+        private async UniTask TryShowAd()
+        {
+            if (_saveLoad.Load().AdsIsOff == false)
+                await _interstitialAd.ShowAdAsync();
         }
         
         private void CreateShip() =>
