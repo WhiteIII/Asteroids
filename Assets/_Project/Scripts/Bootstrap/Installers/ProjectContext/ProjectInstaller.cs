@@ -15,7 +15,7 @@ namespace _Project.Scripts.Bootstrap.Installers
             Container.BindInterfacesTo<FireBaseEventSender>().AsSingle();
             Container.BindInterfacesTo<SceneController>().AsSingle();
             Container.Bind<LocalAssetsProvider>().AsSingle();
-            Container.Bind<SaveLoad>().AsSingle();
+            Container.BindInterfacesTo<SaveLoad>().AsSingle();
         }
     }
 }

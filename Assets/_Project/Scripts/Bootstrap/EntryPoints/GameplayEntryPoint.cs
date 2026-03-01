@@ -3,7 +3,6 @@ using _Project.Scripts.Common.Services.AssetsManagement;
 using _Project.Scripts.Data.Implementation;
 using _Project.Scripts.Data.Services.Repositories.Base;
 using _Project.Scripts.Gameplay.GameLoopSystem;
-using _Project.Scripts.Gameplay.GameProgress;
 using _Project.Scripts.Gameplay.InputSystem;
 using _Project.Scripts.Gameplay.SaveLoadSystem;
 using _Project.Scripts.Gameplay.Services.AnalyticEmplementation;
@@ -33,10 +32,8 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly WindowsRepository _windowsRepository;
         private readonly IInputHandlerController _inputHandler;
         private readonly AssetLoader _assetLoader;
-        private readonly LocalAssetsProvider _localAssetsProvider;
         private readonly LoadingWindowViewModel _loadingWindowViewModel;
-        private readonly SaveLoad _saveLoad;
-        private readonly IPointsAndKillsCounterCounter _pointsAndKillsCounterCounter;
+        private readonly PlayerBestRecordSaver _playerBestRecordSaver;
         private readonly StartGameAndEndGameEventSender _eventSender;
         private readonly IInterstitialAd _interstitialAd;
         private readonly IDataRepository _dataRepository;
@@ -53,10 +50,8 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             IGameLoop gameLoop,
             IInputHandlerController inputHandler, 
             AssetLoader assetLoader, 
-            LocalAssetsProvider localAssetsProvider, 
             LoadingWindowViewModel loadingWindowViewModel,
-            IPointsAndKillsCounterCounter pointsAndKillsCounterCounter, 
-            SaveLoad saveLoad, 
+            PlayerBestRecordSaver playerBestRecordSaver, 
             StartGameAndEndGameEventSender eventSender, 
             IInterstitialAd interstitialAd, 
             IDataRepository dataRepository)
@@ -72,10 +67,8 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _gameLoop = gameLoop;
             _inputHandler = inputHandler;
             _assetLoader = assetLoader;
-            _localAssetsProvider = localAssetsProvider;
             _loadingWindowViewModel = loadingWindowViewModel;
-            _pointsAndKillsCounterCounter = pointsAndKillsCounterCounter;
-            _saveLoad = saveLoad;
+            _playerBestRecordSaver = playerBestRecordSaver;
             _eventSender = eventSender;
             _interstitialAd = interstitialAd;
             _dataRepository = dataRepository;
@@ -108,22 +101,16 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
                 _windowsRepository.TryCloseAndDestroyWindow<ShipStatsWindow>(),
                 _windowsRepository.TryCloseAndDestroyWindow<PlayerPointsWindow>(),
                 _windowsRepository.TryCloseAndDestroyWindow<GameOverWindow>());
-            await TryShowAd();
+            await _interstitialAd.ShowAdAsync();
             await _windowsRepository.Get<LoadingWindow>().OpenAsync();
             _windowsRepository.Get<MobileInputWindow>().CloseAsync().Forget();
             _aiActorsRepository.Clear();
             _spawnersAndControllersRepository.Clear();
-            _charactersRepository.ClearAllCharactersList();
-            _charactersRepository.UnregisterShip();
-            _localAssetsProvider.ReleaseAllAssets();
+            _charactersRepository.ClearAndDestroyAllCharactersInList();
+            _charactersRepository.DestroyAndUnregisterShip();
+            _assetLoader.ReleaseAllLoadedAssets();
         }
 
-        private async UniTask TryShowAd()
-        {
-            if (_saveLoad.Load().AdsIsOff == false)
-                await _interstitialAd.ShowAdAsync();
-        }
-        
         private void CreateShip() =>
             _shipFactory.Create(new ShipSpawnArgs
             {
@@ -132,7 +119,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
                 OnDead = async () =>
                 {
                     _eventSender.SendEndGameEvent();
-                    TryWriteBestRecord();
+                    _playerBestRecordSaver.TrySaveBestRecord();
                     _spawnersAndControllersRepository.StopAllSpawnerControllers();
                     _inputHandler.Disable();
                     _gameLoop.Pause();
@@ -156,16 +143,6 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _inputHandler.Enable();
             _gameLoop.Resume();
             _spawnersAndControllersRepository.StartAllSpawners();
-        }
-        
-        private void TryWriteBestRecord()
-        {
-            PlayerSaveLoadData saveLoadData = _saveLoad.Load();
-            if (saveLoadData.BestRecord < _pointsAndKillsCounterCounter.Points.CurrentValue)
-            {
-                saveLoadData.BestRecord = _pointsAndKillsCounterCounter.Points.CurrentValue;
-                _saveLoad.Save(saveLoadData);
-            }
         }
     }
 }

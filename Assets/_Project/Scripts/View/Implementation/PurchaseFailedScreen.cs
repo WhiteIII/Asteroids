@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -11,9 +12,13 @@ namespace _Project.Scripts.View.Implementation
 
         public async UniTask OpenAndWaitToCloseAsync()
         {
-            await OpenAsync();
-            await WaitForClickAsync(this.GetCancellationTokenOnDestroy());
-            await CloseAsync();
+            try
+            {
+                await OpenAsync();
+                await WaitForClickAsync(this.GetCancellationTokenOnDestroy());
+                await CloseAsync();
+            }
+            catch (OperationCanceledException) { }
         }
 
         private UniTask WaitForClickAsync(CancellationToken token = default)
@@ -30,7 +35,7 @@ namespace _Project.Scripts.View.Implementation
             token.Register(() =>
             {
                 _closeButton.onClick.RemoveListener(Handler);
-                uniTaskCompletionSource.TrySetCanceled();
+                uniTaskCompletionSource.TrySetCanceled(token);
             });
 
             return uniTaskCompletionSource.Task;

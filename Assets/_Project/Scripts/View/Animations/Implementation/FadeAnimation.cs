@@ -1,3 +1,4 @@
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -15,10 +16,11 @@ namespace _Project.Scripts.View.Animations.Implementation
             _duration = duration;
         }
         
-        public async UniTask PlayAnimationAsync(float from, float to) 
+        public async UniTask PlayAnimationAsync(float from, float to, CancellationToken cancellationToken = default) 
         {
             _canvasGroup.alpha = from;
-            await _canvasGroup.DOFade(to, _duration).AsyncWaitForCompletion();
+            if (cancellationToken.IsCancellationRequested == false)
+                await _canvasGroup.DOFade(to, _duration).AsyncWaitForCompletion();
         }
     }
 }

@@ -21,14 +21,14 @@ namespace _Project.Scripts.Gameplay.Characters
         IPausedCharacter
     {
         private RigidbodyMovement _movement;
-        private PointsAndKillsAndKillsCounterCounter _pointsAndKillsAndKillsCounterCounter;
+        private PointsAndKillsCounter _pointsAndKillsCounter;
         private AsteroidView _asteroidView;
         private int _points;
         
         public Vector2 Direction => _movement.Direction;
 
-        [Inject] private void Construct(PointsAndKillsAndKillsCounterCounter pointsAndKillsAndKillsCounterCounter) =>
-            _pointsAndKillsAndKillsCounterCounter = pointsAndKillsAndKillsCounterCounter;
+        [Inject] private void Construct(PointsAndKillsCounter pointsAndKillsCounter) =>
+            _pointsAndKillsCounter = pointsAndKillsCounter;
 
         protected override void OnAwake()
         {
@@ -42,7 +42,7 @@ namespace _Project.Scripts.Gameplay.Characters
             SetupKillableCharacter(() =>
             {
                 onDeadAction?.Invoke();
-                _pointsAndKillsAndKillsCounterCounter.AddKill<Asteroid>(_points);
+                _pointsAndKillsCounter.AddKill<Asteroid>(_points);
             });
         }
         

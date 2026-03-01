@@ -2,9 +2,9 @@ using _Project.Scripts.Bootstrap.EntryPoints;
 using _Project.Scripts.Common.Services.InAppPurchase.Data;
 using _Project.Scripts.Common.Services.InAppPurchase.Implementation;
 using _Project.Scripts.Common.Services.RemoteConfig.Implementation;
+using _Project.Scripts.Data.Services.Repositories.Implementation;
 using _Project.Scripts.Gameplay.Services.Repositories;
 using _Project.Scripts.Gameplay.Services.Spawners;
-using _Project.Scripts.Data.Services.Repositories.Implementation;
 using _Project.Scripts.View.Implementation;
 using _Project.Scripts.View.Services;
 using _Project.Scripts.View.Services.Factories;
@@ -13,7 +13,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
-namespace _Project.Scripts.Bootstrap.Installers
+namespace _Project.Scripts.Bootstrap.Installers.SceneContext
 {
     internal class BootstrapInstaller : MonoInstaller
     {
@@ -44,22 +44,13 @@ namespace _Project.Scripts.Bootstrap.Installers
             Container.Bind<Camera>().FromInstance(_camera).AsSingle();
             Container.Bind<AudioSource>().FromInstance(_audioSource).AsSingle();
             Container.BindInterfacesAndSelfTo<CharactersRepository>().AsSingle();
-            Container
-                .BindInterfacesTo<SpawnPositionHelper>()
-                .AsSingle()
-                .MoveIntoAllSubContainers();
+            Container.BindInterfacesTo<SpawnPositionHelper>().AsSingle().MoveIntoAllSubContainers();
 
-            Container
-                .Bind<AssetReference>()
-                .WithId("LoadingWindowAssetReference")
+            Container.Bind<AssetReference>().WithId("LoadingWindowAssetReference")
                 .FromInstance(_loadingWindowAssetReference);
-            Container
-                .Bind<AssetReference>()
-                .WithId("BestRecordWindowAssetReference")
+            Container.Bind<AssetReference>().WithId("BestRecordWindowAssetReference")
                 .FromInstance(_bestRecordWindowAssetReference);
-            Container
-                .Bind<AssetReference>()
-                .WithId("MobileInputWindowAssetReference")
+            Container.Bind<AssetReference>().WithId("MobileInputWindowAssetReference")
                 .FromInstance(_mobileInputWindowAssetReference);
             
             Container.Bind<PlayerBestRecordViewModel>().AsSingle();

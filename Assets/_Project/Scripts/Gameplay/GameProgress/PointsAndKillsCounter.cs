@@ -5,7 +5,7 @@ using R3;
 
 namespace _Project.Scripts.Gameplay.GameProgress
 {
-    public class PointsAndKillsAndKillsCounterCounter : IPointsAndKillsCounterCounter
+    public class PointsAndKillsCounter : IPointsAndKillsCounterCounter
     {
         public ReadOnlyReactiveProperty<int> Points => _points;
 

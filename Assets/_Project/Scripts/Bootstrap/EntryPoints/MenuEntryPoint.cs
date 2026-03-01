@@ -15,26 +15,23 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly IFactory<Func<UniTask>, MenuWindow> _menuWindowFactory;
         private readonly WindowsRepository _windowsRepository;
         private readonly AssetLoader _assetLoader;
-        private readonly LocalAssetsProvider _localAssetsProvider;
         private readonly LoadingWindowViewModel _loadingWindowViewModel;
         private readonly AssetReference _offAdsWindowAssetReference;
-        private readonly SaveLoad _saveLoad;
+        private readonly ISaveLoad _saveLoad;
         private readonly IFactory<Action, OffAdsWindow> _offAdsWindowFactory;
-        
+
         public MenuEntryPoint(
             IFactory<Func<UniTask>, MenuWindow> menuWindowFactory,
             WindowsRepository windowsRepository, 
             AssetLoader assetLoader,
-            LocalAssetsProvider localAssetsProvider,
             LoadingWindowViewModel loadingWindowViewModel, 
-            SaveLoad saveLoad, 
+            ISaveLoad saveLoad, 
             [Inject(Id = "OffAdsWindowAssetReference")] AssetReference offAdsWindowAssetReference, 
             IFactory<Action, OffAdsWindow> offAdsWindowFactory)
         {
             _menuWindowFactory = menuWindowFactory;
             _windowsRepository = windowsRepository;
             _assetLoader = assetLoader;
-            _localAssetsProvider = localAssetsProvider;
             _loadingWindowViewModel = loadingWindowViewModel;
             _saveLoad = saveLoad;
             _offAdsWindowAssetReference = offAdsWindowAssetReference;
@@ -65,7 +62,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             await _windowsRepository.TryCloseAndDestroyWindow<OffAdsWindow>();
             await _windowsRepository.TryCloseAndDestroyWindow<MenuWindow>();
             await _windowsRepository.Get<LoadingWindow>().OpenAsync();
-            _localAssetsProvider.ReleaseAllAssets();
+            _assetLoader.ReleaseAllLoadedAssets();
         }
     }
 }

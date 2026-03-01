@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d7631a80906d545b896ea180195cf6, type: 3}
   m_Name: InAppPurchaseIdList
   m_EditorClassIdentifier: 
-  _ids:
-  - Product: 0
+  products:
+  - ProductId: off_ads
     ProductType: 1
-    GooglePlayStoreId: off_ads_google
-    MacStoreId: off_ads_mac
-    ProductId: off_ads
+    GoogleStoreSpecificId: off_ads_google
+    MacStoreSpecificId: off_ads_mac
+    AppleStoreSpecificId: off_ads_apple

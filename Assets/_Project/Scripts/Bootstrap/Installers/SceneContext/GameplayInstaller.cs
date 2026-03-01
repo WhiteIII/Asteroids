@@ -1,4 +1,5 @@
 using _Project.Scripts.Bootstrap.EntryPoints;
+using _Project.Scripts.Common.Services.Ads.Base;
 using _Project.Scripts.Common.Services.Ads.Implementation;
 using _Project.Scripts.Common.Services.AssetsManagement;
 using _Project.Scripts.Gameplay.Ai.Base;
@@ -7,6 +8,7 @@ using _Project.Scripts.Gameplay.Characters.Implementation;
 using _Project.Scripts.Gameplay.GameLoopSystem;
 using _Project.Scripts.Gameplay.GameProgress;
 using _Project.Scripts.Gameplay.InputSystem;
+using _Project.Scripts.Gameplay.SaveLoadSystem;
 using _Project.Scripts.Gameplay.Services.AnalyticEmplementation;
 using _Project.Scripts.Gameplay.Services.Factories;
 using _Project.Scripts.Gameplay.Services.ObjectPools;
@@ -37,7 +39,9 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
         public override void InstallBindings()
         {
             Container.BindInterfacesTo<MobileInputHandler>().AsSingle();
-            Container.BindInterfacesTo<UnityAdsInterstitial>().AsSingle();
+            Container.Bind<PlayerBestRecordSaver>().AsSingle();
+            Container.BindInterfacesTo<UnityAdsInterstitial>().WhenInjectedInto<InterstitialAdDecorator>();
+            Container.BindInterfacesTo<InterstitialAdDecorator>().AsSingle();
             Container.BindInterfacesTo<UnityRewardedAd>().AsSingle();
             Container.Bind<AssetLoader>().AsSingle().WithArguments(new[]
             {
@@ -51,7 +55,7 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
                 _gameOverWindowPrefabReference
             });
             Container.BindInterfacesAndSelfTo<WeaponsUsageCounter>().AsSingle();
-            Container.BindInterfacesAndSelfTo<PointsAndKillsAndKillsCounterCounter>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PointsAndKillsCounter>().AsSingle();
             Container.Bind<StartGameAndEndGameEventSender>().AsSingle();
             Container.BindInterfacesTo<GameLoop>().AsSingle();
             Container.BindInterfacesTo<GameLoopRegisterController>().AsSingle();
@@ -71,12 +75,8 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
             Container.BindInterfacesAndSelfTo<UfoPool>().AsSingle();
             Container.BindInterfacesAndSelfTo<AsteroidsSpawner>().AsSingle();
             Container.BindInterfacesAndSelfTo<UfoSpawner>().AsSingle();
-            Container
-                .BindInterfacesAndSelfTo<SpawnerController<AsteroidsSpawner>>()
-                .AsSingle();
-            Container
-                .BindInterfacesAndSelfTo<SpawnerController<UfoSpawner>>()
-                .AsSingle();
+            Container.BindInterfacesAndSelfTo<SpawnerController<AsteroidsSpawner>>().AsSingle();
+            Container.BindInterfacesAndSelfTo<SpawnerController<UfoSpawner>>().AsSingle();
             Container.Bind<SpawnersAndControllersRepository>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<GameOverWindowViewModel>().AsSingle();

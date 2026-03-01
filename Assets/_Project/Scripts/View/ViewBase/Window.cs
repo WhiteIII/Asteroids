@@ -1,7 +1,6 @@
 using System;
 using _Project.Scripts.View.Animations.Base;
 using _Project.Scripts.View.Animations.Implementation;
-using _Project.Scripts.ViewModel;
 using _Project.Scripts.ViewModel.Base;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -50,13 +49,13 @@ namespace _Project.Scripts.View
             gameObject.SetActive(true);
             IsOpen = true;
             OnOpenAnimationStart();
-            await _animation.PlayShowAnimationAsync();
+            await _animation.PlayShowAnimationAsync(this.GetCancellationTokenOnDestroy());
         }
 
         public async UniTask CloseAsync()
         {
             IsOpen = false;
-            await _animation.PlayCloseAnimationAsync();
+            await _animation.PlayCloseAnimationAsync(this.GetCancellationTokenOnDestroy());
             OnCloseAnimationEnd();
             gameObject.SetActive(false);
         }

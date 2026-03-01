@@ -14,7 +14,7 @@ namespace _Project.Scripts.Gameplay.Ai.Base
             _creator = creator;
         }
 
-        public AiActor Create(params IRule[] rules) => 
+        public void Create(params IRule[] rules) => 
             _repository.Register(_creator.RegisterObject(new AiActor(rules)));
     }
 }

@@ -6,36 +6,20 @@ using UnityEngine.Purchasing;
 namespace _Project.Scripts.Common.Services.InAppPurchase.Data
 {
     [CreateAssetMenu(fileName = "InAppPurchaseIdList", menuName = "_Project/InAppPurchaseIdList")]
-    public partial class InAppPurchaseIdList : ScriptableObject
+    public class InAppPurchaseIdList : ScriptableObject
     {
-        [SerializeField] private PurchaseProductData[] _ids;
-        
-        internal IEnumerable<PurchaseProductData> Ids => _ids;
+        [SerializeField] private PurchaseProductData[] _products;
 
-        public string GetIdByProduct(InAppPurchaseProduct product)
-        {
-            /*foreach (PurchaseProductData productData in _ids)
-            {
-                if (product == productData.Product)
-                    return productData.ProductId;
-            }*/
-
-            throw new Exception("Product id not found!");
-        }
+        internal IEnumerable<PurchaseProductData> Products => _products;
     }
 
-    public partial class InAppPurchaseIdList
+    [Serializable]
+    internal class PurchaseProductData
     {
-        [Serializable]
-        internal class PurchaseProductData
-        {
-            public string ProductId;
-            //public  
-        }
-    }
-
-    public class UnityIAPIdList
-    {
-        
+        public string ProductId;
+        public ProductType ProductType;
+        public string GoogleStoreSpecificId;
+        public string MacStoreSpecificId;
+        public string AppleStoreSpecificId;
     }
 }

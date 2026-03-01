@@ -18,12 +18,16 @@ namespace _Project.Scripts.Common.Services.AssetsManagement
         }
         
         public T GetAsset<T>(AssetReference assetReference) where T : Object => _loadedAssets[assetReference] as T;
-        
-        public void ReleaseAllAssets()
+
+        public void ReleaseAsset(AssetReference assetReference)
         {
-            foreach (object asset in _loadedAssets.Values)
-                Addressables.Release(asset);
-            _loadedAssets.Clear();
+            Addressables.Release(_loadedAssets[assetReference]);
+            _loadedAssets.Remove(assetReference);
         }
+    }
+    
+    public class RemoteAssetsProvider
+    {
+        private readonly Dictionary<AssetReference, Object> _loadedAssets = new();
     }
 }

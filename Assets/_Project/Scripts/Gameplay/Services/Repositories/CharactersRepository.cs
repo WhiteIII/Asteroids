@@ -36,20 +36,25 @@ namespace _Project.Scripts.Gameplay.Services.Repositories
             return character;
         }
 
-        public void UnregisterShip()
+        public void DestroyAndUnregisterShip()
         {
             if (Ship is IDisposable disposable)
                 disposable.Dispose();
+            Ship.Destroy();
             Ship = null;
         } 
         
-        public void ClearAllCharactersList()
+        public void ClearAndDestroyAllCharactersInList()
         {
             foreach (ICharacter character in _charactersList)
             {
                 if (character is IDisposable disposable)
                     disposable.Dispose();
             }
+
+            foreach (ICharacter character in _charactersList)
+                character.Destroy();
+            
             _charactersList.Clear();
         }
     }

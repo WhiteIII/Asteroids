@@ -1,3 +1,4 @@
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -15,10 +16,11 @@ namespace _Project.Scripts.View.Animations.Implementation
             _duration = duration;
         }
 
-        public async UniTask PlayAnimationAsync(Vector2 from, Vector2 to)
+        public async UniTask PlayAnimationAsync(Vector2 from, Vector2 to, CancellationToken cancellationToken = default)
         {
             _rectTransform.anchoredPosition = from;
-            await _rectTransform.DOAnchorPos(to, _duration).AsyncWaitForCompletion();
+            if (cancellationToken.IsCancellationRequested == false)
+                await _rectTransform.DOAnchorPos(to, _duration).AsyncWaitForCompletion();
         }
     }
 }

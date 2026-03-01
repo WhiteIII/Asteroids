@@ -2,11 +2,10 @@ using _Project.Scripts.Common.Services.Ads.Base;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Advertisements;
-using Zenject;
 
 namespace _Project.Scripts.Common.Services.Ads.Implementation
 {
-    public class UnityAdsInterstitial : IInterstitialAd, IUnityAdsLoadListener, IUnityAdsShowListener, IInitializable
+    public class UnityAdsInterstitial : IInterstitialAd, IUnityAdsLoadListener, IUnityAdsShowListener
     {
         private const string ANDROID_AD_UNIT_ID = "Interstitial_Android";
         private const string IOS_AD_UNIT_ID = "Interstitial_iOS";
@@ -15,7 +14,7 @@ namespace _Project.Scripts.Common.Services.Ads.Implementation
         private bool _isLoading;
         private string _adUnitId;
         
-        public void Initialize() =>
+        public UnityAdsInterstitial() =>
             _adUnitId = (Application.platform == RuntimePlatform.IPhonePlayer)
                 ? IOS_AD_UNIT_ID
                 : ANDROID_AD_UNIT_ID;

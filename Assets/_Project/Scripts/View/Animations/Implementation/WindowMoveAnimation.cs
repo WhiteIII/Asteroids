@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using _Project.Scripts.View.Animations.Base;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -21,25 +22,29 @@ namespace _Project.Scripts.View.Animations.Implementation
                 config.MoveAnimation = new MoveAnimation(config.RectTransform, _duration);
         }
 
-        public async UniTask PlayCloseAnimationAsync()
+        public async UniTask PlayCloseAnimationAsync(CancellationToken cancellationToken = default)
         {
             List<UniTask> tasks = new();
             foreach (MoveAnimationConfig animationConfig in _configs)
             {
-                tasks.Add(animationConfig.MoveAnimation.PlayAnimationAsync(animationConfig.To, animationConfig.From));
-                await UniTask.WaitForSeconds(_cooldown);
+                tasks.Add(animationConfig
+                    .MoveAnimation
+                    .PlayAnimationAsync(animationConfig.To, animationConfig.From, cancellationToken));
+                await UniTask.WaitForSeconds(_cooldown, false, PlayerLoopTiming.Update, cancellationToken);
             }
 
             await UniTask.WhenAll(tasks);
         }
 
-        public async UniTask PlayShowAnimationAsync()
+        public async UniTask PlayShowAnimationAsync(CancellationToken cancellationToken = default)
         {
             List<UniTask> tasks = new();
             foreach (MoveAnimationConfig animationConfig in _configs)
             {
-                tasks.Add(animationConfig.MoveAnimation.PlayAnimationAsync(animationConfig.From, animationConfig.To));
-                await UniTask.WaitForSeconds(_cooldown);
+                tasks.Add(animationConfig
+                    .MoveAnimation
+                    .PlayAnimationAsync(animationConfig.From, animationConfig.To, cancellationToken));
+                await UniTask.WaitForSeconds(_cooldown, false, PlayerLoopTiming.Update, cancellationToken);
             }
 
             await UniTask.WhenAll(tasks);

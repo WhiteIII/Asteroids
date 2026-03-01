@@ -15,11 +15,10 @@ namespace _Project.Scripts.ViewModel.Implementation
         
         protected InAppPurchaseViewModel(
             IInApp inApp, 
-            InAppPurchaseIdList inAppPurchaseIdList, 
-            InAppPurchaseProduct product)
+            string productId)
         {
             _inApp = inApp;
-            _productId = inAppPurchaseIdList.GetIdByProduct(product);
+            _productId = productId;
         }
 
         public void SetOnBuyAction(Action onBuyAction) => 

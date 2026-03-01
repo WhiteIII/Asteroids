@@ -8,7 +8,7 @@ namespace _Project.Scripts.Common.Services.AssetsManagement
     {
         private readonly LocalAssetsProvider _localAssetsProvider;
         private readonly List<AssetReference> _assetsReference = new();
-
+        
         public AssetLoader(LocalAssetsProvider localAssetsProvider, AssetReference[] assetsReference)
         {
             _localAssetsProvider = localAssetsProvider;
@@ -24,6 +24,12 @@ namespace _Project.Scripts.Common.Services.AssetsManagement
             for (int i = 0; i < _assetsReference.Count; i++)
                 tasks[i] = _localAssetsProvider.LoadAsync(_assetsReference[i]);
             return tasks;
+        }
+
+        public void ReleaseAllLoadedAssets()
+        {
+            foreach (AssetReference assetReference in _assetsReference)
+                _localAssetsProvider.ReleaseAsset(assetReference);
         }
     }
 }

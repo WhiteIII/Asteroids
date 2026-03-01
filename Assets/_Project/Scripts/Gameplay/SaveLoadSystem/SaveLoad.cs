@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Gameplay.SaveLoadSystem
 {
-    public class SaveLoad
+    public class SaveLoad : ISaveLoad
     {
         private readonly ISerializerDeserializer _serializerDeserializer;
         

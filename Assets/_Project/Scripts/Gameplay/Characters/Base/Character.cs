@@ -3,6 +3,7 @@ using _Project.Scripts.Gameplay.Services.Components;
 using _Project.Scripts.Gameplay.Services.ObjectPools.Base;
 using R3;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace _Project.Scripts.Gameplay.Characters.Base
 {
@@ -40,6 +41,9 @@ namespace _Project.Scripts.Gameplay.Characters.Base
                 .AddTo(this);
             OnAwake();
         }
+        
+        public void Destroy() => 
+            Object.Destroy(gameObject);
 
         public void Enable() => 
             gameObject.SetActive(true);
