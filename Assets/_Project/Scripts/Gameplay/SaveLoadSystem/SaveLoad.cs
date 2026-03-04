@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using _Project.Scripts.Common.Services.SerializerDeserializer.Base;
 using UnityEngine;
@@ -10,8 +11,11 @@ namespace _Project.Scripts.Gameplay.SaveLoadSystem
         
         private string FilePath => Path.Combine(Application.persistentDataPath, "PlayerData.txt");
 
-        public SaveLoad(ISerializerDeserializer serializerDeserializer) =>
+        public SaveLoad(ISerializerDeserializer serializerDeserializer)
+        {
             _serializerDeserializer = serializerDeserializer;
+            Debug.Log("Loading player data");
+        } 
 
         public PlayerSaveLoadData Load()
         {
@@ -19,17 +23,14 @@ namespace _Project.Scripts.Gameplay.SaveLoadSystem
             {
                 PlayerSaveLoadData initialData = new();
                 initialData.AdsIsOff = false;
+                initialData.DataTime = DateTime.Now;
                 Save(initialData);
                 return initialData;
             }
-            string playerSaveDataJson = File.ReadAllText(FilePath);
-            return _serializerDeserializer.Deserialize<PlayerSaveLoadData>(playerSaveDataJson);
+            return _serializerDeserializer.Deserialize<PlayerSaveLoadData>(File.ReadAllText(FilePath));
         }
 
-        public void Save(PlayerSaveLoadData data)
-        {
-            string playerSaveDataJson = _serializerDeserializer.Serialize(data);
-            File.WriteAllText(FilePath, playerSaveDataJson);
-        }
+        public void Save(PlayerSaveLoadData data) => 
+            File.WriteAllText(FilePath, _serializerDeserializer.Serialize(data));
     }
 }

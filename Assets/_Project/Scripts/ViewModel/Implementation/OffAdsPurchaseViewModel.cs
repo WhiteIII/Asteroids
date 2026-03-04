@@ -1,5 +1,4 @@
 using _Project.Scripts.Common.Services.InAppPurchase.Base;
-using _Project.Scripts.Common.Services.InAppPurchase.Data;
 
 namespace _Project.Scripts.ViewModel.Implementation
 {

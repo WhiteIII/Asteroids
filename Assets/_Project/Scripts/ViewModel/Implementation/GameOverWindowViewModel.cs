@@ -1,4 +1,3 @@
-using System;
 using _Project.Scripts.Common.Services.Ads.Base;
 using _Project.Scripts.SceneSwitcher;
 using _Project.Scripts.ViewModel.Base;

@@ -1,4 +1,5 @@
 using _Project.Scripts.ViewModel.Implementation;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -11,8 +12,11 @@ namespace _Project.Scripts.View.Implementation
         protected override void OnSetup() =>
             SetCurrentScore();
 
-        protected override void OnOpenAnimationStart() =>
+        protected override UniTask OnOpenAnimationStart()
+        {
             SetCurrentScore();
+            return UniTask.CompletedTask;
+        }
 
         private void SetCurrentScore() =>
             _bestRecordText.text = $"Score: {ViewModel.BestRecord}";

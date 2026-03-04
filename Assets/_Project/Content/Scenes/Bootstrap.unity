@@ -705,6 +705,12 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
+  _saveDataSelectionWindowAssetReference:
+    m_AssetGUID: e4b0ba6938a332541a4ff3c6f6efbe45
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
 --- !u!114 &1616966649
 MonoBehaviour:
   m_ObjectHideFlags: 0

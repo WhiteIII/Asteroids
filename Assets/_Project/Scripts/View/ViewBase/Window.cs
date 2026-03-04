@@ -48,7 +48,7 @@ namespace _Project.Scripts.View
         {
             gameObject.SetActive(true);
             IsOpen = true;
-            OnOpenAnimationStart();
+            await OnOpenAnimationStart();
             await _animation.PlayShowAnimationAsync(this.GetCancellationTokenOnDestroy());
         }
 
@@ -56,13 +56,13 @@ namespace _Project.Scripts.View
         {
             IsOpen = false;
             await _animation.PlayCloseAnimationAsync(this.GetCancellationTokenOnDestroy());
-            OnCloseAnimationEnd();
+            await OnCloseAnimationEnd();
             gameObject.SetActive(false);
         }
         
         protected virtual void OnSetup() { }
         protected virtual void OnDestroyMethod() { }
-        protected virtual void OnOpenAnimationStart() { }
-        protected virtual void  OnCloseAnimationEnd() { }
+        protected virtual UniTask OnOpenAnimationStart() => UniTask.CompletedTask;
+        protected virtual UniTask  OnCloseAnimationEnd() => UniTask.CompletedTask;
     }
 }

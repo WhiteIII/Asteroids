@@ -1,12 +1,14 @@
 using _Project.Scripts.Common.Services.AssetsManagement;
 using _Project.Scripts.Common.Services.RemoteConfig.Base;
-using _Project.Scripts.Gameplay.SaveLoadSystem;
 using _Project.Scripts.SceneSwitcher;
 using _Project.Scripts.View.Implementation;
 using Cysharp.Threading.Tasks;
+using Unity.Services.Authentication;
 using Unity.Services.Core;
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
+using Application = UnityEngine.Application;
 
 namespace _Project.Scripts.Bootstrap.EntryPoints
 {
@@ -50,13 +52,16 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             await _localAssetsProvider.LoadAsync(_bestRecordWindowAssetReference);
             await _localAssetsProvider.LoadAsync(_mobileInputWindowAssetReference);
             _loadingWindowFactory.Create();
-            _bestRecordWindowFactory.Create();
-            _mobileInputWindowFactory.Create().CloseAsync().Forget();
-
+            
             await UnityServices.InitializeAsync();
+            if (Application.internetReachability != NetworkReachability.NotReachable)
+                await AuthenticationService.Instance.SignInAnonymouslyAsync();
             await Firebase.FirebaseApp.CheckAndFixDependenciesAsync();
             await _remoteConfigService.FetchAsync();
             await _remoteConfigService.ActivateAsync();
+            
+            _bestRecordWindowFactory.Create();
+            _mobileInputWindowFactory.Create().CloseAsync().Forget();
             
             _sceneController.GoToMenu();
         }

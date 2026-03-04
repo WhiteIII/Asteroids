@@ -31,6 +31,9 @@ namespace _Project.Scripts.ViewModel.Implementation
         public void SetOnQuitEvent(Func<UniTask> onQuitEvent) =>
             _onQuitEvent =  onQuitEvent;
 
+        public UniTask GetBestRecordAsync() => 
+            _playerBestRecordViewModel.GetBestRecordAsync();
+        
         public async void GoToGameplay()
         {
             if (_onQuitEvent != null)

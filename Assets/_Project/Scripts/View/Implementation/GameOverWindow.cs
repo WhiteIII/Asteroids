@@ -20,7 +20,7 @@ namespace _Project.Scripts.View.Implementation
             reviveObservable.Subscribe(_ => ViewModel.Revive().Forget()).AddTo(this);
         }
 
-        protected override void OnOpenAnimationStart()
+        protected override UniTask OnOpenAnimationStart()
         {
             _goToMenuButton.enabled = true;
 
@@ -31,12 +31,14 @@ namespace _Project.Scripts.View.Implementation
             }
             else 
                 _reviveButton.gameObject.SetActive(false);
+            return UniTask.CompletedTask;
         }
 
-        protected override void OnCloseAnimationEnd()
+        protected override UniTask OnCloseAnimationEnd()
         {
             _goToMenuButton.enabled = false;
             _reviveButton.enabled = false;
+            return UniTask.CompletedTask;
         }
     }
 }

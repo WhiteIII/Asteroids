@@ -2,8 +2,6 @@ using System;
 using System.Threading;
 using _Project.Scripts.Common.Services.Analytics.Base;
 using _Project.Scripts.Common.Services.Analytics.Implementation.Data;
-using _Project.Scripts.Data;
-using _Project.Scripts.Data.Base;
 using _Project.Scripts.Data.Implementation;
 using _Project.Scripts.Data.Services.Repositories.Base;
 using _Project.Scripts.Gameplay.Characters.Base;

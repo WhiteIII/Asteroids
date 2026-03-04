@@ -1,6 +1,5 @@
 using System;
 using _Project.Scripts.Common.Services.InAppPurchase.Base;
-using _Project.Scripts.Common.Services.InAppPurchase.Data;
 using _Project.Scripts.ViewModel.Base;
 using Cysharp.Threading.Tasks;
 

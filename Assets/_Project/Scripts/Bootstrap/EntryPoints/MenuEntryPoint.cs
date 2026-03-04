@@ -17,7 +17,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly AssetLoader _assetLoader;
         private readonly LoadingWindowViewModel _loadingWindowViewModel;
         private readonly AssetReference _offAdsWindowAssetReference;
-        private readonly ISaveLoad _saveLoad;
+        private readonly ISaveLoadAsync _saveLoad;
         private readonly IFactory<Action, OffAdsWindow> _offAdsWindowFactory;
 
         public MenuEntryPoint(
@@ -25,7 +25,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             WindowsRepository windowsRepository, 
             AssetLoader assetLoader,
             LoadingWindowViewModel loadingWindowViewModel, 
-            ISaveLoad saveLoad, 
+            ISaveLoadAsync saveLoad, 
             [Inject(Id = "OffAdsWindowAssetReference")] AssetReference offAdsWindowAssetReference, 
             IFactory<Action, OffAdsWindow> offAdsWindowFactory)
         {
@@ -40,7 +40,8 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
 
         public async void Initialize()
         {
-            bool adsIsOff = _saveLoad.Load().AdsIsOff;
+            PlayerSaveLoadData playerSaveLoadData = await _saveLoad.LoadAsync();
+            bool adsIsOff = playerSaveLoadData.AdsIsOff;
             if (adsIsOff == false)
                 _assetLoader.AddAsset(_offAdsWindowAssetReference);
             await _loadingWindowViewModel.StartLoadingAsync(_assetLoader.GetLoadedAsyncOperations());
@@ -50,11 +51,11 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
                 await _offAdsWindowFactory.Create(OnOffAdsAction).OpenAsync();
         }
 
-        private void OnOffAdsAction()
+        private async void OnOffAdsAction()
         {
-            PlayerSaveLoadData saveLoadData = _saveLoad.Load();
+            PlayerSaveLoadData saveLoadData = await _saveLoad.LoadAsync();
             saveLoadData.AdsIsOff = true;
-            _saveLoad.Save(saveLoadData);
+            await _saveLoad.SaveAsync(saveLoadData);
         }
         
         private async UniTask OnQuitAsync()

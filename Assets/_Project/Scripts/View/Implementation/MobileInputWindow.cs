@@ -1,5 +1,6 @@
 using System;
 using _Project.Scripts.ViewModel.Implementation;
+using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,7 +28,10 @@ namespace _Project.Scripts.View.Implementation
             ViewModel.SetObservables(fireButtonObservable, lazerFireButtonObservable, axis);
         }
 
-        protected override void OnOpenAnimationStart() => 
+        protected override UniTask OnOpenAnimationStart()
+        {
             _movementStick.MoveToInitialPosition();
+            return UniTask.CompletedTask;
+        } 
     }
 }

@@ -1,5 +1,4 @@
 using _Project.Scripts.Gameplay.GameProgress;
-using _Project.Scripts.Gameplay.ShipBase;
 using _Project.Scripts.ViewModel.Base;
 using R3;
 

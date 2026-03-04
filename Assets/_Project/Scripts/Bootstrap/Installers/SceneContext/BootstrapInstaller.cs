@@ -2,7 +2,9 @@ using _Project.Scripts.Bootstrap.EntryPoints;
 using _Project.Scripts.Common.Services.InAppPurchase.Data;
 using _Project.Scripts.Common.Services.InAppPurchase.Implementation;
 using _Project.Scripts.Common.Services.RemoteConfig.Implementation;
+using _Project.Scripts.Common.Services.SaveLoadCloud;
 using _Project.Scripts.Data.Services.Repositories.Implementation;
+using _Project.Scripts.Gameplay.SaveLoadSystem;
 using _Project.Scripts.Gameplay.Services.Repositories;
 using _Project.Scripts.Gameplay.Services.Spawners;
 using _Project.Scripts.View.Implementation;
@@ -30,9 +32,13 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
         [SerializeField] private AssetReference _loadingWindowAssetReference;
         [SerializeField] private AssetReference _bestRecordWindowAssetReference;
         [SerializeField] private AssetReference _mobileInputWindowAssetReference;
+        [SerializeField] private AssetReference _saveDataSelectionWindowAssetReference;
 
         public override void InstallBindings()
         {
+            Container.BindInterfacesTo<SaveLoad>().AsSingle();
+            Container.BindInterfacesTo<UnityCloudLoadSave>().WhenInjectedInto<SaveLoadDecorator>();
+            Container.BindInterfacesTo<SaveLoadDecorator>().AsSingle();
             Container.Bind<InAppPurchaseIdList>().FromInstance(_inAppPurchaseIdList).AsSingle();
             Container.BindInterfacesTo<UnityInApp>().AsSingle();
             Container.BindInterfacesTo<FireBaseRemoteConfigService>().AsSingle();
@@ -52,6 +58,8 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
                 .FromInstance(_bestRecordWindowAssetReference);
             Container.Bind<AssetReference>().WithId("MobileInputWindowAssetReference")
                 .FromInstance(_mobileInputWindowAssetReference);
+            Container.Bind<AssetReference>().WithId("SaveDataSelectionWindowAssetReference")
+                .FromInstance(_saveDataSelectionWindowAssetReference);
             
             Container.Bind<PlayerBestRecordViewModel>().AsSingle();
             Container.BindFactoryCustomInterface<
@@ -71,7 +79,14 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
                     BaseWindowFactory<MobileInputWindow, MobileInputViewModel>,
                     IFactory<MobileInputWindow>>()
                 .WithFactoryArguments(_mobileInputWindowAssetReference);
-
+            Container.Bind<SaveSelectionViewModel>().AsSingle();
+            Container.BindFactoryCustomInterface<
+                    SaveSelectionWindow,
+                    BaseWindowFactory<SaveSelectionWindow, SaveSelectionViewModel>,
+                    IFactory<SaveSelectionWindow>>()
+                .WithFactoryArguments(_saveDataSelectionWindowAssetReference);;
+            Container.BindInterfacesAndSelfTo<SaveLoadView>().AsSingle();
+            
             Container.BindInterfacesTo<BootstrapEntryPoint>().AsSingle();
         }
     }

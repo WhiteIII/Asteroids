@@ -119,7 +119,6 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
                 OnDead = async () =>
                 {
                     _eventSender.SendEndGameEvent();
-                    _playerBestRecordSaver.TrySaveBestRecord();
                     _spawnersAndControllersRepository.StopAllSpawnerControllers();
                     _inputHandler.Disable();
                     _gameLoop.Pause();
@@ -131,6 +130,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
                         await gameOverWindow.OpenAsync();
                     else
                         await _gameOverWindowFactory.Create(OnQuitEvent, OnPlayerRevive).OpenAsync();
+                    await _playerBestRecordSaver.TrySaveBestRecord();
                 }
             });
 

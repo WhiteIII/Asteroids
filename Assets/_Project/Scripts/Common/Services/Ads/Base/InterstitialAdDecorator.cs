@@ -6,9 +6,9 @@ namespace _Project.Scripts.Common.Services.Ads.Base
     public class InterstitialAdDecorator : IInterstitialAd
     {
         private readonly IInterstitialAd _interstitialAd;
-        private readonly ISaveLoad _saveLoad;
+        private readonly ISaveLoadAsync _saveLoad;
 
-        public InterstitialAdDecorator(IInterstitialAd interstitialAd, ISaveLoad saveLoad)
+        public InterstitialAdDecorator(IInterstitialAd interstitialAd, ISaveLoadAsync saveLoad)
         {
             _interstitialAd = interstitialAd;
             _saveLoad = saveLoad;
@@ -19,7 +19,8 @@ namespace _Project.Scripts.Common.Services.Ads.Base
 
         public async UniTask ShowAdAsync()
         {
-            if (_saveLoad.Load().AdsIsOff == false)
+            PlayerSaveLoadData playerSaveLoadData = await _saveLoad.LoadAsync(); 
+            if (playerSaveLoadData.AdsIsOff == false)
                 await _interstitialAd.ShowAdAsync(); 
         }
     }

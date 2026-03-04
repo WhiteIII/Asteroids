@@ -5,45 +5,58 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b03fc07a-0e6a-443e-9c95-d8f0976e3a70" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/Ads/Base/InterstitialAdDecorator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/Ads/Base/InterstitialAdDecorator.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/ISaveLoad.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/ISaveLoad.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/SaveLoadGameplayDecorator.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/SaveLoadGameplayDecorator.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/ISaveLoadAsync.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/ISaveLoadAsync.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/SaveLoadDecorator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/SaveLoadDecorator.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/SaveLoadView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/SaveLoadView.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Implementation/SaveSelectionWindow.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Implementation/SaveSelectionWindow.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/SaveDataType.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/SaveDataType.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/SaveSelectionViewModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/SaveSelectionViewModel.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Asteroids/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Asteroids/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetGroupSortSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AddressableAssetGroupSortSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Default Local Group.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AddressableAssetsData/AssetGroups/Default Local Group.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/UniversalRP.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/UniversalRP.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Content/Data/InAppPurchaseIdList.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Content/Data/InAppPurchaseIdList.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Content/Prefabs/UI/MenuWindow.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Content/Prefabs/UI/MenuWindow.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Content/Prefabs/UI/MobileInputWindow.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Content/Prefabs/UI/MobileInputWindow.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Content/Scenes/Bootstrap.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Content/Scenes/Bootstrap.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/EntryPoints/BootstrapEntryPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/EntryPoints/BootstrapEntryPoint.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/EntryPoints/GameplayEntryPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/EntryPoints/GameplayEntryPoint.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/EntryPoints/MenuEntryPoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/EntryPoints/MenuEntryPoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/EntryPoints/RemoteConfigDefaultsInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/EntryPoints/RemoteConfigDefaultsInitializer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/ProjectContext/ProjectInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/ProjectContext/ProjectInstaller.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/BootstrapInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/BootstrapInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/GameplayInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/GameplayInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/Ads/Implementation/UnityAdsInterstitial.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/Ads/Implementation/UnityAdsInterstitial.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/AssetsManagement/AssetLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/AssetsManagement/AssetLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/AssetsManagement/LocalAssetsProvider.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/AssetsManagement/LocalAssetsProvider.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/InAppPurchase/Data/InAppPurchaseIdList.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/InAppPurchase/Data/InAppPurchaseIdList.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/InAppPurchase/Data/InAppPurchaseProduct.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/InAppPurchase/Data/InAppPurchaseProduct.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/InAppPurchase/Implementation/UnityInApp.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/InAppPurchase/Implementation/UnityInApp.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Ai/Base/AiActorCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Ai/Base/AiActorCreator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Characters/Base/Character.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Characters/Base/Character.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Characters/Base/ICharacter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Characters/Base/ICharacter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Characters/Implementation/Asteroid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Characters/Implementation/Asteroid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Characters/Implementation/Ufo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Characters/Implementation/Ufo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/GameProgress/PointsAndKillsCounter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/GameProgress/PointsAndKillsCounter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/Ads/Base/InterstitialAdDecorator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/Ads/Base/InterstitialAdDecorator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/PlayerSaveLoadData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/PlayerSaveLoadData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/SaveLoad.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/SaveLoad.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Repositories/CharactersRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/Services/Repositories/CharactersRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Animations/Base/IWindowAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Animations/Base/IWindowAnimation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Animations/Implementation/FadeAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Animations/Implementation/FadeAnimation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Animations/Implementation/MoveAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Animations/Implementation/MoveAnimation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Animations/Implementation/RegularAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Animations/Implementation/RegularAnimation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Animations/Implementation/WindowFadeAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Animations/Implementation/WindowFadeAnimation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Animations/Implementation/WindowMoveAnimation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Animations/Implementation/WindowMoveAnimation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Implementation/PurchaseFailedScreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Implementation/PurchaseFailedScreen.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/SaveLoadGameplayDecorator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/SaveLoadSystem/SaveLoadGameplayDecorator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/ShipBase/RotationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/ShipBase/RotationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/ShipBase/Ship.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/ShipBase/Ship.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/ShipBase/ShipMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/Gameplay/ShipBase/ShipMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Implementation/BestRecordWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Implementation/BestRecordWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Implementation/GameOverWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Implementation/GameOverWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Implementation/LoadingWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Implementation/LoadingWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Implementation/MenuWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Implementation/MenuWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Implementation/MobileInputWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/Implementation/MobileInputWindow.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/View/ViewBase/Window.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/View/ViewBase/Window.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/GameOverWindowViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/GameOverWindowViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/InAppPurchaseViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/InAppPurchaseViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/MenuViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/MenuViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/OffAdsPurchaseViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/OffAdsPurchaseViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/PlayerBestRecordViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/PlayerBestRecordViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/PlayerPointsViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/PlayerPointsViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ScriptableBuildPipeline.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ScriptableBuildPipeline.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/UnityConnectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,18 +77,24 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/13c0c460649d4ce49f991e2c222fa63546ae00/e3/3ff79b44/String.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4fc1c867d23f4becac65cdc94b0d68d616200/92/8f696135/FirebaseApp.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4fc1c867d23f4becac65cdc94b0d68d616200/e4/04e53462/AppUtilPINVOKE.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/612ea0208cc847f49d539e6511ed3cd51df400/7a/2a525c04/NetworkReachability.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/761cf2a144514d2291a678c334d49e9baa000/3e/16bf7d4d/JsonConvert.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/761cf2a144514d2291a678c334d49e9baa000/8a/20568940/JToken.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/761cf2a144514d2291a678c334d49e9baa000/ab/3c4c9537/JObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/87d7d2330db94b0a86d1e1fd18f783498c00/2e/521cc8e3/FirebaseRemoteConfig.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a6479622a9314fcba3eb70d4da8dd46092e00/bd/b7e5e0f7/ObservableExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../AiSamples/Assets/_Project/Logic/Bootstrap/GameInstaller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/EntryPoints/RemoteConfigDefaultsInitializer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Bootstrap/Installers/SceneContext/GameplayInstaller.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/Analytics/Implementation/FireBaseEventSender.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/AssetsManagement/AssetLoader.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/Cheats/SaveLoadDebugHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/InAppPurchase/Data/InAppPurchaseIdList.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/InAppPurchase/Implementation/UnityInApp.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/RemoteConfig/Base/IRemoteConfigService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/RemoteConfig/Implementation/FireBaseRemoteConfigService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/SaveLoadCloud/UnityCloudLoadSave.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Common/Services/SerializerDeserializer/Implementation/NewtonsoftSerializerDeserializer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Data/Base/IGameSettingsData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/Data/Implementation/ScriptableObjects/AsteroidsData.cs" root0="FORCE_HIGHLIGHTING" />
@@ -93,7 +112,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/View/Implementation/MenuWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/View/Implementation/MobileInputWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/View/Services/Factories/InAppPurchaseWindowFactory.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/View/Services/WindowsRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/View/Services/WindowsRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/MenuViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/_Project/Scripts/ViewModel/Implementation/ShipStatsViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.codewriter.triinspector@1921fb03fe90/Runtime/Attributes/Validators/AssetsOnlyAttribute.cs" root0="SKIP_HIGHLIGHTING" />
@@ -110,6 +129,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1d7f6a740e58/Runtime/AddressablesImpl.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.addressables@1d7f6a740e58/Runtime/ResourceManager/Util/MonoBehaviourCallbackHooks.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ads@e89225828059/Runtime/Advertisement/Enums/UnityAdsShowCompletionState.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ads@e89225828059/Runtime/Advertisement/Platform/Editor/EditorPlatform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ads@e89225828059/Runtime/Advertisement/Platform/Platform.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@6d21c7e374c4/Runtime/Purchasing/Core/Product/Models/ProductFetchFailed.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@6d21c7e374c4/Runtime/Purchasing/Core/Purchasing/Models/Order.cs" root0="SKIP_HIGHLIGHTING" />
@@ -126,6 +146,15 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@6d21c7e374c4/Runtime/Purchasing/StoreSpecificIds.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.purchasing@6d21c7e374c4/Runtime/Utilities/LoggerExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@2c53672ff4c2/Runtime/Debugging/DebugUpdater.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.authentication@f6045b608d0a/Runtime/AuthenticationService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.authentication@f6045b608d0a/Runtime/Network/WebRequest.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.cloudsave@271cfa0557ba/Runtime/CloudSaveService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.cloudsave@271cfa0557ba/Runtime/Models/SaveItem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.cloudsave@271cfa0557ba/Runtime/com.unity.services.cloudsave.internal/Runtime/DataService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.cloudsave@271cfa0557ba/Runtime/com.unity.services.cloudsave.internal/Runtime/Http/IDeserializable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.cloudsave@271cfa0557ba/Runtime/com.unity.services.cloudsave.internal/Runtime/PlayerDataApiClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.cloudsave@271cfa0557ba/Runtime/com.unity.services.cloudsave.internal/Runtime/PlayerDataService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.services.cloudsave@271cfa0557ba/Runtime/com.unity.services.cloudsave.internal/Runtime/PlayerDataService.deprecated.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@c82f62fefab3/Runtime/UGUI/EventSystem/EventData/PointerEventData.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@c82f62fefab3/Runtime/UGUI/EventSystem/EventSystem.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -198,10 +227,10 @@
       <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="1180">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="40520">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="1180" />
+      <option name="pid" value="40520" />
       <option name="projectPathOnTarget" />
       <option name="runtimes">
         <list>
@@ -357,7 +386,14 @@
       <workItem from="1772283321466" duration="7709000" />
       <workItem from="1772376017012" duration="1667000" />
       <workItem from="1772381250598" duration="108000" />
-      <workItem from="1772381621987" duration="3866000" />
+      <workItem from="1772381621987" duration="5686000" />
+      <workItem from="1772455014385" duration="599000" />
+      <workItem from="1772456262973" duration="2428000" />
+      <workItem from="1772547113535" duration="327000" />
+      <workItem from="1772547459967" duration="426000" />
+      <workItem from="1772547917121" duration="17361000" />
+      <workItem from="1772626281694" duration="1126000" />
+      <workItem from="1772628828204" duration="8354000" />
     </task>
     <servers />
   </component>

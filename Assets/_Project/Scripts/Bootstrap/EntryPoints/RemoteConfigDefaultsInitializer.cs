@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using _Project.Scripts.Common.Services.SerializerDeserializer.Base;
 using _Project.Scripts.Data.Implementation;
-using _Project.Scripts.Data.Services.Repositories.Base;
 using _Project.Scripts.Data.Services.Repositories.Implementation;
 using Firebase.Extensions;
 using Firebase.RemoteConfig;

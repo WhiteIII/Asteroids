@@ -1,27 +1,28 @@
 using _Project.Scripts.Gameplay.GameProgress;
+using Cysharp.Threading.Tasks;
 
 namespace _Project.Scripts.Gameplay.SaveLoadSystem
 {
     public class PlayerBestRecordSaver
     {
-        private readonly ISaveLoad _saveLoad;
+        private readonly ISaveLoadAsync _saveLoad;
         private readonly IPointsAndKillsCounterCounter _pointsAndKillsCounterCounter;
 
         public PlayerBestRecordSaver(
-            ISaveLoad saveLoad,
+            ISaveLoadAsync saveLoad,
             IPointsAndKillsCounterCounter pointsAndKillsCounterCounter)
         {
             _saveLoad = saveLoad;
             _pointsAndKillsCounterCounter = pointsAndKillsCounterCounter;
         }
         
-        public void TrySaveBestRecord()
+        public async UniTask TrySaveBestRecord()
         {
-            PlayerSaveLoadData saveLoadData = _saveLoad.Load();
+            PlayerSaveLoadData saveLoadData = await _saveLoad.LoadAsync();
             if (saveLoadData.BestRecord < _pointsAndKillsCounterCounter.Points.CurrentValue)
             {
                 saveLoadData.BestRecord = _pointsAndKillsCounterCounter.Points.CurrentValue;
-                _saveLoad.Save(saveLoadData);
+                await _saveLoad.SaveAsync(saveLoadData);
             }
         }
     }
