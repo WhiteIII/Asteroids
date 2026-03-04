@@ -77,7 +77,8 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         public async void Initialize()
         {
             _eventSender.SendStartGameEvent();
-            _windowsRepository.Get<MobileInputWindow>().OpenAsync().Forget();
+            if (_windowsRepository.TryGet(out MobileInputWindow mobileInputWindow))
+                await mobileInputWindow.OpenAsync();
             await _loadingWindowViewModel.StartLoadingAsync(_assetLoader.GetLoadedAsyncOperations());
             await _windowsRepository.Get<LoadingWindow>().CloseAsync();
             CreateShip();
@@ -103,7 +104,8 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
                 _windowsRepository.TryCloseAndDestroyWindow<GameOverWindow>());
             await _interstitialAd.ShowAdAsync();
             await _windowsRepository.Get<LoadingWindow>().OpenAsync();
-            _windowsRepository.Get<MobileInputWindow>().CloseAsync().Forget();
+            if (_windowsRepository.TryGet(out MobileInputWindow mobileInputWindow))
+                await mobileInputWindow.CloseAsync();
             _aiActorsRepository.Clear();
             _spawnersAndControllersRepository.Clear();
             _charactersRepository.ClearAndDestroyAllCharactersInList();

@@ -31,7 +31,6 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
         [Header("PrefabRefs:")] 
         [SerializeField] private AssetReference _loadingWindowAssetReference;
         [SerializeField] private AssetReference _bestRecordWindowAssetReference;
-        [SerializeField] private AssetReference _mobileInputWindowAssetReference;
         [SerializeField] private AssetReference _saveDataSelectionWindowAssetReference;
 
         public override void InstallBindings()
@@ -56,8 +55,6 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
                 .FromInstance(_loadingWindowAssetReference);
             Container.Bind<AssetReference>().WithId("BestRecordWindowAssetReference")
                 .FromInstance(_bestRecordWindowAssetReference);
-            Container.Bind<AssetReference>().WithId("MobileInputWindowAssetReference")
-                .FromInstance(_mobileInputWindowAssetReference);
             Container.Bind<AssetReference>().WithId("SaveDataSelectionWindowAssetReference")
                 .FromInstance(_saveDataSelectionWindowAssetReference);
             
@@ -73,12 +70,6 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
                     BaseWindowFactory<LoadingWindow, LoadingWindowViewModel>,
                     IFactory<LoadingWindow>>()
                 .WithFactoryArguments(_loadingWindowAssetReference);
-            Container.BindInterfacesAndSelfTo<MobileInputViewModel>().AsSingle();
-            Container.BindFactoryCustomInterface<
-                    MobileInputWindow,
-                    BaseWindowFactory<MobileInputWindow, MobileInputViewModel>,
-                    IFactory<MobileInputWindow>>()
-                .WithFactoryArguments(_mobileInputWindowAssetReference);
             Container.Bind<SaveSelectionViewModel>().AsSingle();
             Container.BindFactoryCustomInterface<
                     SaveSelectionWindow,

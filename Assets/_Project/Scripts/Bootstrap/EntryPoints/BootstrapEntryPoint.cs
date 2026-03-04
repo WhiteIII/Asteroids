@@ -2,7 +2,6 @@ using _Project.Scripts.Common.Services.AssetsManagement;
 using _Project.Scripts.Common.Services.RemoteConfig.Base;
 using _Project.Scripts.SceneSwitcher;
 using _Project.Scripts.View.Implementation;
-using Cysharp.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using UnityEngine;
@@ -17,11 +16,9 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         private readonly ISceneController _sceneController;
         private readonly IFactory<LoadingWindow> _loadingWindowFactory;
         private readonly IFactory<BestRecordWindow> _bestRecordWindowFactory;
-        private readonly IFactory<MobileInputWindow> _mobileInputWindowFactory;
         private readonly LocalAssetsProvider _localAssetsProvider;
         private readonly AssetReference _loadingWindowAssetReference;
         private readonly AssetReference _bestRecordWindowAssetReference;
-        private readonly AssetReference _mobileInputWindowAssetReference;
         private readonly IRemoteConfigService _remoteConfigService;
 
         public BootstrapEntryPoint(
@@ -30,9 +27,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             LocalAssetsProvider localAssetsProvider, 
             [Inject(Id = "LoadingWindowAssetReference")]AssetReference loadingWindowAssetReference,
             [Inject(Id = "BestRecordWindowAssetReference")]AssetReference bestRecordWindowAssetReference, 
-            [Inject(Id = "MobileInputWindowAssetReference")]AssetReference mobileInputWindowAssetReference,
             IFactory<BestRecordWindow> bestRecordWindowFactory,
-            IFactory<MobileInputWindow> mobileInputWindowFactory, 
             IRemoteConfigService remoteConfigService)
         {
             _sceneController = sceneController;
@@ -40,9 +35,7 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             _localAssetsProvider = localAssetsProvider;
             _loadingWindowAssetReference = loadingWindowAssetReference;
             _bestRecordWindowAssetReference = bestRecordWindowAssetReference;
-            _mobileInputWindowAssetReference = mobileInputWindowAssetReference;
             _bestRecordWindowFactory = bestRecordWindowFactory;
-            _mobileInputWindowFactory = mobileInputWindowFactory;
             _remoteConfigService = remoteConfigService;
         }
 
@@ -50,7 +43,6 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
         {
             await _localAssetsProvider.LoadAsync(_loadingWindowAssetReference);
             await _localAssetsProvider.LoadAsync(_bestRecordWindowAssetReference);
-            await _localAssetsProvider.LoadAsync(_mobileInputWindowAssetReference);
             _loadingWindowFactory.Create();
             
             await UnityServices.InitializeAsync();
@@ -61,7 +53,6 @@ namespace _Project.Scripts.Bootstrap.EntryPoints
             await _remoteConfigService.ActivateAsync();
             
             _bestRecordWindowFactory.Create();
-            _mobileInputWindowFactory.Create().CloseAsync().Forget();
             
             _sceneController.GoToMenu();
         }

@@ -38,7 +38,7 @@ namespace _Project.Scripts.Bootstrap.Installers.SceneContext
         
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<MobileInputHandler>().AsSingle();
+            Container.BindInterfacesTo<KeyBoardInputHandler>().AsSingle();
             Container.Bind<PlayerBestRecordSaver>().AsSingle();
             Container.BindInterfacesTo<UnityAdsInterstitial>().WhenInjectedInto<InterstitialAdDecorator>();
             Container.BindInterfacesTo<InterstitialAdDecorator>().AsSingle();
